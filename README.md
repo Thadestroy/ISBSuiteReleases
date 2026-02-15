@@ -60,7 +60,6 @@ Each wheel entry can have custom actions when it wins:
 Track numbers that persist across streams:
 - **Global Counters** - single shared value (e.g., "Deaths This Stream")
 - **Per-User Counters** - track values for each viewer (e.g., "Times Joined")
-- **Reset Options** - reset on stream start, daily, or manually
 
 ### Presets & Sessions
 - Quick-launch your favorite wheels with one click
@@ -245,6 +244,7 @@ The app has two separate queues (view in left panel):
 - Sound queue plays audio files sequentially
 - Pausing prevents new items from starting
 - Skipping moves to the next item immediately
+- Sounds linked to wheels will play when wheel spins instead of waiting in sound queue
 
 ---
 
@@ -256,7 +256,7 @@ Create and manage counters via the **Automations** window.
 
 **Global Counter:**
 - Single shared value across all users
-- Example: "Deaths This Stream", "Wheels Spun Today"
+- Example: "Deaths This Stream", "Wheels Spun"
 
 **Per-User Counter:**
 - Separate value for each Twitch user
@@ -272,7 +272,7 @@ Increment counters from:
 - Automation rules (when triggered)
 - Entry actions (when entry wins)
 
-View counter values in the Automations window or use `{count}` in messages.
+View counter values with `{counter:CounterName}` to just show value or use `{count}` for times the count is incrememented.
 
 ---
 
