@@ -1,6 +1,6 @@
 # ISB Suite
 
-A full-featured stream overlay suite for Twitch streamers. Spin wheels, run giveaways, fire alerts, manage viewer points, run community goals, and automate your entire stream from a single app.
+A full-featured stream overlay suite for Twitch streamers. Spin wheels, run giveaways, fire alerts, manage viewer points, run community goals, and automate your entire stream from a single app. 
 
 ![Windows](https://img.shields.io/badge/Windows-10%2B-blue?logo=windows)
 [![Latest Release](https://img.shields.io/github/v/release/Thadestroy/ISBSuiteReleases?label=Download)](https://github.com/Thadestroy/ISBSuiteReleases/releases/latest)
