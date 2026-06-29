@@ -1,6 +1,6 @@
 # ISB Suite
 
-A full-featured stream overlay suite for Twitch streamers. Spin wheels, run giveaways, fire alerts, manage viewer points, run community goals, and automate your entire stream from a single app. 
+A full-featured stream overlay suite for Twitch streamers. Spin wheels, run giveaways, fire alerts, manage viewer points, run chat games and community goals, and automate your entire stream from a single app.
 
 ![Windows](https://img.shields.io/badge/Windows-10%2B-blue?logo=windows)
 [![Latest Release](https://img.shields.io/github/v/release/Thadestroy/ISBSuiteReleases?label=Download)](https://github.com/Thadestroy/ISBSuiteReleases/releases/latest)
@@ -69,7 +69,8 @@ ISB Suite is built around several major systems that all work together:
 | **Overlay Layout** | Drag-and-drop layout editor for your capture window |
 | **Viewer Points** | Custom channel currency with a shop and point drops |
 | **Community Goals** | Stream-wide progress bars fed by Twitch events or chat |
-| **Counters & Stats** | Global and per-viewer counters with CSV export |
+| **Chat Games** | Mass-entry chat games with stakes, rolls, and configurable outcomes |
+| **Counters & Stats** | Global and per-viewer counters with tiers and CSV export |
 | **Character Studio** | *(coming soon)* |
 
 ---
@@ -127,6 +128,7 @@ Design exactly what gets captured by your streaming software using the built-in 
 | **Static Image** | Any image or logo placed on your stage |
 | **Browser Source** | Renders a live web page (URL) inside the capture, like an OBS/Streamlabs browser source |
 | **Random Image Picker** | Displays one randomly chosen image from a Random Image Picker; re-rolled by the "Randomize Image Picker" automation action |
+| **Timer Widget** | Live countdown for linked Timer actions (see [Timer Widget](#timer-widget)) |
 | **Character Playfield** | *(coming soon)* |
 
 ### Character Studio
@@ -192,11 +194,16 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Start Giveaway | Open a timed viewer-entry giveaway |
 | Show Alert | Display an on-screen alert box event |
 | Text-to-Speech | Speak an announcement (no credentials needed) |
-| Execution Delay | Set a custom delay before the action fires |
+| Timer | Countdown before actions fire; optionally show the countdown on a [Timer Widget](#timer-widget) |
+| Randomized Action | Pick one of several action sets at random (different sounds, messages, wheels, etc.) |
 
 **Command Cooldowns:** Global (shared channel timer) or Per-User (independent per chatter), with configurable response message.
 
 **Bypass Sound Queue:** play a sound immediately (overlapping) instead of waiting in queue.
+
+**Randomized Action:** Enable on any automation (or shop item / chat game) to define multiple action sets. Each trigger randomly runs one set — uniform random, or **no repeat until all** so every set plays once before any repeats. Useful for varied hype sounds, rotating chat responses, or unpredictable wheel loads from a single command.
+
+**Timer:** Enable the Timer action to delay everything else on the rule until the countdown finishes. Link a Timer Widget preset to show the live countdown on your overlay while chat, alerts, and other deferred actions wait.
 
 ### Chat Bot
 Automated chat messages driven by the same rule engine as Automations, managed in the **Chat Bot** tab:
@@ -209,6 +216,25 @@ Track numbers that persist across streams:
 - **Global Counters:** single shared value (e.g., "Deaths This Stream", "Wheels Spun")
 - **Per-User Counters:** separate value per Twitch viewer (e.g., "Times Won", "Giveaway Entries")
 - Increment from automations, entry actions, or viewer-points redemptions
+
+**Counter Tiers:** Any counter can have a tier ladder (e.g. 0 = Bronze, 10 = Silver, 50 = Gold). The active tier updates automatically as values change and is shown on the Stats page. Use `{counterTier}` in chat or alert templates after an increment, or `{counterTier:CounterName}` to read any counter's current tier.
+
+### Chat Games
+Run mass-entry chat games where viewers join from chat, stake a counter value, and get independent or shared outcomes. Managed in the **Chat Games** tab; each game is its own rule with the same trigger and action building blocks as Automations.
+
+**Built-in presets**
+
+| Preset | What it does |
+|--------|--------------|
+| **Heist** | Timed window; viewers bet a variable amount; each entrant gets an independent roll; winners double their stake |
+| **Lottery** | Fixed entry fee; one winner takes the whole pool when the window closes |
+| **Duel** | Instant per-user gamble — each trigger bets points with separate win/lose action phases |
+| **Blank sandbox** | Timed session with free join — configure triggers and actions yourself |
+| **Instant action** | No timed session — fires through the automation engine on trigger |
+
+**Configure:** join command, stake counter, win chance, payout mode (multiplier on stake or split pool), session duration, and chat messages for open/join/summary/cancel. Chain sounds, alerts, wheels, or other automations to open, join, resolve, win, or lose phases.
+
+**Variables:** `{totalPool}`, `{totalPaidOut}`, `{winnersList}`, `{winnerCount}`, `{userStake}`, `{userPayout}`, and more — see [Message Variables](#message-variables).
 
 ### Queue System
 Four independent queues keep everything organized, each shown as its own column on the Home page:
@@ -273,6 +299,12 @@ Manage all connections from the **Integrations** page. **Twitch** is the only in
 - Polls for new donations and checks campaign totals and milestones
 - Token auto-refresh, with a reconnect window if authentication expires mid-stream
 
+### Discord Webhook *(optional)*
+- Configure on the **Integrations** page — paste a channel webhook URL from Discord (Server Settings → Integrations → Webhooks)
+- Enable the integration, **Save**, then **Test** to confirm delivery
+- Any **Send Chat Message** action (Automations, Chat Bot, shop items, chat games) can deliver to **Twitch**, **Discord**, or **both**
+- The same message template and variables (`{user}`, `{count}`, `{counterTier}`, etc.) are resolved before sending; Discord messages are capped at 2,000 characters
+
 ### Text-to-Speech
 - Built-in, no account or API key required
 - Works automatically for any automation, alert, or giveaway winner TTS action
@@ -327,6 +359,8 @@ Use these in chat messages, alert text, and TTS text:
 | `{reward}` | Channel point reward title |
 | `{count}` | Counter value after the current increment |
 | `{counter:CounterName}` | Current value of a specific named counter |
+| `{counterTier}` | Tier label for the counter tied to the current action |
+| `{counterTier:CounterName}` | Tier label for a specific named counter |
 | `{balance}` | Viewer's current points balance |
 | `{currencyName}` | Display name of the points currency |
 | `{price}` | Cost of the shop item being redeemed |
@@ -335,7 +369,9 @@ Use these in chat messages, alert text, and TTS text:
 | `{duration}` | Giveaway duration in minutes |
 | `{time}` | Cooldown seconds remaining (cooldown response messages) |
 
-**Example:** `"Congrats {user}! The wheel landed on {winner}! You've won {count} times total."`
+**Chat game variables** (resolve/summary messages): `{totalPool}`, `{totalPaidOut}`, `{totalLost}`, `{entryCount}`, `{winnerCount}`, `{winnersList}`, `{losersList}`, `{userStake}`, `{userPayout}`
+
+**Example:** `"Congrats {user}! The wheel landed on {winner}! You've won {count} times total ({counterTier})."`
 
 ---
 
@@ -400,6 +436,9 @@ ISB Suite renders your overlay in its own window with a transparent background. 
 | **Points Shop Spin** | Create viewer points redeemable: viewers spend points to spin a wheel |
 | **Point Drop Event** | Configure a point drop: image appears on overlay, first chatters to type claim points |
 | **Live Alert on Follow** | Create alert rule: Follow shows a fade-in GIF and TTS "Thanks for the follow, {user}!" |
+| **Heist Chat Game** | Chat Games preset: viewers `!heist 50` to stake points; resolve doubles winners' stakes |
+| **Random Hype Sound** | Automation with Randomized Action and 3 action sets, each playing a different sound |
+| **Subathon Countdown** | Automation with Timer linked to a Timer Widget; overlay shows countdown before the action fires |
 
 ---
 
@@ -422,6 +461,15 @@ Access via the **Overlay Layout** tab in the main navigation.
 
 ### Layout Transitions
 - Configure animated transition effects between layout switches
+
+### Timer Widget
+Display a live countdown on your overlay when an automation (or chat game) uses the **Timer** action:
+
+1. In **Overlay Layout**, add a **Timer Widget** and create or select a named preset
+2. In an automation's actions, enable **Timer**, set the duration, and link the same preset
+3. When the rule fires, the widget counts down; chat, alerts, and other deferred actions wait until it reaches zero
+
+Multiple rules can share one preset — they queue automatically so only one countdown runs at a time. Use **None (background only)** on the Timer action if you want a delay without showing anything on the overlay.
 
 ---
 
@@ -481,7 +529,9 @@ Configure drops under the **Point Drops** sub-tab:
 ### Tracking Statistics
 - Use global counters for stream-wide stats (deaths, total spins)
 - Use per-user counters to track viewer participation
+- Enable **Counter Tiers** on the Stats page to label milestones (Bronze/Silver/Gold, rank names, etc.)
 - Display live counter values in chat with `{count}` (after an increment) or `{counter:CounterName}` (any time)
+- Show the viewer's current tier with `{counterTier}` or `{counterTier:CounterName}`
 
 ### Multi-Trigger Automations
 A single automation can respond to multiple triggers. For example, play the same hype sound on any of: a Tier 2 sub, a 100-bit cheer, or a 5-viewer raid. Add as many triggers as you need on one rule instead of maintaining separate rules.
@@ -500,6 +550,27 @@ ISB Suite is an ongoing project and your input shapes where it goes next. Bug re
 
 - **Report a bug or request a feature:** [Open an issue](https://github.com/Thadestroy/ISBSuiteReleases/issues)
 - **Upgrade to Pro:** [Purchase a license key](https://payhip.com/b/dXKjz)
+
+---
+
+## FAQ
+
+### Cursor disappears in a fullscreen game (especially Minecraft)?
+
+**Symptom:** You're playing in **fullscreen** with OBS running. Your mouse cursor **vanishes on your physical monitor**, but it may still appear in the OBS preview or on stream. This often shows up when you have **Game Capture** for the game and a **Window Capture** (Windows 10 / WGC) source for **ISB Suite — Capture** stacked on top.
+
+**This is not an ISB Suite bug.** It is a known interaction between **Windows Graphics Capture (WGC)** and certain **fullscreen** games. WGC forces a software cursor; in **exclusive fullscreen**, the game takes over the display and Windows often **cannot draw that cursor on your monitor**. Windowed and borderless modes usually work fine because the desktop compositor (DWM) is still in charge.
+
+**Minecraft Java Edition** is the most commonly reported example (OpenGL + exclusive fullscreen). Many streamers see the cursor return when switching Minecraft to the **Vulkan** renderer (Options → Video), while keeping **Fullscreen** on. Recent Java versions also have a separate **Exclusive Fullscreen** toggle turning that **off** (and restarting the game) often helps even on OpenGL.
+
+**Other games can hit the same issue** depending on their **rendering engine** and **fullscreen mode**, not just Minecraft. OpenGL games in true exclusive fullscreen are the most affected; DirectX and Vulkan titles vary. Games launched with **"Disable fullscreen optimizations"** checked in Windows compatibility settings are more likely to break.
+
+**Things to try (keep ISB on WGC for alpha):**
+
+1. **Minecraft:** switch to the **Vulkan** renderer, or turn **Exclusive Fullscreen** off if available.
+2. **Any game:** ensure **"Disable fullscreen optimizations"** is **unchecked** on the game’s `.exe` (Properties → Compatibility).
+
+If the cursor works in windowed mode but not fullscreen, the cause is almost certainly the game’s fullscreen path plus WGC, not the Capture Window itself.
 
 ---
 
@@ -535,6 +606,12 @@ ISB Suite is an ongoing project and your input shapes where it goes next. Bug re
 - Verify the Tiltify integration shows as connected on the Integrations page
 - If the session token expired, the app will show a reconnect window; re-authenticate
 - Donation polling runs on a short interval, so there may be a brief delay
+
+### Discord Webhook Not Sending *(optional integration)*
+- Verify **Enable Discord webhook** is checked and the URL is saved on the Integrations page
+- Use **Test** on Integrations to confirm the webhook works before relying on automations
+- Check that the automation's **Send Chat Message** destination includes Discord (not Twitch only)
+- Webhook URLs must start with `https://discord.com/api/webhooks/` (legacy `discordapp.com` URLs also work)
 
 ### Alerts Not Showing
 - Make sure an **Alert Box** widget is placed on the active layout in Overlay Layout
