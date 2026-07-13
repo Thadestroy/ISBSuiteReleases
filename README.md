@@ -37,6 +37,7 @@ ISB Suite is **free to download and use** with generous limits on each feature. 
 | Automations | 15 | Unlimited |
 | Chat Bot commands | 25 | Unlimited |
 | Alerts (per alert type) | 1 dedicated alert per type | Unlimited |
+| Custom Alerts | 3 | Unlimited |
 | Overlay layouts | 2 | Unlimited |
 | Viewer Points currencies | 1 | Unlimited |
 | Shop items (per currency) | 5 | Unlimited |
@@ -107,6 +108,19 @@ Each alert type is fully configurable:
 - TTS announcement attached to any alert
 - Per-alert minimum thresholds (e.g. only alert on raids with 10+ viewers)
 
+**Custom Alerts**
+Create alerts for trigger types that aren't covered by the built-in per-type sections, from the **Custom Alerts** section on the Alerts page:
+
+| Trigger | Details |
+|---------|---------|
+| Community Goal Reached | When a community goal hits its limit |
+| Counter Tier Reached | When a counter crosses into the next configured tier |
+| First Chat Message | Walk-on / catch-all on a viewer's first message |
+| Chat Command | Your own `!command` |
+| Timer | Interval / countdown-driven alert |
+
+Custom alerts support the same overlay options as built-in alerts (image/GIF, sound, alert text, TTS, and chat response). When multiple alert rules match the same event, the most specific alert fires (exact-amount and dedicated rules beat catch-alls). Free includes **3** custom alerts; Pro is unlimited.
+
 ### Overlay Layout Editor
 Design exactly what gets captured by your streaming software using the built-in layout editor:
 
@@ -141,22 +155,31 @@ Create a custom channel currency with a redeemable shop and point drops:
 - Internal name, display name, and balance chat command (e.g. `!points`)
 - Customizable balance response, not-enough-points message, and redemption confirmation message
 
+**Earn Rules**
+- Automatically award points on a schedule while viewers are present in chat during a live stream
+- **Watching (live presence):** set an interval (e.g. every 5 minutes) and how many points to award
+- Requires **Stats → Watch Time** to be enabled (uses the same live chat presence poll)
+
 **Viewer Commands**
 - **Balance command:** viewers type `!points` (or your custom command) to check their balance
 - **Give command:** viewers give their own points to another chatter (`!givepoints`)
 - **Gamble command:** viewers wager their points on a configurable win-chance roll (`!gamble`)
+- Each command supports **aliases** — alternate names that run the same command
 
 **Admin Commands**
 - Admin give command: broadcaster/mods award points to any viewer from chat
+- Supports aliases like the other viewer-points commands
 
 **Shop Items (Redeemables)**
 - Viewers spend points to trigger actions: load a wheel, play a sound, start a giveaway, send a chat message, increment a counter, or trigger any saved automation
 - Per-item price, permission level, and optional cooldown
 - Customizable purchase confirmation message
+- **Command aliases** — alternate names redeem the same shop item; longer aliases pass the remainder as `{input}`
 
 **Point Drops**
 - Timed events where a configurable image or GIF appears on the overlay
 - Chatters type a command to claim a randomized share of a point pool
+- Claim command supports **aliases**
 - Configurable spawn interval, spawn chance, display duration, max claimants, and point pool range
 - Supports "only when live" mode to skip during starting-soon screens
 
@@ -179,7 +202,10 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Goal Achieved | Any goal type, or filtered by type string |
 | Ad Break | Any duration, or a specific ad length |
 | Shoutout Received | Any shoutout from another broadcaster |
-| Custom Chat Command | Your own `!command` with permission level and optional cooldown |
+| Custom Chat Command | Your own `!command` with permission level, optional cooldown, and **aliases** |
+| Counter Tier Reached | When a viewer (per-user counter) or the channel (global counter) crosses upward into the next configured tier on a selected counter; fires once per tier gained if several thresholds are crossed in one increment |
+| Community Goal Reached | When a community goal hits its limit (optional filter by goal) |
+| Timer / Interval | Repeating interval (Automations tab) |
 
 **Multi-trigger support:** one automation can respond to multiple different trigger types simultaneously.
 
@@ -189,15 +215,19 @@ Connect any stream event to any action. Automations live in the **Automations** 
 |--------|---------|
 | Load & Spin Wheel | Pick any saved preset; optionally auto-spin |
 | Play Sound | Queue an audio file with 0 to 200% volume control |
-| Send Chat Message | Custom text with variable substitution |
+| Send Chat Message | Custom text with variable substitution (Twitch chat) |
+| Discord Webhook | Post to one or more named Discord webhooks (see [Discord Webhooks](#discord-webhooks-optional)) |
 | Increment Counter | Update a global or per-user counter |
 | Start Giveaway | Open a timed viewer-entry giveaway |
 | Show Alert | Display an on-screen alert box event |
 | Text-to-Speech | Speak an announcement (no credentials needed) |
 | Timer | Countdown before actions fire; optionally show the countdown on a [Timer Widget](#timer-widget) |
 | Randomized Action | Pick one of several action sets at random (different sounds, messages, wheels, etc.) |
+| Run Automation | Trigger another saved automation (chains keep the original chatter's variables) |
 
 **Command Cooldowns:** Global (shared channel timer) or Per-User (independent per chatter), with configurable response message.
+
+**Command Aliases:** Chat command triggers accept alternate names that fire the same automation. Longer matching aliases win when several could match, and any leftover text after the alias becomes `{input}`.
 
 **Bypass Sound Queue:** play a sound immediately (overlapping) instead of waiting in queue.
 
@@ -205,9 +235,11 @@ Connect any stream event to any action. Automations live in the **Automations** 
 
 **Timer:** Enable the Timer action to delay everything else on the rule until the countdown finishes. Link a Timer Widget preset to show the live countdown on your overlay while chat, alerts, and other deferred actions wait.
 
+**Automation Chains:** When a Chat Bot command or Automation uses **Run Automation** to trigger another rule (which can itself trigger another), every hop keeps the **original chatter's data** — `{user}`, `{userId}`, badge flags, bits, subs, and the rest. Chains can run up to **20** hops; genuine loops (A → B → A) are stopped automatically with a warning in the log. When a wheel entry win triggers an automation, `{winner}` resolves to the winning entry's name.
+
 ### Chat Bot
 Automated chat messages driven by the same rule engine as Automations, managed in the **Chat Bot** tab:
-- Respond to custom `!commands` with permission levels and cooldowns
+- Respond to custom `!commands` with permission levels, cooldowns, and **aliases**
 - Post scheduled or event-driven messages with variable substitution
 - Share the same trigger and action building blocks as Automations
 
@@ -217,7 +249,9 @@ Track numbers that persist across streams:
 - **Per-User Counters:** separate value per Twitch viewer (e.g., "Times Won", "Giveaway Entries")
 - Increment from automations, entry actions, or viewer-points redemptions
 
-**Counter Tiers:** Any counter can have a tier ladder (e.g. 0 = Bronze, 10 = Silver, 50 = Gold). The active tier updates automatically as values change and is shown on the Stats page. Use `{counterTier}` in chat or alert templates after an increment, or `{counterTier:CounterName}` to read any counter's current tier.
+**Counter Tiers:** Any counter can have a tier ladder (e.g. 0 = Bronze, 10 = Silver, 50 = Gold). The active tier updates automatically as values change and is shown on the Stats page. Use `{counterTier}` in chat or alert templates after an increment action, on a **Counter Tier Reached** automation trigger (the tier that was just gained), or `{counterTier:CounterName}` to read any counter's **current** tier for that user.
+
+**Leaderboards in chat:** Use `{top5Counter:CounterName}` in any template to list the top 5 viewers on a per-user counter (e.g. `{top5Counter:Wins}` → `1. Alice 100, 2. Bob 80, 3. Charlie 60, …`). Global counters do not support this token.
 
 ### Chat Games
 Run mass-entry chat games where viewers join from chat, stake a counter value, and get independent or shared outcomes. Managed in the **Chat Games** tab; each game is its own rule with the same trigger and action building blocks as Automations.
@@ -232,7 +266,7 @@ Run mass-entry chat games where viewers join from chat, stake a counter value, a
 | **Blank sandbox** | Timed session with free join — configure triggers and actions yourself |
 | **Instant action** | No timed session — fires through the automation engine on trigger |
 
-**Configure:** join command, stake counter, win chance, payout mode (multiplier on stake or split pool), session duration, and chat messages for open/join/summary/cancel. Chain sounds, alerts, wheels, or other automations to open, join, resolve, win, or lose phases.
+**Configure:** join command (with optional **aliases**), stake counter, win chance, payout mode (multiplier on stake or split pool), session duration, and chat messages for open/join/summary/cancel. Chain sounds, alerts, wheels, or other automations to open, join, resolve, win, or lose phases.
 
 **Variables:** `{totalPool}`, `{totalPaidOut}`, `{winnersList}`, `{winnerCount}`, `{userStake}`, `{userPayout}`, and more — see [Message Variables](#message-variables).
 
@@ -299,11 +333,13 @@ Manage all connections from the **Integrations** page. **Twitch** is the only in
 - Polls for new donations and checks campaign totals and milestones
 - Token auto-refresh, with a reconnect window if authentication expires mid-stream
 
-### Discord Webhook *(optional)*
-- Configure on the **Integrations** page — paste a channel webhook URL from Discord (Server Settings → Integrations → Webhooks)
-- Enable the integration, **Save**, then **Test** to confirm delivery
-- Any **Send Chat Message** action (Automations, Chat Bot, shop items, chat games) can deliver to **Twitch**, **Discord**, or **both**
-- The same message template and variables (`{user}`, `{count}`, `{counterTier}`, etc.) are resolved before sending; Discord messages are capped at 2,000 characters
+### Discord Webhooks *(optional)*
+- Under **Integrations → Discord Webhooks**, add one or more **named** webhooks (paste each channel webhook URL from Discord: Server Settings → Integrations → Webhooks)
+- **Save**, then **Test** a webhook to confirm delivery
+- In any automation, add the **Discord Webhook** action: pick one or more webhooks, reuse the text from your **Send Chat Message** action, and/or write a Discord-only message
+- One automation can post to **multiple webhooks at once**
+- The same variables (`{user}`, `{count}`, `{counterTier}`, etc.) are resolved before sending; Discord messages are capped at 2,000 characters
+- If you previously had a single Discord webhook, it is migrated as **"Default"** automatically; older "send to Discord" checkboxes on Send Chat Message are converted to the Discord Webhook action
 
 ### Text-to-Speech
 - Built-in, no account or API key required
@@ -343,6 +379,8 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 - **Moderators:** mods and broadcaster only
 - **Broadcaster:** broadcaster only
 
+**Command aliases:** Automations, Chat Bot commands, Chat Games join commands, Viewer Points commands, shop items, and point drop claim commands can all define alternate names. Viewers can type any alias; the longest matching alias wins when several could match.
+
 ---
 
 ## Message Variables
@@ -352,15 +390,16 @@ Use these in chat messages, alert text, and TTS text:
 | Variable | Value |
 |----------|-------|
 | `{user}` | Display name of the user who triggered the event |
-| `{winner}` | The winning wheel entry's text |
+| `{winner}` | The winning wheel entry's text (also works in automations triggered by a wheel entry win) |
 | `{entry}` | Alias for `{winner}` |
 | `{wheel}` | Name of the current wheel preset |
 | `{amount}` | Bits, raid viewers, sub months, or gift count depending on context |
 | `{reward}` | Channel point reward title |
 | `{count}` | Counter value after the current increment |
 | `{counter:CounterName}` | Current value of a specific named counter |
-| `{counterTier}` | Tier label for the counter tied to the current action |
-| `{counterTier:CounterName}` | Tier label for a specific named counter |
+| `{counterTier}` | Tier label for the counter tied to the current action **or** the tier just gained on a Counter Tier Reached trigger |
+| `{counterTier:CounterName}` | **Current** tier label for a specific named counter (live lookup; may differ from `{counterTier}` on tier triggers when multiple tiers are crossed at once) |
+| `{top5Counter:CounterName}` | Top 5 users for a per-user counter, ranked: `1. Name value, 2. Name value, …` (empty when no data; per-user counters only) |
 | `{balance}` | Viewer's current points balance |
 | `{currencyName}` | Display name of the points currency |
 | `{price}` | Cost of the shop item being redeemed |
@@ -372,6 +411,8 @@ Use these in chat messages, alert text, and TTS text:
 **Chat game variables** (resolve/summary messages): `{totalPool}`, `{totalPaidOut}`, `{totalLost}`, `{entryCount}`, `{winnerCount}`, `{winnersList}`, `{losersList}`, `{userStake}`, `{userPayout}`
 
 **Example:** `"Congrats {user}! The wheel landed on {winner}! You've won {count} times total ({counterTier})."`
+
+**Leaderboard example:** `"🏆 Top 5: {top5Counter:Wins}"`
 
 ---
 
@@ -438,7 +479,11 @@ ISB Suite renders your overlay in its own window with a transparent background. 
 | **Live Alert on Follow** | Create alert rule: Follow shows a fade-in GIF and TTS "Thanks for the follow, {user}!" |
 | **Heist Chat Game** | Chat Games preset: viewers `!heist 50` to stake points; resolve doubles winners' stakes |
 | **Random Hype Sound** | Automation with Randomized Action and 3 action sets, each playing a different sound |
+| **Live leaderboard in chat** | Custom command or timer automation: `Top 5: {top5Counter:Wins}` on a per-user counter |
 | **Subathon Countdown** | Automation with Timer linked to a Timer Widget; overlay shows countdown before the action fires |
+| **Custom Alert on tier up** | Custom Alert: Counter Tier Reached shows a GIF and TTS when a viewer hits Gold |
+| **Discord milestone ping** | Automation: Counter Tier Reached → Discord Webhook action posts `{user}` hit `{counterTier}` to your Discord |
+| **Command aliases** | Add `!pts` as an alias of `!points`, or `!heistgo` as an alias of your Heist join command |
 
 ---
 
@@ -487,7 +532,21 @@ Access via the **Viewer Points** tab.
 1. Give it an internal name and display name
 2. Choose or create a per-user counter to back the balances
 3. Set the balance command (e.g. `!points`) and response template
-4. Add shop items viewers can spend points on
+4. *(Optional)* Add **Earn Rules** to award points automatically (see below)
+5. Add shop items viewers can spend points on
+
+### Earn Rules
+On each currency's editor, open **Earn Rules** and click **+ Add Earn Rule**.
+
+**Watching (live presence)** — award points on a timer while a viewer is in chat during a live stream:
+1. Set **Rule Name** and choose trigger **Watching (live presence)**
+2. **Award every:** interval (seconds, minutes, or hours)
+3. **Points to Award:** how many points per interval
+4. Save the currency
+
+**Prerequisite:** enable **Stats → Watch Time** and ensure Twitch is connected with the `moderator:read:chatters` scope (reconnect in Settings if watch-time accrual is paused). Watching earn rules use the same once-per-minute live poll as watch time. If Watch Time is off, the app prompts you to enable it before adding or saving an **enabled** Watching rule.
+
+> Additional earn triggers (chat messages, follows, subs, bits, raids, etc.) are planned for a future update.
 
 ### Point Drops (Detailed)
 Configure drops under the **Point Drops** sub-tab:
@@ -530,11 +589,28 @@ Configure drops under the **Point Drops** sub-tab:
 - Use global counters for stream-wide stats (deaths, total spins)
 - Use per-user counters to track viewer participation
 - Enable **Counter Tiers** on the Stats page to label milestones (Bronze/Silver/Gold, rank names, etc.)
-- Display live counter values in chat with `{count}` (after an increment) or `{counter:CounterName}` (any time)
-- Show the viewer's current tier with `{counterTier}` or `{counterTier:CounterName}`
+- Display live counter values in chat with `{count}` (after an increment or on a tier trigger) or `{counter:CounterName}` (any time)
+- Show the tier a viewer **just reached** with `{counterTier}` on a **Counter Tier Reached** automation; use `{counterTier:CounterName}` for their **current** tier on that counter
+- Announce a per-user counter leaderboard with `{top5Counter:CounterName}` (top 5 viewers by value)
+
+### Tier milestone automations
+1. Enable tiers on a counter on the **Stats** page (threshold + label ladder)
+2. Create an automation with trigger **Counter Tier Reached** and select that counter
+3. Use `{user}` and `{counterTier}` in chat or alert text — `{counterTier}` is the label for **this** tier crossing (not the final tier if several were crossed at once)
 
 ### Multi-Trigger Automations
 A single automation can respond to multiple triggers. For example, play the same hype sound on any of: a Tier 2 sub, a 100-bit cheer, or a 5-viewer raid. Add as many triggers as you need on one rule instead of maintaining separate rules.
+
+### Chained Automations
+1. Create automation A (e.g. a chat command) that runs sound/chat actions, then **Run Automation** targeting automation B
+2. Automation B can itself run another automation — every hop still has `{user}` and the rest of the original chatter's variables
+3. Use this for multi-step flows (announce → timer → wheel) without re-entering the same user context
+4. Loops are detected automatically; keep intentional chains under the 20-hop limit
+
+### Discord from Automations
+1. Add named webhooks under **Integrations → Discord Webhooks** and Test each one
+2. On an automation, enable the **Discord Webhook** action and select one or more webhooks
+3. Reuse your Send Chat Message text, write a Discord-only message, or both
 
 ---
 
@@ -561,7 +637,7 @@ ISB Suite is an ongoing project and your input shapes where it goes next. Bug re
 
 **This is not an ISB Suite bug.** It is a known interaction between **Windows Graphics Capture (WGC)** and certain **fullscreen** games. WGC forces a software cursor; in **exclusive fullscreen**, the game takes over the display and Windows often **cannot draw that cursor on your monitor**. Windowed and borderless modes usually work fine because the desktop compositor (DWM) is still in charge.
 
-**Minecraft Java Edition** is the most commonly reported example (OpenGL + exclusive fullscreen). Many streamers see the cursor return when switching Minecraft to the **Vulkan** renderer (Options → Video), while keeping **Fullscreen** on. Recent Java versions also have a separate **Exclusive Fullscreen** toggle turning that **off** (and restarting the game) often helps even on OpenGL.
+**Minecraft Java Edition** is the most commonly reported example (OpenGL + exclusive fullscreen). Many streamers see the cursor return when switching Minecraft to the **Vulkan** renderer (Options → Video), while keeping **Fullscreen** on. Recent Java versions also have a separate **Exclusive Fullscreen** toggle — turning that **off** (and restarting the game) often helps even on OpenGL.
 
 **Other games can hit the same issue** depending on their **rendering engine** and **fullscreen mode**, not just Minecraft. OpenGL games in true exclusive fullscreen are the most affected; DirectX and Vulkan titles vary. Games launched with **"Disable fullscreen optimizations"** checked in Windows compatibility settings are more likely to break.
 
@@ -608,15 +684,16 @@ If the cursor works in windowed mode but not fullscreen, the cause is almost cer
 - Donation polling runs on a short interval, so there may be a brief delay
 
 ### Discord Webhook Not Sending *(optional integration)*
-- Verify **Enable Discord webhook** is checked and the URL is saved on the Integrations page
+- Verify your named webhook(s) are saved under **Integrations → Discord Webhooks**
 - Use **Test** on Integrations to confirm the webhook works before relying on automations
-- Check that the automation's **Send Chat Message** destination includes Discord (not Twitch only)
+- Check that the automation includes the **Discord Webhook** action and that the intended webhook(s) are selected
 - Webhook URLs must start with `https://discord.com/api/webhooks/` (legacy `discordapp.com` URLs also work)
 
 ### Alerts Not Showing
 - Make sure an **Alert Box** widget is placed on the active layout in Overlay Layout
-- Verify the alert rule is enabled in the **Alerts** tab
+- Verify the alert rule is enabled in the **Alerts** tab (built-in type sections or **Custom Alerts**)
 - Check that the trigger threshold (e.g. minimum bits) is being met
+- If several alerts match the same event, only the most specific one fires
 
 ### Point Drops Not Spawning
 - Check that the Point Drop widget is placed on the active layout in Overlay Layout
