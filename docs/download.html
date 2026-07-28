@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="site-base" content="/ISBSuiteReleases/docs" />
+    <title>Download | ISB Suite</title>
+    <meta
+      name="description"
+      content="Download the ISB Suite Windows installer, finish setup, and capture the overlay in OBS."
+    />
+    <meta property="og:title" content="Download | ISB Suite" />
+    <meta
+      property="og:description"
+      content="Download the ISB Suite Windows installer, finish setup, and capture the overlay in OBS."
+    />
+    <meta property="og:image" content="/assets/screenshots/home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+  </head>
+  <body>
+    <div class="wiki">
+      <header class="wiki-top">
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+          <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+          <span class="brand-text">
+            <strong>ISB Suite</strong>
+            <span>Integrated Stream Broadcast Suite</span>
+          </span>
+        </a>
+        <div class="search-wrap">
+          <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2" />
+              <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </span>
+          <label class="sr-only" for="wiki-search">Search docs</label>
+          <input
+            id="wiki-search"
+            type="search"
+            placeholder="Search features, commands, setups..."
+            autocomplete="off"
+          />
+          <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+        </div>
+        <div class="top-actions">
+          <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+          <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html" aria-current="page">Download</a>
+        </div>
+      </header>
+      <aside class="wiki-side" id="wiki-side"></aside>
+      <main class="wiki-main">
+        <article class="page wide">
+          <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / Download</p>
+          <h1 class="page-title">Download</h1>
+          <p class="lede">
+            Get the Windows installer from
+            <a href="https://github.com/Thadestroy/ISBSuiteReleases">Thadestroy/ISBSuiteReleases</a>, finish setup, connect
+            Twitch, then capture the overlay in OBS or Streamlabs.
+          </p>
+
+          <nav class="toc">
+            <strong>On this page</strong>
+            <ol>
+              <li><a href="#release">Latest release</a></li>
+              <li><a href="#requirements">Requirements</a></li>
+              <li><a href="#setup">Install steps</a></li>
+              <li><a href="#capture">Capture setup</a></li>
+            </ol>
+          </nav>
+
+          <div class="ref-panel" id="release">
+            <h3>Latest release</h3>
+            <p id="release-status" class="muted">Loading latest release from GitHub...</p>
+            <p id="release-meta" hidden></p>
+            <div class="btn-row mt-1">
+              <a
+                class="btn btn-primary"
+                id="download-installer"
+                href="https://github.com/Thadestroy/ISBSuiteReleases/releases/latest"
+                >Download installer</a
+              >
+              <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/releases">All releases</a>
+            </div>
+          </div>
+
+          <section class="section" id="requirements">
+            <h2>Requirements</h2>
+            <ul>
+              <li>Windows 10 or later</li>
+              <li>Twitch account (optional to open the app; you want it connected for chat and events)</li>
+              <li>OBS, Streamlabs, or any tool with a Window Capture source</li>
+            </ul>
+          </section>
+
+          <section class="section" id="setup">
+            <h2>Install steps</h2>
+            <ol class="steps">
+              <li>
+                <strong>Download</strong>
+                <p>
+                  Get <code>ISBSuiteSetup_X.X.X.exe</code> from the latest release above (or
+                  <a href="https://github.com/Thadestroy/ISBSuiteReleases/releases/latest">GitHub releases</a>). Do not use
+                  third-party mirrors.
+                </p>
+              </li>
+              <li>
+                <strong>Run the installer</strong>
+                <p>
+                  Windows SmartScreen may warn on first run while the installer is not Authenticode-signed. Choose
+                  <strong>More info</strong>, then <strong>Run anyway</strong>. Prefer checking the release asset name and
+                  size on GitHub before you run it.
+                </p>
+              </li>
+              <li>
+                <strong>Finish setup</strong>
+                <p>Complete the wizard and launch ISB Suite.</p>
+              </li>
+              <li>
+                <strong>Connect Twitch</strong>
+                <p>Open <strong>Integrations</strong> and sign in with device code OAuth for chat and EventSub.</p>
+              </li>
+            </ol>
+            <div class="callout">
+              <p>
+                Only download from
+                <a href="https://github.com/Thadestroy/ISBSuiteReleases">Thadestroy/ISBSuiteReleases</a>. After install, the
+                app checks for updates on launch.
+              </p>
+            </div>
+          </section>
+
+          <section class="section" id="capture">
+            <h2>Capture setup (Window Capture)</h2>
+            <p>
+              ISB Suite draws your overlay in its own transparent window. Nothing shows on broadcast until your streaming
+              software captures that window.
+            </p>
+            <ol class="steps">
+              <li>Add a <strong>Window Capture</strong> source in OBS or Streamlabs.</li>
+              <li>
+                Select <strong>ISBSuite.exe: ISB Suite - Capture</strong>. Prefer Capture Method <strong>Windows 10</strong>
+                and Window Match Priority <strong>Window title must match</strong>.
+              </li>
+              <li>In the app, use <strong>Overlay Layout</strong> to place widgets on the stage.</li>
+            </ol>
+            <div class="callout">
+              <p>Winner text centers on the wheel. The spin pointer sits on the right side of the wheel.</p>
+            </div>
+            <p><a class="btn btn-primary" href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout docs</a></p>
+          </section>
+
+          <p class="page-footer">
+            ISB Suite |
+            <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> |
+            <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a>
+          </p>
+        </article>
+      </main>
+    </div>
+    <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+    <script src="/ISBSuiteReleases/docs/assets/js/download.js"></script>
+  </body>
+</html>

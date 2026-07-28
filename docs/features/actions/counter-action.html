@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Counter Action | ISB Suite</title>
+  <meta name="description" content="Counter Action: Change by or Set to, ranges, other counters, tiers" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Counter Action | ISB Suite" />
+  <meta property="og:description" content="Counter Action: Change by or Set to, ranges, other counters, tiers" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Counter Action</p>
+        <h1 class="page-title">Counter Action</h1>
+        <p class="lede">Adjust one or more counters when the rule fires. Change by a signed amount, set an exact value, pull another counter, or roll a random range.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-counter-action.png" alt="Counter Action action setup in ISB Suite" />
+          <figcaption>Counter Action with several rows: Change by, Set to, random range, and optional tiers on the selected counter.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Counter Action</strong>.</li>
+            <li>Operations: Change by or Set to; amount from a number, another counter, or a min-max range.</li>
+            <li><code>{amount}</code> is the resolved amount from the first counter action on the rule.</li>
+            <li>With <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a>, counter updates still happen immediately.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#amounts">Operations and amounts</a></li>
+          <li><a href="#tiers">Tiers</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>Each enabled row updates one counter when the rule fires. Values clamp at the counter floor (zero by default). You can stack several rows (tax a balance, then clear a pot). Full counter types and Stats UI: <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a>.</p>
+          <p>If a <strong>Timer</strong> is also on the rule, counter (and community goal) updates still apply at fire time so templates like <code>{count}</code> stay correct while other actions wait for the countdown.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Create the counter on Counters and Stats if needed (global or per-user).</li>
+            <li>Enable <strong>Counter Action</strong> and <strong>+ Add counter</strong> for each row.</li>
+            <li>Pick target, operation, and amount source. Save and verify on Stats.</li>
+          </ol>
+        </section>
+        <section class="section" id="amounts">
+          <h2>Operations and amounts</h2>
+          <p>Stack rows when one fire should change more than one counter (for example bump Wins, reset Deaths, and roll Stream Coins):</p>
+          <ul>
+            <li><strong>Change by</strong>: signed delta (positive adds, negative subtracts).</li>
+            <li><strong>Set to</strong>: absolute value (including 0 to reset).</li>
+            <li><strong>Fixed number</strong>, <strong>another counter</strong> (add or subtract that counter&apos;s live value), or a <strong>random range</strong> rolled once each fire.</li>
+            <li><code>{amount}</code> in chat/TTS is the resolved amount from the <em>first</em> counter action on that fire.</li>
+          </ul>
+        </section>
+        <section class="section" id="tiers">
+          <h2>Tiers</h2>
+          <p>Optional tier ladders (Bronze / Silver / Gold style) can be edited from this panel or on the counter definition. Crossing a tier can fire <strong>Counter Tier Reached</strong> triggers on Automations / Custom Alerts. Tokens: <code>{counterTier}</code>, <code>{counterTier:Name}</code> - see Counters and Stats.</p>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>Duel win board</strong> - Chat game win phase -&gt; Change by +1 on per-user <strong>Wins</strong>, then Send Message with <code>{user}</code> and <code>{count}</code>.</li>
+            <li><strong>Death reset redeem</strong> - Channel points -&gt; Set to 0 on <strong>Deaths</strong> plus a short chat confirm.</li>
+            <li><strong>Random tip jar</strong> - Bits or shop -&gt; Change by a random range on <strong>Stream Coins</strong> so each redeem feels different.</li>
+            <li><strong>Tax the pot</strong> - Command -&gt; Change by -[pot counter] on a viewer balance, then Set pot to 0 (two rows on one rule).</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

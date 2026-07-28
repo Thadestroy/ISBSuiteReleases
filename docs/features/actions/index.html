@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Actions | ISB Suite</title>
+  <meta name="description" content="Shared action setup used by Automations, Chat Bot, shop, and Chat Games" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Actions | ISB Suite" />
+  <meta property="og:description" content="Shared action setup used by Automations, Chat Bot, shop, and Chat Games" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Actions</p>
+        <h1 class="page-title">Actions</h1>
+        <p class="lede">The same Actions editor appears on Automations, Chat Bot, Viewer Points shop items, Chat Games, and related surfaces. Pick what should happen when a rule fires; each action has its own options and Test controls where it makes sense.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-hub.png" alt="Actions section on an automation edit form" />
+          <figcaption>Actions (What to Do): enable cards for sound, chat, wheel, alerts, timers, and more.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>One shared Actions control - not a separate app feature with its own Free limit.</li>
+            <li>Used from <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a>, <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a>, shop items, and <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a>.</li>
+            <li>Many actions support <a href="/ISBSuiteReleases/docs/reference/message-variables.html">message variables</a> (<code>{user}</code>, <code>{amount}</code>, and so on).</li>
+            <li>Open a card below for how each action works, options, and pitfalls.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#where">Where Actions appear</a></li>
+          <li><a href="#order">How Actions run together</a></li>
+          <li><a href="#catalog">Action catalog</a></li>
+          <li><a href="#tips">Setup tips</a></li>
+        </ol></nav>
+
+        <section class="section" id="where">
+          <h2>Where Actions appear</h2>
+          <p>Whenever you configure <strong>what happens</strong> after a trigger or redeem, you get this Actions list. Labels match the checkboxes in the app.</p>
+          <ul>
+            <li><strong>Automations</strong> and <strong>Chat Bot</strong>: full action set on each rule.</li>
+            <li><strong>Viewer Points shop</strong>: redeem runs the item Actions.</li>
+            <li><strong>Chat Games</strong>: phase Actions (open, join, win, and so on).</li>
+            <li><strong>Wheel entries</strong>: a smaller per-entry set (sound, chat, counter, run automation). See <a href="/ISBSuiteReleases/docs/features/wheel.html#actions">Wheel - Per entry actions</a>.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="order">
+          <h2>How Actions run together</h2>
+          <ul>
+            <li>You can enable several actions on one rule. They share the same trigger context (<code>{user}</code>, amounts, and so on).</li>
+            <li><a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> is special: Counter Action and Push Community Goal still apply immediately so <code>{count}</code> stays correct; sound, chat, TTS, wheel, giveaway, and alerts wait until the countdown ends.</li>
+            <li><a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a> replaces the flat action list with named Action Sets - each fire picks one set.</li>
+            <li>Free limits apply to the parent feature (automations, chat bot commands, shop items), not per action type.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="catalog">
+          <h2>Action catalog</h2>
+          <div class="feature-grid">
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/start-wheel-session.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-start-wheel-session.png" alt="" /><div class="body"><h3>Start Wheel Session</h3><p>Load a preset; optionally auto-spin.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/play-sound.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-play-sound.png" alt="" /><div class="body"><h3>Play Sound</h3><p>Queue audio, volume, bypass queue.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/send-message.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-send-message.png" alt="" /><div class="body"><h3>Send Message</h3><p>Twitch chat with variables.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/text-to-speech.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-text-to-speech.png" alt="" /><div class="body"><h3>Text-to-Speech</h3><p>Speak chat text or custom TTS.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/discord-webhook.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-discord-webhook.png" alt="" /><div class="body"><h3>Discord Webhook</h3><p>Post to named webhooks.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/counter-action.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-counter-action.png" alt="" /><div class="body"><h3>Counter Action</h3><p>Change by or Set to; tiers optional.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/push-community-goal.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-push-community-goal.png" alt="" /><div class="body"><h3>Push Community Goal</h3><p>Add progress; optional trigger amount.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/run-alert.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-run-alert.png" alt="" /><div class="body"><h3>Run Alert</h3><p>Play a managed Alerts-page alert.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/timer.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-timer.png" alt="" /><div class="body"><h3>Timer</h3><p>Delay other actions; optional overlay.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/start-giveaway-session.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-start-giveaway-session.png" alt="" /><div class="body"><h3>Start Giveaway Session</h3><p>Timed chat entry giveaway.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-run-chat-bot-or-automation.png" alt="" /><div class="body"><h3>Run Chat Bot or Automation</h3><p>Chain into another rule.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/randomized-action.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomized-action.png" alt="" /><div class="body"><h3>Randomized Action</h3><p>Pick one of several action sets.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/actions/randomize-image-picker.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomize-image-picker.png" alt="" /><div class="body"><h3>Randomize Image Picker</h3><p>Reshuffle overlay picker images.</p></div></a>
+          </div>
+        </section>
+
+        <section class="section" id="tips">
+          <h2>Setup tips</h2>
+          <ul>
+            <li>Use <strong>Test</strong> / <strong>Test TTS</strong> on sound and speech actions before going live.</li>
+            <li>Prefer one shared &quot;hype pack&quot; automation and call it with <a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a> from several commands.</li>
+            <li>For variety from one redeem, use <a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a> instead of many near-duplicate rules.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

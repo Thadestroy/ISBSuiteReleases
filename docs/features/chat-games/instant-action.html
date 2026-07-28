@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instant action | ISB Suite</title>
+  <meta name="description" content="Instant action chat game: no session, fires through the automation engine" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Instant action | ISB Suite" />
+  <meta property="og:description" content="Instant action chat game: no session, fires through the automation engine" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a> / Instant action</p>
+        <h1 class="page-title">Instant action</h1>
+        <p class="lede">No timed session. The game fires through the automation engine on its start trigger - useful for command-shaped games that still live under Chat Games.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-instant-action.png" alt="Instant action chat game setup in ISB Suite" />
+          <figcaption>Instant action: no join window; trigger runs Actions immediately.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Preset: <strong>Instant action</strong>.</li>
+            <li>No join window, stakes, or dice table by default.</li>
+            <li>Trigger runs Actions immediately (same engine as Automations).</li>
+            <li>Same Advanced Settings pattern as other chat commands.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a>, <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options</a></li>
+          <li><a href="#vs">When to use vs Automations</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>Instant action skips the timed entrant pool and built-in payout math. Treat it like an Automations / Chat Bot rule that is organized under Chat Games - useful for game-flavored commands that share the Chat Games overview, groups, and Free Chat Games pool.</p>
+          <p>On fire, start-trigger context runs the rule&apos;s Actions immediately (Send Message, Randomized Action, Run Alert, and so on).</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Create an Instant action from Chat Games presets.</li>
+            <li>Add start triggers (command, channel points, bits, and so on).</li>
+            <li>Enable Actions - often Send Message plus <a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a> for variety.</li>
+            <li>Set permission, cooldown, and limits under Advanced Settings.</li>
+            <li>Group the rule with your other games on the Chat Games overview.</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options</h2>
+          <ul>
+            <li><strong>Timed session / stakes / dice outcomes</strong>: off by default.</li>
+            <li><strong>Actions</strong>: the full shared Actions list on the rule (not phase lists).</li>
+            <li><strong>Advanced Settings</strong>: aliases, Match anywhere, permission, cooldown, per-stream limits - same as other <code>!commands</code>.</li>
+            <li>You can still call other rules with <a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a>.</li>
+          </ul>
+        </section>
+        <section class="section" id="vs">
+          <h2>When to use vs Automations</h2>
+          <ul>
+            <li><strong>Prefer Instant action</strong> when the command is part of your games set, should appear under Chat Games, and share that Free pool / grouping.</li>
+            <li><strong>Prefer Automations / Chat Bot</strong> when the rule is stream ops (raids, follows, mod tools) rather than a viewer game.</li>
+            <li><strong>Prefer Duel / Percentile roll</strong> when you need stakes math or dice bands instead of a flat Actions list.</li>
+          </ul>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>!loot</strong> - Instant action with Randomized Action sets for different reward lines.</li>
+            <li><strong>!flex</strong> - Chat + Run Alert showing the viewer&apos;s counter tier.</li>
+            <li><strong>Shop twin</strong> - Same Actions as a Viewer Points shop item, but invoked from a chat command living with your games.</li>
+            <li><strong>Chain into Heist</strong> - Instant action that only mods can run, which opens a Heist via Run Chat Bot or Automation / session start pattern you already use.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/chat-games/duel.html">Duel</a>, <a href="/ISBSuiteReleases/docs/features/chat-games/percentile-roll.html">Percentile roll</a>, <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Text-to-Speech | ISB Suite</title>
+  <meta name="description" content="Text-to-Speech action: voices, volume, Test TTS, read options" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Text-to-Speech | ISB Suite" />
+  <meta property="og:description" content="Text-to-Speech action: voices, volume, Test TTS, read options" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Text-to-Speech</p>
+        <h1 class="page-title">Text-to-Speech</h1>
+        <p class="lede">Speak an announcement when the rule fires. Read the Send Message text, a custom TTS template, or both. Built-in voices need no cloud API key.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-text-to-speech.png" alt="Text-to-Speech action setup in ISB Suite" />
+          <figcaption>Text-to-Speech: read options, TTS text, voice, volume, Test TTS.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Text-to-Speech</strong>.</li>
+            <li>You must enable at least one read option or nothing is spoken.</li>
+            <li>Custom TTS text supports variables; spoken after Send Message text when both are on.</li>
+            <li>Use <strong>Test TTS</strong> before going live.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Read options</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>On fire, TTS speaks the selected sources through the chosen voice, volume, and audio channel. If both Send Message and custom TTS text are enabled, Send Message is spoken first, then the custom TTS line. The editor warns if TTS is on but neither read option is checked.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Enable <strong>Text-to-Speech</strong>.</li>
+            <li>Check <strong>Read Send Message Response via TTS</strong> and/or <strong>Read TTS Text via TTS</strong>.</li>
+            <li>If using custom text, fill <strong>TTS Text</strong> (supports <code>{input}</code> and other variables).</li>
+            <li>Pick voice, volume, and channel, then <strong>Test TTS</strong>.</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Read options</h2>
+          <ul>
+            <li><strong>Read Send Message Response via TTS</strong>: speaks whatever the Send Message template resolved to. Enable Send Message on the same rule (or accept that there is nothing to read).</li>
+            <li><strong>Read TTS Text via TTS</strong>: speaks the dedicated TTS template - useful when chat should be short and speech should be longer (or the reverse).</li>
+            <li><strong>Voice / Channel</strong>: same audio-bus idea as Play Sound.</li>
+          </ul>
+          <p>Alerts can also speak on their own TTS settings; this action is for Automations / Chat Bot / shop / games Actions surfaces. See <a href="/ISBSuiteReleases/docs/features/alerts.html">Alerts</a>.</p>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Raid -&gt; Send Message for chat plus TTS text <code>{user} is raiding!</code> so the room hears it if chat scrolls.</li>
+            <li>Shop redeem -&gt; TTS only (no chat) for a private-feeling on-stream callout.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

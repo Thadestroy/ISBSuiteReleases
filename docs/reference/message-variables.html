@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Message variables | ISB Suite</title>
+  <meta name="description" content="Template tokens for chat, alerts, and TTS" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Message variables | ISB Suite" />
+  <meta property="og:description" content="Template tokens for chat, alerts, and TTS" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / Reference / Message variables</p>
+        <h1 class="page-title">Message variables</h1>
+        <p class="lede">Use these tokens in chat messages, alert text, and TTS text. Availability depends on the trigger and actions that fired. Unset values leave the literal token in place. Names and meanings match the in-app variable registry.</p>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#core">Core</a></li>
+          <li><a href="#counters">Counters</a></li>
+          <li><a href="#points">Viewer Points</a></li>
+          <li><a href="#goals">Community Goals</a></li>
+          <li><a href="#timers">Timers and commands</a></li>
+          <li><a href="#games">Chat Games</a></li>
+          <li><a href="#tiltify">Tiltify</a></li>
+          <li><a href="#examples">Examples</a></li>
+          <li><a href="#tracking">Tracking stats with counters</a></li>
+        </ol></nav>
+
+        <section class="section" id="core">
+          <h2>Core</h2>
+          <p>User, wheel, and Twitch event tokens. <code>{amount}</code> is context-dependent (bits, raid viewers, counter action amount, chat game stake, and more).</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>{user}</code></td><td>Viewer&apos;s display name (requires a Twitch trigger)</td></tr>
+              <tr><td><code>{displayName}</code></td><td>Alias for <code>{user}</code> (Follow Age / Watch Time)</td></tr>
+              <tr><td><code>{winner}</code></td><td>Winning wheel entry text (also when an automation runs from a wheel entry win)</td></tr>
+              <tr><td><code>{wheel}</code></td><td>Wheel / preset name</td></tr>
+              <tr><td><code>{amount}</code></td><td>Numeric event value: bits, viewers, sub months, gift count, hype level, ad seconds, points given/wagered, chat game stake, or Counter Action resolved amount</td></tr>
+              <tr><td><code>{reward}</code></td><td>Channel point reward title</td></tr>
+              <tr><td><code>{input}</code></td><td>User message or leftover text after a command / alias</td></tr>
+              <tr><td><code>{bits}</code></td><td>Bits cheered (Bits trigger)</td></tr>
+              <tr><td><code>{subs}</code></td><td>Sub or gift count (Sub / Resub / Gift Sub)</td></tr>
+              <tr><td><code>{tier}</code></td><td>Sub tier: 1, 2, or 3</td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="counters">
+          <h2>Counters</h2>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>{count}</code></td><td>Counter value after the current change (when a counter action is configured)</td></tr>
+              <tr><td><code>{value}</code></td><td>Alias for <code>{count}</code></td></tr>
+              <tr><td><code>{oldValue}</code></td><td>Counter value before a Counter Value Changed trigger</td></tr>
+              <tr><td><code>{delta}</code></td><td>Signed amount the counter changed by</td></tr>
+              <tr><td><code>{counter:Name}</code></td><td>Current value of a named counter (for example <code>{counter:Wins}</code>)</td></tr>
+              <tr><td><code>{counterTier}</code></td><td>Tier for the wired counter action, or the tier just gained on Counter Tier Reached</td></tr>
+              <tr><td><code>{counterTier:Name}</code></td><td>Current tier label for a named counter (live lookup)</td></tr>
+              <tr><td><code>{top5Counter:Name}</code></td><td>Top 5 for a per-user counter: <code>1. Name value, 2. Name value, ...</code></td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="points">
+          <h2>Viewer Points</h2>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>{balance}</code></td><td>User&apos;s current point balance</td></tr>
+              <tr><td><code>{currencyName}</code></td><td>Currency display name</td></tr>
+              <tr><td><code>{price}</code></td><td>Cost of the redeemable shop item</td></tr>
+              <tr><td><code>{itemName}</code></td><td>Redeemable item name</td></tr>
+              <tr><td><code>{giver}</code></td><td>Points giver&apos;s display name</td></tr>
+              <tr><td><code>{recipient}</code></td><td>Points recipient&apos;s display name</td></tr>
+              <tr><td><code>{giverBalance}</code></td><td>Giver&apos;s balance after a transfer</td></tr>
+              <tr><td><code>{recipientBalance}</code></td><td>Recipient&apos;s balance after a transfer</td></tr>
+              <tr><td><code>{target}</code></td><td>Admin-give target display name</td></tr>
+              <tr><td><code>{pool}</code></td><td>Total claim slots rolled for a point drop</td></tr>
+              <tr><td><code>{claimsLeft}</code></td><td>Remaining unclaimed slots in the active drop</td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="goals">
+          <h2>Community Goals</h2>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>{goalName}</code></td><td>Community goal name</td></tr>
+              <tr><td><code>{goalCurrent}</code></td><td>Current progress</td></tr>
+              <tr><td><code>{goalLimit}</code></td><td>Target limit</td></tr>
+              <tr><td><code>{goalProgress}</code></td><td>Progress as <code>current/limit</code> (for example <code>15/100</code>)</td></tr>
+              <tr><td><code>{goalCycles}</code></td><td>How many times the goal has completed</td></tr>
+              <tr><td><code>{goalOverflow}</code></td><td>Overflow progress after a completion</td></tr>
+              <tr><td><code>{goalCurrent:Name}</code></td><td>Current progress of a named goal</td></tr>
+              <tr><td><code>{goalLimit:Name}</code></td><td>Target of a named goal</td></tr>
+              <tr><td><code>{goalCycles:Name}</code></td><td>Completion count of a named goal</td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="timers">
+          <h2>Timers and commands</h2>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>{command}</code></td><td>Chat command (giveaway join, chat game join, point drop claim, and so on)</td></tr>
+              <tr><td><code>{duration}</code></td><td>Timed session length, humanized (for example <code>5 minutes</code>)</td></tr>
+              <tr><td><code>{timeLeft}</code></td><td>Countdown reminder remaining time (giveaways, chat games, Ad Break pre-warnings)</td></tr>
+              <tr><td><code>{time}</code></td><td>Automation cooldown time remaining, humanized</td></tr>
+              <tr><td><code>{followage}</code></td><td>Formatted follow duration (for example <code>2y 3mo 5d 4h</code>)</td></tr>
+              <tr><td><code>{watchtime}</code></td><td>Formatted watch time (for example <code>2d 5h 13m</code>)</td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="games">
+          <h2>Chat Games</h2>
+          <p>Available in chat game phase, resolve, and summary messages. Dice / range games also set <code>{roll}</code> and <code>{outcome}</code>. Related: <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a>.</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>{totalPool}</code></td><td>Sum of all bets in the active chat game</td></tr>
+              <tr><td><code>{totalPaidOut}</code></td><td>Total amount paid out to winners</td></tr>
+              <tr><td><code>{totalLost}</code></td><td>Total bet forfeited by losers</td></tr>
+              <tr><td><code>{entryCount}</code></td><td>Number of entrants</td></tr>
+              <tr><td><code>{winnerCount}</code></td><td>Number of winners</td></tr>
+              <tr><td><code>{winnersList}</code></td><td>Comma-separated winner display names</td></tr>
+              <tr><td><code>{losersList}</code></td><td>Comma-separated loser display names</td></tr>
+              <tr><td><code>{userStake}</code></td><td>Joining viewer&apos;s bet amount</td></tr>
+              <tr><td><code>{userPayout}</code></td><td>Viewer&apos;s payout from the chat game</td></tr>
+              <tr><td><code>{roll}</code></td><td>Dice / range outcome roll for the current fire</td></tr>
+              <tr><td><code>{outcome}</code></td><td>Name of the matching dice / range outcome band</td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="tiltify">
+          <h2>Tiltify</h2>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>{donor}</code></td><td>Donor&apos;s display name</td></tr>
+              <tr><td><code>{donationAmount}</code></td><td>Formatted donation amount (for example <code>$25.00</code>)</td></tr>
+              <tr><td><code>{currency}</code></td><td>Donation currency code (for example <code>USD</code>)</td></tr>
+              <tr><td><code>{goal}</code></td><td>Campaign goal percentage reached (for example <code>42%</code>)</td></tr>
+              <tr><td><code>{milestone}</code></td><td>Milestone name from the campaign</td></tr>
+              <tr><td><code>{tiltifyReward}</code></td><td>Tiltify reward name claimed</td></tr>
+              <tr><td><code>{quantity}</code></td><td>Reward units claimed in this donation</td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="examples">
+          <h2>Examples</h2>
+          <ul>
+            <li>Wheel win: <code>Congrats {user}! The wheel landed on {winner}! You&apos;ve won {count} times total ({counterTier}).</code></li>
+            <li>Leaderboard: <code>Top 5: {top5Counter:Wins}</code> on a per-user counter</li>
+            <li>Goal check response: <code>{goalName}: {goalProgress}</code> - for example <code>Subathon Bits: 15/100</code></li>
+            <li>Heist summary: <code>Game over! {winnerCount} got away with {totalPaidOut}. Winners: {winnersList}</code></li>
+            <li>Dice band: <code>{user} rolled {roll} ({outcome})!</code></li>
+            <li>Tier up: on Counter Tier Reached, prefer bare <code>{counterTier}</code> for the tier that just fired</li>
+          </ul>
+        </section>
+
+        <section class="section" id="tracking">
+          <h2>Tracking stats with counters</h2>
+          <p>Counters live on <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a>. Change them from <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a>, wheel entry actions, Viewer Points, and related Counter Actions.</p>
+          <ul>
+            <li>Use <strong>global</strong> counters for stream-wide stats (deaths, total spins).</li>
+            <li>Use <strong>per user</strong> counters to track viewer participation.</li>
+            <li>Enable <strong>Counter Tiers</strong> on the Stats page to label milestones (Bronze / Silver / Gold, rank names, and so on).</li>
+            <li>Show live values with <code>{count}</code> (after a change or on a tier trigger) or <code>{counter:CounterName}</code> any time.</li>
+            <li>Announce the tier a viewer just reached with <code>{counterTier}</code> on a Counter Tier Reached automation; use <code>{counterTier:CounterName}</code> for their current tier on that counter.</li>
+            <li>Announce a per user leaderboard with <code>{top5Counter:CounterName}</code>.</li>
+            <li>CSV import accepts comma- or semicolon-separated files (delimiter auto detected). The downloadable template stays comma-separated.</li>
+          </ul>
+          <h3>Tier milestone automation</h3>
+          <ol>
+            <li>Enable tiers on a counter on the Stats page (threshold + label ladder).</li>
+            <li>Create an automation with trigger Counter Tier Reached and select that counter.</li>
+            <li>Use <code>{user}</code> and <code>{counterTier}</code> in chat or alert text. <code>{counterTier}</code> is the label for this tier crossing, not the final tier if several were crossed at once.</li>
+          </ol>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

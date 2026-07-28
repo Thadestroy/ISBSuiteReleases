@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Integrations | ISB Suite</title>
+  <meta name="description" content="Twitch, Discord, Tiltify, TTS" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Integrations | ISB Suite" />
+  <meta property="og:description" content="Twitch, Discord, Tiltify, TTS" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Integrations</p>
+        <h1 class="page-title">Integrations</h1>
+        <p class="lede">Manage connections from the Integrations page. Twitch is the only integration most streamers need. Everything else is optional.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/integrations.png" alt="Integrations page in ISB Suite" />
+          <figcaption>Integrations: Twitch, Discord webhooks, optional Tiltify, TTS notes.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Twitch: device-code OAuth for chat and EventSub.</li>
+            <li>Optional bot account for outbound chat (Free).</li>
+            <li>Discord: named webhooks under Integrations, then Discord Webhook action on rules.</li>
+            <li>TTS is built in with no API key.</li>
+            <li>Want another platform? <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Request an integration</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#twitch">Twitch</a></li>
+          <li><a href="#discord">Discord webhooks</a></li>
+          <li><a href="#tiltify">Tiltify</a></li>
+          <li><a href="#tts">Text to Speech</a></li>
+          <li><a href="#request">Request an integration</a></li>
+        </ol></nav>
+
+        <section class="section" id="twitch">
+          <h2>Twitch</h2>
+          <ul>
+            <li>Sign in with device-code OAuth (no manual token paste).</li>
+            <li>Chat: read commands and send bot messages.</li>
+            <li>EventSub: channel points, follows, subs, raids, bits, hype train, goals, ad breaks, shoutouts.</li>
+            <li>Optional dedicated bot account: link a second Twitch account so replies send as the bot while the broadcaster account stays for triggers. Available on Free. Mod the bot for higher rate limits.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="discord">
+          <h2>Discord webhooks (optional)</h2>
+          <ol class="steps">
+            <li>Under Integrations, Discord Webhooks: add named webhooks (paste each channel webhook URL from Discord: Server Settings - Integrations - Webhooks).</li>
+            <li>Save, then Test a webhook to confirm delivery.</li>
+            <li>On an automation, enable Discord Webhook: pick one or more webhooks, reuse Send Chat Message text and/or write a Discord-only message.</li>
+          </ol>
+          <ul>
+            <li>One automation can post to multiple webhooks at once.</li>
+            <li>Variables resolve before send. Discord messages are capped at 2,000 characters.</li>
+            <li>Webhook URLs should start with <code>https://discord.com/api/webhooks/</code> (legacy discordapp.com URLs also work).</li>
+          </ul>
+          <div class="callout"><p><strong>Migration:</strong> If you previously had a single Discord webhook, it is migrated as <strong>Default</strong> automatically. Older "send to Discord" checkboxes on Send Chat Message are converted to the Discord Webhook action.</p></div>
+        </section>
+
+        <section class="section" id="tiltify">
+          <h2>Tiltify (optional)</h2>
+          <p>Connect a Tiltify charity campaign via OAuth. Polls for donations and campaign totals. Token auto-refresh, with a reconnect window if auth expires mid-stream.</p>
+        </section>
+
+        <section class="section" id="tts">
+          <h2>Text to Speech</h2>
+          <p>Built-in voices (for example Brian, Amy, Matthew). Configure voice and volume per automation, alert, or giveaway winner. No account or API key required.</p>
+        </section>
+
+        <section class="section" id="request">
+          <h2>Want another integration?</h2>
+          <p>ISB Suite is an ongoing project. If there is a platform or service you would like integrated, <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">request it by opening an issue</a>. Feedback and ideas help shape what gets added next.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

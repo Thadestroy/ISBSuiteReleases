@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Timer | ISB Suite</title>
+  <meta name="description" content="Timer action: delay, immediate counters, Timer Widget, !endtimer" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Timer | ISB Suite" />
+  <meta property="og:description" content="Timer action: delay, immediate counters, Timer Widget, !endtimer" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Timer</p>
+        <h1 class="page-title">Timer</h1>
+        <p class="lede">Wait after the trigger, then fire the deferred actions together. Optionally show a Timer Widget on the overlay while you wait.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-timer.png" alt="Timer action setup in ISB Suite" />
+          <figcaption>Timer: wait duration, widget preset, note about counters vs deferred actions.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Timer</strong>.</li>
+            <li>Counters and community goals update immediately; sound, chat, TTS, wheel, giveaway, and alerts wait.</li>
+            <li>Link a Timer Widget preset, or None (background only).</li>
+            <li>Mods: <code>!endtimer {Timer Widget name}</code> ends early and skips deferred actions.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#deferred">What waits vs what runs now</a></li>
+          <li><a href="#overlay">Overlay and !endtimer</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>Enable <strong>Timer</strong> and set how long to wait after the trigger (seconds, minutes, or hours). When the countdown finishes, the deferred actions on that same rule fire together. Linked Timer Widgets show the live countdown on stream; multiple rules that share one preset queue so only one countdown runs at a time.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>(Optional) Create a Timer Widget preset in Overlay Layout and place the widget on a layout.</li>
+            <li>Enable <strong>Timer</strong>, set the wait, pick the preset or <strong>None (background only)</strong>.</li>
+            <li>Enable the actions that should run after the wait (Send Message, Play Sound, and so on) on the same rule.</li>
+          </ol>
+        </section>
+        <section class="section" id="deferred">
+          <h2>What waits vs what runs now</h2>
+          <p>From the editor copy in the app:</p>
+          <ul>
+            <li><strong>Immediate</strong>: Counter Action and Push Community Goal (so <code>{count}</code> / goal progress stay correct in messages that fire later).</li>
+            <li><strong>Deferred until countdown ends</strong>: sound, wheel, giveaway, alert, chat, TTS, and related presentation actions.</li>
+          </ul>
+          <div class="callout"><p><code>!endtimer</code> cancels the countdown and <strong>skips</strong> deferred actions - it does not run them early.</p></div>
+        </section>
+        <section class="section" id="overlay">
+          <h2>Overlay and !endtimer</h2>
+          <p>Presets and widget placement: <a href="/ISBSuiteReleases/docs/features/overlay-layout/timer.html">Overlay Layout - Timer Widget</a>. Mods end an active named countdown with <code>!endtimer {Timer Widget name}</code>. Background-only timers have no on-screen widget but still delay actions the same way.</p>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Channel points &quot;Boss in 60s&quot; -&gt; Timer 60s on <strong>Main Timer</strong>, then Send Message + Play Sound.</li>
+            <li>Counter + Timer on one rule: increment Wins immediately, announce in chat when the timer ends.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

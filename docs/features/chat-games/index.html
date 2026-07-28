@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat Games | ISB Suite</title>
+  <meta name="description" content="Heist, lottery, duel, dice outcomes, phases, and chat game variables" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Chat Games | ISB Suite" />
+  <meta property="og:description" content="Heist, lottery, duel, dice outcomes, phases, and chat game variables" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Chat Games</p>
+        <h1 class="page-title">Chat Games</h1>
+        <p class="lede">Mass entry chat games where viewers join from chat, stake a counter value, and get independent or shared outcomes. Each preset has its own setup page with options, phases, and example recipes.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games.png" alt="Chat Games page in ISB Suite" />
+          <figcaption>Chat Games: presets and configured game rules.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Free: no separate Chat Games cap (stake counters and other features still follow their Free limits). Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
+            <li>Presets: Heist, Lottery, Duel, Percentile roll, Blank sandbox, Instant action.</li>
+            <li>Join and start commands support aliases and Match anywhere. Phases use the same <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> editor as Automations.</li>
+            <li>Variables: <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">Message variables - Chat Games</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#presets">Presets</a></li>
+          <li><a href="#configure">Shared setup</a></li>
+          <li><a href="#phases">Phases</a></li>
+          <li><a href="#stakes">Stakes and payout</a></li>
+          <li><a href="#variables">Variables</a></li>
+        </ol></nav>
+
+        <section class="section" id="presets">
+          <h2>Presets</h2>
+          <p>Open a card for how that preset works, field options, phases, and use cases.</p>
+          <div class="feature-grid">
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/chat-games/heist.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-heist.png" alt="" /><div class="body"><h3>Heist</h3><p>Timed window; variable bets; independent rolls; winners multiply stake.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/chat-games/lottery.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-lottery.png" alt="" /><div class="body"><h3>Lottery</h3><p>Fixed fee; one winner takes the pool.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/chat-games/duel.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-duel.png" alt="" /><div class="body"><h3>Duel</h3><p>Instant per-user gamble with win/lose phases.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/chat-games/percentile-roll.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-percentile-roll.png" alt="" /><div class="body"><h3>Percentile roll</h3><p>Dice / range bands with per-band Actions.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/chat-games/blank-sandbox.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-blank-sandbox.png" alt="" /><div class="body"><h3>Blank sandbox</h3><p>Timed free-join session you configure yourself.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/chat-games/instant-action.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-instant-action.png" alt="" /><div class="body"><h3>Instant action</h3><p>No session; fires through the automation engine.</p></div></a>
+          </div>
+        </section>
+
+        <section class="section" id="configure">
+          <h2>Shared setup</h2>
+          <p>Managed in the <strong>Chat Games</strong> tab. Each game is its own rule with the same trigger and action building blocks as <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a>. Overview pages support name search and custom groups.</p>
+          <ul>
+            <li><strong>Start triggers</strong>: chat command, channel points, and the same trigger types as Automations. Use these to open a timed session or fire an instant game.</li>
+            <li><strong>Join command</strong> with optional aliases and Match anywhere (Advanced Settings) on timed games.</li>
+            <li>Chat messages for open, join confirmed, summary, and cancel (enable the ones you need).</li>
+            <li><strong>Countdown Warnings</strong>: reminder message plus remaining-time offsets; use <code>{timeLeft}</code>. Offsets at or beyond session length are skipped.</li>
+            <li>Permission, cooldown, and per-stream limits (including once per viewer per stream) sit with start/join Advanced Settings on every chat command.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="phases">
+          <h2>Phases</h2>
+          <p>Chain sounds, alerts, wheels, or other actions to these phases (not every preset uses every phase):</p>
+          <ul>
+            <li><strong>Open</strong> - session starts and join becomes available.</li>
+            <li><strong>Join</strong> - a viewer successfully enters (stake taken when stakes are on).</li>
+            <li><strong>Resolve / When Session Ends</strong> - timed window closes and outcomes are calculated.</li>
+            <li><strong>Win</strong> and <strong>Lose</strong> - per-entrant outcome phases.</li>
+            <li><strong>No Winners</strong> - people joined but nobody won (for example Heist). Separate from When Session Ends.</li>
+            <li><strong>If No One Joins</strong> - path for empty sessions.</li>
+          </ul>
+          <p>Phase Actions use the shared <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> editor (sound, chat, Run Alert, Timer, Randomized Action, and so on).</p>
+        </section>
+
+        <section class="section" id="stakes">
+          <h2>Stakes and payout</h2>
+          <p>When a preset uses stakes, pick a <strong>stake counter</strong> (often your Viewer Points currency counter). Common modes:</p>
+          <ul>
+            <li><strong>Variable stake</strong>: viewer supplies an amount (for example <code>!heist 50</code>).</li>
+            <li><strong>Fixed stake</strong>: every entrant pays the same fee into the pool.</li>
+            <li><strong>Win chance</strong> and <strong>payout multiplier</strong>: used when each entrant rolls independently (Heist / Duel).</li>
+            <li><strong>Resolution scope</strong>: each entrant vs a single winner drawn from the pool (Lottery).</li>
+            <li><strong>Payout mode</strong>: multiply the stake, or pay out / split the total pool.</li>
+            <li><strong>Min entrants</strong>: optional floor before a timed game will resolve as a real draw.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="variables">
+          <h2>Variables</h2>
+          <p>Pool, stakes, winner lists, <code>{roll}</code>, and <code>{outcome}</code> are documented as tables on <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">Message variables - Chat Games</a>. Example Heist setup: <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

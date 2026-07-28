@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Random Image Picker | ISB Suite</title>
+  <meta name="description" content="Random Image Picker overlay widget and Randomize Image Picker action" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Random Image Picker | ISB Suite" />
+  <meta property="og:description" content="Random Image Picker overlay widget and Randomize Image Picker action" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a> / Random Image Picker</p>
+        <h1 class="page-title">Random Image Picker</h1>
+        <p class="lede">Show one image from a Random Image Picker pool. Re-roll every bound widget with the Randomize Image Picker action.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-random-image-picker.png" alt="Random Image Picker widget in Overlay Layout" />
+          <figcaption>Random Image Picker widget selected: bound to a picker pool on the stage.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Widget: <strong>Random Image Picker</strong>.</li>
+            <li>Bind to a picker created in the Random Images tool.</li>
+            <li>Action: <a href="/ISBSuiteReleases/docs/features/actions/randomize-image-picker.html">Randomize Image Picker</a>.</li>
+            <li>Multiple widgets can share one picker so a wall updates together.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options</a></li>
+          <li><a href="#tips">Tips</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>Each widget binds to a picker (image pool). The widget shows the currently selected image for that picker. When a rule runs <a href="/ISBSuiteReleases/docs/features/actions/randomize-image-picker.html">Randomize Image Picker</a>, every widget bound to that picker re-rolls together.</p>
+          <p>This is the runtime display half of the Random Images tool - upload and manage pools there, place widgets here.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Create a picker and upload images in the Random Images tool.</li>
+            <li>Add one or more <strong>Random Image Picker</strong> widgets and bind them to that picker.</li>
+            <li>Size each widget where you want that slot on stream.</li>
+            <li>On a rule (Automations, Chat Bot, shop, Chat Games), enable Randomize Image Picker for that picker.</li>
+            <li>Test the redeem/command and confirm every bound widget updates.</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options</h2>
+          <ul>
+            <li><strong>Picker</strong>: which pool this widget displays.</li>
+            <li><strong>Transform / crop / visibility / hotkey / layer order</strong>: shared stage controls.</li>
+            <li>Empty pools have nothing to show until you upload files.</li>
+            <li>Binding the same picker to several widgets creates a synchronized wall.</li>
+          </ul>
+        </section>
+        <section class="section" id="tips">
+          <h2>Tips</h2>
+          <ul>
+            <li>Use consistent image aspect ratios inside a pool so re-rolls do not jump layout.</li>
+            <li>Pair with Play Sound / Run Alert on the same rule for a punchy re-roll moment.</li>
+            <li>Prefer this over Static Image when the art should change from chat or redeems.</li>
+          </ul>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>Emote wall</strong> - Three widgets, one Demo Emotes picker; channel points re-rolls all three.</li>
+            <li><strong>Character reveal</strong> - Single large widget; Chat Games Win phase randomizes the picker.</li>
+            <li><strong>BRB collage</strong> - Layout with only picker widgets for an idle screen.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/actions/randomize-image-picker.html">Randomize Image Picker action</a>, <a href="/ISBSuiteReleases/docs/features/overlay-layout/static-image.html">Static Image</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

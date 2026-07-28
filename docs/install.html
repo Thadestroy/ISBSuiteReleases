@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <title>Redirecting to Download | ISB Suite</title>
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="/ISBSuiteReleases/docs/download.html" />
+</head>
+<body>
+  <p>This guide moved to <a id="redirect-link" href="/ISBSuiteReleases/docs/download.html">Download</a>.</p>
+  <script>
+    (function () {
+      var meta = document.querySelector('meta[name="site-base"]');
+      var base = ((meta && meta.getAttribute("content")) || "").replace(/\/$/, "");
+      var target = (base || "") + "/download.html" + (location.hash || "");
+      var link = document.getElementById("redirect-link");
+      if (link) link.setAttribute("href", target);
+      location.replace(target);
+    })();
+  </script>
+</body>
+</html>

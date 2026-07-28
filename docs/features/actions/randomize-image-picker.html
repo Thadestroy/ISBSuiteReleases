@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Randomize Image Picker | ISB Suite</title>
+  <meta name="description" content="Randomize Image Picker: overlay widgets and Random Images tool" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Randomize Image Picker | ISB Suite" />
+  <meta property="og:description" content="Randomize Image Picker: overlay widgets and Random Images tool" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Randomize Image Picker</p>
+        <h1 class="page-title">Randomize Image Picker</h1>
+        <p class="lede">Re-roll the active image for a Random Image Picker so every overlay widget bound to that picker updates together.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomize-image-picker.png" alt="Randomize Image Picker action setup in ISB Suite" />
+          <figcaption>Randomize Image Picker: picker dropdown.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Randomize Image Picker</strong>.</li>
+            <li>Create pickers and upload images in the Random Images tool.</li>
+            <li>Overlay widgets must bind to the same picker.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/random-image-picker.html">Overlay Layout - Random Image Picker</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>A Random Image Picker holds a pool of images. Overlay widgets bound to that picker show the current pick. This action re-rolls the picker so every bound widget swaps to the new image at once - useful for emote walls, mystery art, or donor showcase images without rebuilding layouts.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>In the Random Images tool, create a picker and upload images.</li>
+            <li>On Overlay Layout, add Random Image Picker widgets and bind them to that picker.</li>
+            <li>On the rule, enable <strong>Randomize Image Picker</strong> and select the picker.</li>
+          </ol>
+          <p>If no picker is selected, the action does nothing. Empty image pools also have nothing to show until you upload files.</p>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Chat command <code>!emote</code> -&gt; Randomize Image Picker on <strong>Demo Emotes</strong>.</li>
+            <li>Channel points &quot;New backdrop&quot; -&gt; randomize a scenic picker bound to a full-stage widget.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

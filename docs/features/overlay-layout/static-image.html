@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Static Image | ISB Suite</title>
+  <meta name="description" content="Static Image overlay widget for logos and fixed art" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Static Image | ISB Suite" />
+  <meta property="og:description" content="Static Image overlay widget for logos and fixed art" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a> / Static Image</p>
+        <h1 class="page-title">Static Image</h1>
+        <p class="lede">Place any image or logo on the capture stage - branding, frames, or scene decoration that stays put until you swap the file or layout.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-static-image.png" alt="Static Image widget in Overlay Layout" />
+          <figcaption>Static Image widget selected: logos and fixed art on the stage.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Widget: <strong>Static Image</strong>.</li>
+            <li>Does not change at runtime unless you swap the file, crop, or layout.</li>
+            <li>Use a widget hotkey to toggle branding mid-stream.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/random-image-picker.html">Random Image Picker</a> for rotating art.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options</a></li>
+          <li><a href="#tips">Tips</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>Static Image renders one file inside its rectangle. It is for logos, frames, and fixed decoration - not for random pools (use Random Image Picker) or live web pages (use Browser Source).</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Add a <strong>Static Image</strong> widget.</li>
+            <li>Choose the image file and size it on the stage.</li>
+            <li>Crop if the asset has extra transparent padding.</li>
+            <li>Optionally bind a visibility hotkey if you toggle the logo during stream.</li>
+            <li>Save the layout.</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options</h2>
+          <ul>
+            <li><strong>Image path</strong>: the file shown in the widget.</li>
+            <li><strong>Transform / crop / visibility / hotkey / layer order</strong>: shared stage controls.</li>
+            <li>Prefer transparent PNGs for logos so the stage behind stays clean.</li>
+          </ul>
+        </section>
+        <section class="section" id="tips">
+          <h2>Tips</h2>
+          <ul>
+            <li>Keep logos above or below Alert Box deliberately with layer order.</li>
+            <li>For art that should re-roll, use <a href="/ISBSuiteReleases/docs/features/overlay-layout/random-image-picker.html">Random Image Picker</a> instead.</li>
+            <li>Duplicate the widget if you need the same logo in two places on one layout.</li>
+          </ul>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>Corner logo</strong> - Always-on brand mark on Main Scene.</li>
+            <li><strong>Sponsored frame</strong> - Full-bleed frame image with a hotkey to hide it between segments.</li>
+            <li><strong>Scene badge</strong> - Different Static Image per layout (BRB vs Live).</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

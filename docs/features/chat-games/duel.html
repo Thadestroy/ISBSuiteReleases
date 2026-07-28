@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Duel | ISB Suite</title>
+  <meta name="description" content="Duel chat game: instant per-user gamble with win and lose phases" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Duel | ISB Suite" />
+  <meta property="og:description" content="Duel chat game: instant per-user gamble with win and lose phases" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a> / Duel</p>
+        <h1 class="page-title">Duel</h1>
+        <p class="lede">Instant per-user gamble: each trigger bets points immediately with separate Win and Lose action phases.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-duel.png" alt="Duel chat game setup in ISB Suite" />
+          <figcaption>Duel setup: instant stakes, win chance, and Win/Lose action phases.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Preset: <strong>Duel</strong>.</li>
+            <li>No timed join window - fires per trigger.</li>
+            <li>Variable stake, win chance, and payout multiplier.</li>
+            <li>Separate Win and Lose action phases per entrant.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a>, <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">variables</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options</a></li>
+          <li><a href="#phases">Phases</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>A Duel does not collect a room of entrants over time. Each start trigger (command, channel points, and so on) takes the stake and rolls win/lose for that viewer immediately, then runs the matching phase Actions. There is no open/summary session messaging unless you add your own Send Message Actions on Win/Lose.</p>
+          <p>Use Duel for spammy, per-viewer gambles. Use Heist/Lottery when you want a shared timed window.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Create a Duel from Chat Games presets.</li>
+            <li>Set stake counter, variable stake mode, win chance, and payout multiplier.</li>
+            <li>Add start trigger(s) - often a chat command that accepts an amount, or a fixed channel points redeem.</li>
+            <li>Enable Execute Actions on Win / Lose and configure those phase Actions (chat, sound, counters, Run Alert).</li>
+            <li>Set Advanced Settings (permission, cooldown, once per viewer per stream) so duels cannot drain balances instantly.</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options</h2>
+          <ul>
+            <li><strong>Timed session</strong>: off - no join window.</li>
+            <li><strong>Stake mode</strong>: Variable (command amount) or Fixed (redeem with a set cost).</li>
+            <li><strong>Win chance %</strong> and <strong>Payout multiplier</strong>: classic 50% / 2x duel math is a common starting point.</li>
+            <li><strong>Execute Actions on Win / Lose</strong>: turn on the phase lists you care about.</li>
+            <li>Open / summary chat templates are usually left off; put copy in the Win/Lose Actions instead.</li>
+          </ul>
+        </section>
+        <section class="section" id="phases">
+          <h2>Phases</h2>
+          <ul>
+            <li><strong>Win</strong> - per successful roll: hype sound, Run Alert, Counter Action on Wins, Send Message with <code>{user}</code> / stake tokens.</li>
+            <li><strong>Lose</strong> - per failed roll: soft chat, fail sting, or a consolation counter bump.</li>
+          </ul>
+          <p>There is no When Session Ends for Duel. Nested Actions still share the game context for <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">Chat Games variables</a> where applicable.</p>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>!duel 50</strong> - Command with stake from input; Win phase Change by +1 on Wins + hype sound.</li>
+            <li><strong>Points redeem duel</strong> - Channel points item opens a fixed-stake duel (no amount typing).</li>
+            <li><strong>Cooldown-gated spam</strong> - Short cooldown + once per viewer per stream so the counter economy stays healthy.</li>
+            <li><strong>Shared hype pack</strong> - Win phase calls <a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a> into a reusable celebration rule.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/chat-games/instant-action.html">Instant action</a> (no stakes), <a href="/ISBSuiteReleases/docs/features/chat-games/heist.html">Heist</a> (timed room).</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

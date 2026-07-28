@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Randomized Action | ISB Suite</title>
+  <meta name="description" content="Randomized Action: action sets, uniform vs no-repeat, nesting rules" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Randomized Action | ISB Suite" />
+  <meta property="og:description" content="Randomized Action: action sets, uniform vs no-repeat, nesting rules" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Randomized Action</p>
+        <h1 class="page-title">Randomized Action</h1>
+        <p class="lede">Define several Action Sets on one rule. Each fire picks one set - uniform random, or no repeat until every set has played.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomized-action.png" alt="Randomized Action action setup in ISB Suite" />
+          <figcaption>Randomized Action with named Action Sets. The selected set (Prize Wheel) shows its own nested Actions below.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Randomized Action</strong> (above the main Actions grid).</li>
+            <li>Each set is a full Actions payload (sound, chat, wheel, and so on).</li>
+            <li>Modes: uniform, or Don&apos;t repeat until all Action Sets have played.</li>
+            <li>Nested Randomized Action inside a set is stripped - keep randomness on the parent only.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#sets">Action Sets</a></li>
+          <li><a href="#modes">Modes</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>When Randomized Action is enabled, the parent rule no longer runs one flat action list. Instead it picks one named Action Set each fire and runs that set&apos;s Actions. Sets are searchable in the editor. Use this for rotating hype lines, stingers, or mystery wheel loads from a single redeem or command.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Enable <strong>Randomized Action</strong> at the top of Actions.</li>
+            <li>Add Action Sets and name them (Prize Wheel, Hype Pack, Alert Burst).</li>
+            <li>Inside each set, enable the Actions for that outcome (Send Message, Play Sound, Start Wheel Session, and so on).</li>
+            <li>Choose uniform vs no-repeat-until-all.</li>
+          </ol>
+        </section>
+        <section class="section" id="sets">
+          <h2>Action Sets</h2>
+          <p>Each set is a complete Actions editor. Switch sets in the picker to edit that outcome. One redeem can land on a wheel, a sound+TTS pack, or an alert - without duplicate rules.</p>
+          <figure class="visual">
+            <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomized-action-hype-pack.png" alt="Hype Pack Action Set with sound, chat, and TTS" />
+            <figcaption>Action Set &quot;Hype Pack&quot;: Play Sound, Send Message, and Text-to-Speech in one outcome.</figcaption>
+          </figure>
+          <figure class="visual">
+            <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomized-action-alert-burst.png" alt="Alert Burst Action Set with Run Alert" />
+            <figcaption>Action Set &quot;Alert Burst&quot;: Run Alert plus chat, for a visual celebration outcome.</figcaption>
+          </figure>
+        </section>
+        <section class="section" id="modes">
+          <h2>Modes</h2>
+          <ul>
+            <li><strong>Uniform</strong> (default): every set has the same chance every fire.</li>
+            <li><strong>Don&apos;t repeat until all Action Sets have played</strong>: shuffle-bag style - every set plays once before any set repeats.</li>
+          </ul>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>Mystery prize redeem</strong> - Channel points -&gt; three sets: Start Wheel Session on Prize Wheel, a sound+TTS hype pack, and Run Alert - with no-repeat so viewers cycle the pool.</li>
+            <li><strong>Raid variety</strong> - Raid automation -&gt; several Play Sound + Send Message sets so back-to-back raids do not feel identical.</li>
+            <li><strong>Shop roulette</strong> - Viewer Points item -&gt; sets that each Start Wheel Session on a different preset plus a unique chat line.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

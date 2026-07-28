@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Viewer Points | ISB Suite</title>
+  <meta name="description" content="Currency, shop, earn rules, point drops" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Viewer Points | ISB Suite" />
+  <meta property="og:description" content="Currency, shop, earn rules, point drops" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Viewer Points</p>
+        <h1 class="page-title">Viewer Points</h1>
+        <p class="lede">Custom channel currency with earn rules, a redeemable shop, and timed point drops on the overlay.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/viewer-points.png" alt="Viewer Points page in ISB Suite" />
+          <figcaption>Viewer Points: currencies, shop items, and drops.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Balances live on a per-user counter.</li>
+            <li>Watching earn rules need <strong>Stats - Watch Time</strong> and the Twitch chatters scope.</li>
+            <li>Shop items run full Actions (wheel, sound, giveaway, automation, Run Alert, and more).</li>
+            <li>Point Drop needs a Point Drop widget on the active layout.</li>
+            <li>Free: 1 currency, 5 shop items per currency, 1 point drop per currency. Full limits on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#create">Creating a currency</a></li>
+          <li><a href="#earn">Earn rules (Watching)</a></li>
+          <li><a href="#commands">Viewer and admin commands</a></li>
+          <li><a href="#shop">Shop items</a></li>
+          <li><a href="#drops">Point drops</a></li>
+        </ol></nav>
+
+        <section class="section" id="create">
+          <h2>Creating a currency</h2>
+          <ol class="steps">
+            <li>Give it an internal name and display name.</li>
+            <li>Choose or create a per-user counter to back the balances.</li>
+            <li>Set the balance command (for example <code>!points</code>) and response template.</li>
+            <li>(Optional) Add Earn Rules to award points automatically.</li>
+            <li>Add shop items viewers can spend points on.</li>
+          </ol>
+          <ul>
+            <li>Also customize the not-enough-points message and redemption confirmation message.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="earn">
+          <h2>Earn rules (Watching)</h2>
+          <p>On each currency editor, open <strong>Earn Rules</strong> and click <strong>+ Add Earn Rule</strong>.</p>
+          <p><strong>Watching (live presence)</strong> awards points on a timer while a viewer is in chat during a live stream:</p>
+          <ol class="steps">
+            <li>Set Rule Name and choose trigger <strong>Watching (live presence)</strong>.</li>
+            <li><strong>Award every:</strong> interval (seconds, minutes, or hours).</li>
+            <li><strong>Points to Award:</strong> how many points per interval.</li>
+            <li>Save the currency.</li>
+          </ol>
+          <div class="callout"><p><strong>Prerequisite:</strong> enable <strong>Stats - Watch Time</strong> and ensure Twitch is connected with the <code>moderator:read:chatters</code> scope (reconnect in Settings if watch-time accrual is paused). Watching earn rules use the same once-per-minute live poll as watch time. If Watch Time is off, the app prompts you to enable it before adding or saving an enabled Watching rule.</p></div>
+        </section>
+
+        <section class="section" id="commands">
+          <h2>Viewer and admin commands</h2>
+          <ul>
+            <li><strong>Balance:</strong> viewers type <code>!points</code> (or your custom command) to check balance.</li>
+            <li><strong>Give:</strong> viewers give their own points to another chatter (for example <code>!givepoints</code>).</li>
+            <li><strong>Gamble:</strong> viewers wager points on a configurable win-chance roll (for example <code>!gamble</code>).</li>
+            <li><strong>Admin give:</strong> broadcaster/mods award points from chat (for example <code>!vpgive</code>).</li>
+            <li>Each command supports aliases and optional Match anywhere in message under Advanced Settings.</li>
+            <li>Advanced Settings also cover permission, time cooldown, and per-stream limits (same unified editor as other commands).</li>
+          </ul>
+        </section>
+
+        <section class="section" id="shop">
+          <h2>Shop items</h2>
+          <ul>
+            <li>Viewers spend points to trigger actions: load a wheel, play a sound, start a giveaway, send chat, increment a counter, run an automation, Run Alert, and more.</li>
+            <li>Per-item price and purchase confirmation message.</li>
+            <li>Advanced Settings: permission, cooldown, per-stream limits, command aliases, and Match anywhere. Longer aliases pass the remainder as <code>{input}</code>.</li>
+          </ul>
+          <p>Useful variables: <code>{balance}</code>, <code>{currencyName}</code>, <code>{price}</code>, <code>{itemName}</code>. Full list: <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</p>
+        </section>
+
+        <section class="section" id="drops">
+          <h2>Point drops</h2>
+          <p>Timed events where a configurable image or GIF appears on the overlay; chatters type a claim command for a share of a point pool. Configure under the Point Drops sub-tab:</p>
+          <ul>
+            <li><strong>Drop interval:</strong> how often (in minutes) the drop can spawn.</li>
+            <li><strong>Spawn chance:</strong> percentage probability at each interval check.</li>
+            <li><strong>Display duration:</strong> how long the drop image stays visible.</li>
+            <li><strong>Claim command:</strong> chat command viewers type to claim (aliases and Match anywhere supported).</li>
+            <li><strong>Max claimants:</strong> how many viewers can claim before the drop ends.</li>
+            <li><strong>Point pool:</strong> randomized range (min/max) split among claimants.</li>
+            <li><strong>Drop image/GIF:</strong> shown in the Point Drop widget on your overlay.</li>
+            <li>Optional claim sound with volume control.</li>
+            <li>Supports only-when-live mode to skip starting-soon screens.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/point-drop.html">Overlay Layout - Point Drop</a>, <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a> (Watch Time), <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

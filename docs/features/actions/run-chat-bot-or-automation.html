@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Run Chat Bot or Automation | ISB Suite</title>
+  <meta name="description" content="Run Chat Bot or Automation: chains, context, picker targets" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Run Chat Bot or Automation | ISB Suite" />
+  <meta property="og:description" content="Run Chat Bot or Automation: chains, context, picker targets" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Run Chat Bot or Automation</p>
+        <h1 class="page-title">Run Chat Bot or Automation</h1>
+        <p class="lede">Trigger another Automations or Chat Bot item from this rule. Chains keep the original chatter context for variables and permissions.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-run-chat-bot-or-automation.png" alt="Run Chat Bot or Automation action setup in ISB Suite" />
+          <figcaption>Run Chat Bot or Automation: searchable target picker.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Run Chat Bot or Automation</strong>.</li>
+            <li>Searchable picker across Automations, Chat Bot, built-ins, games, points, and goal checks.</li>
+            <li>Max 20 hops; genuine loops are blocked. Target rules must be enabled.</li>
+            <li>Alerts use the separate <a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert</a> action.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#targets">What you can pick</a></li>
+          <li><a href="#chains">Chains and context</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>On fire, the selected target runs as if it had been triggered with the same original chatter data. That lets you keep one shared &quot;hype pack&quot; automation and call it from many commands or events without copying actions. Arg-only built-ins (<code>!addgoal</code>, <code>!removegoal</code>, <code>!endtimer</code>) are not listed.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Build and enable the target rule (or rely on a listed built-in).</li>
+            <li>On the parent rule, enable <strong>Run Chat Bot or Automation</strong> and search for the target.</li>
+            <li>If the target needs typed args (give/gamble style), leave leftover text on the parent command when viewers type it.</li>
+          </ol>
+        </section>
+        <section class="section" id="targets">
+          <h2>What you can pick</h2>
+          <ul>
+            <li>Automations and Chat Bot overview items (channel commands, timed messages).</li>
+            <li>Built-ins such as <code>!join</code>, <code>!spinwheel</code>, Watch Time, Follow Age.</li>
+            <li>Chat game start or join, Viewer Points balance/give/gamble/admin/shop/drop claim, community goal check.</li>
+          </ul>
+          <p>Targets that need typed chat arguments use leftover text from the parent fire when available; otherwise they behave like typing the command alone.</p>
+        </section>
+        <section class="section" id="chains">
+          <h2>Chains and context</h2>
+          <ul>
+            <li>Every hop keeps original <code>{user}</code>, <code>{userId}</code>, badges, bits, subs, and related context.</li>
+            <li>Chains can run up to <strong>20</strong> hops; A -&gt; B -&gt; A loops stop with a log warning.</li>
+            <li>When a wheel entry win triggers an automation, <code>{winner}</code> resolves to the winning entry name.</li>
+            <li>Disabled or locked targets are skipped.</li>
+          </ul>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li><code>!hype</code> Chat Bot command -&gt; Run Chat Bot or Automation targeting a shared Raid Hype automation (sound + alert + Discord).</li>
+            <li>Wheel entry action -&gt; run a follow-up automation that starts a second cascading wheel.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

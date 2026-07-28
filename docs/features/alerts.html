@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alerts | ISB Suite</title>
+  <meta name="description" content="Built in and custom alerts, appearance, style presets, and Run Alert" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Alerts | ISB Suite" />
+  <meta property="og:description" content="Built in and custom alerts, appearance, style presets, and Run Alert" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Alerts</p>
+        <h1 class="page-title">Alerts</h1>
+        <p class="lede">Design follow, sub, bits, raid, and custom alerts with appearance presets, then play them in the Alert Box on your overlay - including from Automations, Chat Bot, shop, and Chat Games via Run Alert.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/alerts.png" alt="Alerts page in ISB Suite" />
+          <figcaption>Alerts: built in types, custom alerts, enable lights, and appearance tools.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Free: 1 dedicated alert per built in type, 3 Custom Alerts. Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
+            <li>Needs an <strong>Alert Box</strong> widget on the active <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a>.</li>
+            <li>When several rules match, the most specific alert fires (exact amount and dedicated rules beat catch-alls).</li>
+            <li><strong>Run Alert</strong> from Automations, Chat Bot, shop, and games reuses a designed alert. Related: <a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert action</a>, <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a>, <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#twitch">Twitch alert types</a></li>
+          <li><a href="#appearance">Appearance</a></li>
+          <li><a href="#custom">Custom Alerts</a></li>
+          <li><a href="#run-alert">Run Alert</a></li>
+          <li><a href="#legacy">Legacy style note</a></li>
+        </ol></nav>
+
+        <section class="section" id="twitch">
+          <h2>Twitch alert types</h2>
+          <p>Follow, New Subscription, Resubscription, Gift Subscriptions, Bits / Cheer, Raid, Hype Train End, Goal Achieved, Ad Break, Shoutout Received, Channel Point Redemption.</p>
+          <p>New Subscription and Resubscription follow Twitch chat announcements. A silent payment or badge change with no chat notice does not fire a New Subscription alert.</p>
+          <p>Each type supports custom image or GIF, alert text with variables, display duration, TTS, and minimum thresholds (for example raids with 10+ viewers). Overview rows have an enable/disable light (same as Automations / Chat Bot); turning a type off and back on restores only the rules that were on before.</p>
+        </section>
+
+        <section class="section" id="appearance">
+          <h2>Appearance</h2>
+          <p>Appearance is configured per alert:</p>
+          <ul>
+            <li>Layout, fonts (live preview), colors, highlight, drop shadow, text delay, and fade timings.</li>
+            <li>Save and load reusable <strong>style presets</strong> (copy on apply).</li>
+            <li><strong>Motion:</strong> enter/exit animations (Fade, slides, Scale, Bounce) and text enter (Fade, Slide up, Typewriter).</li>
+            <li><strong>Preset vs Manual</strong> image/text positioning with offset sliders (percent of the Alert Box).</li>
+            <li>Side by side Layout | Motion | Preview columns with inline <strong>Test Alert</strong> (motion, sound, and TTS).</li>
+            <li>Overflow content <strong>soft fits</strong> (uniform scale down) so image and text stay visible; preview matches the live overlay.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="custom">
+          <h2>Custom Alerts</h2>
+          <p>Create alerts for trigger types that are not covered by the built-in per-type sections, from the <strong>Custom Alerts</strong> section on the Alerts page:</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Trigger</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr><td>Community Goal Reached</td><td>When a community goal hits its limit</td></tr>
+              <tr><td>Counter Tier Reached</td><td>Counter crosses into the next configured tier</td></tr>
+              <tr><td>Counter Value Changed</td><td>Counter goes up, down, or either way (once per change)</td></tr>
+              <tr><td>First Chat Message</td><td>Walk on / catch all on a viewer first message</td></tr>
+              <tr><td>Chat Command</td><td>Your own <code>!command</code> (aliases, Match anywhere, permission, cooldown, limits)</td></tr>
+              <tr><td>Timer</td><td>Interval or countdown driven alert</td></tr>
+              <tr><td>Action Only (Run Alert)</td><td>No event trigger; only plays when an Actions surface uses Run Alert</td></tr>
+            </tbody>
+          </table></div>
+          <p>Custom alerts support the same overlay options as built in alerts (image/GIF, sound, alert text, TTS, and chat response).</p>
+        </section>
+
+        <section class="section" id="run-alert">
+          <h2>Run Alert</h2>
+          <p>On <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a>, <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a>, Viewer Points shop items, <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a>, and other Actions surfaces, enable <strong>Run Alert</strong> and pick any Alerts page alert (built-in types, Custom Alerts, or Action Only). When the parent rule fires, that alert plays with the parent event context (<code>{user}</code>, amounts, and so on). The chosen alert must be enabled; its own cooldown and limits still apply. The Run Alert target list uses the same searchable dropdown as Randomized Action sets and Run Chat Bot or Automation.</p>
+          <p>Queued alerts play one at a time in the Home <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Alert Queue</a>.</p>
+        </section>
+
+        <section class="section" id="legacy">
+          <h2>Legacy style note</h2>
+          <p>Older alerts without a saved style keep the previous default look. Opening Appearance and saving (or applying a style preset) stores the new layout, motion, and typography for that alert going forward.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ | ISB Suite</title>
+  <meta name="description" content="FAQ and troubleshooting for ISB Suite" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="FAQ | ISB Suite" />
+  <meta property="og:description" content="FAQ and troubleshooting for ISB Suite" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / Reference / FAQ</p>
+        <h1 class="page-title">FAQ and troubleshooting</h1>
+        <p class="lede">Common fixes. For bugs and feature requests, <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">open an issue</a>.</p>
+
+        <section class="section" id="cursor">
+          <h2>Cursor disappears in a fullscreen game</h2>
+          <p><strong>Symptom:</strong> You play in fullscreen with OBS running. Your mouse cursor vanishes on your monitor, but may still appear in the OBS preview. This often happens with Game Capture for the game plus Window Capture (Windows 10 / WGC) for ISB Suite Capture stacked on top.</p>
+          <p><strong>This is not an ISB Suite bug.</strong> It is a known interaction between Windows Graphics Capture (WGC) and certain fullscreen games. WGC forces a software cursor; in exclusive fullscreen the game takes over the display and Windows often cannot draw that cursor on your monitor. Windowed and borderless modes usually work.</p>
+          <p>Minecraft Java is a common example. Many streamers fix it by switching Minecraft to the Vulkan renderer, or by turning Exclusive Fullscreen off. Other games can hit the same issue depending on engine and fullscreen mode.</p>
+          <ol>
+            <li>Minecraft: switch to Vulkan, or turn Exclusive Fullscreen off if available.</li>
+            <li>Any game: ensure "Disable fullscreen optimizations" is unchecked on the game exe (Properties, Compatibility).</li>
+          </ol>
+        </section>
+
+        <section class="section" id="twitch">
+          <h2>Twitch not connected</h2>
+          <ol>
+            <li>Go to Integrations.</li>
+            <li>Click Connect Twitch and follow device code login.</li>
+            <li>Grant permissions for chat and EventSub.</li>
+          </ol>
+        </section>
+
+        <section class="section" id="commands">
+          <h2>Chat commands not working</h2>
+          <ul>
+            <li>Verify Twitch connection on Integrations.</li>
+            <li>Commands are case insensitive but must match exactly (<code>!spinwheel</code> not <code>!spin wheel</code>).</li>
+            <li>Check the user has the required permission level.</li>
+            <li>If you use Match anywhere, remember space-boundary rules still apply.</li>
+            <li>Confirm Advanced Settings cooldown / per stream limits are not blocking the fire.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="points">
+          <h2>Channel points not triggering</h2>
+          <ul>
+            <li>Confirm EventSub shows connected on Integrations.</li>
+            <li>Reward title in the automation must match the Twitch reward title exactly.</li>
+            <li>Redeem once while connected so the reward ID auto populates.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="audio">
+          <h2>Audio not playing</h2>
+          <ul>
+            <li>Sounds are copied into app data when you save. If an older setup points at a missing file, re pick the sound once.</li>
+            <li>Check volume is not 0.</li>
+            <li>Supported formats: .mp3, .wav, .mp4, .m4a, .wma</li>
+            <li>Check the Sound Queue is not paused.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="overlay">
+          <h2>Overlay or widgets not showing on stream</h2>
+          <ul>
+            <li>Add a Window Capture of the ISB Suite Capture window. See <a href="/ISBSuiteReleases/docs/download.html#capture">Download</a>.</li>
+            <li>Confirm the widget is on the active layout and visible.</li>
+            <li>Check it is not cropped out of your capture.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="alerts">
+          <h2>Alerts not showing</h2>
+          <ul>
+            <li>Place an Alert Box widget on the active layout.</li>
+            <li>Verify the alert rule is enabled.</li>
+            <li>Check trigger thresholds (for example minimum bits).</li>
+            <li>If several alerts match, only the most specific one fires.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="drops">
+          <h2>Point drops not spawning</h2>
+          <ul>
+            <li>Place a Point Drop widget on the active layout.</li>
+            <li>Check interval, spawn chance, and only when live settings.</li>
+            <li>The spawn interval check runs on a timer - wait for the configured interval to elapse.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="tiltify">
+          <h2>Tiltify not triggering</h2>
+          <ul>
+            <li>Verify the Tiltify integration shows as connected on Integrations.</li>
+            <li>If the session token expired, the app shows a reconnect window - re-authenticate.</li>
+            <li>Donation polling runs on a short interval, so there may be a brief delay.</li>
+            <li>Confirm any automation or alert that listens for Tiltify donations is enabled and thresholds match.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="discord">
+          <h2>Discord webhook not sending</h2>
+          <ul>
+            <li>Save named webhooks under Integrations, Discord Webhooks.</li>
+            <li>Use Test on Integrations before relying on automations.</li>
+            <li>Confirm the automation includes the Discord Webhook action with the intended webhooks selected.</li>
+            <li>Webhook URLs should start with <code>https://discord.com/api/webhooks/</code> (legacy discordapp.com URLs also work).</li>
+          </ul>
+        </section>
+
+        <section class="section" id="updates">
+          <h2>Updates</h2>
+          <p>ISB Suite checks for updates on launch and can download and install with a single click when a new version is available.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

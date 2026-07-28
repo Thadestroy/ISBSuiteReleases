@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat Bot | ISB Suite</title>
+  <meta name="description" content="Chat Bot commands, timed messages, and when to use Chat Bot vs Automations" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Chat Bot | ISB Suite" />
+  <meta property="og:description" content="Chat Bot commands, timed messages, and when to use Chat Bot vs Automations" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Chat Bot</p>
+        <h1 class="page-title">Chat Bot</h1>
+        <p class="lede">Custom !commands, timed messages, aliases, and Advanced Settings in the Chat Bot tab - same Actions engine as Automations, focused on chat-driven rules.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-bot.png" alt="Chat Bot page in ISB Suite" />
+          <figcaption>Chat Bot overview: commands, built ins, search, and groups.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Free: 25 Chat Bot commands. Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
+            <li>Same trigger and action building blocks as <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a> - pick the tab that matches how you think about the rule.</li>
+            <li>Custom <code>!commands</code> with permission, cooldown, aliases, Match anywhere, and per stream limits.</li>
+            <li>Built in commands appear here for editing where applicable. Full list: <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>. Variables: <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#engine">Same engine as Automations</a></li>
+          <li><a href="#when">When to use which</a></li>
+          <li><a href="#options">Command options</a></li>
+          <li><a href="#timed">Timed and event messages</a></li>
+          <li><a href="#actions">Actions from Chat Bot</a></li>
+        </ol></nav>
+
+        <section class="section" id="engine">
+          <h2>Same engine as Automations</h2>
+          <p>Chat Bot is not a separate runtime. Rules you create here use the same triggers, actions, cooldowns, aliases, Match anywhere, Randomized Action, Timer, Run Alert, and <strong>Run Chat Bot or Automation</strong> chaining as the Automations tab. Overview pages support name search and custom groups like other list pages.</p>
+          <p>Chat Bot response text routes to Twitch. Discord posts use the Discord Webhook action on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a>.</p>
+        </section>
+
+        <section class="section" id="when">
+          <h2>When to use which</h2>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Prefer</th><th>When</th></tr></thead>
+            <tbody>
+              <tr><td>Chat Bot</td><td>Custom <code>!commands</code> and timed or scheduled chat lines are the main job; you want built-ins (join, spin, watch time, and similar) in one overview</td></tr>
+              <tr><td>Automations</td><td>Twitch EventSub events (channel points, bits, raids, follows, and so on) drive the rule, or you are building a multi-action stream workflow</td></tr>
+              <tr><td>Either</td><td>You need chains - call the other tab with Run Chat Bot or Automation (up to 20 hops; original chatter variables preserved)</td></tr>
+            </tbody>
+          </table></div>
+          <p>There is no wrong tab for a simple command that also plays a sound. Use Chat Bot if you think of it as a chat command; use Automations if you think of it as an event rule.</p>
+        </section>
+
+        <section class="section" id="options">
+          <h2>Command options</h2>
+          <p>Custom commands support the full Advanced Settings block:</p>
+          <ul>
+            <li><strong>Permission levels:</strong> Everyone; Subscribers (subs, VIPs, mods, broadcaster); VIPs (VIPs, mods, broadcaster); Moderators (mods and broadcaster); Broadcaster only.</li>
+            <li><strong>Aliases:</strong> alternate names that fire the same command. Viewers can type any alias; the longest matching alias wins when several could match. Leftover text after the match becomes <code>{input}</code>.</li>
+            <li><strong>Match anywhere in message:</strong> optional whole-word match mid chat (for example <code>/me !discord</code>), not only at the start. Longest matching command still wins. Space-boundary rules apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</li>
+            <li><strong>Cooldown:</strong> None, Global, or Per User, with optional on-cooldown chat reply.</li>
+            <li><strong>Per stream limits:</strong> max fires globally and/or per user (<code>0</code> = unlimited), with optional hit-limit chat reply. Limits reset when a new stream session starts.</li>
+          </ul>
+          <p>Community Goal check commands and Viewer Points commands also appear on the Chat Bot overview where applicable; Edit opens that feature settings. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, and <code>!endtimer</code> stay out of the Run Chat Bot or Automation picker.</p>
+        </section>
+
+        <section class="section" id="timed">
+          <h2>Timed and event messages</h2>
+          <ul>
+            <li>Post scheduled or interval-driven messages with variable substitution.</li>
+            <li>Attach the same event triggers available in Automations when a chat line should also react to stream events.</li>
+            <li>Use variables such as <code>{user}</code>, <code>{time}</code>, <code>{top5Counter:CounterName}</code>, and goal tokens. Full list: <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="actions">
+          <h2>Actions from Chat Bot</h2>
+          <p>Beyond Send Message, a Chat Bot rule uses the same shared <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> editor as Automations (wheel, sound, Discord, counters, giveaway, Run Alert, TTS, Timer, Randomized Action, Run Chat Bot or Automation, Push Community Goal, and more). Open the Actions hub for per-action setup pages.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

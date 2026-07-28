@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Queues and Giveaways | ISB Suite</title>
+  <meta name="description" content="Home queues and timed giveaways" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Queues and Giveaways | ISB Suite" />
+  <meta property="og:description" content="Home queues and timed giveaways" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Queues and Giveaways</p>
+        <h1 class="page-title">Queues and Giveaways</h1>
+        <p class="lede">Four independent queues on Home keep spins, sounds, giveaways, and alerts organized. Giveaways are timed viewer-entry rounds that auto-spin a wheel.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/home.png" alt="Home page queues in ISB Suite" />
+          <figcaption>Home: Wheel, Sound, Giveaway, and Alert queues with Pause, Skip, Clear.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Each queue: Pause, Skip, Clear.</li>
+            <li>Next giveaway join phase opens only after winner chat and TTS finish (about 1 second gap), including empty rounds.</li>
+            <li>Start Giveaway from Automations or Viewer Points shop items.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel</a>, <a href="/ISBSuiteReleases/docs/features/viewer-points.html">Viewer Points</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#queues">The four queues</a></li>
+          <li><a href="#giveaways">Giveaway system</a></li>
+          <li><a href="#countdown">Countdown warnings</a></li>
+        </ol></nav>
+
+        <section class="section" id="queues">
+          <h2>The four queues</h2>
+          <ul>
+            <li><strong>Wheel Queue:</strong> pending wheel loads and spins from automations, commands, or shop redemptions. Shows what is next.</li>
+            <li><strong>Sound Queue:</strong> audio waiting to play. Sounds linked to a wheel play at spin time instead of the general queue.</li>
+            <li><strong>Giveaway Queue:</strong> active and pending giveaways. The current giveaway runs at the top; the next join phase waits for winner chat and TTS (~1 second gap), including when a giveaway expires with no entries.</li>
+            <li><strong>Alert Queue:</strong> on-screen alerts waiting for the Alert Box, played one at a time.</li>
+          </ul>
+          <p>Each column has Pause, Skip, and Clear controls.</p>
+        </section>
+
+        <section class="section" id="giveaways">
+          <h2>Giveaway system</h2>
+          <p>Run timed viewer-entry giveaways from automations or viewer point shop items:</p>
+          <ul>
+            <li>Chatters enter via a configurable command (default <code>!giveaway</code>).</li>
+            <li>Auto-spins the wheel after a configurable duration (seconds, minutes, or hours).</li>
+            <li>Configurable open / already-joined / winner chat announcements.</li>
+            <li>Duplicate-entry protection with per-user cooldown on the already-joined reply.</li>
+            <li>Optional winner counter increment and winner TTS.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="countdown">
+          <h2>Countdown warnings</h2>
+          <p>Under Advanced settings: editable reminder message plus custom remaining-time offsets (seconds, minutes, or hours). Offsets at or beyond the giveaway length are skipped. Use <code>{timeLeft}</code> and <code>{duration}</code> in reminder text. Same style as chat-game and Ad Break pre-warnings.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

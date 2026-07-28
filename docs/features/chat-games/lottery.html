@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lottery | ISB Suite</title>
+  <meta name="description" content="Lottery chat game: fixed entry fee, one winner takes the pool" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Lottery | ISB Suite" />
+  <meta property="og:description" content="Lottery chat game: fixed entry fee, one winner takes the pool" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a> / Lottery</p>
+        <h1 class="page-title">Lottery</h1>
+        <p class="lede">Fixed entry fee lottery: viewers buy in during a timed window; when it closes, one winner takes the whole pool.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-lottery.png" alt="Lottery chat game setup in ISB Suite" />
+          <figcaption>Lottery setup: fixed entry fee, pool payout, join and summary messages.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Preset: <strong>Lottery</strong>.</li>
+            <li>Fixed stake; single winner; pool payout.</li>
+            <li>Timed join window with open / join / end messages.</li>
+            <li>Optional min entrants before a real draw.</li>
+            <li>Variables: <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">Chat Games tokens</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options</a></li>
+          <li><a href="#phases">Phases</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>Each joiner pays the same fixed fee into a shared pool. When the duration ends, one winner is drawn (single-winner resolution) and receives the pool. Empty sessions can use <strong>If No One Joins</strong>. Unlike Heist, there is no per-entrant win chance - the draw picks one winner from everyone who entered.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Create a Lottery from Chat Games presets.</li>
+            <li>Add a start trigger that opens the session.</li>
+            <li>Set fixed entry fee, stake counter, duration, join command, and optional min entrants.</li>
+            <li>Write opened / join-confirmed / winner summary templates; add Countdown Warnings if useful.</li>
+            <li>Wire phase Actions for Open, Join, When Session Ends, and If No One Joins as needed.</li>
+            <li>Set Advanced Settings on start and join (permission, aliases, cooldown, limits).</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options</h2>
+          <ul>
+            <li><strong>Stake mode</strong>: Fixed - every entrant pays <strong>Fixed stake amount</strong>.</li>
+            <li><strong>Stake counter</strong>: counter debited on join and used for payouts.</li>
+            <li><strong>Min entrants</strong>: optional floor (for example 2) before the lottery resolves as a real draw.</li>
+            <li><strong>Resolution scope</strong>: Single winner drawn from the pool.</li>
+            <li><strong>Payout mode</strong>: Split / pay total pool to the winner (classic lottery pot).</li>
+            <li><strong>Duration</strong>: join window; join-confirmed messages can show live <code>{totalPool}</code>.</li>
+            <li><strong>Win chance</strong>: not used for single-winner pool draws (leave at 0 / ignore).</li>
+          </ul>
+        </section>
+        <section class="section" id="phases">
+          <h2>Phases</h2>
+          <ul>
+            <li><strong>Open</strong> - announce the lottery and show the join command.</li>
+            <li><strong>Join</strong> - optional Actions when someone buys in (pool grows).</li>
+            <li><strong>When Session Ends</strong> - announce <code>{winnersList}</code>, <code>{totalPaidOut}</code>, <code>{winnerCount}</code>.</li>
+            <li><strong>If No One Joins</strong> - cancel / soft message when the window closes empty.</li>
+          </ul>
+          <p>Tokens for messages and Actions: <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">Message variables - Chat Games</a>.</p>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>Sub raffle</strong> - Subs+ join permission, 5 minute window, winner chat with <code>{winnersList}</code> and <code>{totalPaidOut}</code>.</li>
+            <li><strong>Channel points lottery</strong> - Start trigger on a redeem that opens the lottery session; fixed fee from Stream Coins.</li>
+            <li><strong>Pot ticker</strong> - Join-confirmed message with <code>{user}</code> and <code>{totalPool}</code> so chat sees the pot grow.</li>
+            <li><strong>Wheel for the winner</strong> - When Session Ends runs <a href="/ISBSuiteReleases/docs/features/actions/start-wheel-session.html">Start Wheel Session</a> after announcing the winner.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/chat-games/heist.html">Heist</a> (everyone rolls), <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games overview</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

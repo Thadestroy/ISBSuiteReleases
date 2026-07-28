@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blank sandbox | ISB Suite</title>
+  <meta name="description" content="Blank sandbox chat game: timed free-join session you wire yourself" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Blank sandbox | ISB Suite" />
+  <meta property="og:description" content="Blank sandbox chat game: timed free-join session you wire yourself" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a> / Blank sandbox</p>
+        <h1 class="page-title">Blank sandbox</h1>
+        <p class="lede">Timed session with free join so you can wire your own triggers and Actions without heist or lottery math.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-blank-sandbox.png" alt="Blank sandbox chat game setup in ISB Suite" />
+          <figcaption>Blank sandbox: timed free-join session you configure yourself.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Preset: <strong>Blank sandbox</strong>.</li>
+            <li>Timed join window; stakes and built-in resolution off by default.</li>
+            <li>Same phase hooks as other timed games - you decide what resolve means.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a>, <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">overview</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options</a></li>
+          <li><a href="#phases">Phases</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>Blank sandbox gives you a timed join session and the phase hooks without opinionated heist/lottery payout math. Viewers join for free (unless you turn stakes on yourself). When the window ends, resolve/When Session Ends Actions run - use them to announce <code>{entryCount}</code>, start a wheel, pick a winner with your own Actions, or hand off to another automation.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Create a Blank sandbox from Chat Games presets.</li>
+            <li>Add a start trigger and set duration + join command.</li>
+            <li>Enable opened message (and join-confirmed if you want RSVP feedback).</li>
+            <li>Wire Open / Join / When Session Ends / If No One Joins Actions for your custom flow.</li>
+            <li>Only enable stakes or built-in resolution if you intentionally want those systems.</li>
+            <li>Set Advanced Settings on start and join.</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options</h2>
+          <ul>
+            <li><strong>Timed session</strong>: on - this is the whole point of the sandbox.</li>
+            <li><strong>Stakes / built-in resolution</strong>: off by default so you control outcomes via Actions.</li>
+            <li><strong>Duration</strong> and <strong>Countdown Warnings</strong>: same as Heist/Lottery.</li>
+            <li><strong>Execute Actions on resolve</strong>: turn on so When Session Ends actually runs your chain.</li>
+            <li>You can still enable stakes later if a custom game needs a buy-in without switching presets.</li>
+          </ul>
+        </section>
+        <section class="section" id="phases">
+          <h2>Phases</h2>
+          <ul>
+            <li><strong>Open</strong> - announce the window and rules.</li>
+            <li><strong>Join</strong> - track RSVPs (chat, counters, Discord webhook).</li>
+            <li><strong>When Session Ends</strong> - your custom resolve: wheel, random pick message, Run Chat Bot or Automation, and so on.</li>
+            <li><strong>If No One Joins</strong> - cancel path.</li>
+            <li>Win / Lose / No Winners only matter if you turn on built-in resolution or simulate outcomes yourself.</li>
+          </ul>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>Custom RSVP window</strong> - Free join for 3 minutes, then When Session Ends announces <code>{entryCount}</code> and starts a wheel.</li>
+            <li><strong>Trivia signup</strong> - Join phase logs entrants; resolve calls an automation that posts the question set.</li>
+            <li><strong>Raid party queue</strong> - Open on raid; When Session Ends runs Start Giveaway Session or a wheel of raiders.</li>
+            <li><strong>Soft stakes later</strong> - Start stake-free, then enable fixed stake once the format is proven.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/actions/start-wheel-session.html">Start Wheel Session</a>, <a href="/ISBSuiteReleases/docs/features/actions/start-giveaway-session.html">Start Giveaway Session</a>, <a href="/ISBSuiteReleases/docs/features/chat-games/lottery.html">Lottery</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

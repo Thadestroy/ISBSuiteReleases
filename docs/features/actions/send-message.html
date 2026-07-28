@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Send Message | ISB Suite</title>
+  <meta name="description" content="Send Message action for Twitch chat with variables" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Send Message | ISB Suite" />
+  <meta property="og:description" content="Send Message action for Twitch chat with variables" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Send Message</p>
+        <h1 class="page-title">Send Message</h1>
+        <p class="lede">Send a Twitch chat line when the rule fires. Templates support message variables from the parent event, with a live preview in the editor.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-send-message.png" alt="Send Message action setup in ISB Suite" />
+          <figcaption>Send Message: chat template with variable picker and preview.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Send Message</strong>.</li>
+            <li>Supports <a href="/ISBSuiteReleases/docs/reference/message-variables.html">message variables</a> such as <code>{user}</code> and <code>{amount}</code>.</li>
+            <li>Optional bot account on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a> sends replies as the bot.</li>
+            <li>TTS and Discord can reuse this same template text.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#variables">Variables and preview</a></li>
+          <li><a href="#reuse">Reuse by other actions</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>When the rule fires, the template is resolved with the current event context and sent to Twitch chat (as the broadcaster account, or as the dedicated bot account if you connected one on Integrations). Rate limits still apply - mod the bot in your channel if you send many replies.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Enable <strong>Send Message</strong>.</li>
+            <li>Write the <strong>Message Template</strong>. Use the Variables helper to insert tokens.</li>
+            <li>Check the green <strong>Preview</strong> line (sample viewer / amounts) before saving.</li>
+          </ol>
+        </section>
+        <section class="section" id="variables">
+          <h2>Variables and preview</h2>
+          <p>Tokens resolve from the event that fired the parent rule (and from counters, goals, and other systems where those tokens are valid). Common ones: <code>{user}</code>, <code>{amount}</code>, <code>{viewers}</code>, <code>{count}</code>, <code>{input}</code>. Full catalog: <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</p>
+        </section>
+        <section class="section" id="reuse">
+          <h2>Reuse by other actions</h2>
+          <ul>
+            <li><a href="/ISBSuiteReleases/docs/features/actions/text-to-speech.html">Text-to-Speech</a> can speak this same Send Message text.</li>
+            <li><a href="/ISBSuiteReleases/docs/features/actions/discord-webhook.html">Discord Webhook</a> can post this same text to Discord.</li>
+            <li>You do not have to duplicate the template unless you want different wording per destination.</li>
+          </ul>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Bits cheer -&gt; <code>Thanks {user} for {amount} bits!</code> plus <a href="/ISBSuiteReleases/docs/features/actions/push-community-goal.html">Push Community Goal</a> with Use amount from trigger.</li>
+            <li>Raid -&gt; longer hype line with <code>{viewers}</code>; keep TTS on a shorter custom line.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

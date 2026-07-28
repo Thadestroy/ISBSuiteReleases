@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Community Goals | ISB Suite</title>
+  <meta name="description" content="Community goals, check commands, accumulation" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Community Goals | ISB Suite" />
+  <meta property="og:description" content="Community goals, check commands, accumulation" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Community Goals</p>
+        <h1 class="page-title">Community Goals</h1>
+        <p class="lede">Stream-wide milestones fed by Twitch events, chat message patterns, or manual pushes from automations.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/community-goals.png" alt="Community Goals page in ISB Suite" />
+          <figcaption>Community Goals: goals list, progress, and check commands.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Accumulation modes (combine freely): Manual, Twitch Data, Chat Message.</li>
+            <li>Check command example: <code>!bitsgoal</code> replies with <code>{goalProgress}</code> like <code>15/100</code>.</li>
+            <li>Fire Automations or Custom Alerts on Community Goal Reached.</li>
+            <li>Do not double-count Blerp-style bits (use Chat Message mode <em>or</em> Chat Message Match push, not both).</li>
+            <li>Free: 3 community goals. Full limits on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#modes">Accumulation modes</a></li>
+          <li><a href="#check">Check commands</a></li>
+          <li><a href="#blerp">Extension / Blerp bits</a></li>
+          <li><a href="#triggers">When a goal is reached</a></li>
+        </ol></nav>
+
+        <section class="section" id="modes">
+          <h2>Accumulation modes</h2>
+          <p>Set a limit and one or more accumulation modes (checkboxes; combine freely):</p>
+          <ul>
+            <li><strong>Twitch Data:</strong> EventSub bits, subs, follows, raids.</li>
+            <li><strong>Chat Message:</strong> watch a specific chatter and a pattern with <code>&lt;amount&gt;</code> (useful for extension bits that never fire as Twitch cheers).</li>
+            <li><strong>Manual:</strong> progress from Push Community Goal actions only.</li>
+          </ul>
+          <p>Automations can also use <strong>Chat Message Match</strong> plus <strong>Push Community Goal</strong> with <strong>Use amount from trigger</strong>.</p>
+        </section>
+
+        <section class="section" id="check">
+          <h2>Check commands</h2>
+          <ul>
+            <li>Optional Check Command per goal (for example <code>!bitsgoal</code>) so anyone in chat can ask for progress.</li>
+            <li>Customizable response template. Default <code>{goalProgress}</code> replies like <code>15/100</code>.</li>
+            <li>Other tokens: <code>{goalName}</code>, <code>{goalCurrent}</code>, <code>{goalLimit}</code>.</li>
+            <li>Advanced Settings: aliases, match anywhere, permission, cooldown, and per-stream limits (same as other chat commands).</li>
+            <li>Check commands also appear on the <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> overview; Edit opens that goal's settings.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="blerp">
+          <h2>Extension / Blerp bits</h2>
+          <div class="callout"><p>Chat Message mode watches a specific chatter and a pattern with <code>&lt;amount&gt;</code> (for example <code>used &lt;amount&gt; bits</code>). A line like <code>CoolViewer used 25 bits to play ...</code> becomes +25. Prefer this <em>or</em> a Chat Message Match automation that pushes the same goal - do not use both, or progress doubles.</p></div>
+        </section>
+
+        <section class="section" id="triggers">
+          <h2>When a goal is reached</h2>
+          <p>Trigger <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a> or <a href="/ISBSuiteReleases/docs/features/alerts.html">Custom Alerts</a> on <strong>Community Goal Reached</strong> (optional filter by goal). Related: <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>, <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

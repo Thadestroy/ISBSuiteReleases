@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Push Community Goal | ISB Suite</title>
+  <meta name="description" content="Push Community Goal: fixed amount or amount from trigger" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Push Community Goal | ISB Suite" />
+  <meta property="og:description" content="Push Community Goal: fixed amount or amount from trigger" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Push Community Goal</p>
+        <h1 class="page-title">Push Community Goal</h1>
+        <p class="lede">Add progress to a community goal when the rule fires. Use a fixed amount, or pull the amount from Bits / Chat Message Match.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-push-community-goal.png" alt="Push Community Goal action setup in ISB Suite" />
+          <figcaption>Push Community Goal: goal picker, amount, Use amount from trigger.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Push Community Goal</strong>.</li>
+            <li><strong>Use amount from trigger</strong> reads Bits cheer amount or Chat Message Match <code>&lt;amount&gt;</code>.</li>
+            <li>With Timer, goal progress still updates immediately.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/community-goals.html">Community Goals</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#trigger-amount">Use amount from trigger</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>On fire, progress is added to the selected community goal. When the goal hits its limit, <strong>Community Goal Reached</strong> triggers can fire (and viewers can still use the goal check command). Goal definitions, check commands, and Chat Message accumulation modes live on the Community Goals page.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Create or enable a goal on Community Goals (limit, check command, enabled).</li>
+            <li>Enable <strong>Push Community Goal</strong>, pick the goal, set <strong>Add amount</strong>.</li>
+            <li>For cheer-driven goals, enable <strong>Use amount from trigger</strong> on a Bits or Chat Message Match rule.</li>
+          </ol>
+        </section>
+        <section class="section" id="trigger-amount">
+          <h2>Use amount from trigger</h2>
+          <p>When checked, the fixed Add amount is ignored and the action uses the amount from the trigger context:</p>
+          <ul>
+            <li><strong>Bits / Cheer</strong>: the cheer amount.</li>
+            <li><strong>Chat Message Match</strong>: the number captured by <code>&lt;amount&gt;</code> in the pattern (for example Blurp-style &quot;used N bits&quot; lines).</li>
+          </ul>
+          <p>If the trigger has no amount, nothing useful is added - pair this checkbox only with those trigger types.</p>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Bits trigger -&gt; Push Community Goal with Use amount from trigger (100 bits = 100 progress).</li>
+            <li>Channel points &quot;+10 to goal&quot; -&gt; fixed Add amount 10.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

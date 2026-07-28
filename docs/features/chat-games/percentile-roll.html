@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Percentile roll | ISB Suite</title>
+  <meta name="description" content="Percentile roll chat game: dice range bands and outcome profiles" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Percentile roll | ISB Suite" />
+  <meta property="og:description" content="Percentile roll chat game: dice range bands and outcome profiles" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a> / Percentile roll</p>
+        <h1 class="page-title">Percentile roll</h1>
+        <p class="lede">Roll a custom min-max (for example 1-100), map bands to Actions, and optionally use alternate outcome tables per viewer login.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-percentile-roll.png" alt="Percentile roll chat game setup in ISB Suite" />
+          <figcaption>Percentile roll: die range, outcome bands, and per-band Actions.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Preset: <strong>Percentile roll</strong> (dice / range outcomes).</li>
+            <li>No stakes and no timed join window by default.</li>
+            <li>Each band uses the full Actions editor.</li>
+            <li>Tokens: <code>{roll}</code>, <code>{outcome}</code>.</li>
+            <li>Outcome profiles: Default table or a copy for a specific Twitch login.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options and bands</a></li>
+          <li><a href="#profiles">Outcome profiles</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>On fire, ISB Suite rolls within your configured min-max, finds the matching outcome band on the active profile, and runs that band&apos;s Actions. Nested chains keep <code>{roll}</code> and <code>{outcome}</code> available. Full token table: <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">Message variables - Chat Games</a>.</p>
+          <p>This preset is for table-driven loot / crit systems - not for pooling stakes. Pair with channel points or a chat command as the start trigger.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Create a Percentile roll from Chat Games presets.</li>
+            <li>Pick start triggers (command, channel points, and so on).</li>
+            <li>Set the die min-max (for example 1-100).</li>
+            <li>Add bands that cover the full range without gaps you care about (for example 1-89 Normal, 90-100 Crit).</li>
+            <li>On each band, enable Actions (chat, sound, alert, counters, Randomized Action, and so on).</li>
+            <li>Set cooldowns and limits under Start Triggers / Advanced Settings.</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options and bands</h2>
+          <ul>
+            <li><strong>Dice roll min / max</strong>: inclusive range for the roll.</li>
+            <li><strong>Outcome band</strong>: name, min, max, and its own Actions list.</li>
+            <li>Band names become <code>{outcome}</code> in templates (for example Normal, Crit).</li>
+            <li>Cover the whole die range; overlapping or missing edges produce surprising matches - keep bands tidy.</li>
+            <li>Stakes / timed session are usually off; add Counter Action inside a band if a roll should spend or grant points.</li>
+          </ul>
+        </section>
+        <section class="section" id="profiles">
+          <h2>Outcome profiles</h2>
+          <p>Use the Outcome profile dropdown for the Default table, or duplicate it for a specific Twitch login so that viewer gets a different band table. Runtime picks the username profile when present, otherwise Default.</p>
+          <ul>
+            <li>Good for VIP / staff softer fail tables, or a harsher &quot;hard mode&quot; login.</li>
+            <li>Keep band names consistent across profiles if you reuse the same chat templates.</li>
+          </ul>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>d100 loot</strong> - Channel points -&gt; bands for common / rare / jackpot with different <a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert</a> designs.</li>
+            <li><strong>VIP table</strong> - Alternate profile for a VIP login with softer fail bands.</li>
+            <li><strong>Crit only hype</strong> - Crit band runs Randomized Action + sound; Normal band is chat-only.</li>
+            <li><strong>Counter tax</strong> - Each band includes Counter Action Change by -cost so rolls spend currency without Chat Game stakes.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a>, <a href="/ISBSuiteReleases/docs/features/chat-games/instant-action.html">Instant action</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

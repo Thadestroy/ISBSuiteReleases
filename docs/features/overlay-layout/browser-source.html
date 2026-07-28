@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Browser Source | ISB Suite</title>
+  <meta name="description" content="Browser Source overlay widget for live web pages in capture" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Browser Source | ISB Suite" />
+  <meta property="og:description" content="Browser Source overlay widget for live web pages in capture" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a> / Browser Source</p>
+        <h1 class="page-title">Browser Source</h1>
+        <p class="lede">Embed a live web page URL inside the ISB Suite capture - similar to an OBS browser source, but inside the same Window Capture as your other widgets.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-browser-source.png" alt="Browser Source widget in Overlay Layout" />
+          <figcaption>Browser Source widget selected: URL and stage region for a live page.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Widget: <strong>Browser Source</strong>.</li>
+            <li>Renders inside ISB Suite - Capture (one Window Capture can include it).</li>
+            <li>Good for goal bars, chat overlays, or status pages you already host.</li>
+            <li>Keep private dashboards off stream.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options</a></li>
+          <li><a href="#tips">Tips</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>Browser Source loads a URL into a Cef-powered region on the stage. Viewers see whatever that page paints inside the widget rectangle. Unlike adding a second OBS browser source, this stays inside the ISB Suite capture window with your wheel, alerts, and timers.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Add a <strong>Browser Source</strong> widget.</li>
+            <li>Enter the URL and size the region on the stage.</li>
+            <li>Preview in capture; adjust crop if the page has chrome you do not want.</li>
+            <li>Remove or hide the widget on layouts that do not need it (CPU).</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options</h2>
+          <ul>
+            <li><strong>URL</strong>: page to load (https preferred).</li>
+            <li><strong>Transform / crop / visibility / hotkey / layer order</strong>: shared stage controls.</li>
+            <li>Volume / sound bus controls may appear when the page plays audio - mute pages that should stay silent on stream.</li>
+          </ul>
+        </section>
+        <section class="section" id="tips">
+          <h2>Tips</h2>
+          <ul>
+            <li>Prefer pages that are safe to show on stream (no private dashboards, tokens, or admin UIs).</li>
+            <li>Heavy pages can use CPU - keep the widget only on layouts that need it.</li>
+            <li>If the page needs a transparent background, use a page designed for OBS-style overlays.</li>
+            <li>Reload / URL typos are a common &quot;blank widget&quot; cause - verify the address loads in a normal browser first.</li>
+          </ul>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>External goal bar</strong> - Hosted HTML goal that updates outside ISB Suite.</li>
+            <li><strong>Event schedule</strong> - Simple status page during marathons.</li>
+            <li><strong>Chat overlay page</strong> - Third-party chat CSS page sitting beside Alert Box.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/community-goals.html">Community Goals</a> (native goals), <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">overview</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

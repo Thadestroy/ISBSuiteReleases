@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Counters and Stats | ISB Suite</title>
+  <meta name="description" content="Counters, tiers, leaderboards, CSV" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Counters and Stats | ISB Suite" />
+  <meta property="og:description" content="Counters, tiers, leaderboards, CSV" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Counters and Stats</p>
+        <h1 class="page-title">Counters and Stats</h1>
+        <p class="lede">Track numbers that persist across streams, with tiers, leaderboards in chat, and CSV import/export.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/stats.png" alt="Stats page in ISB Suite" />
+          <figcaption>Stats: counters, tiers, and per-user leaderboards.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li><strong>Global</strong> counters: one shared value. <strong>Per-user</strong> counters: value per Twitch viewer.</li>
+            <li>Change from automations, entry actions, or viewer points via Counter Action.</li>
+            <li>Leaderboard token: <code>{top5Counter:CounterName}</code> (per-user only).</li>
+            <li>CSV import accepts comma or semicolon (auto-detected).</li>
+            <li>Free: 5 counters. Built-in system counters and counters referenced by other features are exempt. Full limits on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#types">Counter types</a></li>
+          <li><a href="#actions">Counter Action</a></li>
+          <li><a href="#tiers">Counter tiers</a></li>
+          <li><a href="#leaderboards">Leaderboards</a></li>
+          <li><a href="#csv">CSV import and export</a></li>
+          <li><a href="#watch">Watch time</a></li>
+        </ol></nav>
+
+        <section class="section" id="types">
+          <h2>Counter types</h2>
+          <ul>
+            <li><strong>Global:</strong> single shared value (for example Deaths This Stream, Wheels Spun).</li>
+            <li><strong>Per-user:</strong> separate value per Twitch viewer (for example Times Won, Giveaway Entries).</li>
+          </ul>
+        </section>
+
+        <section class="section" id="actions">
+          <h2>Counter Action</h2>
+          <p>Change counters from automations, wheel entry actions, or viewer-points redemptions:</p>
+          <ul>
+            <li><strong>Change by:</strong> signed number, plus/minus another counter, or a random min-max range rolled each fire.</li>
+            <li><strong>Set to:</strong> absolute value (0 resets).</li>
+            <li><code>{amount}</code> is the resolved amount from the first counter action in a fire.</li>
+          </ul>
+          <p><strong>Examples:</strong></p>
+          <ul>
+            <li>Change by -[tax pot] on a viewer's balance, then Set the pot to 0.</li>
+            <li>Range amounts (for example -100 to 100) roll once each time the action fires.</li>
+            <li>Increment Wins by 1 when a wheel entry wins, then announce <code>{count}</code> and <code>{counterTier}</code>.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="tiers">
+          <h2>Counter tiers</h2>
+          <ul>
+            <li>Any counter can have a tier ladder (for example 0 Bronze, 10 Silver, 50 Gold).</li>
+            <li>Active tier updates as values change and shows on the Stats page.</li>
+            <li><code>{counterTier}</code>: tier for the current action, or the tier just gained on Counter Tier Reached.</li>
+            <li><code>{counterTier:CounterName}</code>: current tier label for a named counter (live lookup).</li>
+            <li>On Counter Tier Reached, <code>{counterTier}</code> is the label for <em>this</em> crossing - not the final tier if several thresholds were crossed at once.</li>
+          </ul>
+          <p>Related triggers: Counter Tier Reached and Counter Value Changed on <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a> and <a href="/ISBSuiteReleases/docs/features/alerts.html">Custom Alerts</a>.</p>
+        </section>
+
+        <section class="section" id="leaderboards">
+          <h2>Leaderboards in chat</h2>
+          <p>Use <code>{top5Counter:CounterName}</code> in any template to list the top 5 viewers on a per-user counter. Format: <code>1. Alice 100, 2. Bob 80, 3. Charlie 60, ...</code>. Empty when no data. Global counters do not support this token.</p>
+          <p>Example: <code>Top 5: {top5Counter:Wins}</code>. See <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</p>
+        </section>
+
+        <section class="section" id="csv">
+          <h2>CSV import and export</h2>
+          <ul>
+            <li>Export counters for backup or editing in a spreadsheet.</li>
+            <li>Import accepts comma- or semicolon-separated files (delimiter auto-detected; useful for Excel EU exports).</li>
+            <li>The downloadable template stays comma-separated.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="watch">
+          <h2>Watch time</h2>
+          <p>Stats Watch Time powers watching presence polls used by <a href="/ISBSuiteReleases/docs/features/viewer-points.html">Viewer Points</a> earn rules. Keep Twitch connected with the moderator chatters scope.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

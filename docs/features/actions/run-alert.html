@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Run Alert | ISB Suite</title>
+  <meta name="description" content="Run Alert: play a managed alert with parent context" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Run Alert | ISB Suite" />
+  <meta property="og:description" content="Run Alert: play a managed alert with parent context" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Run Alert</p>
+        <h1 class="page-title">Run Alert</h1>
+        <p class="lede">Play any alert designed on the Alerts page (built-in types, Custom Alerts, or Action Only) using the parent event context.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-run-alert.png" alt="Run Alert action setup in ISB Suite" />
+          <figcaption>Run Alert: searchable alert picker.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Run Alert</strong>.</li>
+            <li>Target must be enabled; its own cooldown and limits still apply.</li>
+            <li>Needs an Alert Box widget on the active overlay layout.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/alerts.html#run-alert">Alerts - Run Alert</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#action-only">Action Only alerts</a></li>
+          <li><a href="#limits">Cooldown and limits</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>On fire, the chosen Alerts-page alert plays in the Alert Box with the <em>parent</em> rule&apos;s context (<code>{user}</code>, amounts, and so on). Appearance, GIF, TTS, and duration come from that alert&apos;s design - this action only selects which alert to run. The picker is the same searchable control used for Randomized Action sets and Run Chat Bot or Automation.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Design or pick an alert on the <a href="/ISBSuiteReleases/docs/features/alerts.html">Alerts</a> page and leave it enabled.</li>
+            <li>Put an <strong>Alert Box</strong> widget on the active <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a>.</li>
+            <li>Enable <strong>Run Alert</strong> and select the alert in the picker.</li>
+          </ol>
+        </section>
+        <section class="section" id="action-only">
+          <h2>Action Only alerts</h2>
+          <p>Action Only alerts have no Twitch event of their own. They only play when an Actions surface uses Run Alert - ideal for shop redeems, chat commands, and game outcomes that should reuse a polished alert without creating a duplicate event-driven alert rule.</p>
+        </section>
+        <section class="section" id="limits">
+          <h2>Cooldown and limits</h2>
+          <p>The target alert keeps its own cooldown and Free/Pro limits. If the alert is disabled or locked, Run Alert does not play it. Turning a whole alert type off on the Alerts overview also blocks Run Alert for those rules until you turn the type back on.</p>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Shop item &quot;Hype Alert&quot; -&gt; Run Alert on an Action Only alert with custom GIF and <code>{user} redeemed Hype Alert!</code>.</li>
+            <li>Chat game win phase -&gt; Run Alert for a shared &quot;Winner&quot; design instead of rebuilding art on every game.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

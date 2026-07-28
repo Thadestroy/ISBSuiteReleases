@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Heist | ISB Suite</title>
+  <meta name="description" content="Heist chat game: timed window, variable bets, win and lose phases" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Heist | ISB Suite" />
+  <meta property="og:description" content="Heist chat game: timed window, variable bets, win and lose phases" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a> / Heist</p>
+        <h1 class="page-title">Heist</h1>
+        <p class="lede">Timed heist window: viewers bet a variable amount, each entrant rolls independently, and winners typically multiply their stake.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-heist.png" alt="Heist chat game setup in ISB Suite" />
+          <figcaption>Heist setup: join command, variable stakes, duration, and phase messages.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Preset: <strong>Heist</strong>.</li>
+            <li>Timed join window; variable stake; independent win rolls per entrant.</li>
+            <li>Typical demo defaults: 50% win chance, 2x payout multiplier, each-entrant resolution.</li>
+            <li>Phases: Open, Join, Win, Lose, No Winners, When Session Ends, If No One Joins.</li>
+            <li>Variables: <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">Chat Games tokens</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options</a></li>
+          <li><a href="#phases">Phases</a></li>
+          <li><a href="#messages">Messages and warnings</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>A start trigger opens the heist. Viewers join with the join command and stake an amount from the configured counter (variable stake). When the timer ends, each entrant is rolled independently against <strong>Win chance</strong>. Winners receive a payout from <strong>Payout multiplier</strong> (often 2x stake); losers forfeit. If people joined but nobody won, the <strong>No Winners</strong> phase can fire in addition to the end-of-session summary path.</p>
+          <p>Heist is the default &quot;everyone rolls&quot; timed game. Prefer <a href="/ISBSuiteReleases/docs/features/chat-games/lottery.html">Lottery</a> when you want one shared pool winner instead.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Create a Heist from Chat Games presets (or duplicate a working heist).</li>
+            <li>Add a start trigger (command, channel points, and so on) that opens the session.</li>
+            <li>Set join command, stake counter, variable stake mode, win chance, payout multiplier, and duration.</li>
+            <li>Enable open / summary chat templates; add Countdown Warnings if you want mid-window reminders.</li>
+            <li>Configure phase Actions (sound, alert, chat, counters) for Open / Join / Win / Lose / No Winners / When Session Ends as needed.</li>
+            <li>Tune Advanced Settings on start and join (aliases, Match anywhere, permission, cooldown, limits).</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options</h2>
+          <ul>
+            <li><strong>Stake counter</strong>: which counter is debited and credited (often Stream Coins / Viewer Points currency).</li>
+            <li><strong>Stake mode</strong>: Variable - viewers pass an amount after the join command.</li>
+            <li><strong>Win chance %</strong>: independent roll chance per entrant when the session resolves.</li>
+            <li><strong>Payout multiplier</strong>: winner payout relative to their stake (for example 2.0 = double).</li>
+            <li><strong>Resolution scope</strong>: Each entrant (Heist-style) so every joiner is rolled.</li>
+            <li><strong>Payout mode</strong>: Multiplier on stake for classic heist math.</li>
+            <li><strong>Duration</strong>: join window length; Countdown Warnings use remaining-time offsets against this.</li>
+            <li><strong>Execute Actions on resolve</strong>: when on, When Session Ends / resolve phase Actions run after outcomes are calculated.</li>
+          </ul>
+        </section>
+        <section class="section" id="phases">
+          <h2>Phases</h2>
+          <ul>
+            <li><strong>Open</strong> - fire hype sound / alert when the window opens.</li>
+            <li><strong>Join</strong> - optional confirm Actions when a stake is taken (keep chat noise low if you already send join-confirmed messages).</li>
+            <li><strong>Win / Lose</strong> - per entrant after their roll; good for stings, Run Alert, or Counter Action on Wins.</li>
+            <li><strong>No Winners</strong> - dedicated path when the session had entrants but zero winners; use <code>{losersList}</code> and <code>{totalLost}</code>.</li>
+            <li><strong>When Session Ends</strong> - summary with <code>{totalPool}</code>, <code>{totalPaidOut}</code>, <code>{winnersList}</code>, <code>{winnerCount}</code>.</li>
+            <li><strong>If No One Joins</strong> - soft fail when the window closes empty.</li>
+          </ul>
+        </section>
+        <section class="section" id="messages">
+          <h2>Messages and warnings</h2>
+          <ul>
+            <li><strong>Opened</strong> template often includes <code>{command}</code> and <code>{duration}</code>.</li>
+            <li><strong>Summary</strong> template often includes <code>{winnerCount}</code>, <code>{totalPaidOut}</code>, and <code>{winnersList}</code>.</li>
+            <li><strong>Countdown Warnings</strong>: reminder text plus offsets (for example 60s and 10s left). Use <code>{timeLeft}</code>. Offsets at or beyond session length are skipped.</li>
+            <li>Full token table: <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">Message variables - Chat Games</a>.</li>
+          </ul>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>Friday night heist</strong> - Mod <code>!heist</code> opens a 2 minute window; Win phase plays a sting + <a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert</a>.</li>
+            <li><strong>Quiet fail</strong> - No Winners phase sends a soft chat line with <code>{totalLost}</code> and skips hype sounds.</li>
+            <li><strong>Channel points open</strong> - Redeem &quot;Start Heist&quot; as the start trigger; viewers still join with <code>!heist &lt;amount&gt;</code>.</li>
+            <li><strong>Win board</strong> - Win phase <a href="/ISBSuiteReleases/docs/features/actions/counter-action.html">Counter Action</a> Change by +1 on per-user Wins, then Send Message with <code>{user}</code> and <code>{count}</code>.</li>
+          </ul>
+          <p>Shared setup: <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games overview</a>. Example recipe: <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

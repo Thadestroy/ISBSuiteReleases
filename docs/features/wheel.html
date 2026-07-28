@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wheel | ISB Suite</title>
+  <meta name="description" content="Wheel presets, chat join, spins, colors, and per entry actions" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Wheel | ISB Suite" />
+  <meta property="og:description" content="Wheel presets, chat join, spins, colors, and per entry actions" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Wheel</p>
+        <h1 class="page-title">Wheel</h1>
+        <p class="lede">Animated prize wheels with chat join, mod control, Quick Launch presets, custom colors, and per entry win actions.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/wheel.png" alt="Wheel Editor in ISB Suite" />
+          <figcaption>Wheel Editor: presets, entries, Twitch join settings, colors, winner message.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Free: 3 wheel presets. Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
+            <li>Viewers join with <code>!join</code> when a session allows chat join.</li>
+            <li>Mods and broadcaster: <code>!startwheelspin</code>, <code>!spinwheel</code>, <code>!endwheelspin</code>, <code>!resetwheelspin</code>.</li>
+            <li>Transparent background for Window Capture. Related: <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Queues and Giveaways</a>, <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a>, <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>, <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#editor">Wheel Editor settings</a></li>
+          <li><a href="#entries">Managing entries</a></li>
+          <li><a href="#colors">Color customization</a></li>
+          <li><a href="#chat">Chat and Twitch</a></li>
+          <li><a href="#actions">Per entry actions</a></li>
+          <li><a href="#cascade">Cascading wheels</a></li>
+        </ol></nav>
+
+        <section class="section" id="overview">
+          <h2>Overview</h2>
+          <p>Create and customize wheels from the <strong>Wheel Editor</strong> tab. Save multiple presets (for example a prize wheel, a game picker, or a category picker) and load them from Quick Launch or from an <a href="/ISBSuiteReleases/docs/features/automations.html">automation</a>.</p>
+          <ul>
+            <li>Smooth spin animations and custom color palettes (per wheel or per entry).</li>
+            <li>Viewer Twitch name colors on slices when they <code>!join</code>.</li>
+            <li>Configurable winner chat messages with <a href="/ISBSuiteReleases/docs/reference/message-variables.html">message variables</a>.</li>
+            <li>Remove on win mode and allow duplicates mode.</li>
+            <li>Quick Launch presets: one click loads and optionally auto spins a saved wheel.</li>
+            <li>Transparent background for window capture in OBS or similar tools. See <a href="/ISBSuiteReleases/docs/download.html#capture">Download - Capture</a>.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="editor">
+          <h2>Wheel Editor settings</h2>
+          <ul>
+            <li><strong>Wheel Name</strong>: shown in Quick Launch and in <code>{wheel}</code> where that variable is available.</li>
+            <li><strong>Allow !join from Chat</strong>: let viewers add themselves during an open session.</li>
+            <li><strong>Remove Winners After Spin</strong>: auto-removes the winner slice so it cannot win twice on later manual spins.</li>
+            <li><strong>Allow Duplicates</strong>: permit the same name on the wheel more than once.</li>
+            <li><strong>Announce Winner in Chat</strong>: send the winner message to Twitch chat automatically.</li>
+            <li><strong>Custom Winner Message</strong>: override the default <code>The winner is: {winner}!</code> template. Supports variables such as <code>{winner}</code>, <code>{user}</code>, and counter tokens.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="entries">
+          <h2>Managing entries</h2>
+          <ul>
+            <li>Add entries one at a time with <strong>+ Add Entry</strong>.</li>
+            <li>Bulk import from text with <strong>Bulk Import</strong> (one entry per line).</li>
+            <li>Edit text, color, and per entry actions for each entry.</li>
+            <li>Duplicate entries to quickly clone text, colors, and actions.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="colors">
+          <h2>Color customization</h2>
+          <ul>
+            <li><strong>Default palette</strong>: automatic rainbow distribution across all slices.</li>
+            <li><strong>Custom palette</strong>: click the color squares in the editor to set hex values for the wheel.</li>
+            <li><strong>Per entry color override</strong>: set a specific color for individual entries.</li>
+            <li><strong>Twitch user colors</strong>: applied automatically when viewers <code>!join</code>.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="chat">
+          <h2>Chat and Twitch</h2>
+          <p>Connect Twitch on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a> so chat commands and EventSub work.</p>
+          <ul>
+            <li>Viewers: <code>!join</code> during an open session (when Allow !join is on).</li>
+            <li>Mods and broadcaster: <code>!startwheelspin</code> (empty wheel, enables join), <code>!endwheelspin</code> (stop join), <code>!spinwheel</code>, <code>!resetwheelspin</code> (clear and end session).</li>
+            <li>Crash recovery and reconnect handling are built in.</li>
+            <li>Optional dedicated <strong>bot account</strong> on Integrations: chat replies (wheel outcomes, automations, alerts, chat bot) send as the bot while the broadcaster account stays for triggers. Available on Free. Mod the bot in your channel for higher chat rate limits.</li>
+          </ul>
+          <p>Full built-in list: <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
+        </section>
+
+        <section class="section" id="actions">
+          <h2>Per entry actions</h2>
+          <p>Each wheel entry can run its own actions when it wins:</p>
+          <ul>
+            <li>Play a sound file with volume control.</li>
+            <li>Send a custom chat message (supports <a href="/ISBSuiteReleases/docs/reference/message-variables.html">variables</a>).</li>
+            <li>Run a <strong>Counter Action</strong> (Change by or Set to; number, plus or minus another counter, or a random range). See <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a>.</li>
+            <li>Trigger another automation (including cascading into a second wheel).</li>
+            <li>Override the wheel winner announcement for that entry.</li>
+            <li>Set a custom color for that entry slice.</li>
+          </ul>
+          <p>When a wheel entry win triggers an automation, <code>{winner}</code> resolves to the winning entry name. Pending loads and spins appear on the Home <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Wheel Queue</a>.</p>
+        </section>
+
+        <section class="section" id="cascade">
+          <h2>Cascading wheels</h2>
+          <ol class="steps">
+            <li>Create multiple wheel presets (for example Category Picker and Game Picker).</li>
+            <li>On an entry in Category Picker, add a trigger automation action.</li>
+            <li>That automation uses Load and Spin Wheel to load the Game Picker (optionally auto spin).</li>
+          </ol>
+          <p>More setups: <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

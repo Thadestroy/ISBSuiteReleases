@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Automations | ISB Suite</title>
+  <meta name="description" content="Automation triggers, actions, cooldowns, chains, and advanced patterns" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Automations | ISB Suite" />
+  <meta property="og:description" content="Automation triggers, actions, cooldowns, chains, and advanced patterns" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Automations</p>
+        <h1 class="page-title">Automations</h1>
+        <p class="lede">Connect Twitch events and custom commands to actions: wheels, sounds, chat, Discord, counters, giveaways, alerts, TTS, timers, randomized sets, and chains into Chat Bot or other automations.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/automations.png" alt="Automations page in ISB Suite" />
+          <figcaption>Automations overview: search, groups, enable lights, and rule list.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Free: 15 automations. Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
+            <li>One automation can have multiple triggers. Same rule engine as <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> - use Automations for EventSub and multi-action rules.</li>
+            <li>Cooldown: None, Global, or Per User, plus per stream limits.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a>, <a href="/ISBSuiteReleases/docs/features/alerts.html">Alerts</a>, <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel</a>, <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>, <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#triggers">Triggers</a></li>
+          <li><a href="#actions">Actions</a></li>
+          <li><a href="#limits">Cooldown and limits</a></li>
+          <li><a href="#commands">Chat command options</a></li>
+          <li><a href="#advanced">Advanced patterns</a></li>
+        </ol></nav>
+
+        <section class="section" id="overview">
+          <h2>Overview</h2>
+          <p>Automations live in the <strong>Automations</strong> tab. Overview pages support instant name search and optional <strong>custom groups</strong> (named groups, chip filters; ungrouped items list first).</p>
+          <p><strong>Chat Bot vs Automations:</strong> both tabs share the same trigger and action building blocks. Prefer <strong>Automations</strong> when the rule is driven by Twitch events (channel points, bits, raids, follows, and so on) or needs a long action chain. Prefer <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> when the rule is mainly a custom <code>!command</code> or timed chat message. Either tab can call the other with <strong>Run Chat Bot or Automation</strong>.</p>
+        </section>
+
+        <section class="section" id="triggers">
+          <h2>Triggers</h2>
+          <p><strong>Multi-trigger support:</strong> one automation can respond to multiple different trigger types at once.</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Trigger</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr><td>Channel Point Redemption</td><td>Match by reward title; reward ID auto detects after the first redemption</td></tr>
+              <tr><td>Walk-on Sound</td><td>First chat message per stream; blank username = everyone; named = specific viewer; both can fire; optional only when live</td></tr>
+              <tr><td>Bits / Cheer</td><td>At least or exact amount</td></tr>
+              <tr><td>Gift Subscriptions</td><td>At least or exact gift count</td></tr>
+              <tr><td>New Subscription</td><td>Any tier or Tier 1/2/3</td></tr>
+              <tr><td>Resubscription</td><td>Any, or tier and/or minimum months</td></tr>
+              <tr><td>Follow</td><td>Any new follow</td></tr>
+              <tr><td>Raid</td><td>Any raid or minimum viewers</td></tr>
+              <tr><td>Hype Train End</td><td>Any level or minimum level</td></tr>
+              <tr><td>Goal Achieved</td><td>Any goal type or filtered type string</td></tr>
+              <tr><td>Ad Break</td><td>Any duration or specific length; optional chat warnings before the ad</td></tr>
+              <tr><td>Shoutout Received</td><td>Any shoutout from another broadcaster</td></tr>
+              <tr><td>Custom Chat Command</td><td>Your <code>!command</code> with permission, cooldown, aliases, Match anywhere</td></tr>
+              <tr><td>Counter Tier Reached</td><td>Viewer or channel crosses upward into a configured tier; once per tier gained if several thresholds cross in one increment</td></tr>
+              <tr><td>Counter Value Changed</td><td>Once per change; filter increase / decrease / either; optional counter filter</td></tr>
+              <tr><td>Community Goal Reached</td><td>Goal hits its limit; optional goal filter</td></tr>
+              <tr><td>Chat Message Match</td><td>Specific chatter message pattern with <code>&lt;amount&gt;</code> becomes <code>{amount}</code></td></tr>
+              <tr><td>Timer / Interval</td><td>Repeating interval</td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="actions">
+          <h2>Actions</h2>
+          <p>Automations use the shared Actions editor (same cards as Chat Bot, shop items, and Chat Games). Labels below match the app checkboxes. Open each guide for setup steps, options, and a screenshot of that editor.</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Action</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/start-wheel-session.html">Start Wheel Session</a></td><td>Load a preset; optionally auto-spin</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/play-sound.html">Play Sound</a></td><td>Queue audio; optional bypass sound queue</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/send-message.html">Send Message</a></td><td>Twitch chat with variables</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/discord-webhook.html">Discord Webhook</a></td><td>Post to named webhooks on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a></td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/counter-action.html">Counter Action</a></td><td>Change by or Set to; number, counter, or range</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/start-giveaway-session.html">Start Giveaway Session</a></td><td>Timed viewer entry giveaway</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert</a></td><td>Play a managed Alerts-page alert</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/text-to-speech.html">Text-to-Speech</a></td><td>Speak Send Message and/or custom TTS text</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a></td><td>Delay other actions; optional Timer Widget</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a></td><td>Pick one of several action sets</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a></td><td>Chain into another rule; keeps chatter context</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/push-community-goal.html">Push Community Goal</a></td><td>Add progress; optional trigger amount</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/randomize-image-picker.html">Randomize Image Picker</a></td><td>Reshuffle overlay picker images</td></tr>
+            </tbody>
+          </table></div>
+          <p><a class="btn btn-primary" href="/ISBSuiteReleases/docs/features/actions/index.html">Actions hub</a></p>
+        </section>
+
+        <section class="section" id="limits">
+          <h2>Cooldown and limits</h2>
+          <p>Every automation can combine a time cooldown (None / Global / Per User) with per stream limits (max fires globally and/or per user; <code>0</code> = unlimited). Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for on cooldown vs hit limit.</p>
+          <div class="callout"><p>Channel Point redemptions: Twitch still accepts the redeem and charges points. ISB Suite only skips running the automation when blocked. Reject or refund is not supported yet.</p></div>
+        </section>
+
+        <section class="section" id="commands">
+          <h2>Chat command options</h2>
+          <p>Custom Chat Command triggers support the same Advanced Settings pattern used across the app:</p>
+          <ul>
+            <li><strong>Permission</strong>: Everyone, Subscribers, VIPs, Moderators, or Broadcaster.</li>
+            <li><strong>Aliases</strong>: alternate names that fire the same rule. Longer matching aliases win; leftover text becomes <code>{input}</code>.</li>
+            <li><strong>Match anywhere in message</strong>: command can appear mid chat (for example <code>/me !discord</code>). Space-boundary rules still apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</li>
+            <li><strong>Cooldown and per stream limits</strong>: with optional chat replies.</li>
+          </ul>
+          <p>Also see <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
+        </section>
+
+        <section class="section" id="advanced">
+          <h2>Advanced patterns</h2>
+          <ul>
+            <li><strong>Walk-on sounds</strong>: First Message Per Stream. Blank username greets everyone once; named username is a special walk-on. Blank and named can both fire. Enable Only When Live to skip setup screens.</li>
+            <li><strong>Stream Deck</strong>: create a broadcaster-only custom command, then send that chat line from a Stream Deck Twitch Chat button.</li>
+            <li><strong>Discord</strong>: add named webhooks on Integrations, then use the <a href="/ISBSuiteReleases/docs/features/actions/discord-webhook.html">Discord Webhook</a> action (one rule can post to multiple webhooks).</li>
+            <li><strong>Chains</strong>: <a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a> keeps original chatter context across hops (max 20; loops are blocked). Alerts use <a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert</a>.</li>
+            <li><strong>Cascading wheels</strong>: entry action or Run Chat Bot or Automation loads a second wheel. See <a href="/ISBSuiteReleases/docs/features/wheel.html#cascade">Wheel - Cascading</a> and <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

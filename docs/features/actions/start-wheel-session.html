@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Start Wheel Session | ISB Suite</title>
+  <meta name="description" content="Load a wheel preset and optionally auto-spin from Actions" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Start Wheel Session | ISB Suite" />
+  <meta property="og:description" content="Load a wheel preset and optionally auto-spin from Actions" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Start Wheel Session</p>
+        <h1 class="page-title">Start Wheel Session</h1>
+        <p class="lede">Load a saved wheel preset when the rule fires. Optionally spin immediately, remove winners, or keep spinning until one entry remains.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-start-wheel-session.png" alt="Start Wheel Session action setup in ISB Suite" />
+          <figcaption>Start Wheel Session: preset picker, auto-spin, remove winner, last-survivor mode.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Start Wheel Session</strong>.</li>
+            <li>Loads a preset from <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel Editor</a>; auto-spin is optional.</li>
+            <li>Without auto-spin, the session opens so chat can <code>!join</code> if the preset allows it.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Queues and Giveaways</a>, <a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>When the parent rule fires, ISB Suite loads the chosen wheel preset into the live session (same idea as Quick Launch). If <strong>Automatically spin immediately</strong> is off, the wheel is ready for joins or a later mod <code>!spinwheel</code>. If auto-spin is on, a spin starts after the configured delay without a separate spin command.</p>
+          <p>Winner chat, entry sounds, and per-entry actions still come from the wheel / entry settings. This action only starts (and optionally spins) the session.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Save the wheel preset in Wheel Editor (entries, join settings, winner message).</li>
+            <li>On the rule, enable <strong>Start Wheel Session</strong> and pick that preset.</li>
+            <li>Decide load-only vs auto-spin, then optional remove-winner / last-survivor modes.</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options</h2>
+          <ul>
+            <li><strong>Wheel Preset</strong>: which saved wheel to load.</li>
+            <li><strong>Automatically spin immediately</strong>: spin after a short delay. If unchecked, the session starts but does not spin on its own (viewers can join when Allow !join is on).</li>
+            <li><strong>Remove winner after spin</strong> (with auto-spin): drop the winning slice and keep spinning for elimination-style games.</li>
+            <li><strong>Spin until one entry remains</strong>: keep removing winners until a last survivor is left.</li>
+            <li><strong>Number of spins</strong> / <strong>Delay between spins</strong>: when removing winners without last-survivor mode, how many spins and the pause between them so viewers can see each result.</li>
+          </ul>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Channel points &quot;Spin the Prize Wheel&quot; -&gt; Start Wheel Session on <strong>Prize Wheel</strong> with auto-spin after 3 seconds.</li>
+            <li>Mod command opens an empty joinable wheel (auto-spin off) so chat <code>!join</code>, then mods spin later.</li>
+            <li>Put different presets in <a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a> sets for a &quot;mystery wheel&quot; redeem.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

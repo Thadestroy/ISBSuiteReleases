@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wheel | ISB Suite</title>
+  <meta name="description" content="Wheel overlay widget: placement, visibility, and pairing with wheel sessions" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Wheel | ISB Suite" />
+  <meta property="og:description" content="Wheel overlay widget: placement, visibility, and pairing with wheel sessions" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a> / Wheel</p>
+        <h1 class="page-title">Wheel</h1>
+        <p class="lede">Place the Wheel widget where the spinning wheel should appear on your capture stage. Without it on the active layout, spins still run in the app but viewers will not see them in capture.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-wheel.png" alt="Wheel widget in Overlay Layout" />
+          <figcaption>Wheel widget selected: position, size, crop, and visibility on the stage.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Widget: <strong>Wheel</strong>.</li>
+            <li>Required for on-stream wheel spins to be visible in capture.</li>
+            <li>Shared transform, crop, visibility, and widget hotkey controls.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel</a>, <a href="/ISBSuiteReleases/docs/features/actions/start-wheel-session.html">Start Wheel Session</a>.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#options">Options</a></li>
+          <li><a href="#tips">Tips</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>The Wheel widget is the on-stage render target for Wheel Editor presets and Start Wheel Session Actions. Presets, entries, and spin rules live on the <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel</a> feature; this widget only controls where that graphic appears in <strong>ISB Suite - Capture</strong>.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Add a <strong>Wheel</strong> widget to the active layout.</li>
+            <li>Size and position it where you want the wheel on stream (often a corner or center stage).</li>
+            <li>Confirm Window Capture includes that region - see <a href="/ISBSuiteReleases/docs/download.html#capture">Download</a>.</li>
+            <li>Start sessions from Wheel Editor, Quick Launch, or <a href="/ISBSuiteReleases/docs/features/actions/start-wheel-session.html">Start Wheel Session</a>.</li>
+          </ol>
+        </section>
+        <section class="section" id="options">
+          <h2>Options</h2>
+          <ul>
+            <li><strong>Transform</strong>: X / Y / W / H percentages of the stage.</li>
+            <li><strong>Visible</strong> and <strong>Widget hotkey</strong>: hide the wheel between spins without removing it.</li>
+            <li><strong>Crop</strong>: trim empty margins if your wheel art has padding.</li>
+            <li><strong>Layer order</strong>: keep the wheel above static logos when they overlap.</li>
+          </ul>
+        </section>
+        <section class="section" id="tips">
+          <h2>Tips</h2>
+          <ul>
+            <li>Keep one Wheel widget on your main layout; duplicate layouts if you need different placements per scene.</li>
+            <li>A Wheel Focus layout can enlarge the wheel and hide Alert Box / Browser clutter for big spins.</li>
+            <li>If spins happen but nothing shows, confirm the widget is on the <em>active</em> layout and Visible is checked.</li>
+          </ul>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>Main scene wheel</strong> - Compact corner widget on Main Scene for frequent redeems.</li>
+            <li><strong>Spotlight layout</strong> - Hotkey to a Wheel Focus layout with a large centered wheel for finales.</li>
+            <li><strong>Hidden until spin</strong> - Widget hotkey or layout switch so the wheel only appears when a session starts.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout overview</a>, <a href="/ISBSuiteReleases/docs/features/actions/start-wheel-session.html">Start Wheel Session</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>
