@@ -93,8 +93,8 @@
               <tr><td>New Subscription</td><td>Any tier or Tier 1/2/3</td></tr>
               <tr><td>Resubscription</td><td>Any, or tier and/or minimum months</td></tr>
               <tr><td>Follow</td><td>Any new follow</td></tr>
-              <tr><td>Raid</td><td>Any raid or minimum viewers</td></tr>
-              <tr><td>Hype Train End</td><td>Any level or minimum level</td></tr>
+              <tr><td>Raid</td><td>At least or exact viewer count (blank / Any for every raid)</td></tr>
+              <tr><td>Hype Train End</td><td>At least or exact level (blank / Any Level for every end)</td></tr>
               <tr><td>Goal Achieved</td><td>Any goal type or filtered type string</td></tr>
               <tr><td>Ad Break</td><td>Any duration or specific length; optional chat warnings before the ad</td></tr>
               <tr><td>Shoutout Received</td><td>Any shoutout from another broadcaster</td></tr>
@@ -102,10 +102,12 @@
               <tr><td>Counter Tier Reached</td><td>Viewer or channel crosses upward into a configured tier; once per tier gained if several thresholds cross in one increment</td></tr>
               <tr><td>Counter Value Changed</td><td>Once per change; filter increase / decrease / either; optional counter filter</td></tr>
               <tr><td>Community Goal Reached</td><td>Goal hits its limit; optional goal filter</td></tr>
+              <tr><td>Live Timer Ended</td><td>Live Clock hits natural zero; optional Timer Widget filter. Manual <code>!endtimer</code> abort does not fire</td></tr>
               <tr><td>Chat Message Match</td><td>Specific chatter message pattern with <code>&lt;amount&gt;</code> becomes <code>{amount}</code></td></tr>
               <tr><td>Timer / Interval</td><td>Repeating interval</td></tr>
             </tbody>
           </table></div>
+          <p><strong>Count each unit:</strong> Bits, Gift Subs, Raid, Hype Train, Tiltify, and Chat Message Match can expand one event into multiple runs (off by default; live preview in the editor).</p>
         </section>
 
         <section class="section" id="actions">
@@ -122,7 +124,8 @@
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/start-giveaway-session.html">Start Giveaway Session</a></td><td>Timed viewer entry giveaway</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert</a></td><td>Play a managed Alerts-page alert</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/text-to-speech.html">Text-to-Speech</a></td><td>Speak Send Message and/or custom TTS text</td></tr>
-              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a></td><td>Delay other actions; optional Timer Widget</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a></td><td>Delay other actions; optional Timer Widget (not Subathon)</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a></td><td>Drive a Live Clock on a Timer Widget (Starts at + per-trigger table). Use <strong>Add Subathon</strong> for a starter</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a></td><td>Pick one of several action sets</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a></td><td>Chain into another rule; keeps chatter context</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/push-community-goal.html">Push Community Goal</a></td><td>Add progress; optional trigger amount</td></tr>

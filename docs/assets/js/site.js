@@ -123,8 +123,14 @@
     {
       title: "Timer action",
       url: "/features/actions/timer.html",
-      blurb: "Delay other actions; optional Timer Widget",
+      blurb: "Delay other actions; optional Timer Widget (not Subathon)",
       keywords: "timer delay countdown !endtimer widget",
+    },
+    {
+      title: "Live Timer action",
+      url: "/features/actions/live-timer.html",
+      blurb: "Drive a Live Clock (Subathon) on a Timer Widget",
+      keywords: "live timer live clock subathon add subathon !pausetimer !addtime !endtimer starts at",
     },
     {
       title: "Start Giveaway Session action",
@@ -255,8 +261,8 @@
     {
       title: "Timer Widget",
       url: "/features/overlay-layout/timer.html",
-      blurb: "Live countdown for Timer actions",
-      keywords: "overlay timer widget countdown !endtimer preset",
+      blurb: "Delay Timer or Live Clock (Subathon) countdown",
+      keywords: "overlay timer widget countdown live clock subathon !endtimer !pausetimer !addtime preset",
     },
     {
       title: "Viewer Points",
@@ -346,6 +352,7 @@
             { href: "/features/actions/push-community-goal.html", label: "Push Community Goal" },
             { href: "/features/actions/run-alert.html", label: "Run Alert" },
             { href: "/features/actions/timer.html", label: "Timer" },
+            { href: "/features/actions/live-timer.html", label: "Live Timer" },
             { href: "/features/actions/start-giveaway-session.html", label: "Start Giveaway Session" },
             { href: "/features/actions/run-chat-bot-or-automation.html", label: "Run Chat Bot or Automation" },
             { href: "/features/actions/randomized-action.html", label: "Randomized Action" },

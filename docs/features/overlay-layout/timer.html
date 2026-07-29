@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Timer Widget | ISB Suite</title>
-  <meta name="description" content="Timer Widget: overlay countdown for Timer actions" />
+  <meta name="description" content="Timer Widget: delay countdown or Live Clock (Subathon) on the overlay" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
   <meta property="og:title" content="Timer Widget | ISB Suite" />
-  <meta property="og:description" content="Timer Widget: overlay countdown for Timer actions" />
+  <meta property="og:description" content="Timer Widget: delay countdown or Live Clock (Subathon) on the overlay" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -48,20 +48,20 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a> / Timer Widget</p>
         <h1 class="page-title">Timer Widget</h1>
-        <p class="lede">Show a live countdown on your overlay when an automation or chat game uses the Timer action. Link the same named preset on the widget and on the action.</p>
+        <p class="lede">Place a named Timer Widget on your overlay for delay-queue countdowns or a Live Clock (Subathon). Style the digits here; Automations drive the clock with Timer or Live Timer.</p>
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-timer.png" alt="Timer Widget widget in Overlay Layout" />
-          <figcaption>Timer Widget selected: linked preset, text style, and placement for countdowns.</figcaption>
+          <figcaption>Timer Widget selected: preset, text style, and Live Clock options (max remaining, accept adds while paused).</figcaption>
         </figure>
 
         <div class="ref-panel">
           <h3>At a glance</h3>
           <ul>
             <li>Widget: <strong>Timer Widget</strong>.</li>
-            <li>Link the same named preset on the <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> action.</li>
+            <li><strong>Delay Timer</strong>: link the same preset on the <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> action.</li>
+            <li><strong>Live Clock</strong>: drive with <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a> (or Add Subathon).</li>
             <li>Style font, weight, color, alignment, and shadow like Alerts text.</li>
-            <li>Mods: <code>!endtimer {Timer Widget name}</code> ends early and skips deferred actions.</li>
           </ul>
         </div>
 
@@ -69,59 +69,73 @@
           <li><a href="#how">How it works</a></li>
           <li><a href="#setup">Setup</a></li>
           <li><a href="#options">Options</a></li>
-          <li><a href="#behavior">Behavior</a></li>
-          <li><a href="#endtimer">!endtimer</a></li>
+          <li><a href="#live-clock">Live Clock</a></li>
+          <li><a href="#delay">Delay Timer behavior</a></li>
+          <li><a href="#chat">Chat commands</a></li>
           <li><a href="#usecases">Use cases</a></li>
         </ol></nav>
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>Timer Widget displays the active countdown for a named preset. Automations, Chat Bot, shop, and Chat Games enable the <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> action, set a duration, and link that same preset. When the rule fires, the widget counts down; deferred actions on that rule wait until zero (Counter Action and Push Community Goal still apply immediately).</p>
+          <p>A Timer Widget shows the active countdown for a named preset on your capture stage. The same widget type covers two jobs:</p>
+          <ul>
+            <li><strong>Delay Timer</strong> - a rule&apos;s <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> action waits, then runs deferred actions. The widget shows that wait.</li>
+            <li><strong>Live Clock</strong> - a subathon-style clock driven by <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a>. Overlay Layout can Start / Pause / Resume / End; mods use chat commands to adjust time.</li>
+          </ul>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>
           <ol class="steps">
             <li>In Overlay Layout, add a Timer Widget and create or select a named preset.</li>
             <li>Style font, weight, color, alignment, and drop shadow (same text style controls as Alerts). Text size still scales with the widget box height.</li>
-            <li>In an automation or chat game, enable Timer, set the duration, and link the same preset.</li>
-            <li>When the rule fires, the widget counts down; deferred actions wait until zero.</li>
+            <li>For delays: enable <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> on a rule and link this preset.</li>
+            <li>For subathons: enable <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a> (or Automations -&gt; <strong>Add Subathon</strong>) and pick this preset.</li>
           </ol>
         </section>
         <section class="section" id="options">
           <h2>Options</h2>
           <ul>
-            <li><strong>Preset</strong>: named timer this widget displays (must match the Timer action).</li>
-            <li><strong>Name</strong>: display / command name used with <code>!endtimer</code>.</li>
+            <li><strong>Preset / Name</strong>: display name used with chat commands (<code>!endtimer</code>, <code>!addtime</code>, and so on).</li>
             <li><strong>Text style</strong>: font, weight, alignment, color, optional text shadow.</li>
+            <li><strong>Live Clock</strong>: optional max remaining; accept adds while paused (see below).</li>
             <li><strong>Transform / crop / visibility / hotkey</strong>: shared stage controls.</li>
-            <li>On the Timer <em>action</em>, choose <strong>None (background only)</strong> for a delay with no overlay display.</li>
+            <li>On the delay Timer <em>action</em>, choose <strong>None (background only)</strong> for a wait with no overlay digits.</li>
           </ul>
         </section>
-        <section class="section" id="behavior">
-          <h2>Behavior</h2>
+        <section class="section" id="live-clock">
+          <h2>Live Clock</h2>
+          <p>Live Clock is the extendable countdown for subathons. Automations add or start time via Live Timer; you can also control the clock from Overlay Layout (Start / Pause / Resume / End).</p>
           <ul>
-            <li>Multiple rules can share one preset; they queue so only one countdown runs at a time.</li>
-            <li>Counter Action and Push Community Goal still apply immediately while the timer runs.</li>
-            <li>Sound, chat, TTS, wheel, giveaway, and alerts wait until the countdown ends (see Timer action).</li>
+            <li><strong>Accept adds while paused</strong>: when on (default), <code>!addtime</code> / RemoveTime still apply while paused.</li>
+            <li><strong>Max remaining</strong>: optional cap so the clock cannot grow past a limit.</li>
+            <li><strong>Live Timer Ended</strong>: automations can fire when the clock hits natural zero. Manual <code>!endtimer</code> abort does not fire that trigger.</li>
           </ul>
         </section>
-        <section class="section" id="endtimer">
-          <h2>!endtimer</h2>
+        <section class="section" id="delay">
+          <h2>Delay Timer behavior</h2>
           <ul>
-            <li>Mods end the active countdown with <code>!endtimer {Timer Widget name}</code>.</li>
-            <li>Customize the command name, permission, and optional Response under Chat Bot - Built-in Commands.</li>
-            <li>Ending <strong>skips</strong> deferred actions; it does not run them early. Waiting items in that preset&apos;s queue stay queued.</li>
-            <li>An unknown name gets a built-in chat reply. If you set a Response, it is sent whenever the command is used.</li>
+            <li>Multiple rules can share one preset; they queue so only one delay countdown runs at a time.</li>
+            <li>Counter Action and Push Community Goal still apply immediately while the delay runs.</li>
+            <li>Sound, chat, TTS, wheel, giveaway, and alerts wait until the countdown ends.</li>
+            <li><code>!endtimer</code> on a delay countdown <strong>skips</strong> deferred actions; it does not run them early.</li>
           </ul>
+        </section>
+        <section class="section" id="chat">
+          <h2>Chat commands</h2>
+          <ul>
+            <li>Delay or Live Clock: <code>!endtimer {name}</code> (Built-in Commands; Live Clock abort does not fire Live Timer Ended).</li>
+            <li>Live Clock: <code>!pausetimer</code>, <code>!resumetimer</code>, <code>!addtime</code>, <code>!removetime</code> under Chat Bot - Live Timer Commands.</li>
+          </ul>
+          <p>Full list: <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
         </section>
         <section class="section" id="usecases">
           <h2>Use cases</h2>
           <ul>
-            <li><strong>Subathon clock</strong> - Long Timer on a large widget; mods use !endtimer only for emergencies.</li>
-            <li><strong>Heist window mirror</strong> - Chat Games Open phase starts a Timer so overlay shows time left alongside Countdown Warnings in chat.</li>
+            <li><strong>Subathon</strong> - Live Clock + Live Timer (or Add Subathon). Mods extend with !addtime.</li>
+            <li><strong>Heist window mirror</strong> - Chat Games Open phase starts a delay Timer so overlay shows time left alongside Countdown Warnings in chat.</li>
             <li><strong>Background delay</strong> - Timer action with None (background only) when you need pacing without on-screen digits.</li>
           </ul>
-          <p>Related: <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer action</a>, <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>, <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a> (Subathon Countdown).</p>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a>, <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer action</a>, <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a> (Subathon Countdown).</p>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>

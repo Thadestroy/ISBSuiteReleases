@@ -58,7 +58,7 @@
               <tr><td><code>!join</code></td><td>Join the current wheel when a session is active</td></tr>
               <tr><td><code>!points</code></td><td>Check viewer points balance (or your custom command name)</td></tr>
               <tr><td><code>!givepoints @user amount</code></td><td>Give your own points to another viewer</td></tr>
-              <tr><td><code>!gamble amount</code></td><td>Wager points on a configurable win chance roll</td></tr>
+              <tr><td><code>!gamble amount</code></td><td>Wager points on a configurable win chance roll (decimals and percents ok, e.g. <code>50.2</code> or <code>34.7%</code>; rounds to a whole stake)</td></tr>
               <tr><td><code>!giveaway</code></td><td>Enter an active giveaway</td></tr>
               <tr><td><em>any shop command</em></td><td>Spend points on shop items you configured</td></tr>
             </tbody>
@@ -74,7 +74,11 @@
               <tr><td><code>!endwheelspin</code></td><td>Stop accepting new entries</td></tr>
               <tr><td><code>!spinwheel</code></td><td>Spin the wheel</td></tr>
               <tr><td><code>!resetwheelspin</code></td><td>Clear the wheel and end the session</td></tr>
-              <tr><td><code>!endtimer {name}</code></td><td>End the active countdown on a named Timer Widget preset (skips deferred actions; does not run them early)</td></tr>
+              <tr><td><code>!endtimer {name}</code></td><td>End a Live Clock (abort; does not fire Live Timer Ended) or skip a delay-queue Timer countdown without running deferred actions</td></tr>
+              <tr><td><code>!pausetimer {name}</code></td><td>Pause a Live Clock on a named Timer Widget preset</td></tr>
+              <tr><td><code>!resumetimer {name}</code></td><td>Resume a paused Live Clock</td></tr>
+              <tr><td><code>!addtime {name} {duration}</code></td><td>Add time to a Live Clock (e.g. <code>5m</code>, <code>30s</code>, <code>1h</code>)</td></tr>
+              <tr><td><code>!removetime {name} {duration}</code></td><td>Remove time from a Live Clock</td></tr>
               <tr><td><code>!vpgive @user amount</code></td><td>Admin give points to a viewer</td></tr>
               <tr><td><code>!customcommand</code></td><td>Any custom command from Automations or Chat Bot</td></tr>
             </tbody>

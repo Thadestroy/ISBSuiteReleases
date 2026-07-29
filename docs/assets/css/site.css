@@ -913,7 +913,8 @@ body.landing {
 
 .landing-hero {
   position: relative;
-  overflow: hidden;
+  /* overflow stays visible so the text cloud can fade past the copy box;
+     clip the photo on .landing-hero-bg instead (hard edges were overflow clipping top/left). */
   min-height: min(72vh, 40rem);
   display: flex;
   align-items: flex-start;
@@ -924,6 +925,7 @@ body.landing {
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
 }
 
 .landing-hero-bg img {
@@ -956,8 +958,38 @@ body.landing {
 }
 
 .landing-hero-copy {
+  position: relative;
+  isolation: isolate;
   max-width: 34rem;
   animation: land-rise 0.85s var(--ease) both;
+}
+
+/* Soft dark cloud: solid pad over the full copy, then heavy blur so every edge
+   fades evenly (radial % sizing kept going narrow / uneven). */
+.landing-hero-copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0.75rem 0;
+  background: #000;
+  opacity: 0.65;
+  border-radius: 2rem;
+  filter: blur(52px);
+  transform: scale(1.28, 1.22);
+  pointer-events: none;
+}
+
+.landing-hero-copy .landing-kicker,
+.landing-hero-copy h1,
+.landing-hero-copy .landing-lead {
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(0, 0, 0, 0.75),
+    0 0 48px rgba(0, 0, 0, 0.55);
+}
+
+.landing-hero-copy .btn-row {
+  filter: drop-shadow(0 0 14px rgba(0, 0, 0, 0.7));
 }
 
 .landing-kicker {
@@ -980,7 +1012,7 @@ body.landing {
   font-size: 1.15rem;
   max-width: 33rem;
   margin-bottom: 1.75rem;
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(255, 255, 255, 0.95);
   text-wrap: pretty;
 }
 

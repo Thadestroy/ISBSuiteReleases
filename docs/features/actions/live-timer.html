@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Live Timer | ISB Suite</title>
+  <meta name="description" content="Live Timer action: drive a Live Clock (Subathon) on a Timer Widget" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Live Timer | ISB Suite" />
+  <meta property="og:description" content="Live Timer action: drive a Live Clock (Subathon) on a Timer Widget" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Live Timer</p>
+        <h1 class="page-title">Live Timer</h1>
+        <p class="lede">Drive a Live Clock on a Timer Widget - the subathon-style countdown you can start, pause, and extend. Separate from the delay-queue Timer action.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-live-timer.png" alt="Live Timer action setup in ISB Suite" />
+          <figcaption>Live Timer action: Timer Widget preset, Starts at, and per-trigger Add / Start / Ignore table.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Live Timer</strong>.</li>
+            <li>Requires a Timer Widget preset set to Live Clock (not a delay Timer).</li>
+            <li>Starts at + a per-trigger table (Add / Start / Ignore). Applies immediately, like counters.</li>
+            <li>Shortcut: Automations header <strong>Add Subathon</strong> creates a starter rule and preset.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#vs-timer">Live Timer vs Timer</a></li>
+          <li><a href="#chat">Chat and Live Timer Ended</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>Enable <strong>Live Timer</strong>, pick a Timer Widget preset, set <strong>Starts at</strong>, and fill the per-trigger time table. When the rule fires, the Live Clock updates right away (Add time, Start from Starts at, or Ignore). Nested <a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a> gets its own row in that table.</p>
+          <p>You can also use a delay <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> on the same rule; Live Timer still applies immediately while other actions wait for the delay.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Fastest: Automations -&gt; <strong>Add Subathon</strong> (starter rule + Subathon Timer Widget preset).</li>
+            <li>Or create a Timer Widget preset in Overlay Layout, set it to Live Clock, and place the widget on a layout.</li>
+            <li>On the automation, enable <strong>Live Timer</strong>, pick that preset, set Starts at, and choose Add / Start / Ignore per trigger.</li>
+            <li>(Optional) Add a <strong>Live Timer Ended</strong> trigger on another rule for when the clock hits natural zero.</li>
+          </ol>
+        </section>
+        <section class="section" id="vs-timer">
+          <h2>Live Timer vs Timer</h2>
+          <ul>
+            <li><strong>Live Timer</strong>: extendable Live Clock for subathons. Overlay Layout Start / Pause / Resume / End; optional max remaining and accept-adds-while-paused.</li>
+            <li><strong>Timer</strong>: delay-queue wait before deferred actions on that rule. Not for adding time from bits/subs.</li>
+          </ul>
+          <div class="callout"><p>Do not use a long delay Timer to fake a subathon. Use Live Timer + Live Clock.</p></div>
+        </section>
+        <section class="section" id="chat">
+          <h2>Chat and Live Timer Ended</h2>
+          <p>Mods use <code>!pausetimer</code>, <code>!resumetimer</code>, <code>!addtime</code>, <code>!removetime</code>, and <code>!endtimer</code> with the Timer Widget name. Those built-ins live under Chat Bot - <strong>Live Timer Commands</strong> (<code>!endtimer</code> is also under Built-in Commands for delay timers). Full list: <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
+          <p><strong>Live Timer Ended</strong> fires when the clock hits natural zero (optional Timer Widget filter). Manual <code>!endtimer</code> abort does not fire it.</p>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Bits -&gt; Live Timer Add 30s; Gift Subs -&gt; Add 2m; chat command -&gt; Start from Starts at.</li>
+            <li>Live Timer Ended -&gt; Send Message + Play Sound when the subathon clock empties.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/timer.html">Timer Widget</a>, <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases - Subathon Countdown</a>, <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer (delay)</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>
