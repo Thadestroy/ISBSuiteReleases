@@ -72,7 +72,7 @@
               <tr><td><code>{displayName}</code></td><td>Alias for <code>{user}</code> (Follow Age / Watch Time)</td></tr>
               <tr><td><code>{winner}</code></td><td>Winning wheel entry text (also when an automation runs from a wheel entry win)</td></tr>
               <tr><td><code>{wheel}</code></td><td>Wheel / preset name</td></tr>
-              <tr><td><code>{amount}</code></td><td>Numeric event value: bits, viewers, sub months, gift count, hype level, ad seconds, points given/wagered, chat game stake, or Counter Action resolved amount</td></tr>
+              <tr><td><code>{amount}</code></td><td>Numeric event value: bits, viewers, sub months, gift count, hype level, ad seconds, points given/wagered, point-drop claim amount, chat game stake, or Counter Action resolved amount</td></tr>
               <tr><td><code>{reward}</code></td><td>Channel point reward title</td></tr>
               <tr><td><code>{input}</code></td><td>User message or leftover text after a command / alias</td></tr>
               <tr><td><code>{bits}</code></td><td>Bits cheered (Bits trigger)</td></tr>
@@ -115,6 +115,7 @@
               <tr><td><code>{target}</code></td><td>Admin-give target display name</td></tr>
               <tr><td><code>{pool}</code></td><td>Total claim slots rolled for a point drop</td></tr>
               <tr><td><code>{claimsLeft}</code></td><td>Remaining unclaimed slots in the active drop</td></tr>
+              <tr><td><code>{amount}</code></td><td>Points awarded per successful point-drop claim (also available as legacy <code>{points}</code>)</td></tr>
             </tbody>
           </table></div>
         </section>
@@ -167,8 +168,8 @@
               <tr><td><code>{losersList}</code></td><td>Comma-separated loser display names</td></tr>
               <tr><td><code>{userStake}</code></td><td>Joining viewer&apos;s bet amount</td></tr>
               <tr><td><code>{userPayout}</code></td><td>Viewer&apos;s payout from the chat game</td></tr>
-              <tr><td><code>{roll}</code></td><td>Dice / range outcome roll for the current fire</td></tr>
-              <tr><td><code>{outcome}</code></td><td>Name of the matching dice / range outcome band</td></tr>
+              <tr><td><code>{roll}</code></td><td>Dice / range outcome roll for the current fire (one roll; shared by all overlapping bands)</td></tr>
+              <tr><td><code>{outcome}</code></td><td>Name of the dice / range band currently running (each overlapping band sees its own name)</td></tr>
             </tbody>
           </table></div>
         </section>

@@ -94,6 +94,7 @@ Overview list pages (Automations, Alerts, Chat Bot, Chat Games, Community Goals,
 - Mods and broadcaster control spins entirely from chat
 - Full built-in crash recovery and reconnect handling
 - EventSub connection for channel point redemptions and all Twitch events
+- Optional dedicated **bot account** on Integrations: link a second Twitch account so all chat replies (automations, alerts, chat bot, wheel outcomes, etc.) send as the bot while your broadcaster account stays for triggers. Available on Free. Mod the bot in your channel for higher chat rate limits.
 
 ### Alerts System
 Animated on-screen alerts for stream events, displayed in the Alert Box widget on your overlay:
@@ -132,8 +133,12 @@ Create alerts for trigger types that aren't covered by the built-in per-type sec
 | First Chat Message | Walk-on / catch-all on a viewer's first message |
 | Chat Command | Your own `!command` |
 | Timer | Interval / countdown-driven alert |
+| Action Only (Run Alert) | No event trigger — only plays when an Automation (or other Actions) uses **Run Alert** |
 
 Custom alerts support the same overlay options as built-in alerts (image/GIF, sound, alert text, TTS, and chat response). When multiple alert rules match the same event, the most specific alert fires (exact-amount and dedicated rules beat catch-alls). Free includes **3** custom alerts; Pro is unlimited.
+
+**Run Alert action**
+On Automations, Chat Bot, Viewer Points shop items, Chat Games, and other places that use Actions, enable **Run Alert** and pick any Alerts-page alert (built-in types, Custom Alerts, or Action Only). When the parent rule fires, that alert plays with the parent event’s context (`{user}`, amounts, etc.). The chosen alert must be enabled; its own cooldown/limits still apply.
 
 ### Overlay Layout Editor
 Design exactly what gets captured by your streaming software using the built-in layout editor:
@@ -156,7 +161,7 @@ Design exactly what gets captured by your streaming software using the built-in 
 | **Static Image** | Any image or logo placed on your stage |
 | **Browser Source** | Renders a live web page (URL) inside the capture, like an OBS/Streamlabs browser source |
 | **Random Image Picker** | Displays one randomly chosen image from a Random Image Picker; re-rolled by the "Randomize Image Picker" automation action |
-| **Timer Widget** | Live countdown for linked Timer actions (see [Timer Widget](#timer-widget)) |
+| **Timer Widget** | Delay-queue countdown or Live Clock (Subathon); see [Timer Widget](#timer-widget) |
 | **Character Playfield** | *(coming soon)* |
 
 ### Character Studio
@@ -177,7 +182,7 @@ Create a custom channel currency with a redeemable shop and point drops:
 **Viewer Commands**
 - **Balance command:** viewers type `!points` (or your custom command) to check their balance
 - **Give command:** viewers give their own points to another chatter (`!givepoints`)
-- **Gamble command:** viewers wager their points on a configurable win-chance roll (`!gamble`)
+- **Gamble command:** viewers wager their points on a configurable win-chance roll (`!gamble 50`, `!gamble 50.2`, `!gamble 34.7%`, or `!gamble all`). Decimal amounts and percents round to a whole stake before the roll.
 - Each command supports **aliases** ? alternate names that run the same command
 - Optional **Match anywhere in message** (Advanced Settings) so the command can appear mid-chat (e.g. `/me !points`), not only at the start
 
@@ -193,9 +198,10 @@ Create a custom channel currency with a redeemable shop and point drops:
 
 **Point Drops**
 - Timed events where a configurable image or GIF appears on the overlay
-- Chatters type a command to claim a randomized share of a point pool
+- Chatters type a command to claim; each claim awards **Points Per Claim** (default 1) and consumes one **claim slot** from the pool
 - Claim command supports **aliases** and optional **Match anywhere in message** (Advanced Settings)
-- Configurable spawn interval, spawn chance, display duration, max claimants, and point pool range
+- Configurable spawn interval, spawn chance, display duration, claim slot range, and Points Per Claim
+- Spawn/claim messages support `{amount}` for the configured award
 - Supports "only when live" mode to skip during starting-soon screens
 
 ### Powerful Automation System
@@ -221,8 +227,11 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Counter Tier Reached | When a viewer (per-user counter) or the channel (global counter) crosses upward into the next configured tier on a selected counter; fires once per tier gained if several thresholds are crossed in one increment |
 | Counter Value Changed | When a counter's value actually changes (once per change, not per unit); filter by increases / decreases / either way, and optionally by counter |
 | Community Goal Reached | When a community goal hits its limit (optional filter by goal) |
+| Live Timer Ended | When a Live Clock on a Timer Widget hits natural zero (optional preset filter). Manual `!endtimer` abort does not fire this |
 | Chat Message Match | Specific chatter (e.g. a bits-sound bot) whose message matches a pattern with `<amount>` (e.g. `used <amount> bits`); that number becomes `{amount}` |
 | Timer / Interval | Repeating interval (Automations tab) |
+
+**Count each unit:** quantity triggers (Bits, Gift Subs, Raid, Hype Train, Tiltify, Chat Message Match) can expand one event into multiple runs (e.g. a 20-gift bomb runs 20 times, or every 100 bits). Off by default; the editor shows a live match + run-count preview.
 
 **Multi-trigger support:** one automation can respond to multiple different trigger types simultaneously.
 
@@ -238,9 +247,10 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Start Giveaway | Open a timed viewer-entry giveaway |
 | Show Alert | Display an on-screen alert box event |
 | Text-to-Speech | Speak an announcement (no credentials needed) |
-| Timer | Countdown before actions fire; optionally show the countdown on a [Timer Widget](#timer-widget) |
+| Timer | Countdown before actions fire; optionally show the countdown on a [Timer Widget](#timer-widget) (delay queue — not Subathon) |
+| Live Timer | Drive a Live Clock on a Timer Widget (Starts at + per-trigger Add / Start / Ignore table). Applies immediately, even alongside a delay Timer |
 | Randomized Action | Pick one of several action sets at random (different sounds, messages, wheels, etc.) |
-| Run Automation | Trigger another saved automation (chains keep the original chatter's variables) |
+| Run Chat Bot or Automation | Trigger another Automations rule or Chat Bot overview item (searchable; chains keep the original chatter's variables) |
 | Push Community Goal | Add progress to one or more goals; optional **Use amount from trigger** (Bits cheer or Chat Message Match `<amount>`) |
 
 **Cooldown & Limits:** Every automation can combine a time cooldown (None / Global / Per-User) with per-stream limits (max fires globally and/or per user; `0` = unlimited). Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for “on cooldown” vs “hit limit.” Channel Point redemptions: Twitch still accepts the redeem and charges points. ISB Suite only skips running the automation when blocked (reject/refund is not supported yet).
@@ -253,19 +263,25 @@ Connect any stream event to any action. Automations live in the **Automations** 
 
 **Timer:** Enable the Timer action to delay everything else on the rule until the countdown finishes. Link a Timer Widget preset to show the live countdown on your overlay while chat, alerts, and other deferred actions wait.
 
-**Automation Chains:** When a Chat Bot command or Automation uses **Run Automation** to trigger another rule (which can itself trigger another), every hop keeps the **original chatter's data** ? `{user}`, `{userId}`, badge flags, bits, subs, and the rest. Chains can run up to **20** hops; genuine loops (A ? B ? A) are stopped automatically with a warning in the log. When a wheel entry win triggers an automation, `{winner}` resolves to the winning entry's name.
+**Live Timer:** For a subathon-style extendable clock, enable **Live Timer** (not the delay Timer). Pick a Timer Widget preset, set Starts at, and fill the per-trigger time table. Automations → **Add Subathon** creates a starter rule plus a Subathon Timer Widget preset.
+
+**Run Chat Bot or Automation:** Enable this action and pick any item from Automations or the Chat Bot overview (channel commands, timed messages, built-ins like `!join` / `!spinwheel` / Watch Time / Follow Age, chat-game start or join, Viewer Points balance/give/gamble/admin/shop/drop claim, or a community goal check). The picker is searchable. Targets that need typed chat arguments (for example give/gamble) use leftover text from the parent fire when available; otherwise they behave like typing the command alone. Arg-only built-ins (`!addgoal`, `!removegoal`, `!endtimer`) are not listed. Rule targets must be enabled; Alerts stay on the separate **Run Alert** action.
+
+**Automation Chains:** When a Chat Bot command or Automation uses **Run Chat Bot or Automation** to trigger another rule (which can itself trigger another), every hop keeps the **original chatter's data** — `{user}`, `{userId}`, badge flags, bits, subs, and the rest. Chains can run up to **20** hops; genuine loops (A -> B -> A) are stopped automatically with a warning in the log. When a wheel entry win triggers an automation, `{winner}` resolves to the winning entry's name.
 
 ### Chat Bot
 Automated chat messages driven by the same rule engine as Automations, managed in the **Chat Bot** tab:
 - Respond to custom `!commands` with permission levels, cooldowns, and **aliases**
-- Optional **Match anywhere in message** so the command can fire mid-chat (e.g. `/me !discord`), not only at the start ? longest matching command still wins; `{input}` is the text after the matched command
+- Optional **Match anywhere in message** so the command can fire mid-chat (e.g. `/me !discord`), not only at the start; longest matching command still wins; `{input}` is the text after the matched command
 - Post scheduled or event-driven messages with variable substitution
 - Share the same trigger and action building blocks as Automations
+- Overview enable/disable lights also cover Chat Game start/join, Viewer Points commands, and Community Goal check command cards (same as other Chat Bot rows)
 
 ### Counter System
 Track numbers that persist across streams:
 - **Global Counters:** single shared value (e.g., "Deaths This Stream", "Wheels Spun")
 - **Per-User Counters:** separate value per Twitch viewer (e.g., "Times Won", "Giveaway Entries")
+- On **Counter Stats**, each per-user counter card shows a **Total** in the header (sum of all users)
 - Change from automations, entry actions, or viewer-points redemptions via **Counter Action**: **Change by** (signed number, ± another counter, or a rolled range) or **Set to** an absolute value (0 resets). Example: Change by −[tax pot] on a viewer's balance, then Set the pot to 0. Range amounts (e.g. −100 to 100) roll once each time the action fires. `{amount}` is the resolved amount from the first counter action.
 
 **Counter Tiers:** Any counter can have a tier ladder (e.g. 0 = Bronze, 10 = Silver, 50 = Gold). The active tier updates automatically as values change and is shown on the Stats page. Use `{counterTier}` in chat or alert templates after an increment action, on a **Counter Tier Reached** automation trigger (the tier that was just gained), or `{counterTier:CounterName}` to read any counter's **current** tier for that user.
@@ -298,11 +314,13 @@ Run mass-entry chat games where viewers join from chat, stake a counter value, a
 | **Blank sandbox** | Timed session with free join. Configure triggers and actions yourself |
 | **Instant action** | No timed session. Fires through the automation engine on trigger |
 
-**Game types** also include **Dice / Range Outcomes**: pick any start trigger (command, channel points, etc.), set the die range, then build outcome bands (e.g. 1–98 normal, 99–105 crit). Each band uses the full action editor (chat, sound, alert, counters, Run Automation, randomized action sets, …). Use the **Outcome profile** dropdown for the Default table or a copied table for a specific Twitch login. Limits/cooldowns (including once per viewer per stream) sit under Start Triggers.
+**Game types** also include **Dice / Range Outcomes**: pick any start trigger (command, channel points, etc.), set the die range, then build outcome bands (e.g. 1–98 normal, 99–105 crit). Each band uses the full action editor (chat, sound, alert, counters, Run Automation, randomized action sets, …). Overlapping bands on the same roll all run in list order and share one `{roll}` (each band sees its own `{outcome}` name while it runs). Use the **Outcome profile** dropdown for the Default table or a copied table for a specific Twitch login. Start Chat Command Advanced Settings holds aliases, Match anywhere, and permission; cooldown and stream limits sit on the shared Start Triggers Cooldown & Limits card. Join command is the command name field only.
+
+**Import Actions:** In the shared Actions editor (Automations, Chat Bot, Chat Games phases/bands, and other hosts), use **Import from Automation / Chat Bot** above Randomized Action to replace the current actions with a copy from another Automation or Chat Bot command — flat actions stay flat; Randomized Action Sets copy as-is. Triggers and cooldown/limits stay on the host you’re editing. The source rule is unchanged. To peel off one outcome for reuse, open Randomized Action and use **Extract** on an Action Set (optionally remove it from the parent after). For Dice / Range Outcomes, import into a band and delete unwanted sets as needed.
 
 **Configure (timed / gamble games):** join command (with optional **aliases** and **Match anywhere in message**), stake counter, win chance, payout mode (multiplier on stake or split pool), session duration, and chat messages for open/join/summary/cancel. **Countdown Warnings** let you edit the reminder message and choose any number of remaining-time offsets (seconds, minutes, or hours); offsets at or beyond the session length are skipped. Start commands also support Match anywhere in Advanced Settings. Chain sounds, alerts, wheels, or other automations to open, join, resolve, win, or lose phases.
 
-**No Winners phase:** timed games (e.g. Heist) can run a dedicated action phase when people joined but nobody won. Configure chat, sound, alerts, and more separately from **When Session Ends**. Use `{losersList}` / `{totalLost}` in responses. **If No One Joins** is unchanged.
+**No Winners phase:** timed games (e.g. Heist) can run a dedicated action phase when people joined but nobody won. It runs **instead of** **When Session Ends** and the **Summary When Game Ends** chat message. Use `{losersList}` / `{totalLost}` in responses. **If No One Joins** is unchanged.
 
 **Variables:** `{totalPool}`, `{totalPaidOut}`, `{winnersList}`, `{winnerCount}`, `{userStake}`, `{userPayout}`, `{timeLeft}`, and for dice games `{roll}` / `{outcome}`. See [Message Variables](#message-variables).
 
@@ -395,7 +413,7 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 | `!join` | Join the current wheel (when a session is active) |
 | `!points` | Check your viewer points balance (or your custom command name) |
 | `!givepoints @user amount` | Give your own points to another viewer |
-| `!gamble amount` | Wager points on a configurable win-chance roll |
+| `!gamble amount` | Wager points on a configurable win-chance roll (`amount`, `amount%`, or `all`; decimals allowed and round to a whole stake) |
 | `!giveaway` | Enter an active giveaway |
 | *any shop command* | Spend points on shop items you've configured |
 
@@ -406,7 +424,11 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 | `!endwheelspin` | Stop accepting new entries (disables `!join`) |
 | `!spinwheel` | Spin the wheel |
 | `!resetwheelspin` | Clear the wheel and end the session |
-| `!endtimer {name}` | End the active countdown on a named [Timer Widget](#timer-widget) preset (skips deferred actions; does not run them early) |
+| `!endtimer {name}` | End an active Live Clock (abort to Idle; does not fire Live Timer Ended) or skip a delay-queue Timer countdown without running deferred actions |
+| `!pausetimer {name}` | Pause a Live Clock on a named Timer Widget preset |
+| `!resumetimer {name}` | Resume a paused Live Clock |
+| `!addtime {name} {duration}` | Add time to a Live Clock (e.g. `5m`, `30s`, `1h`) |
+| `!removetime {name} {duration}` | Remove time from a Live Clock |
 | `!vpgive @user amount` | Give points to a viewer (admin give command) |
 | `!customcommand` | Any custom command you've set up in Automations |
 
@@ -457,7 +479,7 @@ Use these in chat messages, alert text, and TTS text:
 | `{goalLimit}` | Community goal target limit |
 | `{goalProgress}` | Progress as `current/limit` (e.g. `15/100`), used by goal check commands |
 
-**Chat game variables** (resolve/summary messages): `{totalPool}`, `{totalPaidOut}`, `{totalLost}`, `{entryCount}`, `{winnerCount}`, `{winnersList}`, `{losersList}`, `{userStake}`, `{userPayout}`. Dice / range outcomes also expose `{roll}` (the number rolled) and `{outcome}` (matching band name).
+**Chat game variables** (resolve/summary messages): `{totalPool}`, `{totalPaidOut}`, `{totalLost}`, `{entryCount}`, `{winnerCount}`, `{winnersList}`, `{losersList}`, `{userStake}`, `{userPayout}`. Dice / range outcomes also expose `{roll}` (shared across overlapping bands on one fire) and `{outcome}` (name of the band currently running).
 
 **Community goal check example:** `"!bitsgoal"` → `"{goalName}: {goalProgress}"` → `Subathon Bits: 15/100`
 
@@ -531,14 +553,14 @@ ISB Suite renders your overlay in its own window with a transparent background. 
 | **Heist Chat Game** | Chat Games preset: viewers `!heist 50` to stake points; resolve doubles winners' stakes |
 | **Random Hype Sound** | Automation with Randomized Action and 3 action sets, each playing a different sound |
 | **Live leaderboard in chat** | Custom command or timer automation: `Top 5: {top5Counter:Wins}` on a per-user counter |
-| **Subathon Countdown** | Automation with Timer linked to a Timer Widget; overlay shows countdown before the action fires |
+| **Subathon Countdown** | Automations → **Add Subathon** (or Live Timer action) driving a Live Clock on a Timer Widget — not the delay-queue Timer. Optional Live Timer Ended trigger for natural zero |
 | **Custom Alert on tier up** | Custom Alert: Counter Tier Reached shows a GIF and TTS when a viewer hits Gold |
 | **Custom Alert on counter win** | Custom Alert: Counter Value Changed (Increase) on a Diamonds counter ? `{user} scored! Now at {count}` |
 | **Discord milestone ping** | Automation: Counter Tier Reached ? Discord Webhook action posts `{user}` hit `{counterTier}` to your Discord |
 | **Command aliases** | Add `!pts` as an alias of `!points`, or `!heistgo` as an alias of your Heist join command |
 | **Goal progress check** | On a Community Goal, set Check Command to `!bitsgoal`. Viewers get `15/100` (customize with `{goalProgress}`, `{goalName}`, etc.) |
 | **Extension / Blerp bits goal** | Community Goal accumulation **Chat Message**: watch your bits bot login and pattern `used <amount> bits` (or Chat Message Match + Push Community Goal with **Use amount from trigger**) |
-| **Dice / Range Outcomes** | Chat Games → Percentile roll (or game type Dice / Range Outcomes): roll 1–100, bands run full actions; tokens `{roll}` / `{outcome}` |
+| **Dice / Range Outcomes** | Chat Games → Percentile roll (or game type Dice / Range Outcomes): roll 1–100, overlapping bands all run; tokens `{roll}` / `{outcome}` |
 | **Styled alert box** | On any alert, open **Appearance**: pick fonts/colors, a motion pack, save a style preset, then **Test Alert** in the preview |
 
 ---
@@ -564,17 +586,18 @@ Access via the **Overlay Layout** tab in the main navigation.
 - Configure animated transition effects between layout switches
 
 ### Timer Widget
-Display a live countdown on your overlay when an automation (or chat game) uses the **Timer** action:
+A Timer Widget preset can show either:
 
-1. In **Overlay Layout**, add a **Timer Widget** and create or select a named preset
-2. In an automation's actions, enable **Timer**, set the duration, and link the same preset
-3. When the rule fires, the widget counts down; chat, alerts, and other deferred actions wait until it reaches zero
+- **Delay Timer** — linked from the **Timer** action: countdown while deferred actions wait; multiple rules sharing a preset queue so only one delay runs at a time. Use **None (background only)** for a delay with no on-screen widget.
+- **Live Clock (Subathon)** — driven by the **Live Timer** action: extendable countdown with Overlay Layout Start / Pause / Resume / End, optional max remaining, and “accept adds while paused.” Natural zero can fire **Live Timer Ended** automations; manual End / `!endtimer` abort does not.
 
-Multiple rules can share one preset. They queue automatically so only one countdown runs at a time. Use **None (background only)** on the Timer action if you want a delay without showing anything on the overlay.
+**Setup (delay):** Overlay Layout → add Timer Widget / preset → enable **Timer** on a rule and **Link Rule…** (or pick the preset on the Timer action).
+
+**Setup (Subathon):** Automations → **Add Subathon**, or enable **Live Timer** and pick the Timer Widget preset (on the rule or via Overlay Layout **Link Rule…**). Place that Timer Widget on a layout — the countdown shows while the Live Clock is Running/Paused.
 
 **Text styling:** with a Timer widget selected in Overlay Layout, edit font, weight, color, alignment, and drop shadow (same text style controls as Alerts). Text size still scales with the widget box height.
 
-**End from chat:** mods can stop the active countdown with `!endtimer {Timer Widget name}` (customize the command name, permission, and optional Response in Chat Bot → Built-in Commands). Ending skips deferred actions; it does not fire them early. Waiting items in that preset's queue stay queued. An unknown name gets a built-in chat reply; if you set a Response it is sent whenever the command is used (same as other Chat Bot commands).
+**Chat (mods):** `!endtimer`, `!pausetimer`, `!resumetimer`, `!addtime`, and `!removetime` take the Timer Widget name (Live Clock commands also take a duration where noted). Customize names/permission/Response under Chat Bot → Built-in Commands. For delay Timers, `!endtimer` skips deferred actions (does not run them early); queued delay items for that preset stay queued.
 
 ---
 
@@ -610,14 +633,15 @@ On each currency's editor, open **Earn Rules** and click **+ Add Earn Rule**.
 
 ### Point Drops (Detailed)
 Configure drops under the **Point Drops** sub-tab:
-- **Drop interval:** how often (in minutes) the drop can spawn
+- **Drop interval:** how often the drop can spawn
 - **Spawn chance:** percentage probability at each interval check
 - **Display duration:** how long the drop image stays visible
 - **Claim command:** the chat command viewers type to claim
-- **Max claimants:** how many viewers can claim before the drop ends
-- **Point pool:** randomized range (min/max) split among claimants
+- **Claim slots:** min/max how many claims can succeed before the drop ends
+- **Points Per Claim:** viewer points awarded per successful claim (default 1)
 - **Drop image/GIF:** shown in the Point Drop widget on your overlay
 - Optional claim sound with volume control
+- Spawn/claim/expired chat templates can use `{amount}` for Points Per Claim
 
 ---
 
@@ -730,7 +754,7 @@ If the cursor works in windowed mode but not fullscreen, the cause is almost cer
 - Redeem the reward once while connected; it will auto-populate the reward ID for reliable future matching
 
 ### Audio Not Playing
-- Verify the sound file path is correct and the file still exists
+- Sounds you pick are copied into app data when you save — moving or deleting the original file should not break playback. If an older setup still points at a missing file, re-pick the sound once so it can be re-imported
 - Check the volume isn't set to 0
 - Supported formats: `.mp3`, `.wav`, `.mp4`, `.m4a`, `.wma`
 - Check the Sound Queue isn't paused

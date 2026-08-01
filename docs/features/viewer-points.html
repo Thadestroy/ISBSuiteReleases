@@ -125,19 +125,19 @@
 
         <section class="section" id="drops">
           <h2>Point drops</h2>
-          <p>Timed events where a configurable image or GIF appears on the overlay; chatters type a claim command for a share of a point pool. Configure under the Point Drops sub-tab:</p>
+          <p>Timed events where a configurable image or GIF appears on the overlay; chatters type a claim command to take a share of the drop. Configure under the Point Drops sub-tab:</p>
           <ul>
             <li><strong>Drop interval:</strong> how often (in minutes) the drop can spawn.</li>
             <li><strong>Spawn chance:</strong> percentage probability at each interval check.</li>
             <li><strong>Display duration:</strong> how long the drop image stays visible.</li>
             <li><strong>Claim command:</strong> chat command viewers type to claim (aliases and Match anywhere supported).</li>
-            <li><strong>Max claimants:</strong> how many viewers can claim before the drop ends.</li>
-            <li><strong>Point pool:</strong> randomized range (min/max) split among claimants.</li>
+            <li><strong>Claim slots:</strong> randomized range (min/max) for how many successful claims can happen before the drop ends.</li>
+            <li><strong>Points per claim:</strong> how many viewer points each successful claim awards (default 1).</li>
             <li><strong>Drop image/GIF:</strong> shown in the Point Drop widget on your overlay.</li>
             <li>Optional claim sound with volume control.</li>
             <li>Supports only-when-live mode to skip starting-soon screens.</li>
           </ul>
-          <p>Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/point-drop.html">Overlay Layout - Point Drop</a>, <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a> (Watch Time), <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
+          <p>Spawn and claim messages can use <code>{amount}</code> for points per claim, plus <code>{pool}</code> / <code>{claimsLeft}</code> for claim slots. Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/point-drop.html">Overlay Layout - Point Drop</a>, <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a> (Watch Time), <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
