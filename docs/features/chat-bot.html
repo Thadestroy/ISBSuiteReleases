@@ -58,7 +58,7 @@
         <div class="ref-panel">
           <h3>At a glance</h3>
           <ul>
-            <li>Free: 25 Chat Bot commands. Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
+            <li>Free: 25 Chat Bot commands, plus 3 Saved Lists (quotes / notes / todos). Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
             <li>Same trigger and action building blocks as <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a> - pick the tab that matches how you think about the rule.</li>
             <li>Custom <code>!commands</code> with permission, cooldown, aliases, Match anywhere, and per stream limits.</li>
             <li>Built in commands appear here for editing where applicable. Full list: <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>. Variables: <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</li>
@@ -69,6 +69,7 @@
           <li><a href="#engine">Same engine as Automations</a></li>
           <li><a href="#when">When to use which</a></li>
           <li><a href="#options">Command options</a></li>
+          <li><a href="#saved-lists">Saved Lists</a></li>
           <li><a href="#timed">Timed and event messages</a></li>
           <li><a href="#live-timer">Live Timer Commands</a></li>
           <li><a href="#actions">Actions from Chat Bot</a></li>
@@ -103,7 +104,21 @@
             <li><strong>Cooldown:</strong> None, Global, or Per User, with optional on-cooldown chat reply.</li>
             <li><strong>Per stream limits:</strong> max fires globally and/or per user (<code>0</code> = unlimited), with optional hit-limit chat reply. Limits reset when a new stream session starts.</li>
           </ul>
-          <p>Community Goal check commands, Viewer Points commands, and Chat Game start/join commands also appear on the Chat Bot overview where applicable. Each row has the same enable/disable light as other Chat Bot cards (shared with that game, currency, shop item, drop, or goal). Edit opens that feature&apos;s settings. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, and <code>!endtimer</code> stay out of the Run Chat Bot or Automation picker.</p>
+          <p>Community Goal check commands, Viewer Points commands, Chat Game start/join commands, and Saved Lists also appear on the Chat Bot overview where applicable. Each row has the same enable/disable light as other Chat Bot cards. Edit opens that feature&apos;s settings. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, and <code>!endtimer</code> stay out of the Run Chat Bot or Automation picker.</p>
+        </section>
+
+        <section class="section" id="saved-lists">
+          <h2>Saved Lists</h2>
+          <p>Saved Lists are a generic numbered text store for quotes, notes, todos, or anything similar. Free allows <strong>3 lists</strong> (unlimited entries each); Pro is unlimited lists. They use their own Free limit and do not consume a Chat Bot command slot.</p>
+          <ul>
+            <li>Set one <strong>Command</strong> (for example <code>!quote</code>): that is the Read trigger (bare = random, + number = that entry). <strong>Add</strong> autofills as <code>!quote add</code> (editable) with glued alias <code>!quoteadd</code>.</li>
+            <li>Optional <strong>Fire on a timer</strong> on Read posts a random entry on an interval (same reply template). Match anywhere applies to both Read and Add. Each has Advanced Settings (aliases, permission, cooldown). Defaults: Read = Everyone, Add = Moderators. Enable/disable the whole list from the Chat Bot Overview card.</li>
+            <li>Reply templates are editable (blank = silent). Defaults use <code>{number}</code> and <code>{entry}</code>. Optional capture: local date, Twitch category (<code>{game}</code>), and added-by.</li>
+            <li><strong>Entry numbers</strong> stay stable by default (gaps after delete; best for quotes). Turn on <strong>Renumber on delete</strong> in list settings for dense 1...N lists (todos), or use <strong>Renumber</strong> on the Lists tab to compact once.</li>
+            <li>On the <strong>Lists</strong> tab: search, add/bulk-add entries (checkbox in Add entry), export CSV/text, renumber (when not auto-renumbering), and <strong>Pop out</strong> to a separate window for another monitor.</li>
+            <li>Set up and edit list commands on <strong>Add Bot Message</strong> (check <strong>Saved list</strong>). Read/Add each have Advanced Settings (aliases, permission, cooldown). Chat edit/remove of entries is not in v1 (UI only).</li>
+          </ul>
+          <p>Create a list from Chat Bot â†’ Lists â†’ <strong>+ Add Chat Bot list</strong>, or check <strong>Saved list</strong> on Add Bot Message.</p>
         </section>
 
         <section class="section" id="timed">

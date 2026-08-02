@@ -36,6 +36,7 @@ ISB Suite is **free to download and use** with generous limits on each feature. 
 | Wheel presets | 3 | Unlimited |
 | Automations | 15 | Unlimited |
 | Chat Bot commands | 25 | Unlimited |
+| Saved Lists (quotes / notes) | 3 | Unlimited |
 | Alerts (per alert type) | 1 dedicated alert per type | Unlimited |
 | Custom Alerts | 3 | Unlimited |
 | Overlay layouts | 2 | Unlimited |
@@ -100,10 +101,11 @@ Overview list pages (Automations, Alerts, Chat Bot, Chat Games, Community Goals,
 Animated on-screen alerts for stream events, displayed in the Alert Box widget on your overlay:
 
 **Twitch Alerts**
-- Follow, New Subscription, Resubscription, Gift Subscriptions
+- Follow, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver
 - Bits / Cheer, Raid, Hype Train End, Goal Achieved
 - Ad Break, Shoutout Received, Channel Point Redemption
 - New Subscription and Resubscription follow Twitch chat announcements (a silent payment / badge change with no chat notice does not fire a New Subscription alert)
+- Subscription Gifter is gifter-linked (bulk count). Subscription Gift Receiver fires once per recipient (`{user}` = gifted viewer, `{gifter}` = gifter)
 
 Each alert type is fully configurable:
 - Custom alert image or GIF
@@ -214,7 +216,8 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Channel Point Redemption | Matches by reward title; auto-detects reward ID after first redemption |
 | Walk-on Sound | Fires on a viewer's first chat message per stream (leave username blank for every chatter, or name a specific person); blank and named can both fire; supports "only when live" |
 | Bits / Cheer | At-least or exact bit amount |
-| Gift Subscriptions | At-least or exact gift count |
+| Subscription Gifter | At-least or exact gift count (gifter is `{user}`) |
+| Subscription Gift Receiver | Once per recipient; recipient is `{user}`, gifter is `{gifter}` |
 | New Subscription | Any tier, or filtered by Tier 1/2/3 |
 | Resubscription | Any, or filtered by tier and/or minimum months |
 | Follow | Any new follow |
@@ -263,7 +266,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 
 **Timer:** Enable the Timer action to delay everything else on the rule until the countdown finishes. Link a Timer Widget preset to show the live countdown on your overlay while chat, alerts, and other deferred actions wait.
 
-**Live Timer:** For a subathon-style extendable clock, enable **Live Timer** (not the delay Timer). Pick a Timer Widget preset, set Starts at, and fill the per-trigger time table. Automations → **Add Subathon** creates a starter rule plus a Subathon Timer Widget preset.
+**Live Timer:** For a subathon-style extendable clock, enable **Live Timer** (not the delay Timer). Pick a Timer Widget preset, set Starts at, and fill the per-trigger time table.
 
 **Run Chat Bot or Automation:** Enable this action and pick any item from Automations or the Chat Bot overview (channel commands, timed messages, built-ins like `!join` / `!spinwheel` / Watch Time / Follow Age, chat-game start or join, Viewer Points balance/give/gamble/admin/shop/drop claim, or a community goal check). The picker is searchable. Targets that need typed chat arguments (for example give/gamble) use leftover text from the parent fire when available; otherwise they behave like typing the command alone. Arg-only built-ins (`!addgoal`, `!removegoal`, `!endtimer`) are not listed. Rule targets must be enabled; Alerts stay on the separate **Run Alert** action.
 
@@ -453,7 +456,8 @@ Use these in chat messages, alert text, and TTS text:
 
 | Variable | Value |
 |----------|-------|
-| `{user}` | Display name of the user who triggered the event |
+| `{user}` | Display name of the user who triggered the event (Subscription Gift Receiver: the recipient) |
+| `{gifter}` | Gifter display name (Subscription Gift Receiver only) |
 | `{winner}` | The winning wheel entry's text (also works in automations triggered by a wheel entry win) |
 | `{entry}` | Alias for `{winner}` |
 | `{wheel}` | Name of the current wheel preset |
@@ -553,7 +557,7 @@ ISB Suite renders your overlay in its own window with a transparent background. 
 | **Heist Chat Game** | Chat Games preset: viewers `!heist 50` to stake points; resolve doubles winners' stakes |
 | **Random Hype Sound** | Automation with Randomized Action and 3 action sets, each playing a different sound |
 | **Live leaderboard in chat** | Custom command or timer automation: `Top 5: {top5Counter:Wins}` on a per-user counter |
-| **Subathon Countdown** | Automations → **Add Subathon** (or Live Timer action) driving a Live Clock on a Timer Widget — not the delay-queue Timer. Optional Live Timer Ended trigger for natural zero |
+| **Subathon Countdown** | Automation with the **Live Timer** action driving a Live Clock on a Timer Widget — not the delay-queue Timer. Optional Live Timer Ended trigger for natural zero |
 | **Custom Alert on tier up** | Custom Alert: Counter Tier Reached shows a GIF and TTS when a viewer hits Gold |
 | **Custom Alert on counter win** | Custom Alert: Counter Value Changed (Increase) on a Diamonds counter ? `{user} scored! Now at {count}` |
 | **Discord milestone ping** | Automation: Counter Tier Reached ? Discord Webhook action posts `{user}` hit `{counterTier}` to your Discord |
@@ -593,7 +597,7 @@ A Timer Widget preset can show either:
 
 **Setup (delay):** Overlay Layout → add Timer Widget / preset → enable **Timer** on a rule and **Link Rule…** (or pick the preset on the Timer action).
 
-**Setup (Subathon):** Automations → **Add Subathon**, or enable **Live Timer** and pick the Timer Widget preset (on the rule or via Overlay Layout **Link Rule…**). Place that Timer Widget on a layout — the countdown shows while the Live Clock is Running/Paused.
+**Setup (Subathon):** Enable **Live Timer** on an automation and pick the Timer Widget preset (on the rule or via Overlay Layout **Link Rule…**). Place that Timer Widget on a layout — the countdown shows while the Live Clock is Running/Paused.
 
 **Text styling:** with a Timer widget selected in Overlay Layout, edit font, weight, color, alignment, and drop shadow (same text style controls as Alerts). Text size still scales with the widget box height.
 

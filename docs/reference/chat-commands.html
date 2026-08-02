@@ -81,8 +81,10 @@
               <tr><td><code>!removetime {name} {duration}</code></td><td>Remove time from a Live Clock</td></tr>
               <tr><td><code>!vpgive @user amount</code></td><td>Admin give points to a viewer</td></tr>
               <tr><td><code>!customcommand</code></td><td>Any custom command from Automations or Chat Bot</td></tr>
+              <tr><td><code>!quote add &hellip;</code> / <code>!quoteadd</code></td><td>Example Saved List Add (your base command; default Mods). See <a href="/ISBSuiteReleases/docs/features/chat-bot.html#saved-lists">Saved Lists</a></td></tr>
             </tbody>
           </table></div>
+          <p>Saved List <strong>Read</strong> is usually Everyone: bare base command = random entry; base + number = that entry. Configure under Chat Bot â†’ Add Bot Message (Saved list), or open settings from Overview / Lists.</p>
         </section>
 
         <section class="section" id="permissions">
@@ -99,13 +101,13 @@
 
         <section class="section" id="aliases">
           <h2>Aliases and Match anywhere</h2>
-          <p><strong>Aliases:</strong> Automations, Chat Bot commands, Chat Games join commands, Viewer Points commands, shop items, point drop claims, and Community Goal check commands can define alternate names. The longest matching alias wins. Leftover text after a longer alias becomes <code>{input}</code>.</p>
+          <p><strong>Aliases:</strong> Automations, Chat Bot commands, Chat Games join commands, Viewer Points commands, shop items, point drop claims, Community Goal check commands, and Saved List Read/Add commands can define alternate names. The longest matching alias wins. Leftover text after a longer alias becomes <code>{input}</code>.</p>
           <p><strong>Match anywhere in message</strong> (optional, under Advanced Settings): match as a whole word anywhere in chat, not only at the start. Useful for <code>/me !command</code> and mid-chat triggers. Space boundary rules still apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</p>
         </section>
 
         <section class="section" id="advanced">
           <h2>Advanced Settings limits</h2>
-          <p>Viewer Points commands (including shop redeem and point-drop claim), Chat Game join, Community Goal check commands, Automations / Chat Bot custom commands, and related editors share one <strong>Advanced Settings</strong> block:</p>
+          <p>Viewer Points commands (including shop redeem and point-drop claim), Chat Game join, Community Goal check commands, Saved List Read/Add, Automations / Chat Bot custom commands, and related editors share one <strong>Advanced Settings</strong> block:</p>
           <ul>
             <li><strong>Permission</strong> - who may run the command</li>
             <li><strong>Time cooldown</strong> - None, Global, or Per User</li>

@@ -128,6 +128,15 @@
           </ul>
         </section>
 
+        <section class="section" id="drop-edit-live">
+          <h2>Edited point drop still uses old claim message or amount</h2>
+          <ul>
+            <li>While a drop is active, claim amount, claim slots, claim command, and chat templates stay frozen from when that drop spawned.</li>
+            <li>Saving the Point Drop editor updates the stored config for the <strong>next</strong> spawn only.</li>
+            <li><code>{amount}</code> in spawn/claim messages reflects the active spawn&apos;s points per claim, not a later edit.</li>
+          </ul>
+        </section>
+
         <section class="section" id="tiltify">
           <h2>Tiltify not triggering</h2>
           <ul>
