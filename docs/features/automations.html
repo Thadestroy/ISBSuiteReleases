@@ -95,11 +95,12 @@
               <tr><td>Resubscription</td><td>Any, or tier and/or minimum months</td></tr>
               <tr><td>Follow</td><td>Any new follow</td></tr>
               <tr><td>Raid</td><td>At least or exact viewer count (blank / Any for every raid)</td></tr>
-              <tr><td>Hype Train End</td><td>At least or exact level (blank / Any Level for every end)</td></tr>
-              <tr><td>Hype Train Level Up</td><td>Fires once per level increase; at least or exact level (blank / Any Level for every level-up)</td></tr>
+              <tr><td>Hype Train End</td><td>At least or exact level (blank / Any Level for every end); levels can go well past 5 (emote unlocks continue at 10 / 25 / 50 / 100+)</td></tr>
+              <tr><td>Hype Train Level Up</td><td>Fires once per level increase; at least or exact level (blank / Any Level for every level-up); same open level field as End</td></tr>
               <tr><td>Goal Achieved</td><td>Any goal type or filtered type string</td></tr>
-              <tr><td>Ad Break</td><td>Any duration or specific length; optional chat warnings before the ad</td></tr>
+              <tr><td>Ad Break</td><td>Any duration or specific length; optional chat warnings before the ad; optional welcome-back message when ads end</td></tr>
               <tr><td>Shoutout Received</td><td>Any shoutout from another broadcaster</td></tr>
+              <tr><td>Stream Went Live</td><td>Once per broadcast: new stream session, or first hydrate after flag-only live (not on reconnect or mid-stream app restart with the same stream id)</td></tr>
               <tr><td>Custom Chat Command</td><td>Your <code>!command</code> with permission, cooldown, aliases, Match anywhere</td></tr>
               <tr><td>Counter Tier Reached</td><td>Viewer or channel crosses upward into a configured tier; once per tier gained if several thresholds cross in one increment</td></tr>
               <tr><td>Counter Value Changed</td><td>Once per change; filter increase / decrease / either; optional counter filter</td></tr>
@@ -109,7 +110,7 @@
               <tr><td>Timer / Interval</td><td>Repeating interval</td></tr>
             </tbody>
           </table></div>
-          <p><strong>Count each unit:</strong> Bits, Subscription Gifter, Raid, Hype Train, Tiltify, and Chat Message Match can expand one event into multiple runs (off by default; live preview in the editor).</p>
+          <p><strong>Count each unit:</strong> Bits, Subscription Gifter, Raid, Hype Train, Tiltify, and Chat Message Match can expand one event into multiple runs (off by default; live preview in the editor). Count-each runs share one cooldown and per-stream limit slot for that source event.</p>
         </section>
 
         <section class="section" id="actions">
@@ -139,7 +140,12 @@
 
         <section class="section" id="limits">
           <h2>Cooldown and limits</h2>
-          <p>Every automation can combine a time cooldown (None / Global / Per User) with per stream limits (max fires globally and/or per user; <code>0</code> = unlimited). Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for on cooldown vs hit limit.</p>
+          <p>Every automation can combine a time cooldown (None / Global / Per User) with per stream limits (max fires globally and/or per user; <code>0</code> = unlimited) - the same structure as chat commands. Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for on cooldown vs hit limit.</p>
+          <ul>
+            <li><strong>Count each:</strong> one source event = one cooldown / limit slot; expanded runs share that admit.</li>
+            <li><strong>Multi-cross fan-outs</strong> (counter tiers, hype train level jumps, community goal completions): each crossed unit is its own event and uses its own slot.</li>
+            <li><strong>Per-recipient gift subs</strong> and multi-unit Tiltify reward claims: each recipient / unit admits separately. A global cooldown can stop later units of a bomb - prefer Per User or None for bomb-heavy rules.</li>
+          </ul>
           <div class="callout"><p>Channel Point redemptions: Twitch still accepts the redeem and charges points. ISB Suite only skips running the automation when blocked. Reject or refund is not supported yet.</p></div>
         </section>
 

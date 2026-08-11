@@ -219,7 +219,7 @@
     {
       title: "Overlay Layout",
       url: "/features/overlay-layout/index.html",
-      blurb: "Layouts, widgets, hotkeys, Timer Widget",
+      blurb: "Layouts, widgets, hotkeys, Timer Widget, Goals",
       keywords: "overlay layout widget alert box point drop browser source timer !endtimer hotkey transition",
     },
     {
@@ -263,6 +263,12 @@
       url: "/features/overlay-layout/timer.html",
       blurb: "Delay Timer or Live Clock (Subathon) countdown",
       keywords: "overlay timer widget countdown live clock subathon !endtimer !pausetimer !addtime preset",
+    },
+    {
+      title: "Goals overlay widget",
+      url: "/features/overlay-layout/goals.html",
+      blurb: "Live Community Goal progress bar on the stage",
+      keywords: "overlay goals widget community goal progress bar standard condensed appearance",
     },
     {
       title: "Viewer Points",
@@ -391,6 +397,7 @@
             { href: "/features/overlay-layout/browser-source.html", label: "Browser Source" },
             { href: "/features/overlay-layout/random-image-picker.html", label: "Random Image Picker" },
             { href: "/features/overlay-layout/timer.html", label: "Timer Widget" },
+            { href: "/features/overlay-layout/goals.html", label: "Goals" },
           ],
         },
         { href: "/features/viewer-points.html", label: "Viewer Points" },

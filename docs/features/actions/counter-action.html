@@ -77,6 +77,7 @@
           <h2>How it works</h2>
           <p>Each enabled row updates one counter when the rule fires. Values clamp at the counter floor (zero by default). You can stack several rows (tax a balance, then clear a pot). Full counter types and Stats UI: <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a>.</p>
           <p>If a <strong>Timer</strong> is also on the rule, counter (and community goal) updates still apply at fire time so templates like <code>{count}</code> stay correct while other actions wait for the countdown.</p>
+          <p>With multiple Counter Action rows, <code>{count}</code> / <code>{counterTier}</code> still refer to the <em>first</em> row. Use <code>{counter:Name}</code> / <code>{counterTier:Name}</code> for any other row - those tokens use this fire&apos;s post-update values for every counter the action updated (see <a href="/ISBSuiteReleases/docs/reference/message-variables.html#counters">Message variables</a>).</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>

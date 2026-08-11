@@ -98,7 +98,7 @@
             <li><strong>Points to Award:</strong> how many points per interval.</li>
             <li>Save the currency.</li>
           </ol>
-          <div class="callout"><p><strong>Prerequisite:</strong> enable <strong>Stats - Watch Time</strong> and ensure Twitch is connected with the <code>moderator:read:chatters</code> scope (reconnect in Settings if watch-time accrual is paused). Watching earn rules use the same once-per-minute live poll as watch time. If Watch Time is off, the app prompts you to enable it before adding or saving an enabled Watching rule.</p></div>
+          <div class="callout"><p><strong>Prerequisite:</strong> enable <strong>Stats - Watch Time</strong> and ensure Twitch is connected with the <code>moderator:read:chatters</code> scope (reconnect on <strong>Integrations</strong> if watch-time accrual is paused). Watching earn rules use the same once-per-minute live poll as watch time. If Watch Time is off, the app prompts you to enable it before adding or saving an enabled Watching rule.</p></div>
         </section>
 
         <section class="section" id="commands">
@@ -137,7 +137,7 @@
             <li>Optional claim sound with volume control.</li>
             <li>Supports only-when-live mode to skip starting-soon screens.</li>
           </ul>
-          <p>Spawn and claim messages can use <code>{amount}</code> for points per claim, plus <code>{pool}</code> / <code>{claimsLeft}</code> for claim slots. An <strong>active</strong> drop is frozen at spawn: claim amount, claim slots, claim command, and chat templates stay as they were when that drop appeared. Saving the Point Drop editor updates the stored config for the <strong>next</strong> spawn only. Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/point-drop.html">Overlay Layout - Point Drop</a>, <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a> (Watch Time), <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
+          <p>Spawn and claim messages can use <code>{amount}</code> for points per claim, <code>{pool}</code> / <code>{claimsLeft}</code> for claim slots, and <code>{pointsPool}</code> / <code>{pointsLeft}</code> for total/remaining points (slots x amount). Prefer <code>{pointsLeft}</code> when Points per claim is greater than 1 so chat does not look like a slot count. An <strong>active</strong> drop is frozen at spawn: claim amount, claim slots, claim command, and chat templates stay as they were when that drop appeared. Saving the Point Drop editor updates the stored config for the <strong>next</strong> spawn only. Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/point-drop.html">Overlay Layout - Point Drop</a>, <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a> (Watch Time), <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>

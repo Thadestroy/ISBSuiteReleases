@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Point Drop | ISB Suite</title>
-  <meta name="description" content="Point Drop overlay widget for Viewer Points drops" />
+  <title>Solo Gamble | ISB Suite</title>
+  <meta name="description" content="Solo Gamble chat game: instant per-user gamble with win and lose phases" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
-  <meta property="og:title" content="Point Drop | ISB Suite" />
-  <meta property="og:description" content="Point Drop overlay widget for Viewer Points drops" />
+  <meta property="og:title" content="Solo Gamble | ISB Suite" />
+  <meta property="og:description" content="Solo Gamble chat game: instant per-user gamble with win and lose phases" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -46,22 +46,23 @@
     <aside class="wiki-side" id="wiki-side"></aside>
     <main class="wiki-main">
       <article class="page wide">
-        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a> / Point Drop</p>
-        <h1 class="page-title">Point Drop</h1>
-        <p class="lede">Show drop images or GIFs on the stage while a Viewer Points point drop is active. Claim commands and spawn chance are configured on the drop, not the widget.</p>
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a> / Solo Gamble</p>
+        <h1 class="page-title">Solo Gamble</h1>
+        <p class="lede">Instant per-user gamble: each trigger rolls win/lose for that viewer with separate Win and Lose action phases.</p>
 
         <figure class="visual">
-          <img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-point-drop.png" alt="Point Drop widget in Overlay Layout" />
-          <figcaption>Point Drop widget selected: where drop images appear when a drop is active.</figcaption>
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-games-solo-gamble.png" alt="Solo Gamble chat game setup in ISB Suite" />
+          <figcaption>Solo Gamble setup: win chance and Win/Lose action phases.</figcaption>
         </figure>
 
         <div class="ref-panel">
           <h3>At a glance</h3>
           <ul>
-            <li>Widget: <strong>Point Drop</strong>.</li>
-            <li>Pairs with point drops on <a href="/ISBSuiteReleases/docs/features/viewer-points.html">Viewer Points</a>.</li>
-            <li>Claim commands and spawn chance are configured on the drop, not the widget.</li>
-            <li>Variables: <code>{pool}</code>, <code>{claimsLeft}</code>, <code>{pointsLeft}</code>, <code>{pointsPool}</code>, <code>{amount}</code>, <code>{command}</code>.</li>
+            <li>Preset: <strong>Solo Gamble</strong> (formerly labeled Duel in older docs).</li>
+            <li>No timed join window - fires per start trigger.</li>
+            <li>Win chance and optional payout multiplier.</li>
+            <li>Separate Win and Lose action phases per entrant.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/chat-games/duel.html">Duel</a> (PvP), <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a>.</li>
           </ul>
         </div>
 
@@ -69,47 +70,48 @@
           <li><a href="#how">How it works</a></li>
           <li><a href="#setup">Setup</a></li>
           <li><a href="#options">Options</a></li>
-          <li><a href="#tips">Tips</a></li>
+          <li><a href="#phases">Phases</a></li>
           <li><a href="#usecases">Use cases</a></li>
         </ol></nav>
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>When a Viewer Points drop is live, spawn images appear inside this widget region. Viewers claim with the drop&apos;s claim command. The widget is only the stage rectangle - pool size, image, spawn chance, and messages live on the drop definition.</p>
+          <p>Solo Gamble does not challenge another viewer. Each start trigger rolls win/lose for that viewer immediately, then runs the matching phase Actions. There is no open/summary session messaging unless you add your own Send Message Actions on Win/Lose.</p>
+          <p>Use Solo Gamble for per-viewer house bets. Use <a href="/ISBSuiteReleases/docs/features/chat-games/duel.html">Duel</a> when two viewers stake against each other.</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>
           <ol class="steps">
-            <li>Configure a point drop on Viewer Points (image, pool, claim command, spawn settings).</li>
-            <li>Add a <strong>Point Drop</strong> widget on the layout where drops should appear.</li>
-            <li>Size the region large enough for falling / spawning art without covering chat-critical UI.</li>
-            <li>Test spawn and claim on stream with Window Capture active.</li>
+            <li>Create a Solo Gamble from Chat Games (game type <strong>Solo Gamble</strong>).</li>
+            <li>Set win chance and payout multiplier as needed.</li>
+            <li>Add start trigger(s) - often a chat command or channel points redeem.</li>
+            <li>Enable Execute Actions on Win / Lose and configure those phase Actions.</li>
+            <li>Set Advanced Settings on the start command so spam cannot drain the economy instantly.</li>
           </ol>
         </section>
         <section class="section" id="options">
           <h2>Options</h2>
           <ul>
-            <li><strong>Transform / crop / visibility / hotkey</strong>: shared stage controls.</li>
-            <li>No per-drop binding on the widget - active drops from Viewer Points use this region on the active layout.</li>
-            <li>Hide the widget on layouts where you never run drops (saves clutter).</li>
+            <li><strong>Timed session</strong>: off - no join window.</li>
+            <li><strong>Win chance %</strong> and <strong>Payout multiplier</strong>: classic 50% / 2x math is a common starting point when you wire your own counter Actions.</li>
+            <li><strong>Execute Actions on Win / Lose</strong>: turn on the phase lists you care about.</li>
           </ul>
         </section>
-        <section class="section" id="tips">
-          <h2>Tips</h2>
+        <section class="section" id="phases">
+          <h2>Phases</h2>
           <ul>
-            <li>Variables for drop chat: <code>{pool}</code>, <code>{claimsLeft}</code>, <code>{pointsLeft}</code>, <code>{pointsPool}</code>, <code>{amount}</code>, <code>{command}</code> - see <a href="/ISBSuiteReleases/docs/reference/message-variables.html#points">Message variables - Viewer Points</a>.</li>
-            <li>If images never show, confirm a drop is actually active and the widget is visible on the current layout.</li>
-            <li>Keep the region away from the Wheel center if both run at once.</li>
+            <li><strong>Win</strong> - per successful roll: hype sound, Run Alert, Counter Action, Send Message.</li>
+            <li><strong>Lose</strong> - per failed roll: soft chat, fail sting, or a consolation counter bump.</li>
           </ul>
         </section>
         <section class="section" id="usecases">
           <h2>Use cases</h2>
           <ul>
-            <li><strong>Raid drop</strong> - Automation on Raid starts a drop; Point Drop widget shows the art while chat claims.</li>
-            <li><strong>Hourly rain</strong> - Timed automation opens a small pool drop every hour.</li>
-            <li><strong>Clean talk scene</strong> - Just Chatting layout omits Point Drop so talk segments stay quiet.</li>
+            <li><strong>House coin flip</strong> - Start command rolls 50/50; Win phase credits a counter.</li>
+            <li><strong>Points redeem gamble</strong> - Channel points item opens a solo roll.</li>
+            <li><strong>Cooldown-gated spam</strong> - Short cooldown + once per viewer per stream.</li>
           </ul>
-          <p>Related: <a href="/ISBSuiteReleases/docs/features/viewer-points.html">Viewer Points</a>, <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">overview</a>.</p>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/chat-games/duel.html">Duel</a> (PvP), <a href="/ISBSuiteReleases/docs/features/chat-games/instant-action.html">Instant action</a>.</p>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>

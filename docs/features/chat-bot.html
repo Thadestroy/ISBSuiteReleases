@@ -86,7 +86,7 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Prefer</th><th>When</th></tr></thead>
             <tbody>
-              <tr><td>Chat Bot</td><td>Custom <code>!commands</code> and timed or scheduled chat lines are the main job; you want built-ins (join, spin, watch time, and similar) in one overview</td></tr>
+              <tr><td>Chat Bot</td><td>Custom <code>!commands</code> and timed or scheduled chat lines are the main job; you want built-ins (join, spin, shoutout, watch time, and similar) in one overview</td></tr>
               <tr><td>Automations</td><td>Twitch EventSub events (channel points, bits, raids, follows, and so on) drive the rule, or you are building a multi-action stream workflow</td></tr>
               <tr><td>Either</td><td>You need chains - call the other tab with Run Chat Bot or Automation (up to 20 hops; original chatter variables preserved)</td></tr>
             </tbody>
@@ -96,13 +96,13 @@
 
         <section class="section" id="options">
           <h2>Command options</h2>
-          <p>Custom commands support the full Advanced Settings block:</p>
+          <p>On the Chat Bot Add/Edit form, <strong>Command</strong>, <strong>Match anywhere</strong>, and <strong>Aliases</strong> sit on the main card. <strong>Show Advanced</strong> opens actions plus Cooldown &amp; Limits (and related action categories).</p>
           <ul>
-            <li><strong>Permission levels:</strong> Everyone; Subscribers (subs, VIPs, mods, broadcaster); VIPs (VIPs, mods, broadcaster); Moderators (mods and broadcaster); Broadcaster only.</li>
-            <li><strong>Aliases:</strong> alternate names that fire the same command. Viewers can type any alias; the longest matching alias wins when several could match. Leftover text after the match becomes <code>{input}</code>.</li>
+            <li><strong>Permission levels:</strong> Everyone; Subscribers (subs, VIPs, mods, broadcaster); VIPs (VIPs, mods, broadcaster); Moderators (mods and broadcaster); Broadcaster only. (Also on the main card for Chat Bot.)</li>
+            <li><strong>Aliases:</strong> alternate names that fire the same command. Always on the main card for normal bot messages (hidden in Saved List mode, which uses per-subcommand Advanced Settings). Viewers can type any alias; the longest matching alias wins when several could match. Leftover text after the match becomes <code>{input}</code>.</li>
             <li><strong>Match anywhere in message:</strong> optional whole-word match mid chat (for example <code>/me !discord</code>), not only at the start. Longest matching command still wins. Space-boundary rules apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</li>
-            <li><strong>Cooldown:</strong> None, Global, or Per User, with optional on-cooldown chat reply.</li>
-            <li><strong>Per stream limits:</strong> max fires globally and/or per user (<code>0</code> = unlimited), with optional hit-limit chat reply. Limits reset when a new stream session starts.</li>
+            <li><strong>Cooldown:</strong> None, Global, or Per User, with optional on-cooldown chat reply (under Show Advanced).</li>
+            <li><strong>Per stream limits:</strong> max fires globally and/or per user (<code>0</code> = unlimited), with optional hit-limit chat reply. Limits reset when a new stream session starts (under Show Advanced).</li>
           </ul>
           <p>Community Goal check commands, Viewer Points commands, Chat Game start/join commands, and Saved Lists also appear on the Chat Bot overview where applicable. Each row has the same enable/disable light as other Chat Bot cards. Edit opens that feature&apos;s settings. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, and <code>!endtimer</code> stay out of the Run Chat Bot or Automation picker.</p>
         </section>

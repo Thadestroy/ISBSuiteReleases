@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Goals | ISB Suite</title>
+  <meta name="description" content="Goals overlay widget: live Community Goal progress bar with layout and style options" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Goals | ISB Suite" />
+  <meta property="og:description" content="Goals overlay widget: live Community Goal progress bar with layout and style options" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a> / Goals</p>
+        <h1 class="page-title">Goals</h1>
+        <p class="lede">Place a Goals widget on your overlay to show a live Community Goal progress bar. Bind any Community Goal, then customize layout, bar colors, amount format, and typography per placement.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/community-goals.png" alt="Goals widget in Overlay Layout" />
+          <figcaption>Goals widget: pick a Community Goal and open Edit appearance for layout, bar colors, and text style.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Widget: <strong>Goals</strong>.</li>
+            <li>Shows live progress from a <a href="/ISBSuiteReleases/docs/features/community-goals.html">Community Goal</a> (name, amounts or percent, fill bar).</li>
+            <li>Layouts: Standard, Condensed, or Bar only.</li>
+            <li>Appearance is per placement - the same goal can look different on another layout.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#appearance">Appearance</a></li>
+          <li><a href="#behavior">Live updates</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>The Goals widget is a placement on your Overlay Layout. It does not create a new goal - it displays an existing <a href="/ISBSuiteReleases/docs/features/community-goals.html">Community Goal</a>. Progress, limit, enable, and lock state come from that goal; the widget stores only position, size, which goal to show, and visual style.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol>
+            <li>Create or enable a Community Goal on the Community Goals page (bits, subs, follows, chat match, or manual).</li>
+            <li>Open <strong>Overlay Layout</strong>, select a layout, and click <strong>+ Goals Widget</strong>.</li>
+            <li>Select the widget and choose the Community Goal in the properties panel.</li>
+            <li>Save the layout. Add a Window Capture of <strong>ISB Suite - Capture</strong> in OBS if you have not already.</li>
+          </ol>
+        </section>
+        <section class="section" id="appearance">
+          <h2>Appearance</h2>
+          <p>Click <strong>Edit appearance</strong> on the selected Goals widget. Changes apply as you edit (no separate Save in the dialog).</p>
+          <ul>
+            <li><strong>Layout</strong> - Standard (title, bar, amounts), Condensed (single row), or Bar only.</li>
+            <li><strong>Show title / Show amounts</strong> - toggles for Standard and Condensed (ignored for Bar only).</li>
+            <li><strong>Amount format</strong> - numbers (<code>current / limit</code>) or percent of progress.</li>
+            <li><strong>Title / amount placement</strong> - layout default, above, below, left, right, or over the bar.</li>
+            <li><strong>Text positioning</strong> - Preset (placement only) or Manual offsets (-50%...+50%). In Manual, drag title or amounts on the appearance preview. The preview builds at your widget's Capture size so it matches the live stage.</li>
+            <li><strong>Bar thickness</strong> and <strong>fill / track colors</strong> - color picker for on-stream look. The shared color picker includes <strong>Clear (transparent)</strong>; use it on bar fill to hide the fill while the track still shows. Optional <strong>bar outline</strong> with its own color and thickness (1-12 px).</li>
+            <li><strong>Title and amount text</strong> - font, size, weight, color, and shadow (same text style editor as Alerts and Timer).</li>
+          </ul>
+          <p>Locked or disabled goals still appear on the stage but look dimmed so viewers can see the goal is paused.</p>
+        </section>
+        <section class="section" id="behavior">
+          <h2>Live updates</h2>
+          <p>The bar and labels update when the Community Goal accumulates, decrements, resets, or when you rename, disable, or delete the goal. If the bound goal is deleted, the widget shows an unknown-goal placeholder until you pick another.</p>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>Bits / sub drive</strong> - put a Standard bar under your Alerts so chat sees the milestone fill live.</li>
+            <li><strong>Compact HUD</strong> - Condensed or Bar only in a corner for a cleaner scene.</li>
+            <li><strong>Multi-layout branding</strong> - same goal on Main and BRB layouts with different colors or thickness.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/community-goals.html">Community Goals</a>, <a href="/ISBSuiteReleases/docs/features/actions/push-community-goal.html">Push Community Goal</a>, <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

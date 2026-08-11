@@ -48,9 +48,10 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / Reference / Message variables</p>
         <h1 class="page-title">Message variables</h1>
-        <p class="lede">Use these tokens in chat messages, alert text, and TTS text. Availability depends on the trigger and actions that fired. Unset values leave the literal token in place. Names and meanings match the in-app variable registry.</p>
+        <p class="lede">Use these tokens in chat messages, alert text, and TTS text. Availability depends on the trigger and actions that fired; the in-app Variables picker highlights what applies. Unset values leave the literal token in place. Names and meanings match the in-app variable registry.</p>
 
         <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#picker">In-app picker</a></li>
           <li><a href="#core">Core</a></li>
           <li><a href="#counters">Counters</a></li>
           <li><a href="#points">Viewer Points</a></li>
@@ -63,9 +64,20 @@
           <li><a href="#tracking">Tracking stats with counters</a></li>
         </ol></nav>
 
+        <section class="section" id="picker">
+          <h2>In-app picker</h2>
+          <p>The Variables button on template fields groups tokens that apply to the current editor:</p>
+          <ul>
+            <li><strong>Active for this trigger</strong> - tokens supplied by the current automation/alert trigger or host (for example Counter Tier Reached, or dice <code>{roll}</code> / <code>{outcome}</code>)</li>
+            <li><strong>This screen</strong> - tokens registered for that template family (Saved List, Chat Game, Follow Age, and so on)</li>
+            <li><strong>Global (by name)</strong> - named counter and named community-goal lookups such as <code>{counter:Wins}</code> or <code>{goalCurrent:Subathon}</code></li>
+          </ul>
+          <p><strong>Other variables</strong> stays collapsed until you expand it or type in the search box. Unset values still leave the literal token in chat or overlay text.</p>
+        </section>
+
         <section class="section" id="core">
           <h2>Core</h2>
-          <p>User, wheel, and Twitch event tokens. <code>{amount}</code> is context-dependent (bits, raid viewers, counter action amount, chat game stake, and more).</p>
+          <p>User, wheel, and Twitch event tokens. Chat/TTS and alert overlays share one <code>{amount}</code> cascade (counter precedence, then bits / viewers / resub months / gift count / hype / ad seconds). Prefer <code>{bits}</code> or <code>{subs}</code> when those apply. There is no separate <code>{months}</code> or <code>{viewers}</code> token.</p>
           <div class="table-wrap"><table>
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
@@ -73,7 +85,8 @@
               <tr><td><code>{displayName}</code></td><td>Alias for <code>{user}</code> (Follow Age / Watch Time)</td></tr>
               <tr><td><code>{winner}</code></td><td>Winning wheel entry text (also when an automation runs from a wheel entry win)</td></tr>
               <tr><td><code>{wheel}</code></td><td>Wheel / preset name</td></tr>
-              <tr><td><code>{amount}</code></td><td>Numeric event value: bits, viewers, sub months, gift count, hype level, ad seconds, points given/wagered, point-drop claim amount, chat game stake, or Counter Action resolved amount</td></tr>
+              <tr><td><code>{amount}</code></td><td>Shared numeric event value: Counter Value Changed abs-delta, wired Counter Action amount, community-goal delta, bits, raid/shoutout viewers, resub months, gift count, hype level, ad seconds, points given/wagered, point-drop claim amount, or chat game stake</td></tr>
+              <tr><td><code>{message}</code></td><td>Alert overlay text typed by the viewer (same source as <code>{input}</code>)</td></tr>
               <tr><td><code>{reward}</code></td><td>Channel point reward title</td></tr>
               <tr><td><code>{input}</code></td><td>User message or leftover text after a command / alias</td></tr>
               <tr><td><code>{bits}</code></td><td>Bits cheered (Bits trigger)</td></tr>
@@ -89,13 +102,13 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
-              <tr><td><code>{count}</code></td><td>Counter value after the current change (when a counter action is configured)</td></tr>
+              <tr><td><code>{count}</code></td><td>Counter value after the current change for the <em>first</em> Counter Action row (when a counter action is configured)</td></tr>
               <tr><td><code>{value}</code></td><td>Alias for <code>{count}</code></td></tr>
               <tr><td><code>{oldValue}</code></td><td>Counter value before a Counter Value Changed trigger</td></tr>
               <tr><td><code>{delta}</code></td><td>Signed amount the counter changed by</td></tr>
-              <tr><td><code>{counter:Name}</code></td><td>Current value of a named counter (for example <code>{counter:Wins}</code>) - per-user counters resolve for the triggering viewer</td></tr>
-              <tr><td><code>{counterTier}</code></td><td>Tier for the wired counter action, or the tier just gained on Counter Tier Reached</td></tr>
-              <tr><td><code>{counterTier:Name}</code></td><td>Current tier label for a named counter (live lookup)</td></tr>
+              <tr><td><code>{counter:Name}</code></td><td>Value of a named counter (for example <code>{counter:Wins}</code>). Per-user counters resolve for the triggering viewer. After a Counter Action on the same fire, uses that fire&apos;s post-update value for every updated row; otherwise the live current value</td></tr>
+              <tr><td><code>{counterTier}</code></td><td>Tier for the wired (first) counter action, or the tier just gained on Counter Tier Reached</td></tr>
+              <tr><td><code>{counterTier:Name}</code></td><td>Tier label for a named counter. After a Counter Action on the same fire, uses the tier for that fire&apos;s post-update value; otherwise a live lookup</td></tr>
               <tr><td><code>{top5Counter:Name}</code></td><td>Top 5 for a per-user counter: <code>1. Name value, 2. Name value, ...</code></td></tr>
               <tr><td><code>{counterTotal:Name}</code></td><td>Aggregate total for a named counter - global value, or sum of every user on a per-user counter (same Total as Counter Stats)</td></tr>
             </tbody>
@@ -116,8 +129,10 @@
               <tr><td><code>{giverBalance}</code></td><td>Giver&apos;s balance after a transfer</td></tr>
               <tr><td><code>{recipientBalance}</code></td><td>Recipient&apos;s balance after a transfer</td></tr>
               <tr><td><code>{target}</code></td><td>Admin-give target display name</td></tr>
-              <tr><td><code>{pool}</code></td><td>Total claim slots rolled for a point drop</td></tr>
-              <tr><td><code>{claimsLeft}</code></td><td>Remaining unclaimed slots in the active drop</td></tr>
+              <tr><td><code>{pool}</code></td><td>Total claim slots rolled for a point drop (not points)</td></tr>
+              <tr><td><code>{claimsLeft}</code></td><td>Remaining unclaimed slots in the active drop (not points)</td></tr>
+              <tr><td><code>{pointsLeft}</code></td><td>Remaining points = claims left x points per claim</td></tr>
+              <tr><td><code>{pointsPool}</code></td><td>Total points in the drop = claim slots x points per claim</td></tr>
               <tr><td><code>{amount}</code></td><td>Points awarded per successful point-drop claim for the active spawn (frozen at spawn time; also available as legacy <code>{points}</code>)</td></tr>
             </tbody>
           </table></div>
@@ -125,6 +140,7 @@
 
         <section class="section" id="goals">
           <h2>Community Goals</h2>
+          <p>Bare goal tokens appear on Community Goal check replies and when a Community Goal Reached automation or alert fires. Named lookups (<code>{goalCurrent:Name}</code>, and so on) are always offered in the picker like named counters.</p>
           <div class="table-wrap"><table>
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
@@ -164,11 +180,13 @@
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td><code>{command}</code></td><td>Chat command (giveaway join, chat game join, point drop claim, and so on)</td></tr>
-              <tr><td><code>{duration}</code></td><td>Timed session length, humanized (for example <code>5 minutes</code>)</td></tr>
+              <tr><td><code>{duration}</code></td><td>Timed session length, humanized (for example <code>5 minutes</code>); also Ad Break length for welcome-back</td></tr>
               <tr><td><code>{timeLeft}</code></td><td>Countdown reminder remaining time (giveaways, chat games, Ad Break pre-warnings)</td></tr>
               <tr><td><code>{time}</code></td><td>Automation cooldown time remaining, humanized</td></tr>
               <tr><td><code>{followage}</code></td><td>Formatted follow duration (for example <code>2y 3mo 5d 4h</code>)</td></tr>
               <tr><td><code>{watchtime}</code></td><td>Formatted watch time (for example <code>2d 5h 13m</code>)</td></tr>
+              <tr><td><code>{login}</code></td><td>Twitch login for the shoutout target (used in <code>https://twitch.tv/{login}</code>)</td></tr>
+              <tr><td><code>{game}</code></td><td>Also used by <code>!so</code> for the target channel&apos;s last Twitch category (same token as Saved Lists)</td></tr>
             </tbody>
           </table></div>
         </section>
@@ -188,6 +206,15 @@
               <tr><td><code>{losersList}</code></td><td>Comma-separated loser display names</td></tr>
               <tr><td><code>{userStake}</code></td><td>Joining viewer&apos;s bet amount</td></tr>
               <tr><td><code>{userPayout}</code></td><td>Viewer&apos;s payout from the chat game</td></tr>
+              <tr><td><code>{minBet}</code></td><td>Configured minimum bet (<code>1</code> when no min is set)</td></tr>
+              <tr><td><code>{maxBet}</code></td><td>Configured maximum bet (<code>unlimited</code> when no max is set)</td></tr>
+              <tr><td><code>{acceptCommand}</code></td><td>Duel accept command (for example <code>!accept</code>)</td></tr>
+              <tr><td><code>{declineCommand}</code></td><td>Duel decline command (for example <code>!decline</code>)</td></tr>
+              <tr><td><code>{timeout}</code></td><td>Duel accept timeout in seconds</td></tr>
+              <tr><td><code>{opponent}</code></td><td>Duel opponent display name (alias for <code>{target}</code>)</td></tr>
+              <tr><td><code>{target}</code></td><td>Duel opponent display name (same as <code>{opponent}</code> in duel templates)</td></tr>
+              <tr><td><code>{winner}</code></td><td>Duel winner display name (also wheel winning entry text)</td></tr>
+              <tr><td><code>{loser}</code></td><td>Duel loser display name</td></tr>
               <tr><td><code>{roll}</code></td><td>Dice / range outcome roll for the current fire (one roll; shared by all overlapping bands)</td></tr>
               <tr><td><code>{outcome}</code></td><td>Name of the dice / range band currently running (each overlapping band sees its own name)</td></tr>
             </tbody>
@@ -218,6 +245,7 @@
             <li>Aggregate total: <code>All wins combined: {counterTotal:Wins}</code></li>
             <li>Goal check response: <code>{goalName}: {goalProgress}</code> - for example <code>Subathon Bits: 15/100</code></li>
             <li>Heist summary: <code>Game over! {winnerCount} got away with {totalPaidOut}. Winners: {winnersList}</code></li>
+            <li>Duel challenge: <code>{user} challenged {opponent} for {amount}! Type {acceptCommand} or {declineCommand} ({timeout}s).</code></li>
             <li>Dice band: <code>{user} rolled {roll} ({outcome})!</code></li>
             <li>Tier up: on Counter Tier Reached, prefer bare <code>{counterTier}</code> for the tier that just fired</li>
           </ul>
@@ -230,7 +258,7 @@
             <li>Use <strong>global</strong> counters for stream-wide stats (deaths, total spins).</li>
             <li>Use <strong>per user</strong> counters to track viewer participation.</li>
             <li>Enable <strong>Counter Tiers</strong> on the Stats page to label milestones (Bronze / Silver / Gold, rank names, and so on).</li>
-            <li>Show live values with <code>{count}</code> (after a change or on a tier trigger) or <code>{counter:CounterName}</code> any time.</li>
+            <li>Show values with <code>{count}</code> (first Counter Action row after a change, or on a tier trigger) or <code>{counter:CounterName}</code> (any counter; uses this fire&apos;s post-update value when that counter was just updated).</li>
             <li>Announce the tier a viewer just reached with <code>{counterTier}</code> on a Counter Tier Reached automation; use <code>{counterTier:CounterName}</code> for their current tier on that counter.</li>
             <li>Announce a per user leaderboard with <code>{top5Counter:CounterName}</code>.</li>
             <li>Show the stream-wide total (global value or sum of all per-user values) with <code>{counterTotal:CounterName}</code>.</li>

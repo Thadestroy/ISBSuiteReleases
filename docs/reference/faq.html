@@ -97,6 +97,18 @@
             <li>Check volume is not 0.</li>
             <li>Supported formats: .mp3, .wav, .mp4, .m4a, .wma</li>
             <li>Check the Sound Queue is not paused.</li>
+            <li>Confirm the Play Sound / TTS action uses the right bus under <strong>Settings &gt; Audio Output Channels</strong>.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="backups">
+          <h2>Backups and restore</h2>
+          <ul>
+            <li>Everything lives under <strong>Settings &gt; Backups</strong>: schedule, create, restore, export, and import.</li>
+            <li>A backup is a standard <code>.zip</code> of your recoverable data (config, state, database, media). Create and export write that same pack; restore and import apply it (full replace + app restart).</li>
+            <li>Choose how often to create backups and how many to keep. Secrets (tokens, keys, license) are included by default - turn that off before sharing a file.</li>
+            <li>After importing on a new PC, re-check <strong>Settings &gt; Audio Output Channels</strong> - device IDs may not match.</li>
+            <li>ISB Suite also keeps lightweight safety copies whenever you save so a single corrupt file can recover without a full restore. You do not manage those separately.</li>
           </ul>
         </section>
 

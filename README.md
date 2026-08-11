@@ -312,7 +312,8 @@ Run mass-entry chat games where viewers join from chat, stake a counter value, a
 |--------|--------------|
 | **Heist** | Timed window; viewers bet a variable amount; each entrant gets an independent roll; winners double their stake |
 | **Lottery** | Fixed entry fee; one winner takes the whole pool when the window closes |
-| **Duel** | Instant per-user gamble. Each trigger bets points with separate win/lose action phases |
+| **Duel** | Challenge another viewer (`!duel user amount`); they accept or decline; 50/50 transfers the stake from loser to winner |
+| **Solo Gamble** | Instant per-user house bet (formerly labeled Duel). Each trigger rolls win/lose with separate Win and Lose action phases |
 | **Percentile roll** | Dice / range outcomes. Roll a custom min–max (e.g. 1–100 or 1–105), run different actions per band; optional alternate tables per viewer login |
 | **Blank sandbox** | Timed session with free join. Configure triggers and actions yourself |
 | **Instant action** | No timed session. Fires through the automation engine on trigger |
@@ -325,7 +326,7 @@ Run mass-entry chat games where viewers join from chat, stake a counter value, a
 
 **No Winners phase:** timed games (e.g. Heist) can run a dedicated action phase when people joined but nobody won. It runs **instead of** **When Session Ends** and the **Summary When Game Ends** chat message. Use `{losersList}` / `{totalLost}` in responses. **If No One Joins** is unchanged.
 
-**Variables:** `{totalPool}`, `{totalPaidOut}`, `{winnersList}`, `{winnerCount}`, `{userStake}`, `{userPayout}`, `{timeLeft}`, and for dice games `{roll}` / `{outcome}`. See [Message Variables](#message-variables).
+**Variables:** `{totalPool}`, `{totalPaidOut}`, `{winnersList}`, `{winnerCount}`, `{userStake}`, `{userPayout}`, `{timeLeft}`, `{minBet}` / `{maxBet}`, and for dice games `{roll}` / `{outcome}`. **Duel** also uses `{acceptCommand}`, `{declineCommand}`, `{timeout}`, `{opponent}` / `{target}`, `{winner}`, `{loser}`. See [Message Variables](#message-variables).
 
 ### Queue System
 Four independent queues keep everything organized, each shown as its own column on the Home page:
@@ -452,44 +453,51 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 
 ## Message Variables
 
-Use these in chat messages, alert text, and TTS text:
+Use these in chat messages, alert text, and TTS text. In the app, the Variables button groups **Available** tokens (Active for this trigger / This screen / Global by name) and keeps everything else under a collapsed **Other variables** list with search.
 
 | Variable | Value |
 |----------|-------|
 | `{user}` | Display name of the user who triggered the event (Subscription Gift Receiver: the recipient) |
 | `{gifter}` | Gifter display name (Subscription Gift Receiver only) |
 | `{winner}` | The winning wheel entry's text (also works in automations triggered by a wheel entry win) |
-| `{entry}` | Alias for `{winner}` |
+| `{entry}` | Alias for `{winner}` (wheel); Saved Lists use `{entry}` for list entry text |
 | `{wheel}` | Name of the current wheel preset |
-| `{amount}` | Bits cheer, Chat Message Match capture, raid viewers, sub months, gift count, or counter action, depending on context |
+| `{amount}` | Shared numeric value for chat/TTS and alerts: Counter Value Changed abs-delta, wired Counter Action amount, community-goal delta, bits, raid/shoutout viewers, resub months, gift count, hype level, or ad seconds (one matched trigger per fire). Prefer `{bits}` / `{subs}` when those apply. There is no separate `{months}` or `{viewers}` token |
+| `{message}` | Alert overlay text typed by the viewer (same source as `{input}`) |
+| `{input}` | User message or leftover text after a command / alias |
+| `{bits}` | Bits cheered (Bits trigger) |
+| `{subs}` | Sub or gift count |
 | `{reward}` | Channel point reward title |
-| `{count}` | Counter value after the current increment / change |
+| `{count}` / `{value}` | Counter value after the current change (first Counter Action row, or trigger counter on tier/CVC fires) |
 | `{oldValue}` | Counter value before a Counter Value Changed trigger |
 | `{delta}` | Signed amount the counter changed by (Counter Value Changed) |
-| `{counter:CounterName}` | Current value of a specific named counter |
+| `{counter:CounterName}` | Current value of a specific named counter (always offered in the picker) |
 | `{counterTier}` | Tier label for the counter tied to the current action **or** the tier just gained on a Counter Tier Reached trigger |
 | `{counterTier:CounterName}` | **Current** tier label for a specific named counter (live lookup; may differ from `{counterTier}` on tier triggers when multiple tiers are crossed at once) |
-| `{top5Counter:CounterName}` | Top 5 users for a per-user counter, ranked: `1. Name value, 2. Name value, ?` (empty when no data; per-user counters only) |
+| `{top5Counter:CounterName}` | Top 5 users for a per-user counter, ranked: `1. Name value, 2. Name value, …` (empty when no data; per-user counters only) |
+| `{counterTotal:CounterName}` | Aggregate total for a named counter (global value, or sum of every user on a per-user counter) |
 | `{balance}` | Viewer's current points balance |
 | `{currencyName}` | Display name of the points currency |
 | `{price}` | Cost of the shop item being redeemed |
 | `{itemName}` | Name of the shop item being redeemed |
-| `{command}` | The giveaway / chat-game join command |
-| `{duration}` | Timed session length, humanized (e.g. `5 minutes`, `30 seconds`) |
-| `{timeLeft}` | Countdown reminder remaining time (e.g. `1 minute`, `30 seconds`) for giveaways, chat games, and Ad Break pre-warnings |
-| `{time}` | Cooldown time remaining, humanized (e.g. `15 seconds`, `5 minutes`) |
+| `{command}` | The giveaway / chat-game join command (also point-drop claim, shoutout usage, etc.) |
+| `{duration}` | Timed session length, humanized (e.g. `5 minutes`); also Ad Break length for welcome-back |
+| `{timeLeft}` | Countdown reminder remaining time for giveaways, chat games, and Ad Break pre-warnings |
+| `{time}` | Cooldown reply time remaining, humanized (cooldown templates only — not stream-limit replies) |
 | `{goalName}` | Community goal name |
 | `{goalCurrent}` | Community goal current progress |
 | `{goalLimit}` | Community goal target limit |
 | `{goalProgress}` | Progress as `current/limit` (e.g. `15/100`), used by goal check commands |
+| `{goalCycles}` / `{goalOverflow}` | Completion count / overflow after a Community Goal Reached fire |
+| `{goalCurrent:Name}` / `{goalLimit:Name}` / `{goalCycles:Name}` | Named goal lookups (always offered like named counters) |
 
-**Chat game variables** (resolve/summary messages): `{totalPool}`, `{totalPaidOut}`, `{totalLost}`, `{entryCount}`, `{winnerCount}`, `{winnersList}`, `{losersList}`, `{userStake}`, `{userPayout}`. Dice / range outcomes also expose `{roll}` (shared across overlapping bands on one fire) and `{outcome}` (name of the band currently running).
+**Chat game variables** (resolve/summary messages): `{totalPool}`, `{totalPaidOut}`, `{totalLost}`, `{entryCount}`, `{winnerCount}`, `{winnersList}`, `{losersList}`, `{userStake}`, `{userPayout}`, `{minBet}`, `{maxBet}`. Dice / range outcomes also expose `{roll}` (shared across overlapping bands on one fire) and `{outcome}` (name of the band currently running). **Duel** templates also use `{acceptCommand}`, `{declineCommand}`, `{timeout}`, `{opponent}` / `{target}`, `{winner}`, `{loser}`.
 
 **Community goal check example:** `"!bitsgoal"` → `"{goalName}: {goalProgress}"` → `Subathon Bits: 15/100`
 
 **Example:** `"Congrats {user}! The wheel landed on {winner}! You've won {count} times total ({counterTier})."`
 
-**Leaderboard example:** `"?? Top 5: {top5Counter:Wins}"`
+**Leaderboard example:** `"Top 5: {top5Counter:Wins}"`
 
 ---
 
@@ -555,6 +563,8 @@ ISB Suite renders your overlay in its own window with a transparent background. 
 | **Point Drop Event** | Configure a point drop: image appears on overlay, first chatters to type claim points |
 | **Live Alert on Follow** | Create alert rule: Follow shows a fade-in GIF and TTS "Thanks for the follow, {user}!" |
 | **Heist Chat Game** | Chat Games preset: viewers `!heist 50` to stake points; resolve doubles winners' stakes |
+| **Duel Chat Game** | Chat Games preset: `!duel user amount`, opponent `!accept` / `!decline`; 50/50 stake transfer |
+| **Solo Gamble** | Chat Games preset: per-viewer win/lose roll with separate Win and Lose action phases |
 | **Random Hype Sound** | Automation with Randomized Action and 3 action sets, each playing a different sound |
 | **Live leaderboard in chat** | Custom command or timer automation: `Top 5: {top5Counter:Wins}` on a per-user counter |
 | **Subathon Countdown** | Automation with the **Live Timer** action driving a Live Clock on a Timer Widget — not the delay-queue Timer. Optional Live Timer Ended trigger for natural zero |
