@@ -5,7 +5,7 @@ A full-featured stream overlay suite for Twitch streamers. Spin wheels, run give
 ![Windows](https://img.shields.io/badge/Windows-10%2B-blue?logo=windows)
 [![Latest Release](https://img.shields.io/github/v/release/Thadestroy/ISBSuiteReleases?label=Download)](https://github.com/Thadestroy/ISBSuiteReleases/releases/latest)
 
-> **ISB Suite is an ongoing project.** Feedback, bug reports, and feature ideas are fully welcomed. [Open an issue](https://github.com/Thadestroy/ISBSuiteReleases/issues) to share anything you'd like to see.
+> **ISB Suite is an ongoing project.** Feedback, bug reports, and feature ideas are fully welcomed. [Open an issue](https://github.com/Thadestroy/ISBSuiteReleases/issues) to report a bug or request a feature. To talk setups and share how you use ISB Suite, [join the Discord](https://discord.gg/w834PyCCgb).
 
 ---
 
@@ -276,6 +276,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 Automated chat messages driven by the same rule engine as Automations, managed in the **Chat Bot** tab:
 - Respond to custom `!commands` with permission levels, cooldowns, and **aliases**
 - Optional **Match anywhere in message** so the command can fire mid-chat (e.g. `/me !discord`), not only at the start; longest matching command still wins; `{input}` is the text after the matched command
+- Optional **Don't trigger from the broadcaster or linked bot** so the command will not fire from your Twitch account or a linked bot account (prefix or mid-message). Same rule either way you send chat
 - Post scheduled or event-driven messages with variable substitution
 - Share the same trigger and action building blocks as Automations
 - Overview enable/disable lights also cover Chat Game start/join, Viewer Points commands, and Community Goal check command cards (same as other Chat Bot rows)
@@ -318,7 +319,7 @@ Run mass-entry chat games where viewers join from chat, stake a counter value, a
 | **Blank sandbox** | Timed session with free join. Configure triggers and actions yourself |
 | **Instant action** | No timed session. Fires through the automation engine on trigger |
 
-**Game types** also include **Dice / Range Outcomes**: pick any start trigger (command, channel points, etc.), set the die range, then build outcome bands (e.g. 1–98 normal, 99–105 crit). Each band uses the full action editor (chat, sound, alert, counters, Run Automation, randomized action sets, …). Overlapping bands on the same roll all run in list order and share one `{roll}` (each band sees its own `{outcome}` name while it runs). Use the **Outcome profile** dropdown for the Default table or a copied table for a specific Twitch login. Start Chat Command Advanced Settings holds aliases, Match anywhere, and permission; cooldown and stream limits sit on the shared Start Triggers Cooldown & Limits card. Join command is the command name field only.
+**Game types** also include **Dice / Range Outcomes**: pick any start trigger (command, channel points, etc.), set the die range, then build outcome bands (e.g. 1–98 normal, 99–105 crit). Each band uses the full action editor (chat, sound, alert, counters, Run Automation, randomized action sets, …). Overlapping bands on the same roll all run in list order and share one `{roll}` (each band sees its own `{outcome}` name while it runs). Use the **Outcome profile** dropdown for the Default table or a copied table for a specific Twitch login. Start Chat Command Advanced Settings holds aliases, Match anywhere, optional Don't trigger from the broadcaster or linked bot, and permission; cooldown and stream limits sit on the shared Start Triggers Cooldown & Limits card. Join command is the command name field only.
 
 **Import Actions:** In the shared Actions editor (Automations, Chat Bot, Chat Games phases/bands, and other hosts), use **Import from Automation / Chat Bot** above Randomized Action to replace the current actions with a copy from another Automation or Chat Bot command — flat actions stay flat; Randomized Action Sets copy as-is. Triggers and cooldown/limits stay on the host you’re editing. The source rule is unchanged. To peel off one outcome for reuse, open Randomized Action and use **Extract** on an Action Set (optionally remove it from the parent after). For Dice / Range Outcomes, import into a band and delete unwanted sets as needed.
 
@@ -446,6 +447,8 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 **Command aliases:** Automations, Chat Bot commands, Chat Games join commands, Viewer Points commands, shop items, point drop claim commands, and Community Goal check commands can all define alternate names. Viewers can type any alias; the longest matching alias wins when several could match.
 
 **Match anywhere in message:** Chat Bot commands, Custom Alerts chat commands, Chat Games start/join commands, Viewer Points commands (balance, give, gamble, admin give, shop redeem, point-drop claim), and Community Goal check commands can optionally match as a whole word anywhere in a chat message, not only at the start. Useful for `/me !command` and mid-chat triggers. Space-boundary rules still apply (e.g. `!spin` will not match inside `!spinwheel`). Off by default.
+
+**Don't trigger from the broadcaster or linked bot:** On Chat Bot, Custom Alerts, Automations Chat Command, Chat Games start, and Saved Lists, an optional per-command toggle skips the streamer and a linked bot account (prefix or mid-message). Same rule either way you send chat. Off by default.
 
 **Permission, cooldown & limits:** Viewer Points commands (including shop redeem and point-drop claim), Chat Game join, Community Goal check commands, and related editors share one Advanced Settings block for permission, time cooldown, and per-stream limits (with optional chat replies). New limit fields default to unlimited; existing cooldowns keep working.
 

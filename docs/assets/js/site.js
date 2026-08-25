@@ -37,6 +37,12 @@
       keywords: "privacy data local appdata tokens",
     },
     {
+      title: "Community Discord",
+      url: "https://discord.gg/w834PyCCgb",
+      blurb: "Talk setups and share how you use ISB Suite",
+      keywords: "discord community chat server invite join setups share",
+    },
+    {
       title: "Download",
       url: "/download.html",
       blurb: "Windows installer, SmartScreen, Twitch, and OBS Window Capture",
@@ -273,14 +279,14 @@
     {
       title: "Viewer Points",
       url: "/features/viewer-points.html",
-      blurb: "Currency, Watching earn, shop, point drops",
-      keywords: "viewer points shop drop earn watching watch time balance !points !givepoints !gamble !claim",
+      blurb: "Currency, earn rules, shop, point drops",
+      keywords: "viewer points shop drop earn watching watch time follow bits raid sub chat message channel points balance !points !givepoints !gamble !claim community goal contribute",
     },
     {
       title: "Community Goals",
       url: "/features/community-goals.html",
-      blurb: "Milestones, check commands, Chat Message accumulation",
-      keywords: "community goal !bitsgoal progress check command blerp used bits push goal",
+      blurb: "Milestones, check commands, Viewer Points contribute",
+      keywords: "community goal !bitsgoal progress check command contribute !goal viewer points refund blerp used bits push goal",
     },
     {
       title: "Counters and Stats",
@@ -304,7 +310,7 @@
       title: "Use cases",
       url: "/reference/use-cases.html",
       blurb: "Scenarios and Extra tips",
-      keywords: "use case setup walk-on cascading stream deck hands-free multi-trigger chain discord heist",
+      keywords: "use case setup walk-on cascading stream deck hands-free multi-trigger chain discord heist community goal contribute",
     },
     {
       title: "Chat commands",

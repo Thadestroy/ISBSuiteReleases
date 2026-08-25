@@ -78,6 +78,7 @@
         <section class="section" id="engine">
           <h2>Same engine as Automations</h2>
           <p>Chat Bot is not a separate runtime. Rules you create here use the same triggers, actions, cooldowns, aliases, Match anywhere, Randomized Action, Timer, Live Timer, Run Alert, and <strong>Run Chat Bot or Automation</strong> chaining as the Automations tab. Overview pages support name search and custom groups like other list pages.</p>
+          <p>Leaving Add Bot Message with unsaved changes shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Opening the form and leaving without edits does not prompt. Form <strong>Cancel</strong> discards without asking.</p>
           <p>Chat Bot response text routes to Twitch. Discord posts use the Discord Webhook action on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a>.</p>
         </section>
 
@@ -96,15 +97,16 @@
 
         <section class="section" id="options">
           <h2>Command options</h2>
-          <p>On the Chat Bot Add/Edit form, <strong>Command</strong>, <strong>Match anywhere</strong>, and <strong>Aliases</strong> sit on the main card. <strong>Show Advanced</strong> opens actions plus Cooldown &amp; Limits (and related action categories).</p>
+          <p>Custom commands support the full Advanced Settings block:</p>
           <ul>
-            <li><strong>Permission levels:</strong> Everyone; Subscribers (subs, VIPs, mods, broadcaster); VIPs (VIPs, mods, broadcaster); Moderators (mods and broadcaster); Broadcaster only. (Also on the main card for Chat Bot.)</li>
-            <li><strong>Aliases:</strong> alternate names that fire the same command. Always on the main card for normal bot messages (hidden in Saved List mode, which uses per-subcommand Advanced Settings). Viewers can type any alias; the longest matching alias wins when several could match. Leftover text after the match becomes <code>{input}</code>.</li>
+            <li><strong>Permission levels:</strong> Everyone; Subscribers (subs, VIPs, mods, broadcaster); VIPs (VIPs, mods, broadcaster); Moderators (mods and broadcaster); Broadcaster only.</li>
+            <li><strong>Aliases:</strong> alternate names that fire the same command. Viewers can type any alias; the longest matching alias wins when several could match. Leftover text after the match becomes <code>{input}</code>.</li>
             <li><strong>Match anywhere in message:</strong> optional whole-word match mid chat (for example <code>/me !discord</code>), not only at the start. Longest matching command still wins. Space-boundary rules apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</li>
-            <li><strong>Cooldown:</strong> None, Global, or Per User, with optional on-cooldown chat reply (under Show Advanced).</li>
-            <li><strong>Per stream limits:</strong> max fires globally and/or per user (<code>0</code> = unlimited), with optional hit-limit chat reply. Limits reset when a new stream session starts (under Show Advanced).</li>
+            <li><strong>Don't trigger from the broadcaster or linked bot:</strong> this command will not fire from your Twitch account or a linked bot account (prefix or mid-message). Same rule either way you send chat. Off by default.</li>
+            <li><strong>Cooldown:</strong> None, Global, or Per User, with optional burst (N uses within a window then a longer cooldown; the normal duration can be off) and optional on-cooldown chat reply.</li>
+            <li><strong>Per stream limits:</strong> max fires globally and/or per user (<code>0</code> = unlimited), with optional hit-limit chat reply. Limits reset when a new stream session starts.</li>
           </ul>
-          <p>Community Goal check commands, Viewer Points commands, Chat Game start/join commands, and Saved Lists also appear on the Chat Bot overview where applicable. Each row has the same enable/disable light as other Chat Bot cards. Edit opens that feature&apos;s settings. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, and <code>!endtimer</code> stay out of the Run Chat Bot or Automation picker.</p>
+          <p>Community Goal check and contribute commands, Viewer Points commands, Chat Game start/join commands, and Saved Lists also appear on the Chat Bot overview where applicable. Each row has the same enable/disable light as other Chat Bot cards. Edit opens that feature&apos;s settings. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, and <code>!endtimer</code> stay out of the Run Chat Bot or Automation picker. Contribute is not a Run Automation nested target.</p>
         </section>
 
         <section class="section" id="saved-lists">
@@ -112,7 +114,7 @@
           <p>Saved Lists are a generic numbered text store for quotes, notes, todos, or anything similar. Free allows <strong>3 lists</strong> (unlimited entries each); Pro is unlimited lists. They use their own Free limit and do not consume a Chat Bot command slot.</p>
           <ul>
             <li>Set one <strong>Command</strong> (for example <code>!quote</code>): that is the Read trigger (bare = random, + number = that entry). <strong>Add</strong> autofills as <code>!quote add</code> (editable) with glued alias <code>!quoteadd</code>.</li>
-            <li>Optional <strong>Fire on a timer</strong> on Read posts a random entry on an interval (same reply template). Match anywhere applies to both Read and Add. Each has Advanced Settings (aliases, permission, cooldown). Defaults: Read = Everyone, Add = Moderators. Enable/disable the whole list from the Chat Bot Overview card.</li>
+            <li>Optional <strong>Fire on a timer</strong> on Read posts a random entry on an interval (same reply template). Match anywhere and Don't trigger from the broadcaster or linked bot apply to both Read and Add. Each has Advanced Settings (aliases, permission, cooldown). Defaults: Read = Everyone, Add = Moderators. Enable/disable the whole list from the Chat Bot Overview card.</li>
             <li>Reply templates are editable (blank = silent). Defaults use <code>{number}</code> and <code>{entry}</code>. Optional capture: local date, Twitch category (<code>{game}</code>), and added-by.</li>
             <li><strong>Entry numbers</strong> stay stable by default (gaps after delete; best for quotes). Turn on <strong>Renumber on delete</strong> in list settings for dense 1...N lists (todos), or use <strong>Renumber</strong> on the Lists tab to compact once.</li>
             <li>On the <strong>Lists</strong> tab: search, add/bulk-add entries (checkbox in Add entry), export CSV/text, renumber (when not auto-renumbering), and <strong>Pop out</strong> to a separate window for another monitor.</li>
@@ -139,7 +141,7 @@
           <h2>Actions from Chat Bot</h2>
           <p>Beyond Send Message, a Chat Bot rule uses the same shared <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> editor as Automations (wheel, sound, Discord, counters, giveaway, Run Alert, TTS, Timer, Live Timer, Randomized Action, Run Chat Bot or Automation, Push Community Goal, and more). Open the Actions hub for per-action setup pages.</p>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

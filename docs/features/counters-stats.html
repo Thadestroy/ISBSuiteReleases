@@ -60,6 +60,7 @@
           <ul>
             <li><strong>Global</strong> counters: one shared value. <strong>Per-user</strong> counters: value per Twitch viewer.</li>
             <li>On Stats, each per-user card header shows a <strong>Total</strong> (sum of all users).</li>
+            <li>Optional <strong>thousands separators</strong> (1,234) per Number counter. Toggle on Stats, Counter Options, or Create Counter. Off by default. Chat, alerts, TTS, and Discord use the same setting.</li>
             <li>Change from automations, entry actions, or viewer points via Counter Action.</li>
             <li>Leaderboard token: <code>{top5Counter:CounterName}</code> (per-user only).</li>
             <li>CSV import accepts comma or semicolon (auto-detected).</li>
@@ -81,6 +82,7 @@
           <ul>
             <li><strong>Global:</strong> single shared value (for example Deaths This Stream, Wheels Spun).</li>
             <li><strong>Per-user:</strong> separate value per Twitch viewer (for example Times Won, Giveaway Entries). On the Stats page, the card header <strong>Total</strong> is the sum of every user's value (search does not change it).</li>
+            <li><strong>Thousands separators:</strong> Number counters can show <code>1,234</code> instead of <code>1234</code>. Enable per counter on Stats, on Counter Options (next to Enable tiers), or when creating the counter. Off by default so existing counters stay unchanged. Watch Time is already <code>2d 5h 13m</code>. CSV import/export and the edit-value dialog stay raw integers so parsing is unchanged.</li>
           </ul>
         </section>
 
@@ -131,7 +133,7 @@
           <h2>Watch time</h2>
           <p>Stats Watch Time powers watching presence polls used by <a href="/ISBSuiteReleases/docs/features/viewer-points.html">Viewer Points</a> earn rules. Keep Twitch connected with the moderator chatters scope.</p>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

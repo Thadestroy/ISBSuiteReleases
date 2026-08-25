@@ -60,7 +60,7 @@
           <ul>
             <li>Free: 15 automations. Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
             <li>One automation can have multiple triggers. Same rule engine as <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> - use Automations for EventSub and multi-action rules.</li>
-            <li>Cooldown: None, Global, or Per User, plus per stream limits.</li>
+            <li>Cooldown: None, Global, or Per User, plus optional burst (N uses within a window then a longer cooldown; the normal duration can be off) and per stream limits.</li>
             <li>Related: <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a>, <a href="/ISBSuiteReleases/docs/features/alerts.html">Alerts</a>, <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel</a>, <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>, <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</li>
           </ul>
         </div>
@@ -77,6 +77,7 @@
         <section class="section" id="overview">
           <h2>Overview</h2>
           <p>Automations live in the <strong>Automations</strong> tab. Overview pages support instant name search and optional <strong>custom groups</strong> (named groups, chip filters; ungrouped items list first).</p>
+          <p>Leaving Add/Edit with unsaved changes (or switching to another automation) shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Opening a form and leaving without edits does not prompt. Form <strong>Cancel</strong> discards without asking.</p>
           <p><strong>Chat Bot vs Automations:</strong> both tabs share the same trigger and action building blocks. Prefer <strong>Automations</strong> when the rule is driven by Twitch events (channel points, bits, raids, follows, and so on) or needs a long action chain. Prefer <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> when the rule is mainly a custom <code>!command</code> or timed chat message. Either tab can call the other with <strong>Run Chat Bot or Automation</strong>.</p>
         </section>
 
@@ -140,7 +141,7 @@
 
         <section class="section" id="limits">
           <h2>Cooldown and limits</h2>
-          <p>Every automation can combine a time cooldown (None / Global / Per User) with per stream limits (max fires globally and/or per user; <code>0</code> = unlimited) - the same structure as chat commands. Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for on cooldown vs hit limit.</p>
+          <p>Every automation can combine a time cooldown (None / Global / Per User) with per stream limits (max fires globally and/or per user; <code>0</code> = unlimited) - the same structure as chat commands. Optional burst: if the command is used N times within a window you set (for example 5 times in 30 seconds), a longer cooldown starts. The normal per-use duration is independent and can be off. Slow use outside the window does not trigger it. Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for on cooldown vs hit limit.</p>
           <ul>
             <li><strong>Count each:</strong> one source event = one cooldown / limit slot; expanded runs share that admit.</li>
             <li><strong>Multi-cross fan-outs</strong> (counter tiers, hype train level jumps, community goal completions): each crossed unit is its own event and uses its own slot.</li>
@@ -156,6 +157,7 @@
             <li><strong>Permission</strong>: Everyone, Subscribers, VIPs, Moderators, or Broadcaster.</li>
             <li><strong>Aliases</strong>: alternate names that fire the same rule. Longer matching aliases win; leftover text becomes <code>{input}</code>.</li>
             <li><strong>Match anywhere in message</strong>: command can appear mid chat (for example <code>/me !discord</code>). Space-boundary rules still apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</li>
+            <li><strong>Don't trigger from the broadcaster or linked bot</strong>: this command will not fire from your Twitch account or a linked bot account (prefix or mid-message). Same rule either way you send chat. Off by default.</li>
             <li><strong>Cooldown and per stream limits</strong>: with optional chat replies.</li>
           </ul>
           <p>Also see <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
@@ -171,7 +173,7 @@
             <li><strong>Cascading wheels</strong>: entry action or Run Chat Bot or Automation loads a second wheel. See <a href="/ISBSuiteReleases/docs/features/wheel.html#cascade">Wheel - Cascading</a> and <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</li>
           </ul>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

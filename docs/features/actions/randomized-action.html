@@ -61,6 +61,7 @@
             <li>UI label: <strong>Randomized Action</strong> (above the main Actions grid).</li>
             <li>Each set is a full Actions payload (sound, chat, wheel, and so on).</li>
             <li>Modes: uniform, or Don&apos;t repeat until all Action Sets have played.</li>
+            <li><strong>Import .txt</strong>, <strong>Edit lines</strong>, and <strong>Export .txt</strong> work with Send Message sets (one line = one set). Edit lines is a searchable list: edit or add a line in that window, Ctrl/Shift-click to select several, and double-click a line to close it and jump to that set&apos;s Actions.</li>
             <li>Nested Randomized Action inside a set is stripped - keep randomness on the parent only.</li>
           </ul>
         </div>
@@ -75,17 +76,19 @@
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>When Randomized Action is enabled, the parent rule no longer runs one flat action list. Instead it picks one named Action Set each fire and runs that set&apos;s Actions. Sets are searchable in the editor. Use this for rotating hype lines, stingers, or mystery wheel loads from a single redeem or command.</p>
+          <p>When Randomized Action is enabled, the parent rule no longer runs one flat action list. Instead it picks one named Action Set each fire and runs that set&apos;s Actions. Sets are searchable in the picker. Use this for rotating hype lines, stingers, or mystery wheel loads from a single redeem or command.</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>
           <ol class="steps">
             <li>Enable <strong>Randomized Action</strong> at the top of Actions.</li>
-            <li>Add Action Sets and name them (Prize Wheel, Hype Pack, Alert Burst).</li>
-            <li>Inside each set, enable the Actions for that outcome (Send Message, Play Sound, Start Wheel Session, and so on).</li>
+            <li>Add Action Sets and name them (Prize Wheel, Hype Pack, Alert Burst), or use <strong>Import .txt</strong> / <strong>Edit lines</strong> to create one set per Send Message line.</li>
+            <li>Inside each set, enable the Actions for that outcome (Send Message, Play Sound, Start Wheel Session, and so on). After a line import, open <strong>Edit lines</strong>, search, and double-click a line to jump to that set and add extras (sound, TTS, wheel) on that set only.</li>
+            <li>Optional: check <strong>Copy other actions from the selected set</strong> so every imported line also gets that set&apos;s extras, then overwrites Send Message.</li>
             <li>Choose uniform vs no-repeat-until-all.</li>
           </ol>
-          <p>To reuse an existing setup, use <strong>Import from Automation / Chat Bot</strong> above Randomized Action (copies flat actions or Action Sets). <strong>Extract</strong> on a set creates a standalone Automation for reuse.</p>
+          <p>To reuse an existing setup, use <strong>Import from Automation / Chat Bot</strong> above Randomized Action. A randomized source copies its Action Sets; a flat Chat Bot or Automation becomes one Action Set so Send Message stays on the set (not the Chat Bot parent Response field). Play Sound files are copied onto this rule. <strong>Extract</strong> on a set creates a standalone Automation for reuse and copies that set&apos;s sounds onto the new rule.</p>
+          <p><strong>Import .txt</strong> turns a list of chat lines into Action Sets (UTF-8, one non-empty line per set). The file is copied in - it is not watched on disk. Append keeps existing sets; Replace wipes them (you get an extra confirm if any set has actions besides Send Message). If you already have Action Sets, <strong>Edit lines</strong> opens a popup generated from those sets so you can search, edit or add a line in place, or edit-as-text. Ctrl+click and Shift+click select more than one line to delete. Double-click a line to close the popup and jump to that set&apos;s Actions. <strong>Export .txt</strong> writes Send Message templates for sets where Send Message is on, one per line. Hundreds of rotating lines still share the same Twitch chat rate limit.</p>
         </section>
         <section class="section" id="sets">
           <h2>Action Sets</h2>
@@ -111,10 +114,11 @@
           <ul>
             <li><strong>Mystery prize redeem</strong> - Channel points -&gt; three sets: Start Wheel Session on Prize Wheel, a sound+TTS hype pack, and Run Alert - with no-repeat so viewers cycle the pool.</li>
             <li><strong>Raid variety</strong> - Raid automation -&gt; several Play Sound + Send Message sets so back-to-back raids do not feel identical.</li>
+            <li><strong>Rotating chat lines</strong> - Import a .txt of hype lines, or open Edit lines from the sets you already have, then search and double-click a line to attach a sound or TTS.</li>
             <li><strong>Shop roulette</strong> - Viewer Points item -&gt; sets that each Start Wheel Session on a different preset plus a unique chat line.</li>
           </ul>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>
