@@ -52,7 +52,7 @@
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomized-action.png" alt="Randomized Action action setup in ISB Suite" />
-          <figcaption>Randomized Action with named Action Sets. The selected set (Prize Wheel) shows its own nested Actions below.</figcaption>
+          <figcaption>Randomized Action with named Action Sets. Import .txt, Edit lines, and Export .txt sit under the Action Set picker. The selected set (Prize Wheel) shows its own nested Actions below.</figcaption>
         </figure>
 
         <div class="ref-panel">
@@ -61,7 +61,7 @@
             <li>UI label: <strong>Randomized Action</strong> (above the main Actions grid).</li>
             <li>Each set is a full Actions payload (sound, chat, wheel, and so on).</li>
             <li>Modes: uniform, or Don&apos;t repeat until all Action Sets have played.</li>
-            <li><strong>Import .txt</strong>, <strong>Edit lines</strong>, and <strong>Export .txt</strong> work with Send Message sets (one line = one set). Edit lines is a searchable list: edit or add a line in that window, Ctrl/Shift-click to select several, and double-click a line to close it and jump to that set&apos;s Actions.</li>
+            <li><strong>Import .txt</strong> / <strong>Edit lines</strong> / <strong>Export .txt</strong> turn a list of chat lines into Action Sets. See <a href="#import">Import, edit, and export lines</a> for the file picker and Import lines dialog.</li>
             <li>Nested Randomized Action inside a set is stripped - keep randomness on the parent only.</li>
           </ul>
         </div>
@@ -69,6 +69,7 @@
         <nav class="toc"><strong>On this page</strong><ol>
           <li><a href="#how">How it works</a></li>
           <li><a href="#setup">Setup</a></li>
+          <li><a href="#import">Import, edit, and export lines</a></li>
           <li><a href="#sets">Action Sets</a></li>
           <li><a href="#modes">Modes</a></li>
           <li><a href="#usecases">Use cases</a></li>
@@ -82,13 +83,45 @@
           <h2>Setup</h2>
           <ol class="steps">
             <li>Enable <strong>Randomized Action</strong> at the top of Actions.</li>
-            <li>Add Action Sets and name them (Prize Wheel, Hype Pack, Alert Burst), or use <strong>Import .txt</strong> / <strong>Edit lines</strong> to create one set per Send Message line.</li>
-            <li>Inside each set, enable the Actions for that outcome (Send Message, Play Sound, Start Wheel Session, and so on). After a line import, open <strong>Edit lines</strong>, search, and double-click a line to jump to that set and add extras (sound, TTS, wheel) on that set only.</li>
-            <li>Optional: check <strong>Copy other actions from the selected set</strong> so every imported line also gets that set&apos;s extras, then overwrites Send Message.</li>
+            <li>Add Action Sets and name them (Prize Wheel, Hype Pack, Alert Burst), or import a list of chat lines (see <a href="#import">Import, edit, and export lines</a>).</li>
+            <li>Inside each set, enable the Actions for that outcome (Send Message, Play Sound, Start Wheel Session, and so on).</li>
             <li>Choose uniform vs no-repeat-until-all.</li>
           </ol>
           <p>To reuse an existing setup, use <strong>Import from Automation / Chat Bot</strong> above Randomized Action. A randomized source copies its Action Sets; a flat Chat Bot or Automation becomes one Action Set so Send Message stays on the set (not the Chat Bot parent Response field). Play Sound files are copied onto this rule. <strong>Extract</strong> on a set creates a standalone Automation for reuse and copies that set&apos;s sounds onto the new rule.</p>
-          <p><strong>Import .txt</strong> turns a list of chat lines into Action Sets (UTF-8, one non-empty line per set). The file is copied in - it is not watched on disk. Append keeps existing sets; Replace wipes them (you get an extra confirm if any set has actions besides Send Message). If you already have Action Sets, <strong>Edit lines</strong> opens a popup generated from those sets so you can search, edit or add a line in place, or edit-as-text. Ctrl+click and Shift+click select more than one line to delete. Double-click a line to close the popup and jump to that set&apos;s Actions. <strong>Export .txt</strong> writes Send Message templates for sets where Send Message is on, one per line. Hundreds of rotating lines still share the same Twitch chat rate limit.</p>
+        </section>
+        <section class="section" id="import">
+          <h2>Import, edit, and export lines</h2>
+          <p>The three buttons under the Action Set picker work with <strong>Send Message</strong> only: one non-empty line becomes one Action Set. Import copies the file into the rule. ISB Suite does not keep watching that .txt on disk, so later edits to the file do nothing until you import again. UTF-8. Empty lines are skipped. Commas, variables, and duplicate lines are kept. Hundreds of rotating lines still share the same Twitch chat rate limit.</p>
+          <h3>Import .txt</h3>
+          <p>Click <strong>Import .txt</strong>, pick a file, then review it in the <strong>Import lines</strong> dialog. You can still edit the text, choose Append or Replace, and optionally copy extras from the Action Set that was selected.</p>
+          <figure class="visual">
+            <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomized-action-import-lines.png" alt="Import lines dialog with a list of Send Message lines, Append or Replace, and Copy other actions" />
+            <figcaption>Import lines: review the .txt, choose Append or Replace, optionally copy extras from the selected set, then Import.</figcaption>
+          </figure>
+          <ol class="steps">
+            <li>Optional: select an Action Set first if you want imported lines to copy that set&apos;s extras (sound, TTS, wheel, counters). The copy checkbox is disabled until a set is selected.</li>
+            <li>Click <strong>Import .txt</strong>. A file picker titled <strong>Import Action Set lines</strong> opens (*.txt, or any file).</li>
+            <li>After you pick a file, an <strong>Import lines</strong> dialog shows the file text so you can still edit it. The line count at the bottom is how many Action Sets will be created.</li>
+            <li>Choose <strong>Append to current Action Sets</strong> (keep what you have) or <strong>Replace current Action Sets</strong> (wipe them first).</li>
+            <li>Optional: check <strong>Copy other actions from the selected set</strong>. Each imported line gets that set&apos;s extras, then Send Message is overwritten with that line.</li>
+            <li>Click <strong>Import</strong>. Importing 50 or more lines asks for a second confirm. Replace also warns if any current set has actions besides Send Message (those extras would be dropped).</li>
+          </ol>
+          <p>An empty file (or only blank lines) shows <strong>No lines to import</strong> and never opens the dialog.</p>
+          <h3>Edit lines</h3>
+          <p><strong>Edit lines</strong> opens the <strong>Action Set lines</strong> window from the sets you already have. You do not need a file first. Search, add, or import more lines here, then double-click a line to jump to that set&apos;s Actions and attach a sound, TTS, or wheel.</p>
+          <figure class="visual">
+            <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomized-action-edit-lines.png" alt="Action Set lines window with numbered Send Message lines, search, Import .txt, Export .txt, and Edit as text" />
+            <figcaption>Action Set lines: search and edit Send Message rows. Double-click a line to jump to that set&apos;s Actions.</figcaption>
+          </figure>
+          <ul>
+            <li>Search the list. Click a line to edit it in place, or <strong>Add line</strong> for a new set.</li>
+            <li>Double-click a line to close the window and jump to that set&apos;s Actions (attach a sound, TTS, or wheel on that set only).</li>
+            <li>Ctrl+click and Shift+click select more than one line, then <strong>Delete</strong>.</li>
+            <li>The same <strong>Import .txt</strong> / <strong>Export .txt</strong> buttons are in this window.</li>
+            <li><strong>Edit as text</strong> shows every Send Message as a plain list (one line per set). <strong>Apply text</strong> writes that order back; extra lines become new sets. <strong>Show list</strong> returns to the searchable list without applying.</li>
+          </ul>
+          <h3>Export .txt</h3>
+          <p><strong>Export .txt</strong> writes Send Message templates for sets where Send Message is on, one per line (file picker titled <strong>Export Action Set lines</strong>, default name <code>action-set-lines.txt</code>). Sets with Send Message off are skipped. If none have a Send Message, export is refused.</p>
         </section>
         <section class="section" id="sets">
           <h2>Action Sets</h2>
@@ -114,7 +147,7 @@
           <ul>
             <li><strong>Mystery prize redeem</strong> - Channel points -&gt; three sets: Start Wheel Session on Prize Wheel, a sound+TTS hype pack, and Run Alert - with no-repeat so viewers cycle the pool.</li>
             <li><strong>Raid variety</strong> - Raid automation -&gt; several Play Sound + Send Message sets so back-to-back raids do not feel identical.</li>
-            <li><strong>Rotating chat lines</strong> - Import a .txt of hype lines, or open Edit lines from the sets you already have, then search and double-click a line to attach a sound or TTS.</li>
+            <li><strong>Rotating chat lines</strong> - Import a .txt of hype lines (file picker, then the Import lines dialog), or open Edit lines from the sets you already have, then search and double-click a line to attach a sound or TTS.</li>
             <li><strong>Shop roulette</strong> - Viewer Points item -&gt; sets that each Start Wheel Session on a different preset plus a unique chat line.</li>
           </ul>
         </section>

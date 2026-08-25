@@ -5,7 +5,7 @@ A full-featured stream overlay suite for Twitch streamers. Spin wheels, run give
 ![Windows](https://img.shields.io/badge/Windows-10%2B-blue?logo=windows)
 [![Latest Release](https://img.shields.io/github/v/release/Thadestroy/ISBSuiteReleases?label=Download)](https://github.com/Thadestroy/ISBSuiteReleases/releases/latest)
 
-> **ISB Suite is an ongoing project.** Feedback, bug reports, and feature ideas are fully welcomed. [Open an issue](https://github.com/Thadestroy/ISBSuiteReleases/issues) to report a bug or request a feature. To talk setups and share how you use ISB Suite, [join the Discord](https://discord.gg/w834PyCCgb).
+> **ISB Suite is an ongoing project.** Feedback, bug reports, and feature ideas are fully welcomed. [Open an issue](https://github.com/Thadestroy/ISBSuiteReleases/issues) to report a bug or request a feature. To talk setups and share how you use ISB Suite, [join the Discord](https://discord.gg/w834PyCCgb). Step-by-step feature guides: [ISB Suite docs](https://thadestroy.github.io/ISBSuiteReleases/docs/).
 
 ---
 
@@ -102,8 +102,8 @@ Animated on-screen alerts for stream events, displayed in the Alert Box widget o
 
 **Twitch Alerts**
 - Follow, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver
-- Bits / Cheer, Raid, Hype Train End, Goal Achieved
-- Ad Break, Shoutout Received, Channel Point Redemption
+- Bits / Cheer, Raid, Hype Train End, Hype Train Level Up, Goal Achieved
+- Ad Break (optional pre-warnings and welcome-back), Shoutout Received, Stream Went Live, Channel Point Redemption
 - New Subscription and Resubscription follow Twitch chat announcements (a silent payment / badge change with no chat notice does not fire a New Subscription alert)
 - Subscription Gifter is gifter-linked (bulk count). Subscription Gift Receiver fires once per recipient (`{user}` = gifted viewer, `{gifter}` = gifter)
 
@@ -164,6 +164,7 @@ Design exactly what gets captured by your streaming software using the built-in 
 | **Browser Source** | Renders a live web page (URL) inside the capture, like an OBS/Streamlabs browser source |
 | **Random Image Picker** | Displays one randomly chosen image from a Random Image Picker; re-rolled by the "Randomize Image Picker" automation action |
 | **Timer Widget** | Delay-queue countdown or Live Clock (Subathon); see [Timer Widget](#timer-widget) |
+| **Goals** | Live Community Goal progress bar; bind any goal and style the bar per placement |
 | **Character Playfield** | *(coming soon)* |
 
 ### Character Studio
@@ -177,9 +178,9 @@ Create a custom channel currency with a redeemable shop and point drops:
 - Customizable balance response, not-enough-points message, and redemption confirmation message
 
 **Earn Rules**
-- Automatically award points on a schedule while viewers are present in chat during a live stream
-- **Watching (live presence):** set an interval (e.g. every 5 minutes) and how many points to award
-- Requires **Stats ? Watch Time** to be enabled (uses the same live chat presence poll)
+- **Watching (live presence):** award on a schedule while viewers are in chat during a live stream. Requires **Stats > Watch Time** (same live chat presence poll)
+- **Event rules:** chat, follow, sub, resub, gift (gifter and receiver), raid, bits, and channel-point redemption. Gift bombs pay the gifter once per gifted sub. Bits, raid, and gift count support At least / Exactly (leave blank for every event). Tiltify donations are not an earn trigger
+- **Watching**, **Subscription**, and **Resubscription** can add extra points for current T1 / T2 / T3 subscribers (Prime counts as T1). Set the base to 0 if only subscribers should earn
 
 **Viewer Commands**
 - **Balance command:** viewers type `!points` (or your custom command) to check their balance
@@ -223,9 +224,11 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Follow | Any new follow |
 | Raid | Any raid, or with minimum viewer count |
 | Hype Train End | Any level, or minimum level |
+| Hype Train Level Up | Once per level increase; any level, or at least / exact |
 | Goal Achieved | Any goal type, or filtered by type string |
-| Ad Break | Any duration, or a specific ad length; optional chat warnings a few minutes before the scheduled ad (same style as giveaway countdown reminders) |
+| Ad Break | Any duration, or a specific ad length; optional chat warnings before the ad; optional welcome-back when ads end |
 | Shoutout Received | Any shoutout from another broadcaster |
+| Stream Went Live | Once per broadcast (not on reconnect or mid-stream app restart with the same stream id) |
 | Custom Chat Command | Your own `!command` with permission level, optional cooldown, **aliases**, and optional **Match anywhere in message** |
 | Counter Tier Reached | When a viewer (per-user counter) or the channel (global counter) crosses upward into the next configured tier on a selected counter; fires once per tier gained if several thresholds are crossed in one increment |
 | Counter Value Changed | When a counter's value actually changes (once per change, not per unit); filter by increases / decreases / either way, and optionally by counter |
@@ -256,13 +259,15 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Run Chat Bot or Automation | Trigger another Automations rule or Chat Bot overview item (searchable; chains keep the original chatter's variables) |
 | Push Community Goal | Add progress to one or more goals; optional **Use amount from trigger** (Bits cheer or Chat Message Match `<amount>`) |
 
-**Cooldown & Limits:** Every automation can combine a time cooldown (None / Global / Per-User) with per-stream limits (max fires globally and/or per user; `0` = unlimited). Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for “on cooldown” vs “hit limit.” Channel Point redemptions: Twitch still accepts the redeem and charges points. ISB Suite only skips running the automation when blocked (reject/refund is not supported yet).
+**Cooldown & Limits:** Every automation can combine a time cooldown (None / Global / Per-User) with per-stream limits (max fires globally and/or per user; `0` = unlimited). Optional **burst**: if used N times within a window you set (for example 5 times in 30 seconds), a longer cooldown starts. The normal per-use duration is independent and can be off. Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for “on cooldown” vs “hit limit.” Channel Point redemptions: Twitch still accepts the redeem and charges points. ISB Suite only skips running the automation when blocked (reject/refund is not supported yet).
 
 **Command Aliases:** Chat command triggers accept alternate names that fire the same automation. Longer matching aliases win when several could match, and any leftover text after the alias becomes `{input}`.
 
 **Bypass Sound Queue:** play a sound immediately (overlapping) instead of waiting in queue.
 
-**Randomized Action:** Enable on any automation (or shop item / chat game) to define multiple action sets. Each trigger randomly runs one set ? uniform random, or **no repeat until all** so every set plays once before any repeats. Useful for varied hype sounds, rotating chat responses, or unpredictable wheel loads from a single command.
+**Randomized Action:** Enable on any automation (or shop item / chat game) to define multiple action sets. Each trigger randomly runs one set: uniform random, or **no repeat until all** so every set plays once before any repeats. Useful for varied hype sounds, rotating chat responses, or unpredictable wheel loads from a single command.
+
+**Import / Edit / Export lines:** On Randomized Action, **Import .txt** opens a file picker, then an **Import lines** dialog so you can still edit the text. Choose Append or Replace. Optional **Copy other actions from the selected set** copies that set's extras (sound, TTS, wheel) onto every imported line, then overwrites Send Message. **Edit lines** is a searchable list of the sets you already have (double-click a line to jump to that set's Actions; **Edit as text** for a plain list). **Export .txt** writes Send Message templates, one per line. The file is copied in; ISB Suite does not watch it on disk. Full steps: [Randomized Action](https://thadestroy.github.io/ISBSuiteReleases/docs/features/actions/randomized-action.html#import).
 
 **Timer:** Enable the Timer action to delay everything else on the rule until the countdown finishes. Link a Timer Widget preset to show the live countdown on your overlay while chat, alerts, and other deferred actions wait.
 
@@ -286,6 +291,7 @@ Track numbers that persist across streams:
 - **Global Counters:** single shared value (e.g., "Deaths This Stream", "Wheels Spun")
 - **Per-User Counters:** separate value per Twitch viewer (e.g., "Times Won", "Giveaway Entries")
 - On **Counter Stats**, each per-user counter card shows a **Total** in the header (sum of all users)
+- Optional **thousands separators** (`1,234`) per Number counter (off by default). Toggle on Stats, Counter Options, or Create Counter. Chat, alerts, TTS, and Discord use the same setting. Watch Time and CSV stay raw integers
 - Change from automations, entry actions, or viewer-points redemptions via **Counter Action**: **Change by** (signed number, ± another counter, or a rolled range) or **Set to** an absolute value (0 resets). Example: Change by −[tax pot] on a viewer's balance, then Set the pot to 0. Range amounts (e.g. −100 to 100) roll once each time the action fires. `{amount}` is the resolved amount from the first counter action.
 
 **Counter Tiers:** Any counter can have a tier ladder (e.g. 0 = Bronze, 10 = Silver, 50 = Gold). The active tier updates automatically as values change and is shown on the Stats page. Use `{counterTier}` in chat or alert templates after an increment action, on a **Counter Tier Reached** automation trigger (the tier that was just gained), or `{counterTier:CounterName}` to read any counter's **current** tier for that user.
@@ -295,14 +301,17 @@ Track numbers that persist across streams:
 ### Community Goals
 Track stream-wide milestones (bits, subs, follows, raids, chat bot lines, or manual pushes from automations). Managed in the **Community Goals** tab.
 
-- Set a limit and one or more **accumulation modes** (checkboxes; combine freely): **Manual**, **Twitch Data** (EventSub bits/subs/follows/raids), and/or **Chat Message**
+- Set a limit and one or more **accumulation modes** (checkboxes; combine freely): **Manual**, **Twitch Data** (EventSub bits/subs/follows/raids), **Chat Message**, and/or **Viewer Points**
 - **Chat Message** watches a specific chatter and a message pattern with `<amount>` (e.g. `used <amount> bits`). Useful for extension/Blerp bits that never fire as Twitch cheers (`CoolViewer used 25 bits to play ...` becomes +25). Prefer this *or* a Chat Message Match automation that pushes the same goal; do not use both, or progress doubles
+- **Viewer Points:** bind a currency so viewers spend 1:1 into the goal (optional contribute command such as `!goal 50`; same name as Check is fine). **Refund VP** credits those points without unwinding Goal Reached
+- When the limit is hit: **Carry Over**, **Zero Out**, or **Stop at limit** (bar stays full, Goal Reached fires once, further progress including VP contribute stops until Reset)
 - Automations can also use **Chat Message Match** plus **Push Community Goal** with **Use amount from trigger**
 - Optional **Check Command** per goal (e.g. `!bitsgoal`) so anyone in chat can ask for progress
 - Customizable response template. Default `{goalProgress}` replies like `15/100`
 - **Advanced Settings** on check commands (same as other chat commands): aliases, match anywhere, permission, cooldown, and per-stream limits
 - Check commands also appear on the **Chat Bot** overview; Edit opens that goal's settings
 - Trigger automations or Custom Alerts on **Community Goal Reached**
+- Place a **Goals** widget on Overlay Layout to show the bar on stream
 
 ### Chat Games
 Run mass-entry chat games where viewers join from chat, stake a counter value, and get independent or shared outcomes. Managed in the **Chat Games** tab; each game is its own rule with the same trigger and action building blocks as Automations.
@@ -420,6 +429,7 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 | `!givepoints @user amount` | Give your own points to another viewer |
 | `!gamble amount` | Wager points on a configurable win-chance roll (`amount`, `amount%`, or `all`; decimals allowed and round to a whole stake) |
 | `!giveaway` | Enter an active giveaway |
+| *goal contribute* | On a Community Goal with Viewer Points mode, type the contribute command plus a whole number (e.g. `!goal 50`) |
 | *any shop command* | Spend points on shop items you've configured |
 
 ### Mod & Broadcaster Commands
@@ -434,6 +444,7 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 | `!resumetimer {name}` | Resume a paused Live Clock |
 | `!addtime {name} {duration}` | Add time to a Live Clock (e.g. `5m`, `30s`, `1h`) |
 | `!removetime {name} {duration}` | Remove time from a Live Clock |
+| `!so @user` / `!shoutout` | Shout out a channel (Nightbot style). Customize the template in Chat Bot. Built in; does not use a Free chat command slot |
 | `!vpgive @user amount` | Give points to a viewer (admin give command) |
 | `!customcommand` | Any custom command you've set up in Automations |
 
@@ -450,7 +461,7 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 
 **Don't trigger from the broadcaster or linked bot:** On Chat Bot, Custom Alerts, Automations Chat Command, Chat Games start, and Saved Lists, an optional per-command toggle skips the streamer and a linked bot account (prefix or mid-message). Same rule either way you send chat. Off by default.
 
-**Permission, cooldown & limits:** Viewer Points commands (including shop redeem and point-drop claim), Chat Game join, Community Goal check commands, and related editors share one Advanced Settings block for permission, time cooldown, and per-stream limits (with optional chat replies). New limit fields default to unlimited; existing cooldowns keep working.
+**Permission, cooldown & limits:** Viewer Points commands (including shop redeem and point-drop claim), Chat Game join, Community Goal check and contribute commands, and related editors share one Advanced Settings block for permission, time cooldown (optional burst after N uses in a window), and per-stream limits (with optional chat replies). New limit fields default to unlimited; existing cooldowns keep working.
 
 ---
 
@@ -461,6 +472,7 @@ Use these in chat messages, alert text, and TTS text. In the app, the Variables 
 | Variable | Value |
 |----------|-------|
 | `{user}` | Display name of the user who triggered the event (Subscription Gift Receiver: the recipient) |
+| `{randomViewer}` | Random current chatter's display name (including the linked bot). Same name for every use on one fire. Only fills while live; empty chat or offline substitutes nothing |
 | `{gifter}` | Gifter display name (Subscription Gift Receiver only) |
 | `{winner}` | The winning wheel entry's text (also works in automations triggered by a wheel entry win) |
 | `{entry}` | Alias for `{winner}` (wheel); Saved Lists use `{entry}` for list entry text |
@@ -513,12 +525,14 @@ Create and customize wheels from the **Wheel Editor** tab.
 - **Allow `!join` from Chat:** let viewers add themselves via chat
 - **Remove Winners After Spin:** auto-removes the winner slice so it can't win twice
 - **Allow Duplicates:** permit the same name on the wheel more than once
+- **Equal slice sizes (visual only):** draw every slice the same size; the % column (real odds) stays as set. Use **Reset Chances** when you want equal weights
 - **Announce Winner in Chat:** send the winner message to Twitch chat automatically
 - **Custom Winner Message:** override the default `The winner is: {winner}!` template
 
 ### Managing Entries
 - Add entries one at a time with **+ Add Entry**
 - Bulk import from text with **Bulk Import** (one entry per line)
+- **Reset Chances** sets unlocked entries to equal chance (this changes real odds). Use **Equal slice sizes (visual only)** when you want the wheel to look even without changing those percentages
 - Edit text, color, and per-entry actions for each entry
 - Duplicate entries to quickly create similar ones
 
@@ -547,6 +561,7 @@ ISB Suite renders your overlay in its own window with a transparent background. 
 - Use layout hotkeys to switch between multiple named layouts without touching your streaming software
 - Make sure the Window is capturing "ISBSuite.exe: ISB Suite - Capture"
 - Verify that the Capture Method is using "Windows 10"
+- After an ISB Suite update, Window Capture should rematch the Capture window without changing Window Match Priority
 
 ---
 
@@ -569,6 +584,7 @@ ISB Suite renders your overlay in its own window with a transparent background. 
 | **Duel Chat Game** | Chat Games preset: `!duel user amount`, opponent `!accept` / `!decline`; 50/50 stake transfer |
 | **Solo Gamble** | Chat Games preset: per-viewer win/lose roll with separate Win and Lose action phases |
 | **Random Hype Sound** | Automation with Randomized Action and 3 action sets, each playing a different sound |
+| **Rotating chat lines** | Randomized Action: **Import .txt** of hype lines (file picker, then Import lines dialog); **Edit lines** to attach a sound per line |
 | **Live leaderboard in chat** | Custom command or timer automation: `Top 5: {top5Counter:Wins}` on a per-user counter |
 | **Subathon Countdown** | Automation with the **Live Timer** action driving a Live Clock on a Timer Widget — not the delay-queue Timer. Optional Live Timer Ended trigger for natural zero |
 | **Custom Alert on tier up** | Custom Alert: Counter Tier Reached shows a GIF and TTS when a viewer hits Gold |
@@ -636,17 +652,26 @@ Access via the **Viewer Points** tab.
 5. Add shop items viewers can spend points on
 
 ### Earn Rules
-On each currency's editor, open **Earn Rules** and click **+ Add Earn Rule**.
+On each currency's editor, open **Earn Rules** and click **+ Add Earn Rule**. Points always go to the viewer who earned them, not to everyone in chat.
 
-**Watching (live presence)** ? award points on a timer while a viewer is in chat during a live stream:
+**Watching (live presence)** awards points on a timer while a viewer is in chat during a live stream:
 1. Set **Rule Name** and choose trigger **Watching (live presence)**
 2. **Award every:** interval (seconds, minutes, or hours)
-3. **Points to Award:** how many points per interval
-4. Save the currency
+3. **Points they earn:** how many points per interval
+4. Optional extras for current **Tier 1**, **Tier 2**, and **Tier 3** subscribers live under **Advanced Settings** (added on top of the base). Prime counts as Tier 1. Set the base to 0 if only subscribers should earn. The same extras can be set on Subscription and Resubscription event rules.
+5. Save the currency
 
-**Prerequisite:** enable **Stats ? Watch Time** and ensure Twitch is connected with the `moderator:read:chatters` scope (reconnect in Settings if watch-time accrual is paused). Watching earn rules use the same once-per-minute live poll as watch time. If Watch Time is off, the app prompts you to enable it before adding or saving an **enabled** Watching rule.
+**Prerequisite:** enable **Stats > Watch Time** and ensure Twitch is connected with the `moderator:read:chatters` scope (reconnect on **Integrations** if watch-time accrual is paused). Watching earn rules use the same once-per-minute live poll as watch time. If Watch Time is off, the app prompts you to enable it before adding or saving an **enabled** Watching rule. Other earn triggers do not need Watch Time.
 
-> Additional earn triggers (chat messages, follows, subs, bits, raids, etc.) are planned for a future update.
+**Event triggers** (same family Automations already see, when the event carries a Twitch user id):
+- **Chat Message** - after N chat messages (commands like `!points` do not count)
+- **Follow**, **Subscription**, **Resubscription**
+- **Subscription Gifter** - once per gifted sub (a bomb of 5 awards 5 times). Optional gift count with At least or Exactly
+- **Subscription Gift Receiver**
+- **Raid** / **Bits** - optional count or amount with At least or Exactly
+- **Channel Point Redemption** - optional reward name; leave blank for every reward
+
+Tiltify donations are not an earn trigger: they do not identify a Twitch viewer.
 
 ### Point Drops (Detailed)
 Configure drops under the **Point Drops** sub-tab:

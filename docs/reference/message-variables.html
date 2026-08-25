@@ -82,7 +82,7 @@
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td><code>{user}</code></td><td>Viewer&apos;s display name (requires a Twitch trigger)</td></tr>
-              <tr><td><code>{randomViewer}</code></td><td>Random current chatter&apos;s display name (anyone in chat now, including the linked bot). Empty when chat is empty. Repeated uses in one message share the same name.</td></tr>
+              <tr><td><code>{randomViewer}</code></td><td>Random current chatter&apos;s display name (anyone in chat now, including the linked bot). Same name for every use in one message, and for chat, TTS, Discord, and alerts on the same fire. Only fills while the stream is live (same chatters list Watch Time uses). Empty chat or offline substitutes nothing.</td></tr>
               <tr><td><code>{displayName}</code></td><td>Alias for <code>{user}</code> (Follow Age / Watch Time)</td></tr>
               <tr><td><code>{winner}</code></td><td>Winning wheel entry text (also when an automation runs from a wheel entry win)</td></tr>
               <tr><td><code>{wheel}</code></td><td>Wheel / preset name</td></tr>
