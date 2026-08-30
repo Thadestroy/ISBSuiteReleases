@@ -63,6 +63,7 @@
             <li>Optional <strong>thousands separators</strong> (1,234) per Number counter. Toggle on Stats, Counter Options, or Create Counter. Off by default. Chat, alerts, TTS, and Discord use the same setting.</li>
             <li>Change from automations, entry actions, or viewer points via Counter Action.</li>
             <li>Leaderboard token: <code>{top5Counter:CounterName}</code> (per-user only).</li>
+            <li>Per-user <code>{counter:CounterName}</code> on a timer (no viewer) shows the Stats Total.</li>
             <li>CSV import accepts comma or semicolon (auto-detected).</li>
             <li>Free: 5 counters. Built-in system counters and counters referenced by other features are exempt. Full limits on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
           </ul>
@@ -117,6 +118,7 @@
         <section class="section" id="leaderboards">
           <h2>Leaderboards in chat</h2>
           <p>Use <code>{top5Counter:CounterName}</code> in any template to list the top 5 viewers on a per-user counter. Format: <code>1. Alice 100, 2. Bob 80, 3. Charlie 60, ...</code>. Empty when no data. Global counters do not support this token.</p>
+          <p>On Chat Bot timers and other messages with no triggering viewer, <code>{counter:CounterName}</code> on a per-user counter shows the Stats <strong>Total</strong> (same number as <code>{counterTotal:CounterName}</code>). A command or event that has a viewer still shows that viewer&apos;s value.</p>
           <p>Example: <code>Top 5: {top5Counter:Wins}</code>. See <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</p>
         </section>
 

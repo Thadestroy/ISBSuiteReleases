@@ -102,7 +102,7 @@ Animated on-screen alerts for stream events, displayed in the Alert Box widget o
 
 **Twitch Alerts**
 - Follow, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver
-- Bits / Cheer, Raid, Hype Train End, Hype Train Level Up, Goal Achieved
+- Bits / Cheer, Power-Up, Raid, Hype Train End, Hype Train Level Up, Goal Achieved
 - Ad Break (optional pre-warnings and welcome-back), Shoutout Received, Stream Went Live, Channel Point Redemption
 - New Subscription and Resubscription follow Twitch chat announcements (a silent payment / badge change with no chat notice does not fire a New Subscription alert)
 - Subscription Gifter is gifter-linked (bulk count). Subscription Gift Receiver fires once per recipient (`{user}` = gifted viewer, `{gifter}` = gifter)
@@ -179,7 +179,7 @@ Create a custom channel currency with a redeemable shop and point drops:
 
 **Earn Rules**
 - **Watching (live presence):** award on a schedule while viewers are in chat during a live stream. Requires **Stats > Watch Time** (same live chat presence poll)
-- **Event rules:** chat, follow, sub, resub, gift (gifter and receiver), raid, bits, and channel-point redemption. Gift bombs pay the gifter once per gifted sub. Bits, raid, and gift count support At least / Exactly (leave blank for every event). Tiltify donations are not an earn trigger
+- **Event rules:** chat, follow, sub, resub, gift (gifter and receiver), raid, bits (cheers and Power-Ups), and channel-point redemption. Gift bombs pay the gifter once per gifted sub. Bits, raid, and gift count support At least / Exactly (leave blank for every event). Tiltify donations are not an earn trigger
 - **Watching**, **Subscription**, and **Resubscription** can add extra points for current T1 / T2 / T3 subscribers (Prime counts as T1). Set the base to 0 if only subscribers should earn
 
 **Viewer Commands**
@@ -205,6 +205,7 @@ Create a custom channel currency with a redeemable shop and point drops:
 - Claim command supports **aliases** and optional **Match anywhere in message** (Advanced Settings)
 - Configurable spawn interval, spawn chance, display duration, claim slot range, and Points Per Claim
 - Spawn/claim messages support `{amount}` for the configured award
+- Optional already-claimed chat reply when a viewer tries to claim again on the same drop (one claim per viewer). Leave empty to stay silent
 - Supports "only when live" mode to skip during starting-soon screens
 
 ### Powerful Automation System
@@ -216,7 +217,8 @@ Connect any stream event to any action. Automations live in the **Automations** 
 |---------|---------|
 | Channel Point Redemption | Matches by reward title; auto-detects reward ID after first redemption |
 | Walk-on Sound | Fires on a viewer's first chat message per stream (leave username blank for every chatter, or name a specific person); blank and named can both fire; supports "only when live" |
-| Bits / Cheer | At-least or exact bit amount |
+| Bits / Cheer | At-least or exact bit amount (chat cheers only) |
+| Power-Up | Bits spent on Gigantify, Celebration, Message Effect, or custom Power-Ups; at-least or exact amount. Community goals and viewer-points Bits earn still count those bits |
 | Subscription Gifter | At-least or exact gift count (gifter is `{user}`) |
 | Subscription Gift Receiver | Once per recipient; recipient is `{user}`, gifter is `{gifter}` |
 | New Subscription | Any tier, or filtered by Tier 1/2/3 |
@@ -237,7 +239,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Chat Message Match | Specific chatter (e.g. a bits-sound bot) whose message matches a pattern with `<amount>` (e.g. `used <amount> bits`); that number becomes `{amount}` |
 | Timer / Interval | Repeating interval (Automations tab) |
 
-**Count each unit:** quantity triggers (Bits, Gift Subs, Raid, Hype Train, Tiltify, Chat Message Match) can expand one event into multiple runs (e.g. a 20-gift bomb runs 20 times, or every 100 bits). Off by default; the editor shows a live match + run-count preview.
+**Count each unit:** quantity triggers (Bits, Power-Up, Gift Subs, Raid, Hype Train, Tiltify, Chat Message Match) can expand one event into multiple runs (e.g. a 20-gift bomb runs 20 times, or every 100 bits). Off by default; the editor shows a live match + run-count preview.
 
 **Multi-trigger support:** one automation can respond to multiple different trigger types simultaneously.
 
@@ -257,7 +259,9 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Live Timer | Drive a Live Clock on a Timer Widget (Starts at + per-trigger Add / Start / Ignore table). Applies immediately, even alongside a delay Timer |
 | Randomized Action | Pick one of several action sets at random (different sounds, messages, wheels, etc.) |
 | Run Chat Bot or Automation | Trigger another Automations rule or Chat Bot overview item (searchable; chains keep the original chatter's variables) |
-| Push Community Goal | Add progress to one or more goals; optional **Use amount from trigger** (Bits cheer or Chat Message Match `<amount>`) |
+| Push Community Goal | Add progress to one or more goals; optional **Use amount from trigger** (Bits cheer, Power-Up bits, or Chat Message Match `<amount>`) |
+| Enable / Disable | Search Overview items by type or name (Chat Bot, Automations, Alerts, shop, currencies, point drops, Community Goals, Saved Lists) and enable or disable that list immediately |
+| Spotify | Pause, resume, skip, shuffle, repeat, queue, play now, or Pause Then Resume At End on the connected Spotify app (hidden until you Connect) |
 
 **Cooldown & Limits:** Every automation can combine a time cooldown (None / Global / Per-User) with per-stream limits (max fires globally and/or per user; `0` = unlimited). Optional **burst**: if used N times within a window you set (for example 5 times in 30 seconds), a longer cooldown starts. The normal per-use duration is independent and can be off. Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for “on cooldown” vs “hit limit.” Channel Point redemptions: Twitch still accepts the redeem and charges points. ISB Suite only skips running the automation when blocked (reject/refund is not supported yet).
 
@@ -285,6 +289,7 @@ Automated chat messages driven by the same rule engine as Automations, managed i
 - Post scheduled or event-driven messages with variable substitution
 - Share the same trigger and action building blocks as Automations
 - Overview enable/disable lights also cover Chat Game start/join, Viewer Points commands, and Community Goal check command cards (same as other Chat Bot rows)
+- **Export Commands** on Overview saves a CSV of every command card on the page (channel commands, timed messages, built-ins, Chat Games, Viewer Points, Community Goals, Saved Lists, Live Timer). Aliases are listed in Description. Saved Lists export both Read and Add. The file is not an import.
 
 ### Counter System
 Track numbers that persist across streams:
@@ -301,7 +306,7 @@ Track numbers that persist across streams:
 ### Community Goals
 Track stream-wide milestones (bits, subs, follows, raids, chat bot lines, or manual pushes from automations). Managed in the **Community Goals** tab.
 
-- Set a limit and one or more **accumulation modes** (checkboxes; combine freely): **Manual**, **Twitch Data** (EventSub bits/subs/follows/raids), **Chat Message**, and/or **Viewer Points**
+- Set a limit and one or more **accumulation modes** (checkboxes; combine freely): **Manual**, **Twitch Data** (several EventSub sources at once: Bits / Cheer, Power-Up, New / Resub / Gifted, follows, raids), **Chat Message**, and/or **Viewer Points**
 - **Chat Message** watches a specific chatter and a message pattern with `<amount>` (e.g. `used <amount> bits`). Useful for extension/Blerp bits that never fire as Twitch cheers (`CoolViewer used 25 bits to play ...` becomes +25). Prefer this *or* a Chat Message Match automation that pushes the same goal; do not use both, or progress doubles
 - **Viewer Points:** bind a currency so viewers spend 1:1 into the goal (optional contribute command such as `!goal 50`; same name as Check is fine). **Refund VP** credits those points without unwinding Goal Reached
 - When the limit is hit: **Carry Over**, **Zero Out**, or **Stop at limit** (bar stays full, Goal Reached fires once, further progress including VP contribute stops until Reset)
@@ -389,13 +394,21 @@ Each wheel entry can have its own actions when it wins:
 
 ## Integrations
 
-Manage all connections from the **Integrations** page. **Twitch** is the only integration most streamers need. Everything else is optional.
+Manage all connections from the **Integrations** page. **Twitch** is the integration most streamers need. Spotify, Tiltify, and Discord are optional.
 
 ### Twitch
 - Sign in with your Twitch account using device-code OAuth (no manual token copy-paste)
 - Grants chat read/write and EventSub access
 - **Chat:** reads commands and sends bot messages
-- **EventSub:** receives channel points, follows, subs, raids, bits, hype train, goals, ad breaks, shoutouts
+- **EventSub:** receives channel points, follows, subs, raids, bits, Power-Ups, hype train, goals, ad breaks, shoutouts
+
+### Spotify *(optional)*
+- Guided setup: your own Spotify Developer app and Client ID (no secret), then **Connect with Spotify**. Requires Spotify Premium
+- ISB Suite commands the Spotify app on your PC. It never plays Spotify audio itself
+- Automations can pause, resume, skip, shuffle, repeat, queue a track, play now, or **Pause Then Resume At End** (pauses before Play Sound, then resumes when that rule's sound, TTS, alert overlay, or auto-spin wheel finishes)
+- Queue / Play now accept a song name, an open.spotify.com/track link, or a `spotify:track:` URI. Album and playlist links are not supported
+- Built-in `!sr` / `!songrequest` and `!remove` / `!removesong` stay hidden until you Connect. Set command, permission, cooldown, confirm reply, and per-viewer queue caps (default 5) from Integrations, Spotify, Song Request
+- Full steps: [Spotify](https://thadestroy.github.io/ISBSuiteReleases/docs/features/integrations.html)
 
 ### Tiltify *(optional)*
 - Connect a Tiltify charity campaign via OAuth
@@ -429,6 +442,8 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 | `!givepoints @user amount` | Give your own points to another viewer |
 | `!gamble amount` | Wager points on a configurable win-chance roll (`amount`, `amount%`, or `all`; decimals allowed and round to a whole stake) |
 | `!giveaway` | Enter an active giveaway |
+| `!sr` / `!songrequest` | Queue a song on the connected Spotify app (hidden until you Connect). Default permission Everyone. Per-viewer cap default is 5 |
+| `!remove` / `!removesong` | Undo that chatter's last `!sr` (last in, first out). Spotify cannot delete a queued song; ISB Suite skips it when it would play |
 | *goal contribute* | On a Community Goal with Viewer Points mode, type the contribute command plus a whole number (e.g. `!goal 50`) |
 | *any shop command* | Spend points on shop items you've configured |
 
@@ -450,6 +465,7 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 
 **Permission levels for custom commands:**
 - **Everyone:** any viewer
+- **Followers+:** followers, plus subs, VIPs, mods, and the broadcaster
 - **Subscribers:** subs, VIPs, mods, broadcaster
 - **VIPs:** VIPs, mods, broadcaster
 - **Moderators:** mods and broadcaster only
@@ -480,7 +496,7 @@ Use these in chat messages, alert text, and TTS text. In the app, the Variables 
 | `{amount}` | Shared numeric value for chat/TTS and alerts: Counter Value Changed abs-delta, wired Counter Action amount, community-goal delta, bits, raid/shoutout viewers, resub months, gift count, hype level, or ad seconds (one matched trigger per fire). Prefer `{bits}` / `{subs}` when those apply. There is no separate `{months}` or `{viewers}` token |
 | `{message}` | Alert overlay text typed by the viewer (same source as `{input}`) |
 | `{input}` | User message or leftover text after a command / alias |
-| `{bits}` | Bits cheered (Bits trigger) |
+| `{bits}` | Bits spent (Bits / Cheer or Power-Up trigger) |
 | `{subs}` | Sub or gift count |
 | `{reward}` | Channel point reward title |
 | `{count}` / `{value}` | Counter value after the current change (first Counter Action row, or trigger counter on tier/CVC fires) |
@@ -668,7 +684,7 @@ On each currency's editor, open **Earn Rules** and click **+ Add Earn Rule**. Po
 - **Follow**, **Subscription**, **Resubscription**
 - **Subscription Gifter** - once per gifted sub (a bomb of 5 awards 5 times). Optional gift count with At least or Exactly
 - **Subscription Gift Receiver**
-- **Raid** / **Bits** - optional count or amount with At least or Exactly
+- **Raid** / **Bits** - optional count or amount with At least or Exactly. Bits earn includes Power-Up spends
 - **Channel Point Redemption** - optional reward name; leave blank for every reward
 
 Tiltify donations are not an earn trigger: they do not identify a Twitch viewer.

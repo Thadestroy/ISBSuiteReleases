@@ -66,7 +66,7 @@
 
         <section class="section" id="picker">
           <h2>In-app picker</h2>
-          <p>The Variables button on template fields groups tokens that apply to the current editor:</p>
+          <p>The Variables button on template fields is the catalog (there is no token list under the box). It groups tokens that apply to the current editor:</p>
           <ul>
             <li><strong>Active for this trigger</strong> - tokens supplied by the current automation/alert trigger or host (for example Counter Tier Reached, or dice <code>{roll}</code> / <code>{outcome}</code>)</li>
             <li><strong>This screen</strong> - tokens registered for that template family (Saved List, Chat Game, Follow Age, and so on)</li>
@@ -90,7 +90,7 @@
               <tr><td><code>{message}</code></td><td>Alert overlay text typed by the viewer (same source as <code>{input}</code>)</td></tr>
               <tr><td><code>{reward}</code></td><td>Channel point reward title</td></tr>
               <tr><td><code>{input}</code></td><td>User message or leftover text after a command / alias</td></tr>
-              <tr><td><code>{bits}</code></td><td>Bits cheered (Bits trigger)</td></tr>
+              <tr><td><code>{bits}</code></td><td>Bits spent (Bits / Cheer or Power-Up trigger)</td></tr>
               <tr><td><code>{subs}</code></td><td>Sub or gift count (Sub / Resub / Gift Sub)</td></tr>
               <tr><td><code>{tier}</code></td><td>Sub tier: 1, 2, or 3</td></tr>
               <tr><td><code>{gifter}</code></td><td>Gifter display name (Subscription Gift Receiver; <code>{user}</code> is the recipient)</td></tr>
@@ -107,7 +107,7 @@
               <tr><td><code>{value}</code></td><td>Alias for <code>{count}</code></td></tr>
               <tr><td><code>{oldValue}</code></td><td>Counter value before a Counter Value Changed trigger (same thousands-separator setting as <code>{count}</code>)</td></tr>
               <tr><td><code>{delta}</code></td><td>Signed amount the counter changed by (same thousands-separator setting as <code>{count}</code>)</td></tr>
-              <tr><td><code>{counter:Name}</code></td><td>Value of a named counter (for example <code>{counter:Wins}</code>). Per-user counters resolve for the triggering viewer. After a Counter Action on the same fire, uses that fire&apos;s post-update value for every updated row; otherwise the live current value. Uses thousands separators when that counter has the option enabled</td></tr>
+              <tr><td><code>{counter:Name}</code></td><td>Value of a named counter (for example <code>{counter:Wins}</code>). Per-user counters resolve for the triggering viewer when the message has one; with no user (Chat Bot timers, Stream Went Live) they use the Stats Total, same as <code>{counterTotal:Name}</code>. After a Counter Action on the same fire, uses that fire&apos;s post-update value for every updated row; otherwise the live current value. Uses thousands separators when that counter has the option enabled</td></tr>
               <tr><td><code>{counterTier}</code></td><td>Tier for the wired (first) counter action, or the tier just gained on Counter Tier Reached</td></tr>
               <tr><td><code>{counterTier:Name}</code></td><td>Tier label for a named counter. After a Counter Action on the same fire, uses the tier for that fire&apos;s post-update value; otherwise a live lookup</td></tr>
               <tr><td><code>{top5Counter:Name}</code></td><td>Top 5 for a per-user counter: <code>1. Name value, 2. Name value, ...</code> (thousands separators when that counter has the option enabled)</td></tr>
@@ -121,7 +121,7 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
-              <tr><td><code>{balance}</code></td><td>User&apos;s current point balance</td></tr>
+              <tr><td><code>{balance}</code></td><td>User&apos;s current point balance (thousands separators when the backing counter has them on)</td></tr>
               <tr><td><code>{currencyName}</code></td><td>Currency display name</td></tr>
               <tr><td><code>{price}</code></td><td>Cost of the redeemable shop item</td></tr>
               <tr><td><code>{itemName}</code></td><td>Redeemable item name</td></tr>
@@ -192,6 +192,9 @@
               <tr><td><code>{watchtime}</code></td><td>Formatted watch time (for example <code>2d 5h 13m</code>)</td></tr>
               <tr><td><code>{login}</code></td><td>Twitch login for the shoutout target (used in <code>https://twitch.tv/{login}</code>)</td></tr>
               <tr><td><code>{game}</code></td><td>Also used by <code>!so</code> for the target channel&apos;s last Twitch category (same token as Saved Lists)</td></tr>
+              <tr><td><code>{track}</code></td><td>Spotify track title for <code>!sr</code> / <code>!remove</code></td></tr>
+              <tr><td><code>{artist}</code></td><td>Spotify artist for <code>!sr</code> / <code>!remove</code></td></tr>
+              <tr><td><code>{cap}</code></td><td>That viewer's song-request queue cap (at-cap <code>!sr</code> reply)</td></tr>
             </tbody>
           </table></div>
         </section>
@@ -247,6 +250,7 @@
           <ul>
             <li>Wheel win: <code>Congrats {user}! The wheel landed on {winner}! You&apos;ve won {count} times total ({counterTier}).</code></li>
             <li>Leaderboard: <code>Top 5: {top5Counter:Wins}</code> on a per-user counter</li>
+            <li>Timer / no-user per-user stat: <code>Wins so far: {counter:Wins}</code> (Stats Total)</li>
             <li>Aggregate total: <code>All wins combined: {counterTotal:Wins}</code></li>
             <li>Goal check response: <code>{goalName}: {goalProgress}</code> - for example <code>Subathon Bits: 15/100</code></li>
             <li>Goal contribute success: <code>@{user} contributed {amount} to {goalName}! {goalProgress} ({balance} remaining)</code></li>
@@ -264,7 +268,7 @@
             <li>Use <strong>global</strong> counters for stream-wide stats (deaths, total spins).</li>
             <li>Use <strong>per user</strong> counters to track viewer participation.</li>
             <li>Enable <strong>Counter Tiers</strong> on the Stats page to label milestones (Bronze / Silver / Gold, rank names, and so on).</li>
-            <li>Show values with <code>{count}</code> (first Counter Action row after a change, or on a tier trigger) or <code>{counter:CounterName}</code> (any counter; uses this fire&apos;s post-update value when that counter was just updated).</li>
+            <li>Show values with <code>{count}</code> (first Counter Action row after a change, or on a tier trigger) or <code>{counter:CounterName}</code> (any counter; triggering viewer when present, otherwise the Stats Total on timers; uses this fire&apos;s post-update value when that counter was just updated).</li>
             <li>Turn on <strong>thousands separators</strong> (1,234) per counter on Stats, Counter Options, or Create Counter so Stats and chat/alert tokens match. Off by default. Watch Time and CSV stay unchanged.</li>
             <li>Announce the tier a viewer just reached with <code>{counterTier}</code> on a Counter Tier Reached automation; use <code>{counterTier:CounterName}</code> for their current tier on that counter.</li>
             <li>Announce a per user leaderboard with <code>{top5Counter:CounterName}</code>.</li>

@@ -113,7 +113,7 @@
             <li><strong>Subscription Gifter</strong> - points go to the gifter, once per gifted sub (a bomb of 5 gifts awards 5 times). Optional gift count with At least or Exactly; leave blank for every gift</li>
             <li><strong>Subscription Gift Receiver</strong> - points go to the person who received the gifted sub</li>
             <li><strong>Raid</strong> - points go to the raider. Optional raider count with At least or Exactly; leave blank for every raid</li>
-            <li><strong>Bits</strong> - points go to the cheerer. Optional bit amount with At least or Exactly; leave blank for every cheer</li>
+            <li><strong>Bits</strong> - points go to the viewer who spent bits (chat cheer or Power-Up). Optional bit amount with At least or Exactly; leave blank for every spend</li>
             <li><strong>Channel Point Redemption</strong> - points go to the redeemer. Optional reward name; leave blank for every reward</li>
           </ul>
           <p>Tiltify donations are not an earn trigger: they do not identify a Twitch viewer, so points cannot attach to a real account.</p>
@@ -154,9 +154,10 @@
             <li><strong>Points per claim:</strong> how many viewer points each successful claim awards (default 1).</li>
             <li><strong>Drop image/GIF:</strong> shown in the Point Drop widget on your overlay.</li>
             <li>Optional claim sound with volume control.</li>
+            <li>Optional already-claimed chat message when a viewer tries to claim again on the same drop (one claim per viewer). Leave the field empty to stay silent.</li>
             <li>Supports only-when-live mode to skip starting-soon screens.</li>
           </ul>
-          <p>Spawn and claim messages can use <code>{amount}</code> for points per claim, <code>{pool}</code> / <code>{claimsLeft}</code> for claim slots, and <code>{pointsPool}</code> / <code>{pointsLeft}</code> for total/remaining points (slots x amount). Prefer <code>{pointsLeft}</code> when Points per claim is greater than 1 so chat does not look like a slot count. An <strong>active</strong> drop is frozen at spawn: claim amount, claim slots, claim command, and chat templates stay as they were when that drop appeared. Saving the Point Drop editor updates the stored config for the <strong>next</strong> spawn only. Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/point-drop.html">Overlay Layout - Point Drop</a>, <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a> (Watch Time), <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
+          <p>Spawn, claim, already-claimed, and expiry messages can use <code>{amount}</code> for points per claim, <code>{pool}</code> / <code>{claimsLeft}</code> for claim slots, and <code>{pointsPool}</code> / <code>{pointsLeft}</code> for total/remaining points (slots x amount). Prefer <code>{pointsLeft}</code> when Points per claim is greater than 1 so chat does not look like a slot count. An <strong>active</strong> drop is frozen at spawn: claim amount, claim slots, claim command, and chat templates stay as they were when that drop appeared. Saving the Point Drop editor updates the stored config for the <strong>next</strong> spawn only. Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/point-drop.html">Overlay Layout - Point Drop</a>, <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a> (Watch Time), <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>

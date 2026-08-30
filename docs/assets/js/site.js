@@ -81,8 +81,8 @@
     {
       title: "Start Wheel Session action",
       url: "/features/actions/start-wheel-session.html",
-      blurb: "Load a wheel preset and optionally auto-spin",
-      keywords: "start wheel session load spin auto-spin preset",
+      blurb: "Load a wheel preset; auto-spin on by default",
+      keywords: "start wheel session load spin auto-spin preset default",
     },
     {
       title: "Play Sound action",
@@ -107,6 +107,12 @@
       url: "/features/actions/discord-webhook.html",
       blurb: "Post to named Discord webhooks",
       keywords: "discord webhook webhook message announce",
+    },
+    {
+      title: "Spotify action",
+      url: "/features/actions/spotify.html",
+      blurb: "Pause, skip, queue, or play now on the official Spotify app",
+      keywords: "spotify pause skip shuffle repeat queue play now song request !sr !remove !removesong premium connect",
     },
     {
       title: "Counter Action",
@@ -166,7 +172,7 @@
       title: "Automations",
       url: "/features/automations.html",
       blurb: "Triggers, actions, cooldowns, chains, randomized sets",
-      keywords: "automation trigger action channel points bits walk-on timer discord webhook run alert randomized chain bypass sound queue",
+      keywords: "automation trigger action channel points bits walk-on timer discord webhook spotify run alert randomized chain bypass sound queue",
     },
     {
       title: "Alerts",
@@ -178,7 +184,7 @@
       title: "Chat Bot",
       url: "/features/chat-bot.html",
       blurb: "Commands, timed messages, same engine as Automations",
-      keywords: "chat bot command alias cooldown match anywhere timed scheduled built in groups",
+      keywords: "chat bot command alias cooldown match anywhere timed scheduled built in groups !sr !remove song request",
     },
     {
       title: "Chat Games",
@@ -297,8 +303,8 @@
     {
       title: "Integrations",
       url: "/features/integrations.html",
-      blurb: "Twitch, bot account, Discord webhooks, Tiltify, TTS",
-      keywords: "integrations twitch discord tiltify bot account eventsub oauth webhook migration",
+      blurb: "Twitch, bot account, Discord webhooks, Tiltify, Spotify, TTS",
+      keywords: "integrations twitch discord tiltify spotify bot account eventsub oauth webhook migration pkce",
     },
     {
       title: "Queues and Giveaways",
@@ -310,25 +316,25 @@
       title: "Use cases",
       url: "/reference/use-cases.html",
       blurb: "Scenarios and Extra tips",
-      keywords: "use case setup walk-on cascading stream deck hands-free multi-trigger chain discord heist community goal contribute",
+      keywords: "use case setup walk-on cascading stream deck hands-free multi-trigger chain discord spotify !sr heist community goal contribute",
     },
     {
       title: "Chat commands",
       url: "/reference/chat-commands.html",
       blurb: "Viewer and mod commands, Advanced Settings",
-      keywords: "commands !join !spinwheel !points !giveaway !vpgive permission alias match anywhere cooldown limits",
+      keywords: "commands !join !spinwheel !points !giveaway !sr !songrequest !remove !removesong !vpgive permission alias match anywhere cooldown limits",
     },
     {
       title: "Message variables",
       url: "/reference/message-variables.html",
       blurb: "Tokens for chat, alerts, TTS, leaderboards",
-      keywords: "variables tokens {user} {winner} {amount} {counter} {balance} {goalProgress} {top5Counter} {counterTier} {input}",
+      keywords: "variables tokens {user} {winner} {amount} {counter} {balance} {goalProgress} {top5Counter} {counterTier} {input} {track} {artist}",
     },
     {
       title: "FAQ and troubleshooting",
       url: "/reference/faq.html",
-      blurb: "Twitch, audio, overlay, alerts, cursor, Tiltify",
-      keywords: "faq troubleshooting connected audio overlay cursor minecraft wgc fullscreen tiltify",
+      blurb: "Twitch, audio, overlay, alerts, cursor, Tiltify, Spotify",
+      keywords: "faq troubleshooting connected audio overlay cursor minecraft wgc fullscreen tiltify spotify premium device",
     },
   ];
 
@@ -360,6 +366,7 @@
             { href: "/features/actions/send-message.html", label: "Send Message" },
             { href: "/features/actions/text-to-speech.html", label: "Text-to-Speech" },
             { href: "/features/actions/discord-webhook.html", label: "Discord Webhook" },
+            { href: "/features/actions/spotify.html", label: "Spotify" },
             { href: "/features/actions/counter-action.html", label: "Counter Action" },
             { href: "/features/actions/push-community-goal.html", label: "Push Community Goal" },
             { href: "/features/actions/run-alert.html", label: "Run Alert" },

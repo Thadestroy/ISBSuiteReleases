@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Start Wheel Session | ISB Suite</title>
-  <meta name="description" content="Load a wheel preset and optionally auto-spin from Actions" />
+  <meta name="description" content="Load a wheel preset and auto-spin by default from Actions" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
   <meta property="og:title" content="Start Wheel Session | ISB Suite" />
-  <meta property="og:description" content="Load a wheel preset and optionally auto-spin from Actions" />
+  <meta property="og:description" content="Load a wheel preset and auto-spin by default from Actions" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -48,7 +48,7 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Start Wheel Session</p>
         <h1 class="page-title">Start Wheel Session</h1>
-        <p class="lede">Load a saved wheel preset when the rule fires. Optionally spin immediately, remove winners, or keep spinning until one entry remains.</p>
+        <p class="lede">Load a saved wheel preset when the rule fires. Auto-spin is on by default for new actions; uncheck it to load without spinning, or add remove-winner / last-survivor modes.</p>
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-start-wheel-session.png" alt="Start Wheel Session action setup in ISB Suite" />
@@ -59,8 +59,8 @@
           <h3>At a glance</h3>
           <ul>
             <li>UI label: <strong>Start Wheel Session</strong>.</li>
-            <li>Loads a preset from <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel Editor</a>; auto-spin is optional.</li>
-            <li>Without auto-spin, the session opens so chat can <code>!join</code> if the preset allows it.</li>
+            <li>Loads a preset from <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel Editor</a>; auto-spin is on by default for new actions.</li>
+            <li>Uncheck auto-spin to open the session so chat can <code>!join</code> if the preset allows it.</li>
             <li>Related: <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Queues and Giveaways</a>, <a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a>.</li>
           </ul>
         </div>
@@ -82,14 +82,14 @@
           <ol class="steps">
             <li>Save the wheel preset in Wheel Editor (entries, join settings, winner message).</li>
             <li>On the rule, enable <strong>Start Wheel Session</strong> and pick that preset.</li>
-            <li>Decide load-only vs auto-spin, then optional remove-winner / last-survivor modes.</li>
+            <li>Leave auto-spin on (the default for new actions), or uncheck it for load-only / join, then optional remove-winner / last-survivor modes.</li>
           </ol>
         </section>
         <section class="section" id="options">
           <h2>Options</h2>
           <ul>
             <li><strong>Wheel Preset</strong>: which saved wheel to load.</li>
-            <li><strong>Automatically spin immediately</strong>: spin after a short delay. If unchecked, the session starts but does not spin on its own (viewers can join when Allow !join is on).</li>
+            <li><strong>Automatically spin immediately</strong>: on by default for new actions. Spin after a short delay. Uncheck it so the session starts without spinning (viewers can join when Allow !join is on). Existing saved rules keep whatever you stored.</li>
             <li><strong>Remove winner after spin</strong> (with auto-spin): drop the winning slice and keep spinning for elimination-style games.</li>
             <li><strong>Spin until one entry remains</strong>: keep removing winners until a last survivor is left.</li>
             <li><strong>Number of spins</strong> / <strong>Delay between spins</strong>: when removing winners without last-survivor mode, how many spins and the pause between them so viewers can see each result.</li>

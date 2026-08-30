@@ -76,7 +76,7 @@
 
         <section class="section" id="overview">
           <h2>Overview</h2>
-          <p>Automations live in the <strong>Automations</strong> tab. Overview pages support instant name search and optional <strong>custom groups</strong> (named groups, chip filters; ungrouped items list first).</p>
+          <p>Automations live in the <strong>Automations</strong> tab. Overview pages support instant name search and optional <strong>custom groups</strong> (named groups, chip filters; ungrouped items list first). Each row has a green (enabled) or grey (disabled) light. Click the light to turn the rule on or off; a legend at the top of the list explains this.</p>
           <p>Leaving Add/Edit with unsaved changes (or switching to another automation) shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Opening a form and leaving without edits does not prompt. Form <strong>Cancel</strong> discards without asking.</p>
           <p><strong>Chat Bot vs Automations:</strong> both tabs share the same trigger and action building blocks. Prefer <strong>Automations</strong> when the rule is driven by Twitch events (channel points, bits, raids, follows, and so on) or needs a long action chain. Prefer <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> when the rule is mainly a custom <code>!command</code> or timed chat message. Either tab can call the other with <strong>Run Chat Bot or Automation</strong>.</p>
         </section>
@@ -89,7 +89,8 @@
             <tbody>
               <tr><td>Channel Point Redemption</td><td>Match by reward title; reward ID auto detects after the first redemption</td></tr>
               <tr><td>Walk-on Sound</td><td>First chat message per stream; blank username = everyone; named = specific viewer; both can fire; optional only when live</td></tr>
-              <tr><td>Bits / Cheer</td><td>At least or exact amount</td></tr>
+              <tr><td>Bits / Cheer</td><td>At least or exact amount (chat cheers only)</td></tr>
+              <tr><td>Power-Up</td><td>Bits spent on Gigantify, Celebration, Message Effect, or custom Power-Ups; at least or exact amount. Viewer-points Bits earn still counts those bits. Community goals count them when Power-Up is among the selected Twitch Data sources</td></tr>
               <tr><td>Subscription Gifter</td><td>At least or exact gift count (gifter is <code>{user}</code>)</td></tr>
               <tr><td>Subscription Gift Receiver</td><td>Once per recipient from chat gift notice; recipient is <code>{user}</code>, gifter is <code>{gifter}</code></td></tr>
               <tr><td>New Subscription</td><td>Any tier or Tier 1/2/3</td></tr>
@@ -111,7 +112,7 @@
               <tr><td>Timer / Interval</td><td>Repeating interval</td></tr>
             </tbody>
           </table></div>
-          <p><strong>Count each unit:</strong> Bits, Subscription Gifter, Raid, Hype Train, Tiltify, and Chat Message Match can expand one event into multiple runs (off by default; live preview in the editor). Count-each runs share one cooldown and per-stream limit slot for that source event.</p>
+          <p><strong>Count each unit:</strong> Bits, Power-Up, Subscription Gifter, Raid, Hype Train, Tiltify, and Chat Message Match can expand one event into multiple runs (off by default; live preview in the editor). Count-each runs share one cooldown and per-stream limit slot for that source event.</p>
         </section>
 
         <section class="section" id="actions">
@@ -120,10 +121,11 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Action</th><th>Details</th></tr></thead>
             <tbody>
-              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/start-wheel-session.html">Start Wheel Session</a></td><td>Load a preset; optionally auto-spin</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/start-wheel-session.html">Start Wheel Session</a></td><td>Load a preset; auto-spin on by default</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/play-sound.html">Play Sound</a></td><td>Queue audio; optional bypass sound queue</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/send-message.html">Send Message</a></td><td>Twitch chat with variables</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/discord-webhook.html">Discord Webhook</a></td><td>Post to named webhooks on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a></td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a></td><td>Pause, resume, skip, shuffle, repeat, queue, or play now on the official Spotify app after <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Connect</a></td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/counter-action.html">Counter Action</a></td><td>Change by or Set to; number, counter, or range</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/start-giveaway-session.html">Start Giveaway Session</a></td><td>Timed viewer entry giveaway</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert</a></td><td>Play a managed Alerts-page alert</td></tr>
@@ -132,6 +134,7 @@
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a></td><td>Drive a Live Clock on a Timer Widget (Starts at + per-trigger table)</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a></td><td>Pick one of several action sets</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a></td><td>Chain into another rule; keeps chatter context</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/enable-disable.html">Enable / Disable</a></td><td>Turn Overview items on or off from a rule</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/push-community-goal.html">Push Community Goal</a></td><td>Add progress; optional trigger amount</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/randomize-image-picker.html">Randomize Image Picker</a></td><td>Reshuffle overlay picker images</td></tr>
             </tbody>
@@ -152,9 +155,10 @@
 
         <section class="section" id="commands">
           <h2>Chat command options</h2>
+          <p>Type the command the way viewers will send it in chat, including a leading <code>!</code> (for example <code>!spin</code>). Empty command-name fields show a <code>!command</code> hint. Other prefixes such as <code>?help</code> still work; the app does not auto-add <code>!</code>.</p>
           <p>Custom Chat Command triggers support the same Advanced Settings pattern used across the app:</p>
           <ul>
-            <li><strong>Permission</strong>: Everyone, Subscribers, VIPs, Moderators, or Broadcaster.</li>
+            <li><strong>Permission</strong>: Everyone, Followers, Subscribers, VIPs, Moderators, or Broadcaster.</li>
             <li><strong>Aliases</strong>: alternate names that fire the same rule. Longer matching aliases win; leftover text becomes <code>{input}</code>.</li>
             <li><strong>Match anywhere in message</strong>: command can appear mid chat (for example <code>/me !discord</code>). Space-boundary rules still apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</li>
             <li><strong>Don't trigger from the broadcaster or linked bot</strong>: this command will not fire from your Twitch account or a linked bot account (prefix or mid-message). Same rule either way you send chat. Off by default.</li>
@@ -169,6 +173,7 @@
             <li><strong>Walk-on sounds</strong>: First Message Per Stream. Blank username greets everyone once; named username is a special walk-on. Blank and named can both fire. Enable Only When Live to skip setup screens.</li>
             <li><strong>Stream Deck</strong>: create a broadcaster-only custom command, then send that chat line from a Stream Deck Twitch Chat button.</li>
             <li><strong>Discord</strong>: add named webhooks on Integrations, then use the <a href="/ISBSuiteReleases/docs/features/actions/discord-webhook.html">Discord Webhook</a> action (one rule can post to multiple webhooks).</li>
+            <li><strong>Spotify</strong>: Connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Integrations</a>, then enable the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> action (pause, skip, shuffle, repeat, queue, or play now). Viewers can also use built-in <code>!sr</code> and <code>!remove</code>.</li>
             <li><strong>Chains</strong>: <a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a> keeps original chatter context across hops (max 20; loops are blocked). Alerts use <a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert</a>.</li>
             <li><strong>Cascading wheels</strong>: entry action or Run Chat Bot or Automation loads a second wheel. See <a href="/ISBSuiteReleases/docs/features/wheel.html#cascade">Wheel - Cascading</a> and <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</li>
           </ul>

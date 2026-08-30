@@ -48,7 +48,7 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / Reference / Use cases</p>
         <h1 class="page-title">Use cases</h1>
-        <p class="lede">Common setups. Each row is a scenario and how to wire it. Extra tips below cover hands-free control, cascading wheels, walk-ons, Stream Deck, multi-trigger rules, chains, and Discord.</p>
+        <p class="lede">Common setups. Each row is a scenario and how to wire it. Extra tips below cover hands-free control, cascading wheels, walk-ons, Stream Deck, multi-trigger rules, chains, Discord, and Spotify.</p>
 
         <div class="table-wrap">
           <table>
@@ -75,9 +75,11 @@
               <tr><td>Custom Alert on tier up</td><td>Custom Alert: Counter Tier Reached shows a GIF and TTS when a viewer hits Gold</td></tr>
               <tr><td>Custom Alert on counter win</td><td>Custom Alert: Counter Value Changed (Increase) on a Diamonds counter with <code>{user}</code> and <code>{count}</code></td></tr>
               <tr><td>Discord milestone ping</td><td>Automation: Counter Tier Reached, then Discord Webhook posts <code>{user}</code> hit <code>{counterTier}</code></td></tr>
+              <tr><td>Song request from chat</td><td>Connect Spotify under Integrations, then leave built-in <code>!sr</code> enabled in Chat Bot (Everyone). Set per-viewer queue caps on the Spotify card (Song Request). Viewers type a song name or paste a track link. They can <code>!remove</code> their last request</td></tr>
+              <tr><td>Channel points song queue</td><td>Automation: Channel Points reward, then <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> Queue with <code>{input}</code> as the song field</td></tr>
               <tr><td>Command aliases</td><td>Add <code>!pts</code> as an alias of <code>!points</code>, or <code>!heistgo</code> as an alias of your Heist join command</td></tr>
               <tr><td>Goal progress check</td><td>On a Community Goal, set Check Command to <code>!bitsgoal</code>. Viewers get <code>15/100</code> style progress</td></tr>
-              <tr><td>Viewer Points community goal</td><td>Enable Viewer Points on a Community Goal, pick a currency, set Contribute Command to <code>!goal</code>. Viewers type <code>!goal 50</code> to spend 50 points 1:1. Stop-at-limit goals reject further spend once full. Refund from the goal card does not unwind Goal Reached</td></tr>
+              <tr><td>Viewer Points community goal</td><td>Enable Viewer Points on a Community Goal, pick a currency, set Contribute Command to <code>!goal</code>. Viewers type <code>!goal 50</code> to spend 50 points 1:1. Stop-at-limit goals reject further spend once full. Refund from the goal card credits Viewer Points and resets the bar; Goal Reached automations are not undone</td></tr>
               <tr><td>Extension / Blerp bits goal</td><td>Community Goal Chat Message mode: watch your bits bot login and pattern <code>used &lt;amount&gt; bits</code> (or Chat Message Match + Push Community Goal with Use amount from trigger)</td></tr>
               <tr><td>Extension / Blerp bits live timer</td><td>Chat Message Match (bot login + <code>used &lt;amount&gt; bits</code>) with Count each + <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a> Add (same pattern as Bits). Not the Bits cheer trigger</td></tr>
               <tr><td>Dice / Range Outcomes</td><td>Chat Games Percentile roll: one roll, all matching bands (including overlaps) run full actions; tokens <code>{roll}</code> / <code>{outcome}</code></td></tr>
@@ -136,6 +138,13 @@
             <li>Add named webhooks under Integrations, Discord Webhooks, and Test each one.</li>
             <li>On an automation, enable the Discord Webhook action and select one or more webhooks.</li>
             <li>Reuse your Send Chat Message text, write a Discord-only message, or both. Variables resolve before send.</li>
+          </ol>
+
+          <h3>Spotify from automations and chat</h3>
+          <ol>
+            <li>On Integrations, finish Set Up Spotify and Connect with Spotify (Premium account; keep the app open).</li>
+            <li>For viewer requests, leave built-in <code>!sr</code> and <code>!remove</code> on in Chat Bot (command, permission, confirm template).</li>
+            <li>For skip, pause, or queue from a redeem, enable the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> action on that rule.</li>
           </ol>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>

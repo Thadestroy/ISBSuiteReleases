@@ -59,7 +59,7 @@
           <h3>At a glance</h3>
           <ul>
             <li>UI label: <strong>Timer</strong>.</li>
-            <li>Counters and community goals update immediately; sound, chat, TTS, wheel, giveaway, and alerts wait.</li>
+            <li>Counters, community goals, Live Timer, and Enable / Disable update immediately; sound, chat, TTS, wheel, giveaway, and alerts wait.</li>
             <li>Link a Timer Widget preset, or None (background only).</li>
             <li>Mods: <code>!endtimer {Timer Widget name}</code> ends early and skips deferred actions.</li>
           </ul>
@@ -89,7 +89,7 @@
           <h2>What waits vs what runs now</h2>
           <p>From the editor copy in the app:</p>
           <ul>
-            <li><strong>Immediate</strong>: Counter Action and Push Community Goal (so <code>{count}</code> / goal progress stay correct in messages that fire later).</li>
+            <li><strong>Immediate</strong>: Counter Action, Push Community Goal, Live Timer, and Enable / Disable (so <code>{count}</code> / goal progress stay correct in messages that fire later, and Overview lights flip now).</li>
             <li><strong>Deferred until countdown ends</strong>: sound, wheel, giveaway, alert, chat, TTS, and related presentation actions.</li>
           </ul>
           <div class="callout"><p><code>!endtimer</code> cancels the countdown and <strong>skips</strong> deferred actions - it does not run them early.</p></div>

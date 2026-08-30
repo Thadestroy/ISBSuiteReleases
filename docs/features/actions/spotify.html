@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spotify | ISB Suite</title>
+  <meta name="description" content="Spotify action: pause, skip, shuffle, queue, play now, or Pause Then Resume At End" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Spotify | ISB Suite" />
+  <meta property="og:description" content="Spotify action: pause, skip, shuffle, queue, play now, or Pause Then Resume At End" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Spotify</p>
+        <h1 class="page-title">Spotify</h1>
+        <p class="lede">Control the Spotify app already open on your PC. ISB Suite never plays Spotify audio itself. Connect under Integrations first (Spotify Premium required).</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/integrations.png" alt="Spotify action setup in ISB Suite" />
+          <figcaption>Spotify setup lives on Integrations. The Spotify action is on Automations, Chat Bot, and other Actions surfaces.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Spotify</strong>.</li>
+            <li>Connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Integrations</a> (your own Developer app + Client ID, no secret). The Spotify action and Chat Bot <code>!sr</code> / <code>!remove</code> stay hidden until you Connect.</li>
+            <li>Keep the Spotify desktop or mobile app open and play something once so a device is active.</li>
+            <li>Viewers can also queue with built-in <code>!sr</code> and undo with <code>!remove</code> (see <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>).</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#commands">Commands</a></li>
+          <li><a href="#pitfalls">Pitfalls</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>When the parent rule fires, ISB Suite sends a Player command to the official Spotify app (pause, resume, skip, shuffle, repeat, queue, play now, or Pause Then Resume At End). A Spotify error (not connected, Free account, no active device) is logged and does not stop the rest of the rule (sound, chat, alerts still run).</p>
+          <p>Queue adds a track behind what is playing. Play now starts that track immediately. Both accept a song name, an open.spotify.com/track link, or a <code>spotify:track:</code> URI. Message variables such as <code>{input}</code> resolve the same way other action fields do.</p>
+          <p><strong>Pause Then Resume At End</strong> pauses as soon as this rule starts (before Play Sound), then resumes when this rule&apos;s sound, TTS, alert overlay, and auto-spin wheel have finished. It does not wait for a Timer (the Timer delays the whole payload), a giveaway until a winner, or a chat game. Two overlapping rules keep Spotify paused until both have finished.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>On Integrations, finish <strong>Set Up Spotify</strong> and <strong>Connect with Spotify</strong>. Playback needs a Spotify Premium account.</li>
+            <li>Open the Spotify app and play something once so a device is active.</li>
+            <li>On the rule, enable <strong>Spotify</strong>, pick a command, and for Queue / Play now fill <strong>Song or Spotify link</strong>.</li>
+          </ol>
+        </section>
+        <section class="section" id="commands">
+          <h2>Commands</h2>
+          <ul>
+            <li><strong>Pause</strong> / <strong>Resume</strong> / <strong>Skip next</strong> / <strong>Skip previous</strong>.</li>
+            <li><strong>Shuffle</strong>: check Shuffle on, or leave it off to disable shuffle.</li>
+            <li><strong>Repeat</strong>: Off, Track, or Context.</li>
+            <li><strong>Queue</strong> / <strong>Play now</strong>: song search or a track link. Album and playlist links are not supported. Blank song field cannot save.</li>
+            <li><strong>Pause Then Resume At End</strong>: pause immediately, resume when this rule&apos;s clip, TTS, alert, or auto-spin is done. Walk-on setup: First Message + Play Sound (bypass queue) + this command.</li>
+          </ul>
+        </section>
+        <section class="section" id="pitfalls">
+          <h2>Pitfalls</h2>
+          <ul>
+            <li>Development Mode apps only work for Spotify accounts you add under User Management on the Developer Dashboard.</li>
+            <li>If Spotify is closed or idle, commands fail with a no-active-device message until you play something once.</li>
+            <li>Spotify Free accounts cannot be controlled (Premium required).</li>
+            <li>For viewer requests, prefer built-in <code>!sr</code> / <code>!remove</code> instead of a custom Chat Command that only runs this action (Chat Bot already has permission, cooldown, and a confirm template).</li>
+            <li>This command is not a general &quot;run anything at the start / end of an automation&quot; slot. It only waits for sound, TTS, alert, and auto-spin on this rule.</li>
+          </ul>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Channel point redeem -&gt; Queue <code>{input}</code> so the redeem text is the song name.</li>
+            <li>Mod-only Chat Bot command -&gt; Skip next when chat is tired of a song.</li>
+            <li>Raid hype -&gt; Play now a known track URI.</li>
+            <li>Walk-on clip -&gt; Pause Then Resume At End + Play Sound (bypass queue) so Spotify does not clash with the clip.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

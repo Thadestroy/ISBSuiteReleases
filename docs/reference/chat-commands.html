@@ -60,7 +60,9 @@
               <tr><td><code>!givepoints @user amount</code></td><td>Give your own points to another viewer</td></tr>
               <tr><td><code>!gamble amount</code></td><td>Wager points on a configurable win chance roll (decimals and percents ok, e.g. <code>50.2</code> or <code>34.7%</code>; rounds to a whole stake)</td></tr>
               <tr><td><code>!giveaway</code></td><td>Enter an active giveaway</td></tr>
-              <tr><td><em>goal contribute</em></td><td>On a Community Goal with Viewer Points mode, viewers type your contribute command plus a whole number (for example <code>!goal 50</code>) to spend 1:1. Same name as Check is ok: bare checks, amount contributes. Stop-at-limit goals reject further spend once the bar is full; a last remainder smaller than the typed amount is clamped</td></tr>
+              <tr><td><code>!sr</code> / <code>!songrequest</code></td><td>Queue a song on the streamer's Spotify app (song name, optional artist, or a track link). Requires Spotify Connect under Integrations and Spotify Premium. Customize the reply in Chat Bot (<code>{user}</code>, <code>{track}</code>, <code>{artist}</code>). Set per-viewer queue caps on the Spotify Integrations card (default 5; 0 = none; leave blank for unlimited). Built in; default Everyone; does not use a Free chat command slot.</td></tr>
+              <tr><td><code>!remove</code> / <code>!removesong</code></td><td>Remove that chatter's most recently requested song (stack: last request first). Spotify cannot delete a queued song, so ISB Suite mutes and skips it when it would play, or immediately if it is already current. Built in; default Everyone; does not use a Free chat command slot.</td></tr>
+              <tr><td><em>goal contribute</em></td><td>On a Community Goal with Viewer Points mode, viewers type your contribute command plus a whole number (for example <code>!goal 50</code>) to spend 1:1. Same name as Check is ok: bare checks, amount contributes. Stop-at-limit goals reject further spend once the bar is full; a last remainder smaller than the typed amount is clamped. Optional per-stream / per-user-per-stream point caps (Advanced Settings) work the same way</td></tr>
               <tr><td><em>any shop command</em></td><td>Spend points on shop items you configured</td></tr>
             </tbody>
           </table></div>
@@ -96,6 +98,7 @@
           <p>Custom commands and editors that expose permission use these levels:</p>
           <ul>
             <li><strong>Everyone</strong>: any viewer</li>
+            <li><strong>Followers</strong>: followers, subs, VIPs, mods, broadcaster</li>
             <li><strong>Subscribers</strong>: subs, VIPs, mods, broadcaster</li>
             <li><strong>VIPs</strong>: VIPs, mods, broadcaster</li>
             <li><strong>Moderators</strong>: mods and broadcaster only</li>
@@ -105,14 +108,15 @@
 
         <section class="section" id="aliases">
           <h2>Aliases and Match anywhere</h2>
+          <p><strong>Command names:</strong> type the trigger the way viewers will send it in chat, including a leading <code>!</code> (for example <code>!spin</code>). Empty command-name and alias fields show a muted <code>!command</code> / <code>!alias</code> hint. Other prefixes such as <code>?help</code> still work. The app does not auto-add <code>!</code>.</p>
           <p><strong>Aliases:</strong> Automations, Chat Bot commands, Chat Games join commands, Viewer Points commands, shop items, point drop claims, Community Goal check and contribute commands, and Saved List Read/Add commands can define alternate names. The longest matching alias wins. Leftover text after a longer alias becomes <code>{input}</code>.</p>
-          <p><strong>Match anywhere in message</strong> (optional, under Advanced Settings): match as a whole word anywhere in chat, not only at the start. Useful for <code>/me !command</code> and mid-chat triggers. Space boundary rules still apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</p>
+          <p><strong>Match anywhere in message</strong> (optional): match as a whole word anywhere in chat, not only at the start. On Chat Bot custom commands this is on the Add/Edit card; on Viewer Points, Community Goals, Saved Lists, Chat Games, and Automations it is under Advanced Settings. Useful for <code>/me !command</code> and mid-chat triggers. Space boundary rules still apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</p>
           <p><strong>Don't trigger from the broadcaster or linked bot</strong> (optional; Chat Bot, Alerts, Automations Chat Command, Chat Games start, and Saved Lists): the command will not fire from your Twitch account or a linked bot account, whether it is at the start or mid-message. Same rule either way you send chat. Off by default.</p>
         </section>
 
         <section class="section" id="advanced">
           <h2>Advanced Settings limits</h2>
-          <p>Viewer Points commands (including shop redeem and point-drop claim), Chat Game join, Community Goal check and contribute commands, Saved List Read/Add, Automations / Chat Bot custom commands, and related editors share one <strong>Advanced Settings</strong> block:</p>
+          <p>Viewer Points commands (including shop redeem and point-drop claim), Chat Game join, Community Goal check and contribute commands, Saved List Read/Add, Automations, and related editors share one <strong>Advanced Settings</strong> block. Chat Bot custom commands keep aliases, Match anywhere, and Don't trigger on the Add/Edit card; Cooldown &amp; Limits stay under Show Advanced.</p>
           <ul>
             <li><strong>Permission</strong> - who may run the command</li>
             <li><strong>Time cooldown</strong> - None, Global, or Per User. Optional burst: if used N times within a window you set, a longer cooldown starts. The normal per-use duration is independent and can be off.</li>
@@ -121,6 +125,7 @@
             <li><strong>Aliases</strong> and <strong>Match anywhere</strong> - as above</li>
           </ul>
           <p>New limit fields default to unlimited; existing cooldowns keep working. Channel Point redemptions are different: Twitch still accepts the redeem and charges points; ISB Suite only skips running the automation when blocked (reject / refund is not supported yet).</p>
+          <p>Community Goal <strong>contribute</strong> Advanced Settings also has optional <strong>point-amount</strong> caps (max points per stream, and max per user per stream). Those are separate from max fires. <code>0</code> = unlimited. They reset on a new stream and when you Refund VP.</p>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>

@@ -82,7 +82,7 @@
           <h2>Accumulation modes</h2>
           <p>Set a limit and one or more accumulation modes (checkboxes; combine freely):</p>
           <ul>
-            <li><strong>Twitch Data:</strong> EventSub bits, subs, follows, raids.</li>
+            <li><strong>Twitch Data:</strong> pick one or more EventSub sources from the dropdown (Bits / Cheer, Power-Up, new sub, resub, gifted, follows, raids). New sub matches first-time New Subscription, not a resub. New, resub, follows, and raids always add +1; Bits, Power-Up, and gifted subs use Count method (raw amount or +1 per event).</li>
             <li><strong>Chat Message:</strong> watch a specific chatter and a pattern with <code>&lt;amount&gt;</code> (useful for extension bits that never fire as Twitch cheers).</li>
             <li><strong>Viewer Points:</strong> viewers spend a bound currency into this goal (1 point = 1 progress).</li>
             <li><strong>Manual:</strong> progress from Push Community Goal actions only.</li>
@@ -98,7 +98,7 @@
             <li><strong>Zero Out:</strong> the bar resets to 0 after each completion. Goal Reached fires, and further progress continues.</li>
             <li><strong>Stop at limit:</strong> the bar stays full. Goal Reached fires once. Twitch, chat, Push, and Viewer Points add nothing more until you Reset (or stream-start reset, if that is on). Decrementing below the limit reopens the bar.</li>
           </ul>
-          <p>Manual Reset zeros the bar and cycle count. If viewers have contributed Viewer Points, the confirm dialog says those points are <strong>not</strong> refunded. Use <strong>Refund VP</strong> to credit them. Reset-when-stream-starts also does not refund (no dialog).</p>
+          <p>Manual Reset zeros the bar and cycle count. If viewers have contributed Viewer Points, the confirm dialog says those points are <strong>not</strong> refunded. Use <strong>Refund VP</strong> to credit them and reset the bar. Reset-when-stream-starts also does not refund (no dialog).</p>
         </section>
 
         <section class="section" id="viewer-points">
@@ -107,12 +107,12 @@
           <ul>
             <li><strong>Contribute command</strong> is optional. Leave it empty to keep Viewer Points on but disable chat contribute. Viewers type the command plus a whole number (for example <code>!goal 50</code>). Bare command with no amount is not a contribute.</li>
             <li>The contribute name may match the Check command: <code>!goal</code> checks progress, <code>!goal 50</code> spends 50. Longest match and leftover text still apply.</li>
-            <li>Advanced Settings: aliases, match anywhere, permission, cooldown (optional burst), and per-stream limits (same as other chat commands).</li>
+            <li>Advanced Settings: aliases, match anywhere, permission, cooldown (optional burst), and per-stream <em>use</em> limits (same as other chat commands). Optionally cap how many points can go into the goal this stream, and how many each viewer can put in this stream (0 = unlimited). A typed amount larger than the remaining room is reduced to that remainder; chat explains when a cap is already full. Amount caps reset on a new stream and when you Refund VP.</li>
             <li>Success and not-enough templates use contribute tokens such as <code>{amount}</code>, <code>{balance}</code>, <code>{currencyName}</code>, and goal progress tokens. Full list: <a href="/ISBSuiteReleases/docs/reference/message-variables.html#goals">Message variables - Community Goals</a>.</li>
             <li>Contribute commands appear on the <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> overview. They are <strong>not</strong> a Run Chat Bot or Automation nested target.</li>
             <li>On a <strong>Stop at limit</strong> goal, further spend is rejected once the bar is full (chat: <code>This goal is already complete.</code>). If the typed amount is larger than the remaining gap, only that remainder is spent and the success template <code>{amount}</code> is the applied amount.</li>
           </ul>
-          <div class="callout"><p><strong>Refund Viewer Points</strong> (overview or editor) credits every ledgered account and clears this goal&apos;s ledger. It does <strong>not</strong> unwind bar progress, cycle count, or Goal Reached automations. Reset progress also does not refund (the Reset confirm dialog says so when the ledger has points). Delete with a ledger offers <strong>Refund and delete</strong>; if refund fails, the goal is not deleted.</p></div>
+          <div class="callout"><p><strong>Refund Viewer Points</strong> (overview or editor) credits every ledgered account, clears this goal&apos;s ledger, and resets the bar and cycle count. Goal Reached automations are not undone. Reset progress also does not refund (the Reset confirm dialog says so when the ledger has points). Delete with a ledger offers <strong>Refund and delete</strong>; if refund fails, the goal is not deleted.</p></div>
           <p>Related: <a href="/ISBSuiteReleases/docs/features/viewer-points.html">Viewer Points</a>.</p>
         </section>
 

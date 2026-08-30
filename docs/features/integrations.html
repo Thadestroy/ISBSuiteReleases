@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Integrations | ISB Suite</title>
-  <meta name="description" content="Twitch, Discord, Tiltify, TTS" />
+  <meta name="description" content="Twitch, Discord, Tiltify, Spotify, TTS" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
   <meta property="og:title" content="Integrations | ISB Suite" />
-  <meta property="og:description" content="Twitch, Discord, Tiltify, TTS" />
+  <meta property="og:description" content="Twitch, Discord, Tiltify, Spotify, TTS" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -52,7 +52,7 @@
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/integrations.png" alt="Integrations page in ISB Suite" />
-          <figcaption>Integrations: Twitch, Discord webhooks, optional Tiltify, TTS notes.</figcaption>
+          <figcaption>Integrations: Twitch, Discord webhooks, optional Tiltify and Spotify, TTS notes.</figcaption>
         </figure>
 
         <div class="ref-panel">
@@ -61,6 +61,7 @@
             <li>Twitch: device-code OAuth for chat and EventSub.</li>
             <li>Optional bot account for outbound chat (Free).</li>
             <li>Discord: named webhooks under Integrations, then Discord Webhook action on rules.</li>
+            <li>Spotify: guided setup (your own Developer app + Connect). Automations use the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> action; viewers can <code>!sr</code> a song after Connect and <code>!remove</code> their last request.</li>
             <li>TTS is built in with no API key.</li>
             <li>Audio output channels (buses for sounds/alerts/TTS) live under <strong>Settings</strong>, not on this page.</li>
             <li>Want another platform? <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Request an integration</a>.</li>
@@ -71,6 +72,7 @@
           <li><a href="#twitch">Twitch</a></li>
           <li><a href="#discord">Discord webhooks</a></li>
           <li><a href="#tiltify">Tiltify</a></li>
+          <li><a href="#spotify">Spotify</a></li>
           <li><a href="#tts">Text to Speech</a></li>
           <li><a href="#request">Request an integration</a></li>
         </ol></nav>
@@ -103,6 +105,34 @@
         <section class="section" id="tiltify">
           <h2>Tiltify (optional)</h2>
           <p>Connect a Tiltify charity campaign via OAuth. Polls for donations and campaign totals. Token auto-refresh, with a reconnect window if auth expires mid-stream.</p>
+        </section>
+
+        <section class="section" id="spotify">
+          <h2>Spotify (optional)</h2>
+          <p>ISB Suite sends commands to the official Spotify app on your PC (pause, skip, shuffle, queue). It never plays Spotify audio itself. Available on Free and Pro. Playback requires a <strong>Spotify Premium</strong> account.</p>
+          <p>Spotify does not allow ISB Suite to ship one shared app for every customer. You create a free app on the Spotify Developer Dashboard; ISB Suite walks you through it (same style as Amazon Polly setup):</p>
+          <ol class="steps">
+            <li>On Integrations, Spotify: <strong>Set Up Spotify</strong>.</li>
+            <li>Create an app on the Spotify Developer Dashboard (open the link in the wizard). If you are not logged in to Spotify, log in first, then open the wizard link again.</li>
+            <li>Paste the redirect URI shown in the wizard (<code>http://127.0.0.1:37892/</code>) into the app settings. Use that exact address, not localhost.</li>
+            <li>Under User Management, add the Spotify account you stream with.</li>
+            <li>Paste the Client ID only (no secret) and <strong>Connect with Spotify</strong>.</li>
+          </ol>
+          <ul>
+            <li>Keep the Spotify desktop or mobile app open and play something once so a device is active.</li>
+            <li>After the Client ID is saved, reconnect is one <strong>Connect with Spotify</strong> click. Disconnect clears tokens but keeps the Client ID.</li>
+            <li>On an automation, enable the <strong>Spotify</strong> action: pause, resume, skip, shuffle, repeat, queue a track, play now, or Pause Then Resume At End. See the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify action</a> page. Queue / Play now accept a song name, an open.spotify.com/track link, or a <code>spotify:track:</code> URI (message variables like <code>{input}</code> work).</li>
+            <li>Viewers can request songs with built-in <code>!sr</code> (alias <code>!songrequest</code>): a song name, optional artist, or a track link. They can <code>!remove</code> (alias <code>!removesong</code>) their last request. Chat Bot holds the command name, permission, cooldown, and confirm template. Per-viewer queue caps (default 5; 0 = none; leave blank for unlimited) are on the Spotify card under Integrations. Spotify cannot delete a queued song, so <code>!remove</code> skips that request when it comes up.</li>
+            <li>Development Mode apps can only be used by accounts you add under User Management (a small allowlist).</li>
+          </ul>
+          <h3>If Connect or playback fails</h3>
+          <ul>
+            <li><strong>Premium required:</strong> the Spotify account you Connect must be Premium. Free accounts cannot be controlled.</li>
+            <li><strong>No active device:</strong> open the Spotify app and play something once, then try again.</li>
+            <li><strong>Allowlist / 403:</strong> under the Developer Dashboard app, User Management, add the same Spotify account you stream with.</li>
+            <li>Album and playlist links cannot be queued. Use a track link, a <code>spotify:track:</code> URI, or a song name.</li>
+            <li>More troubleshooting: <a href="/ISBSuiteReleases/docs/reference/faq.html#spotify">FAQ - Spotify</a>.</li>
+          </ul>
         </section>
 
         <section class="section" id="tts">

@@ -108,6 +108,7 @@
             <li>A backup is a standard <code>.zip</code> of your recoverable data (config, state, database, media). Create and export write that same pack; restore and import apply it (full replace + app restart).</li>
             <li>Choose how often to create backups and how many to keep. Secrets (tokens, keys, license) are included by default - turn that off before sharing a file.</li>
             <li>After importing on a new PC, re-check <strong>Settings &gt; Audio Output Channels</strong> - device IDs may not match.</li>
+            <li>Export copies media already stored in AppData. If a command still pointed at a file on the old PC (Downloads, Desktop, a local HTML page), that file is not in the zip. After import, ISB Suite lists those leftovers so you can re-browse them. You can save that full list to a text file from the dialog.</li>
             <li>ISB Suite also keeps lightweight safety copies whenever you save so a single corrupt file can recover without a full restore. You do not manage those separately.</li>
           </ul>
         </section>
@@ -143,7 +144,7 @@
         <section class="section" id="drop-edit-live">
           <h2>Edited point drop still uses old claim message or amount</h2>
           <ul>
-            <li>While a drop is active, claim amount, claim slots, claim command, and chat templates stay frozen from when that drop spawned.</li>
+            <li>While a drop is active, claim amount, claim slots, claim command, and chat templates (spawn, claim, already-claimed, expiry) stay frozen from when that drop spawned.</li>
             <li>Saving the Point Drop editor updates the stored config for the <strong>next</strong> spawn only.</li>
             <li><code>{amount}</code> in spawn/claim messages reflects the active spawn&apos;s points per claim, not a later edit.</li>
           </ul>
@@ -166,6 +167,17 @@
             <li>Use Test on Integrations before relying on automations.</li>
             <li>Confirm the automation includes the Discord Webhook action with the intended webhooks selected.</li>
             <li>Webhook URLs should start with <code>https://discord.com/api/webhooks/</code> (legacy discordapp.com URLs also work).</li>
+          </ul>
+        </section>
+
+        <section class="section" id="spotify">
+          <h2>Spotify not connecting or not controlling playback</h2>
+          <ul>
+            <li>Finish <strong>Set Up Spotify</strong> on Integrations: your own Developer app, paste the wizard redirect URI, add yourself under User Management, then Connect with Spotify (Client ID only, no secret).</li>
+            <li>The Spotify account you Connect must be <strong>Premium</strong>. Free accounts cannot be controlled.</li>
+            <li>Keep the Spotify desktop or mobile app open and play something once so a device is active.</li>
+            <li>Album and playlist links cannot be queued. Use a track link, a <code>spotify:track:</code> URI, or a song name.</li>
+            <li>Viewers use built-in <code>!sr</code> after you Connect, and <code>!remove</code> to undo their last request. Customize the replies in Chat Bot. Setup walkthrough: <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Integrations - Spotify</a>. Action options: <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify action</a>.</li>
           </ul>
         </section>
 

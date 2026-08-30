@@ -48,7 +48,7 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Chat Bot</p>
         <h1 class="page-title">Chat Bot</h1>
-        <p class="lede">Custom !commands, timed messages, aliases, and Advanced Settings in the Chat Bot tab - same Actions engine as Automations, focused on chat-driven rules.</p>
+        <p class="lede">Custom !commands, timed messages, and aliases in the Chat Bot tab - same Actions engine as Automations, focused on chat-driven rules.</p>
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-bot.png" alt="Chat Bot page in ISB Suite" />
@@ -60,7 +60,8 @@
           <ul>
             <li>Free: 25 Chat Bot commands, plus 3 Saved Lists (quotes / notes / todos). Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
             <li>Same trigger and action building blocks as <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a> - pick the tab that matches how you think about the rule.</li>
-            <li>Custom <code>!commands</code> with permission, cooldown, aliases, Match anywhere, and per stream limits.</li>
+            <li>Custom <code>!commands</code> with permission, aliases, Match anywhere, and Don't trigger from the broadcaster or linked bot on the card; cooldown and per stream limits under Show Advanced.</li>
+            <li>Overview <strong>Export Commands</strong> writes a CSV of every command card on this page (channel commands, timed messages, built-ins, Chat Games, Viewer Points, Community Goals, Saved Lists, Live Timer), including aliases in the Description column.</li>
             <li>Built in commands appear here for editing where applicable. Full list: <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>. Variables: <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</li>
           </ul>
         </div>
@@ -69,15 +70,17 @@
           <li><a href="#engine">Same engine as Automations</a></li>
           <li><a href="#when">When to use which</a></li>
           <li><a href="#options">Command options</a></li>
+          <li><a href="#export">Export Commands</a></li>
           <li><a href="#saved-lists">Saved Lists</a></li>
           <li><a href="#timed">Timed and event messages</a></li>
           <li><a href="#live-timer">Live Timer Commands</a></li>
+          <li><a href="#song-request">Song request</a></li>
           <li><a href="#actions">Actions from Chat Bot</a></li>
         </ol></nav>
 
         <section class="section" id="engine">
           <h2>Same engine as Automations</h2>
-          <p>Chat Bot is not a separate runtime. Rules you create here use the same triggers, actions, cooldowns, aliases, Match anywhere, Randomized Action, Timer, Live Timer, Run Alert, and <strong>Run Chat Bot or Automation</strong> chaining as the Automations tab. Overview pages support name search and custom groups like other list pages.</p>
+          <p>Chat Bot is not a separate runtime. Rules you create here use the same triggers, actions, cooldowns, aliases, Match anywhere, Randomized Action, Timer, Live Timer, Run Alert, Enable / Disable, and <strong>Run Chat Bot or Automation</strong> chaining as the Automations tab. Overview pages support name search and custom groups like other list pages. Each command card has a green (enabled) or grey (disabled) light. Click the light to turn that command on or off; a legend at the top of the list explains this.</p>
           <p>Leaving Add Bot Message with unsaved changes shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Opening the form and leaving without edits does not prompt. Form <strong>Cancel</strong> discards without asking.</p>
           <p>Chat Bot response text routes to Twitch. Discord posts use the Discord Webhook action on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a>.</p>
         </section>
@@ -87,7 +90,7 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Prefer</th><th>When</th></tr></thead>
             <tbody>
-              <tr><td>Chat Bot</td><td>Custom <code>!commands</code> and timed or scheduled chat lines are the main job; you want built-ins (join, spin, shoutout, watch time, and similar) in one overview</td></tr>
+              <tr><td>Chat Bot</td><td>Custom <code>!commands</code> and timed or scheduled chat lines are the main job; you want built-ins (join, spin, shoutout, song request, watch time, and similar) in one overview</td></tr>
               <tr><td>Automations</td><td>Twitch EventSub events (channel points, bits, raids, follows, and so on) drive the rule, or you are building a multi-action stream workflow</td></tr>
               <tr><td>Either</td><td>You need chains - call the other tab with Run Chat Bot or Automation (up to 20 hops; original chatter variables preserved)</td></tr>
             </tbody>
@@ -97,9 +100,11 @@
 
         <section class="section" id="options">
           <h2>Command options</h2>
-          <p>Custom commands support the full Advanced Settings block:</p>
+          <p>Type the command the way viewers will send it in chat, including a leading <code>!</code> (for example <code>!spin</code>). Empty command-name and alias fields show a muted <code>!command</code> / <code>!alias</code> hint. Other prefixes such as <code>?help</code> still work. The app does not auto-add <code>!</code>.</p>
+          <p>Custom commands keep permission, aliases, Match anywhere, and Don't trigger from the broadcaster or linked bot on the main card (with info tips). Cooldown and per-stream limits stay under Show Advanced with the other actions.</p>
+          <p>Custom commands support:</p>
           <ul>
-            <li><strong>Permission levels:</strong> Everyone; Subscribers (subs, VIPs, mods, broadcaster); VIPs (VIPs, mods, broadcaster); Moderators (mods and broadcaster); Broadcaster only.</li>
+            <li><strong>Permission levels:</strong> Everyone; Followers (followers, subs, VIPs, mods, broadcaster); Subscribers (subs, VIPs, mods, broadcaster); VIPs (VIPs, mods, broadcaster); Moderators (mods and broadcaster); Broadcaster only.</li>
             <li><strong>Aliases:</strong> alternate names that fire the same command. Viewers can type any alias; the longest matching alias wins when several could match. Leftover text after the match becomes <code>{input}</code>.</li>
             <li><strong>Match anywhere in message:</strong> optional whole-word match mid chat (for example <code>/me !discord</code>), not only at the start. Longest matching command still wins. Space-boundary rules apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</li>
             <li><strong>Don't trigger from the broadcaster or linked bot:</strong> this command will not fire from your Twitch account or a linked bot account (prefix or mid-message). Same rule either way you send chat. Off by default.</li>
@@ -109,12 +114,23 @@
           <p>Community Goal check and contribute commands, Viewer Points commands, Chat Game start/join commands, and Saved Lists also appear on the Chat Bot overview where applicable. Each row has the same enable/disable light as other Chat Bot cards. Edit opens that feature&apos;s settings. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, and <code>!endtimer</code> stay out of the Run Chat Bot or Automation picker. Contribute is not a Run Automation nested target.</p>
         </section>
 
+        <section class="section" id="export">
+          <h2>Export Commands</h2>
+          <p>On Chat Bot Overview, <strong>Export Commands</strong> saves a CSV (<code>bot-commands.csv</code>) of the same commands shown on the page. Columns: Type, Command, Description, Permission, Cooldown, Enabled.</p>
+          <ul>
+            <li>Includes Channel Commands, Timed Messages, Built-in Commands, Chat Game join/start, Viewer Points, Community Goal add/remove plus per-goal check/contribute, Saved List Read and Add, and Live Timer Commands.</li>
+            <li>Aliases are not extra rows (Overview does not show alias cards). They are listed in Description as <code>Aliases: !foo, !bar</code>.</li>
+            <li>Timed Messages use Type <code>Timed Message</code> with the interval in Command (for example <code>Every 5m</code>). Saved Lists export both Read and Add so mods have both chat triggers.</li>
+            <li>This file is a list for docs or Nightbot-style copies. It is not an import.</li>
+          </ul>
+        </section>
+
         <section class="section" id="saved-lists">
           <h2>Saved Lists</h2>
           <p>Saved Lists are a generic numbered text store for quotes, notes, todos, or anything similar. Free allows <strong>3 lists</strong> (unlimited entries each); Pro is unlimited lists. They use their own Free limit and do not consume a Chat Bot command slot.</p>
           <ul>
             <li>Set one <strong>Command</strong> (for example <code>!quote</code>): that is the Read trigger (bare = random, + number = that entry). <strong>Add</strong> autofills as <code>!quote add</code> (editable) with glued alias <code>!quoteadd</code>.</li>
-            <li>Optional <strong>Fire on a timer</strong> on Read posts a random entry on an interval (same reply template). Match anywhere and Don't trigger from the broadcaster or linked bot apply to both Read and Add. Each has Advanced Settings (aliases, permission, cooldown). Defaults: Read = Everyone, Add = Moderators. Enable/disable the whole list from the Chat Bot Overview card.</li>
+            <li>Optional <strong>Fire on a timer</strong> on Read posts a random entry on an interval (same reply template). Match anywhere and Don't trigger from the broadcaster or linked bot are on Read Advanced Settings and apply to both Read and Add. Each has Advanced Settings (aliases, permission, cooldown). Defaults: Read = Everyone, Add = Moderators. Enable/disable the whole list from the Chat Bot Overview card.</li>
             <li>Reply templates are editable (blank = silent). Defaults use <code>{number}</code> and <code>{entry}</code>. Optional capture: local date, Twitch category (<code>{game}</code>), and added-by.</li>
             <li><strong>Entry numbers</strong> stay stable by default (gaps after delete; best for quotes). Turn on <strong>Renumber on delete</strong> in list settings for dense 1...N lists (todos), or use <strong>Renumber</strong> on the Lists tab to compact once.</li>
             <li>On the <strong>Lists</strong> tab: search, add/bulk-add entries (checkbox in Add entry), export CSV/text, renumber (when not auto-renumbering), and <strong>Pop out</strong> to a separate window for another monitor.</li>
@@ -137,9 +153,15 @@
           <p>The Chat Bot overview has a <strong>Live Timer Commands</strong> section for <code>!pausetimer</code>, <code>!resumetimer</code>, <code>!addtime</code>, and <code>!removetime</code>. <code>!endtimer</code> stays under Built-in Commands (ends a Live Clock or skips a delay Timer). See <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a> and <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
         </section>
 
+        <section class="section" id="song-request">
+          <h2>Song request</h2>
+          <p>Built-in <code>!sr</code> (alias <code>!songrequest</code>) queues a song on the Spotify app after you Connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Integrations</a>. The command cards stay hidden on Chat Bot Overview until that Connect. Default permission is Everyone. Chat Bot holds the command name, aliases, cooldown, and confirm template (<code>{user}</code>, <code>{track}</code>, <code>{artist}</code>). Per-viewer queue caps by permission level (default 5; 0 = none; leave blank for unlimited) are on the Spotify card under Integrations (<strong>Song Request</strong>). Blank <code>!sr</code> posts a usage line. At the cap, chat gets the at-cap reply (<code>{cap}</code>).</p>
+          <p>Built-in <code>!remove</code> (alias <code>!removesong</code>) pops that chatter's most recently requested song (a stack: two requests, two removes, last in first out). Only their own songs. Spotify cannot delete a queued song, so the request stays in Next in Queue until it would play; ISB Suite then mutes and skips it. If that track is already playing, it is skipped immediately. See <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a> and the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> action for pause/skip/queue from automations.</p>
+        </section>
+
         <section class="section" id="actions">
           <h2>Actions from Chat Bot</h2>
-          <p>Beyond Send Message, a Chat Bot rule uses the same shared <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> editor as Automations (wheel, sound, Discord, counters, giveaway, Run Alert, TTS, Timer, Live Timer, Randomized Action, Run Chat Bot or Automation, Push Community Goal, and more). Open the Actions hub for per-action setup pages.</p>
+          <p>Beyond Send Message, a Chat Bot rule uses the same shared <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> editor as Automations (wheel, sound, Discord, counters, giveaway, Run Alert, TTS, Timer, Live Timer, Enable / Disable, Randomized Action, Run Chat Bot or Automation, Push Community Goal, and more). Open the Actions hub for per-action setup pages.</p>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
