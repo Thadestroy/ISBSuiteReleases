@@ -87,8 +87,9 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Trigger</th><th>Details</th></tr></thead>
             <tbody>
-              <tr><td>Channel Point Redemption</td><td>Match by reward title; reward ID auto detects after the first redemption</td></tr>
+              <tr><td>Channel Point Redemption</td><td>Pick from your live Twitch catalog (binds reward ID) or Any redemption. Type the exact title if Twitch is disconnected; ID still auto-binds after the first matching redeem</td></tr>
               <tr><td>Walk-on Sound</td><td>First chat message per stream; blank username = everyone; named = specific viewer; both can fire; optional only when live</td></tr>
+              <tr><td>First-Time Chatter</td><td>Once the first time a viewer chats (not each stream). Existing viewers already in your data are not treated as first-time after an update. Optional only when live. For starting currency, add a Viewer Points earn rule of the same type</td></tr>
               <tr><td>Bits / Cheer</td><td>At least or exact amount (chat cheers only)</td></tr>
               <tr><td>Power-Up</td><td>Bits spent on Gigantify, Celebration, Message Effect, or custom Power-Ups; at least or exact amount. Viewer-points Bits earn still counts those bits. Community goals count them when Power-Up is among the selected Twitch Data sources</td></tr>
               <tr><td>Subscription Gifter</td><td>At least or exact gift count (gifter is <code>{user}</code>)</td></tr>
@@ -96,7 +97,8 @@
               <tr><td>New Subscription</td><td>Any tier or Tier 1/2/3</td></tr>
               <tr><td>Resubscription</td><td>Any, or tier and/or minimum months</td></tr>
               <tr><td>Follow</td><td>Any new follow</td></tr>
-              <tr><td>Raid</td><td>At least or exact viewer count (blank / Any for every raid)</td></tr>
+              <tr><td>Raid</td><td>At least or exact viewer count (blank / Any for every raid). Send Message <code>/shoutout {user}</code> fires Twitch's official shoutout</td></tr>
+              <tr><td>Hype Train Start</td><td>Once when the train begins. Level Up does not fire on start</td></tr>
               <tr><td>Hype Train End</td><td>At least or exact level (blank / Any Level for every end); levels can go well past 5 (emote unlocks continue at 10 / 25 / 50 / 100+)</td></tr>
               <tr><td>Hype Train Level Up</td><td>Fires once per level increase; at least or exact level (blank / Any Level for every level-up); same open level field as End</td></tr>
               <tr><td>Goal Achieved</td><td>Any goal type or filtered type string</td></tr>
@@ -162,6 +164,7 @@
             <li><strong>Aliases</strong>: alternate names that fire the same rule. Longer matching aliases win; leftover text becomes <code>{input}</code>.</li>
             <li><strong>Match anywhere in message</strong>: command can appear mid chat (for example <code>/me !discord</code>). Space-boundary rules still apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</li>
             <li><strong>Don't trigger from the broadcaster or linked bot</strong>: this command will not fire from your Twitch account or a linked bot account (prefix or mid-message). Same rule either way you send chat. Off by default.</li>
+            <li><strong>Allow checking another viewer</strong>: first leftover word is a viewer (<code>@user</code>). <code>{user}</code> becomes that person; leftover text is <code>{input}</code>. Off by default so <code>!love pizza</code> keeps pizza as <code>{input}</code>. Cooldown and permission still apply to the typer; use <code>{caller}</code> for them.</li>
             <li><strong>Cooldown and per stream limits</strong>: with optional chat replies.</li>
           </ul>
           <p>Also see <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
@@ -171,6 +174,7 @@
           <h2>Advanced patterns</h2>
           <ul>
             <li><strong>Walk-on sounds</strong>: First Message Per Stream. Blank username greets everyone once; named username is a special walk-on. Blank and named can both fire. Enable Only When Live to skip setup screens.</li>
+            <li><strong>First-time chatter</strong>: fires once per viewer for their first chat, not each stream. Use a Viewer Points <strong>First-Time Chatter</strong> earn rule to grant starting currency.</li>
             <li><strong>Stream Deck</strong>: create a broadcaster-only custom command, then send that chat line from a Stream Deck Twitch Chat button.</li>
             <li><strong>Discord</strong>: add named webhooks on Integrations, then use the <a href="/ISBSuiteReleases/docs/features/actions/discord-webhook.html">Discord Webhook</a> action (one rule can post to multiple webhooks).</li>
             <li><strong>Spotify</strong>: Connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Integrations</a>, then enable the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> action (pause, skip, shuffle, repeat, queue, or play now). Viewers can also use built-in <code>!sr</code> and <code>!remove</code>.</li>

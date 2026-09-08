@@ -72,6 +72,7 @@ ISB Suite is built around several major systems that all work together:
 | **Viewer Points** | Custom channel currency with a shop and point drops |
 | **Community Goals** | Stream-wide progress bars fed by Twitch events or chat |
 | **Chat Games** | Mass-entry chat games with stakes, rolls, and configurable outcomes |
+| **Stream Manager** | Live desk: chat, Activity, viewers, stream info, Channel Points, clip, and Quick Actions |
 | **Counters & Stats** | Global and per-viewer counters with tiers and CSV export |
 | **Character Studio** | *(coming soon)* |
 
@@ -80,6 +81,16 @@ ISB Suite is built around several major systems that all work together:
 ## Features Overview
 
 Overview list pages (Automations, Alerts, Chat Bot, Chat Games, Community Goals, Viewer Points) include instant name search and optional **custom groups**. Create named groups, assign items from the edit form or multi-select, and filter with chip buttons. Ungrouped items list first, then each named group.
+
+### Stream Manager
+Live desk on the nav rail. Full guide: [Stream Manager](https://thadestroy.github.io/ISBSuiteReleases/docs/features/stream.html).
+- Customizable columns (drag, hide, resize, Reset) and status cards (live, uptime, CCV, followers, subs, Twitch, Capture, overlay, ads)
+- Chat on the right: send as Streamer or Bot, emotes and GIFs, Bits and Gifted leaderboards, Slow mode, and mod actions. Gifted is who currently gifted a still-active sub (not Twitch's all-time Top Gifters)
+- **Viewers** tile lists people currently in chat (Twitch chatters, not CCV), with search. Chat has a Viewers / Chat swap like Twitch
+- **Activity** lists follows, subs, bits, raids, Tiltify, wheels, giveaways, chat games, goals, timers, song requests, Viewer Points commands, and automations that ran without an alert. Filter, search, and Resend a stored alert
+- Stream info Edit (title, category, tags, language, labels) opens a popup. Clip from the desk tile. Optional go-live line with **Send to Twitch chat** (off by default)
+- Channel Points tab: create, edit, and delete rewards ISB created. Dashboard rewards stay read-only; **Migrate to ISB** / **Migrate all** make paused ISB copies
+- Quick Actions: Add Automation, Add Chat Bot, Pause / Resume Automations, plus up to 8 of your own rules
 
 ### Wheel
 - Colorful animated wheel with smooth spin animations
@@ -102,7 +113,7 @@ Animated on-screen alerts for stream events, displayed in the Alert Box widget o
 
 **Twitch Alerts**
 - Follow, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver
-- Bits / Cheer, Power-Up, Raid, Hype Train End, Hype Train Level Up, Goal Achieved
+- Bits / Cheer, Power-Up, Raid, Hype Train Start, Hype Train End, Hype Train Level Up, Goal Achieved
 - Ad Break (optional pre-warnings and welcome-back), Shoutout Received, Stream Went Live, Channel Point Redemption
 - New Subscription and Resubscription follow Twitch chat announcements (a silent payment / badge change with no chat notice does not fire a New Subscription alert)
 - Subscription Gifter is gifter-linked (bulk count). Subscription Gift Receiver fires once per recipient (`{user}` = gifted viewer, `{gifter}` = gifter)
@@ -217,6 +228,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 |---------|---------|
 | Channel Point Redemption | Matches by reward title; auto-detects reward ID after first redemption |
 | Walk-on Sound | Fires on a viewer's first chat message per stream (leave username blank for every chatter, or name a specific person); blank and named can both fire; supports "only when live" |
+| First-Time Chatter | Fires once the first time a viewer chats (not each stream). Existing viewers already in your data are not treated as first-time after an update. Optional only when live. For starting currency, add a Viewer Points First-Time Chatter earn rule |
 | Bits / Cheer | At-least or exact bit amount (chat cheers only) |
 | Power-Up | Bits spent on Gigantify, Celebration, Message Effect, or custom Power-Ups; at-least or exact amount. Community goals and viewer-points Bits earn still count those bits |
 | Subscription Gifter | At-least or exact gift count (gifter is `{user}`) |
@@ -225,6 +237,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Resubscription | Any, or filtered by tier and/or minimum months |
 | Follow | Any new follow |
 | Raid | Any raid, or with minimum viewer count |
+| Hype Train Start | Once when the train begins. Level Up does not fire on start |
 | Hype Train End | Any level, or minimum level |
 | Hype Train Level Up | Once per level increase; any level, or at least / exact |
 | Goal Achieved | Any goal type, or filtered by type string |
@@ -261,6 +274,8 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Run Chat Bot or Automation | Trigger another Automations rule or Chat Bot overview item (searchable; chains keep the original chatter's variables) |
 | Push Community Goal | Add progress to one or more goals; optional **Use amount from trigger** (Bits cheer, Power-Up bits, or Chat Message Match `<amount>`) |
 | Enable / Disable | Search Overview items by type or name (Chat Bot, Automations, Alerts, shop, currencies, point drops, Community Goals, Saved Lists) and enable or disable that list immediately |
+| Create Clip | Create a Twitch clip of the current stream (must be live) |
+| Set Title / Category | Change the stream title and/or category. Title fields use the same variables as Send Message |
 | Spotify | Pause, resume, skip, shuffle, repeat, queue, play now, or Pause Then Resume At End on the connected Spotify app (hidden until you Connect) |
 
 **Cooldown & Limits:** Every automation can combine a time cooldown (None / Global / Per-User) with per-stream limits (max fires globally and/or per user; `0` = unlimited). Optional **burst**: if used N times within a window you set (for example 5 times in 30 seconds), a longer cooldown starts. The normal per-use duration is independent and can be off. Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for “on cooldown” vs “hit limit.” Channel Point redemptions: Twitch still accepts the redeem and charges points. ISB Suite only skips running the automation when blocked (reject/refund is not supported yet).
@@ -277,7 +292,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 
 **Live Timer:** For a subathon-style extendable clock, enable **Live Timer** (not the delay Timer). Pick a Timer Widget preset, set Starts at, and fill the per-trigger time table.
 
-**Run Chat Bot or Automation:** Enable this action and pick any item from Automations or the Chat Bot overview (channel commands, timed messages, built-ins like `!join` / `!spinwheel` / Watch Time / Follow Age, chat-game start or join, Viewer Points balance/give/gamble/admin/shop/drop claim, or a community goal check). The picker is searchable. Targets that need typed chat arguments (for example give/gamble) use leftover text from the parent fire when available; otherwise they behave like typing the command alone. Arg-only built-ins (`!addgoal`, `!removegoal`, `!endtimer`) are not listed. Rule targets must be enabled; Alerts stay on the separate **Run Alert** action.
+**Run Chat Bot or Automation:** Enable this action and pick any item from Automations or the Chat Bot overview (channel commands, timed messages, built-ins like `!join` / `!spinwheel` / Watch Time / Follow Age, chat-game start or join, Viewer Points balance/give/gamble/admin/shop/drop claim, or a community goal check). The picker is searchable. Targets that need typed chat arguments (for example give/gamble) use leftover text from the parent fire when available; otherwise they behave like typing the command alone. Arg-only built-ins (`!addgoal`, `!removegoal`, `!endtimer`, `!addcommand`, `!editcommand`) are not listed. Rule targets must be enabled; Alerts stay on the separate **Run Alert** action.
 
 **Automation Chains:** When a Chat Bot command or Automation uses **Run Chat Bot or Automation** to trigger another rule (which can itself trigger another), every hop keeps the **original chatter's data** — `{user}`, `{userId}`, badge flags, bits, subs, and the rest. Chains can run up to **20** hops; genuine loops (A -> B -> A) are stopped automatically with a warning in the log. When a wheel entry win triggers an automation, `{winner}` resolves to the winning entry's name.
 
@@ -288,6 +303,7 @@ Automated chat messages driven by the same rule engine as Automations, managed i
 - Optional **Don't trigger from the broadcaster or linked bot** so the command will not fire from your Twitch account or a linked bot account (prefix or mid-message). Same rule either way you send chat
 - Post scheduled or event-driven messages with variable substitution
 - Share the same trigger and action building blocks as Automations
+- Mods can create or update a basic reply from chat with `!addcommand` / `!editcommand` (aliases `!addcom` / `!editcom`; default Moderators). Add fails if the name exists; edit changes response text only
 - Overview enable/disable lights also cover Chat Game start/join, Viewer Points commands, and Community Goal check command cards (same as other Chat Bot rows)
 - **Export Commands** on Overview saves a CSV of every command card on the page (channel commands, timed messages, built-ins, Chat Games, Viewer Points, Community Goals, Saved Lists, Live Timer). Aliases are listed in Description. Saved Lists export both Read and Add. The file is not an import.
 
@@ -306,7 +322,7 @@ Track numbers that persist across streams:
 ### Community Goals
 Track stream-wide milestones (bits, subs, follows, raids, chat bot lines, or manual pushes from automations). Managed in the **Community Goals** tab.
 
-- Set a limit and one or more **accumulation modes** (checkboxes; combine freely): **Manual**, **Twitch Data** (several EventSub sources at once: Bits / Cheer, Power-Up, New / Resub / Gifted, follows, raids), **Chat Message**, and/or **Viewer Points**
+- Set a limit and one or more **accumulation modes** (checkboxes; combine freely): **Manual**, **Twitch Data** (several EventSub sources at once: Bits / Cheer, Power-Up, New / Resub / Gifted, follows, raids), **Chat Message**, **Viewer Points**, and/or live channel totals (Followers, Subscribers, or Sub Points: the bar is the live number, not this-session increments)
 - **Chat Message** watches a specific chatter and a message pattern with `<amount>` (e.g. `used <amount> bits`). Useful for extension/Blerp bits that never fire as Twitch cheers (`CoolViewer used 25 bits to play ...` becomes +25). Prefer this *or* a Chat Message Match automation that pushes the same goal; do not use both, or progress doubles
 - **Viewer Points:** bind a currency so viewers spend 1:1 into the goal (optional contribute command such as `!goal 50`; same name as Check is fine). **Refund VP** credits those points without unwinding Goal Reached
 - When the limit is hit: **Carry Over**, **Zero Out**, or **Stop at limit** (bar stays full, Goal Reached fires once, further progress including VP contribute stops until Reset)
@@ -460,6 +476,8 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 | `!addtime {name} {duration}` | Add time to a Live Clock (e.g. `5m`, `30s`, `1h`) |
 | `!removetime {name} {duration}` | Remove time from a Live Clock |
 | `!so @user` / `!shoutout` | Shout out a channel (Nightbot style). Customize the template in Chat Bot. Built in; does not use a Free chat command slot |
+| `!addcommand {name} {response}` / `!addcom` | Create a simple Chat Bot reply command (default Mods). Fails if the name already exists. Built in; does not use a Free chat command slot |
+| `!editcommand {name} {response}` / `!editcom` | Update the response text of a Chat Bot custom command (default Mods). Cannot change built-ins or Automations |
 | `!vpgive @user amount` | Give points to a viewer (admin give command) |
 | `!customcommand` | Any custom command you've set up in Automations |
 

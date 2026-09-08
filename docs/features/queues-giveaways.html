@@ -59,6 +59,7 @@
           <h3>At a glance</h3>
           <ul>
             <li>Each queue: Pause, Skip, Clear.</li>
+            <li>Click the active Home giveaway to inspect joiners, remove entries, and watch remaining join time.</li>
             <li>Next giveaway join phase opens only after winner chat and TTS finish (about 1 second gap), including empty rounds.</li>
             <li>Start Giveaway from Automations or Viewer Points shop items.</li>
             <li>Related: <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel</a>, <a href="/ISBSuiteReleases/docs/features/viewer-points.html">Viewer Points</a>.</li>
@@ -76,7 +77,7 @@
           <ul>
             <li><strong>Wheel Queue:</strong> pending wheel loads and spins from automations, commands, or shop redemptions. Items show the triggering chatter when known (channel-point redeem, chat command, or automation).</li>
             <li><strong>Sound Queue:</strong> audio waiting to play. Sounds linked to a wheel play at spin time instead of the general queue.</li>
-            <li><strong>Giveaway Queue:</strong> active and pending giveaways. The current giveaway runs at the top; the next join phase waits for winner chat and TTS (~1 second gap), including when a giveaway expires with no entries.</li>
+            <li><strong>Giveaway Queue:</strong> active and pending giveaways. The current giveaway runs at the top. Click it to inspect who has joined, remove people from the pool, and see remaining join time. Close without Save discards staged removals. The next join phase waits for winner chat and TTS (~1 second gap), including when a giveaway expires with no entries.</li>
             <li><strong>Alert Queue:</strong> on-screen alerts waiting for the Alert Box, played one at a time. Labels show the chatter when known: bits and resub amounts, and gift-sub gifter to recipient on per-recipient gifts (community bombs stay gifter x count).</li>
           </ul>
           <p>Each column has Pause, Skip, and Clear controls. Giveaway Queue Skip discards the active giveaway without spinning or announcing a winner; the next queued giveaway still opens after the usual gap.</p>
@@ -87,6 +88,7 @@
           <p>Run timed viewer-entry giveaways from automations or viewer point shop items:</p>
           <ul>
             <li>Chatters enter via a configurable command (default <code>!giveaway</code>).</li>
+            <li>Click the active Home queue row to review joiners and remaining time. Save commits removals; removed chatters can re-join.</li>
             <li>Auto-spins the wheel after a configurable duration (seconds, minutes, or hours).</li>
             <li>Configurable open / already-joined / winner chat announcements.</li>
             <li>Duplicate-entry protection with per-user cooldown on the already-joined reply.</li>

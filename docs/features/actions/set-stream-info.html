@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Enable / Disable | ISB Suite</title>
-  <meta name="description" content="Enable or Disable action: flip Overview on/off lights from a rule" />
+  <title>Set Title / Category | ISB Suite</title>
+  <meta name="description" content="Set Title / Category action: change stream title or game from a rule" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
-  <meta property="og:title" content="Enable / Disable | ISB Suite" />
-  <meta property="og:description" content="Enable or Disable action: flip Overview on/off lights from a rule" />
+  <meta property="og:title" content="Set Title / Category | ISB Suite" />
+  <meta property="og:description" content="Set Title / Category action: change stream title or game from a rule" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -46,54 +46,48 @@
     <aside class="wiki-side" id="wiki-side"></aside>
     <main class="wiki-main">
       <article class="page wide">
-        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Enable / Disable</p>
-        <h1 class="page-title">Enable / Disable</h1>
-        <p class="lede">Search by type or name, add as many Chat Bot commands, Automations, shop items, alerts, and other Overview items as you want, then Enable or Disable that whole list when the rule fires.</p>
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Set Title / Category</p>
+        <h1 class="page-title">Set Title / Category</h1>
+        <p class="lede">Change the Twitch stream title and/or category when a rule fires. Leave a field blank to keep the current value.</p>
 
         <figure class="visual">
-          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-enable-disable.png" alt="Enable / Disable action setup in ISB Suite" />
-          <figcaption>Enable / Disable: searchable add list, chips for each target, and one Enable or Disable choice.</figcaption>
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-set-stream-info.png" alt="Set Title / Category action setup in ISB Suite" />
+          <figcaption>Set Title / Category: optional title (variables allowed) and Twitch category search.</figcaption>
         </figure>
 
         <div class="ref-panel">
           <h3>At a glance</h3>
           <ul>
-            <li>UI label: <strong>Enable / Disable</strong>.</li>
-            <li>Flips the same Overview status lights you click by hand.</li>
-            <li>One mode for the whole card: Enable them, or Disable them.</li>
-            <li>Not the same as <a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a> (that fires a target).</li>
+            <li>UI label: <strong>Set Title / Category</strong>.</li>
+            <li>Helix Modify Channel Information (<code>channel:manage:broadcast</code>). Re-authenticate Twitch once if you connected before this feature.</li>
+            <li>Title is optional (max 140 characters after variables resolve). It uses the same message variables as Send Message (including trigger tokens such as <code>{input}</code>). Category search uses Twitch&apos;s category list.</li>
+            <li>At least one of title or category must be set when the action is on.</li>
           </ul>
         </div>
 
         <nav class="toc"><strong>On this page</strong><ol>
           <li><a href="#how">How it works</a></li>
           <li><a href="#setup">Setup</a></li>
-          <li><a href="#targets">What you can pick</a></li>
           <li><a href="#example">Examples</a></li>
         </ol></nav>
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>When the rule fires, each added item is turned on or off immediately (same moment as Counter Action and Live Timer), even if a delay Timer is also on the rule. Missing or locked items are skipped. The rest of this rule still finishes if you disable the rule itself.</p>
+          <p>When the rule fires, ISB Suite patches the live channel information. A Helix error (missing scope, AutoMod title, invalid category) is logged and does not stop the rest of the rule. Tags, language, and content labels stay on <a href="/ISBSuiteReleases/docs/features/stream.html">Stream Manager</a> stream-info Edit - this action is title and category only.</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>
           <ol class="steps">
-            <li>Enable <strong>Enable / Disable</strong> on the Actions card.</li>
-            <li>Search by type (Chat Bot, Automations, Shop) or by name, then click <strong>Add</strong> for each item.</li>
-            <li>Choose <strong>Disable them</strong> or <strong>Enable them</strong>.</li>
+            <li>Connect Twitch under Integrations (grant broadcast permission when prompted).</li>
+            <li>Enable <strong>Set Title / Category</strong>.</li>
+            <li>Type a title (variables allowed) and/or search for a category. Use <strong>Clear category</strong> to remove the game.</li>
           </ol>
-        </section>
-        <section class="section" id="targets">
-          <h2>What you can pick</h2>
-          <p>Anything with an Overview on/off light: Automations, Chat Bot commands and built-ins, Chat Games, Alerts, shop items, Viewer Points currencies, point drops, Community Goals, and Saved Lists.</p>
         </section>
         <section class="section" id="example">
           <h2>Examples</h2>
           <ul>
-            <li>Going live -&gt; Enable a set of hype commands and shop items.</li>
-            <li>Raid incoming -&gt; Disable noisy Chat Bot commands for a few minutes, then Enable them on another rule.</li>
-            <li>Mod command <code>!quiet</code> -&gt; Disable several automations at once.</li>
+            <li>Chat command <code>!justchatting</code> -&gt; Set Title / Category to Just Chatting.</li>
+            <li>Stream went live -&gt; Set title <code>{user}&apos;s stream is live</code> (or your usual show title).</li>
           </ul>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>

@@ -76,7 +76,7 @@
       title: "Actions",
       url: "/features/actions/index.html",
       blurb: "Shared action setup: sound, chat, wheel, alerts, timers",
-      keywords: "actions play sound send message start wheel session giveaway run alert tts discord webhook counter timer randomized image picker",
+      keywords: "actions play sound send message start wheel session giveaway run alert tts discord webhook counter timer create clip set title category enable disable randomized image picker",
     },
     {
       title: "Start Wheel Session action",
@@ -155,6 +155,24 @@
       url: "/features/actions/run-chat-bot-or-automation.html",
       blurb: "Chain into another Chat Bot or Automation rule",
       keywords: "run chat bot or automation chain call rule",
+    },
+    {
+      title: "Create Clip action",
+      url: "/features/actions/create-clip.html",
+      blurb: "Clip the live broadcast; announce with {clipUrl}",
+      keywords: "create clip twitch clips:edit duration title {clipUrl} {clipId}",
+    },
+    {
+      title: "Set Title / Category action",
+      url: "/features/actions/set-stream-info.html",
+      blurb: "Change stream title and/or category from a rule",
+      keywords: "set title category stream info game just chatting channel:manage:broadcast",
+    },
+    {
+      title: "Enable / Disable action",
+      url: "/features/actions/enable-disable.html",
+      blurb: "Turn Overview items on or off from a rule",
+      keywords: "enable disable overview status light shop chat bot automations",
     },
     {
       title: "Randomized Action",
@@ -286,7 +304,7 @@
       title: "Viewer Points",
       url: "/features/viewer-points.html",
       blurb: "Currency, earn rules, shop, point drops",
-      keywords: "viewer points shop drop earn watching watch time follow bits raid sub chat message channel points balance !points !givepoints !gamble !claim community goal contribute",
+      keywords: "viewer points shop drop earn watching watch time follow bits raid sub chat message channel points balance !points !points @user {caller} !givepoints !gamble !vpgive !vpgive all !claim community goal contribute",
     },
     {
       title: "Community Goals",
@@ -313,6 +331,42 @@
       keywords: "queue giveaway pause skip countdown winner !giveaway handoff",
     },
     {
+      title: "Stream Manager",
+      url: "/features/stream.html",
+      blurb: "Live desk: stream info, Channel Points, clips, Activity, and chat",
+      keywords: "stream info title category tags clip channel points rewards activity feed create clip desk",
+    },
+    {
+      title: "Channel Points",
+      url: "/features/stream/channel-points.html",
+      blurb: "Create, pause, and migrate Channel Point rewards",
+      keywords: "channel points rewards migrate isb dashboard pause enable cooldown",
+    },
+    {
+      title: "Stream info",
+      url: "/features/stream/stream-info.html",
+      blurb: "Title, category, tags, go-live line, and Create Clip",
+      keywords: "stream info title category tags clip golive {title} {category} {golive} edit",
+    },
+    {
+      title: "Chat",
+      url: "/features/stream/chat.html",
+      blurb: "Stream Manager chat transcript, viewers, Bits and Gifted",
+      keywords: "chat transcript viewers bits gifted emotes slow mode mod actions",
+    },
+    {
+      title: "Quick Actions",
+      url: "/features/stream/quick-actions.html",
+      blurb: "Add Automation, Add Chat Bot, Pause Automations",
+      keywords: "quick actions pause automations add automation add chat bot",
+    },
+    {
+      title: "Activity",
+      url: "/features/activity.html",
+      blurb: "Twitch-style event history on the Stream Manager desk",
+      keywords: "activity feed history follow sub bits raid redeem resend replay twitch tiltify donation alert wheel walk-on chat game spotify song request !sr viewer points community goal check contribute alias search yesterday giveaway session details join resub tier channel points cost cheer message stream clip timer automation",
+    },
+    {
       title: "Use cases",
       url: "/reference/use-cases.html",
       blurb: "Scenarios and Extra tips",
@@ -322,7 +376,7 @@
       title: "Chat commands",
       url: "/reference/chat-commands.html",
       blurb: "Viewer and mod commands, Advanced Settings",
-      keywords: "commands !join !spinwheel !points !giveaway !sr !songrequest !remove !removesong !vpgive permission alias match anywhere cooldown limits",
+      keywords: "commands !join !spinwheel !points !points @user {caller} !giveaway !sr !songrequest !remove !removesong !vpgive !vpgive all permission alias match anywhere allow checking another viewer cooldown limits",
     },
     {
       title: "Message variables",
@@ -374,12 +428,16 @@
             { href: "/features/actions/live-timer.html", label: "Live Timer" },
             { href: "/features/actions/start-giveaway-session.html", label: "Start Giveaway Session" },
             { href: "/features/actions/run-chat-bot-or-automation.html", label: "Run Chat Bot or Automation" },
+            { href: "/features/actions/create-clip.html", label: "Create Clip" },
+            { href: "/features/actions/set-stream-info.html", label: "Set Title / Category" },
+            { href: "/features/actions/enable-disable.html", label: "Enable / Disable" },
             { href: "/features/actions/randomized-action.html", label: "Randomized Action" },
             { href: "/features/actions/randomize-image-picker.html", label: "Randomize Image Picker" },
           ],
         },
         { href: "/features/automations.html", label: "Automations" },
         { href: "/features/alerts.html", label: "Alerts" },
+        { href: "/features/activity.html", label: "Activity" },
         { href: "/features/chat-bot.html", label: "Chat Bot" },
         {
           id: "chat-games",
@@ -417,6 +475,20 @@
         { href: "/features/community-goals.html", label: "Community Goals" },
         { href: "/features/counters-stats.html", label: "Counters and Stats" },
         { href: "/features/integrations.html", label: "Integrations" },
+        {
+          id: "stream-manager",
+          href: "/features/stream.html",
+          label: "Stream Manager",
+          matchPrefix: "/features/stream",
+          children: [
+            { href: "/features/stream.html", label: "Overview" },
+            { href: "/features/stream/channel-points.html", label: "Channel Points" },
+            { href: "/features/stream/stream-info.html", label: "Stream info" },
+            { href: "/features/activity.html", label: "Activity" },
+            { href: "/features/stream/chat.html", label: "Chat" },
+            { href: "/features/stream/quick-actions.html", label: "Quick Actions" },
+          ],
+        },
         { href: "/features/queues-giveaways.html", label: "Queues and Giveaways" },
       ],
     },
@@ -454,7 +526,11 @@
       return path === base;
     }
     if (prefix.endsWith(".html")) return path === prefix;
-    return path === prefix || path === `${prefix}/index.html` || path.startsWith(`${prefix}/`);
+    // Folder children plus a sibling hub page (Stream Manager is /features/stream.html).
+    return path === prefix
+      || path === `${prefix}.html`
+      || path === `${prefix}/index.html`
+      || path.startsWith(`${prefix}/`);
   }
 
   function branchStorageKey(id) {

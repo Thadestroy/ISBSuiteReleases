@@ -57,6 +57,8 @@
           <li><a href="#points">Viewer Points</a></li>
           <li><a href="#goals">Community Goals</a></li>
           <li><a href="#saved-lists">Saved Lists</a></li>
+          <li><a href="#add-edit-command">Add / Edit Command</a></li>
+          <li><a href="#stream">Stream</a></li>
           <li><a href="#timers">Timers and commands</a></li>
           <li><a href="#games">Chat Games</a></li>
           <li><a href="#tiltify">Tiltify</a></li>
@@ -81,19 +83,22 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
-              <tr><td><code>{user}</code></td><td>Viewer&apos;s display name (requires a Twitch trigger)</td></tr>
-              <tr><td><code>{randomViewer}</code></td><td>Random current chatter&apos;s display name (anyone in chat now, including the linked bot). Same name for every use in one message, and for chat, TTS, Discord, and alerts on the same fire. Only fills while the stream is live (same chatters list Watch Time uses). Empty chat or offline substitutes nothing.</td></tr>
+              <tr><td><code>{user}</code></td><td>Viewer&apos;s display name (requires a Twitch trigger). On lookup-style commands this is the looked-up subject when an <code>@user</code> arg is present</td></tr>
+              <tr><td><code>{caller}</code> / <code>{callerDisplayName}</code></td><td>Display name of the viewer who typed the command when <code>{user}</code> is a looked-up subject (Viewer Points balance, Follow Age, Watch Time, and Chat Command / Chat Bot when Allow checking another viewer is on). Equals <code>{user}</code> when there is no subject</td></tr>
+              <tr><td><code>{randomViewer}</code></td><td>Random current chatter&apos;s display name (anyone in chat now, including the linked bot). Same name for every use in one message, and for chat, TTS, Discord, and alerts on the same fire. Fills from the Helix chatters list while Twitch is connected (live or offline). Empty chat substitutes nothing.</td></tr>
               <tr><td><code>{displayName}</code></td><td>Alias for <code>{user}</code> (Follow Age / Watch Time)</td></tr>
               <tr><td><code>{winner}</code></td><td>Winning wheel entry text (also when an automation runs from a wheel entry win)</td></tr>
               <tr><td><code>{wheel}</code></td><td>Wheel / preset name</td></tr>
               <tr><td><code>{amount}</code></td><td>Shared numeric event value: Counter Value Changed abs-delta, wired Counter Action amount, community-goal delta, bits, raid/shoutout viewers, resub months, gift count, hype level, ad seconds, points given/wagered, point-drop claim amount, or chat game stake</td></tr>
-              <tr><td><code>{message}</code></td><td>Alert overlay text typed by the viewer (same source as <code>{input}</code>)</td></tr>
+              <tr><td><code>{message}</code></td><td>Alert overlay text typed by the viewer (same source as <code>{input}</code>). On Bits / Cheer, <code>cheerN</code> tokens are stripped so TTS does not repeat each emote</td></tr>
               <tr><td><code>{reward}</code></td><td>Channel point reward title</td></tr>
-              <tr><td><code>{input}</code></td><td>User message or leftover text after a command / alias</td></tr>
+              <tr><td><code>{input}</code></td><td>User message or leftover text after a command / alias. On Bits / Cheer, same cheer-token strip as <code>{message}</code></td></tr>
               <tr><td><code>{bits}</code></td><td>Bits spent (Bits / Cheer or Power-Up trigger)</td></tr>
               <tr><td><code>{subs}</code></td><td>Sub or gift count (Sub / Resub / Gift Sub)</td></tr>
               <tr><td><code>{tier}</code></td><td>Sub tier: 1, 2, or 3</td></tr>
               <tr><td><code>{gifter}</code></td><td>Gifter display name (Subscription Gift Receiver; <code>{user}</code> is the recipient)</td></tr>
+              <tr><td><code>{clipUrl}</code></td><td>Public clip URL after a successful Create Clip action on this fire. Unset (literal token) if clip failed or the channel was offline.</td></tr>
+              <tr><td><code>{clipId}</code></td><td>Clip id after a successful Create Clip action on this fire.</td></tr>
             </tbody>
           </table></div>
         </section>
@@ -121,7 +126,8 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
-              <tr><td><code>{balance}</code></td><td>User&apos;s current point balance (thousands separators when the backing counter has them on)</td></tr>
+              <tr><td><code>{balance}</code></td><td>Looked-up subject&apos;s current point balance on <code>!points</code> / <code>!points @user</code> (thousands separators when the backing counter has them on)</td></tr>
+              <tr><td><code>{caller}</code></td><td>Who typed <code>!points</code> when the balance is for another viewer</td></tr>
               <tr><td><code>{currencyName}</code></td><td>Currency display name</td></tr>
               <tr><td><code>{price}</code></td><td>Cost of the redeemable shop item</td></tr>
               <tr><td><code>{itemName}</code></td><td>Redeemable item name</td></tr>
@@ -171,10 +177,37 @@
               <tr><td><code>{entry}</code></td><td>Entry text</td></tr>
               <tr><td><code>{number}</code></td><td>Stable entry number</td></tr>
               <tr><td><code>{listName}</code></td><td>List display name</td></tr>
-              <tr><td><code>{game}</code></td><td>Twitch stream category when captured (if enabled)</td></tr>
+              <tr><td><code>{game}</code></td><td>Twitch category captured with the list entry (if enabled). Not this stream&apos;s live category</td></tr>
               <tr><td><code>{date}</code></td><td>Local date/time when captured (if enabled)</td></tr>
               <tr><td><code>{addedBy}</code></td><td>Chatter who added the entry (if enabled)</td></tr>
               <tr><td><code>{user}</code></td><td>Viewer who ran the command</td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="add-edit-command">
+          <h2>Add / Edit Command</h2>
+          <p>Used in the Chat Bot <code>!addcommand</code> / <code>!editcommand</code> confirmation Response. <code>{command}</code> is the built-in they typed; <code>{name}</code> and <code>{response}</code> are the command they created or updated. Do not reuse Saved List <code>{entry}</code>. Defaults are <code>Added {name}: {response}</code> / <code>Updated {name}: {response}</code>.</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>{command}</code></td><td>The built-in they ran (for example <code>!addcom</code>)</td></tr>
+              <tr><td><code>{name}</code></td><td>Command they created or edited (for example <code>!project</code>)</td></tr>
+              <tr><td><code>{response}</code></td><td>Reply text they set on that command</td></tr>
+              <tr><td><code>{user}</code></td><td>Viewer who ran the built-in</td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="stream">
+          <h2>Stream</h2>
+          <p>These tokens read the Stream Manager go-live line and the last title/category ISB loaded from Twitch (Stream Manager, go-live send, or Set Title/Category). Use them in automations, alerts, Viewer Points, and other templates. Related: <a href="/ISBSuiteReleases/docs/features/stream.html">Stream Manager</a>.</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>{golive}</code></td><td>Go live chat message from Stream Manager (stored even when Send to Twitch chat is off). Tokens inside that line (for example <code>{category}</code>) fill in when this token is used</td></tr>
+              <tr><td><code>{category}</code></td><td>This stream&apos;s current Twitch category</td></tr>
+              <tr><td><code>{title}</code></td><td>This stream&apos;s current Twitch title</td></tr>
             </tbody>
           </table></div>
         </section>
@@ -191,7 +224,7 @@
               <tr><td><code>{followage}</code></td><td>Formatted follow duration (for example <code>2y 3mo 5d 4h</code>)</td></tr>
               <tr><td><code>{watchtime}</code></td><td>Formatted watch time (for example <code>2d 5h 13m</code>)</td></tr>
               <tr><td><code>{login}</code></td><td>Twitch login for the shoutout target (used in <code>https://twitch.tv/{login}</code>)</td></tr>
-              <tr><td><code>{game}</code></td><td>Also used by <code>!so</code> for the target channel&apos;s last Twitch category (same token as Saved Lists)</td></tr>
+              <tr><td><code>{game}</code></td><td>Also used by <code>!so</code> for the target channel&apos;s last Twitch category (not this stream&apos;s <code>{category}</code>)</td></tr>
               <tr><td><code>{track}</code></td><td>Spotify track title for <code>!sr</code> / <code>!remove</code></td></tr>
               <tr><td><code>{artist}</code></td><td>Spotify artist for <code>!sr</code> / <code>!remove</code></td></tr>
               <tr><td><code>{cap}</code></td><td>That viewer's song-request queue cap (at-cap <code>!sr</code> reply)</td></tr>

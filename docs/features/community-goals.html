@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Community Goals | ISB Suite</title>
-  <meta name="description" content="Community goals, check commands, Viewer Points contribute" />
+  <meta name="description" content="Community goals, live channel totals, check commands, Viewer Points contribute" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
   <meta property="og:title" content="Community Goals | ISB Suite" />
-  <meta property="og:description" content="Community goals, check commands, Viewer Points contribute" />
+  <meta property="og:description" content="Community goals, live channel totals, check commands, Viewer Points contribute" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -48,7 +48,7 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Community Goals</p>
         <h1 class="page-title">Community Goals</h1>
-        <p class="lede">Stream-wide milestones fed by Twitch events, chat message patterns, Viewer Points spend, or manual pushes from automations.</p>
+        <p class="lede">Stream-wide milestones fed by Twitch events, live Helix channel totals, chat message patterns, Viewer Points spend, or manual pushes from automations.</p>
         <p>Leaving Add/Edit Goal with unsaved changes shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Opening a form and leaving without edits does not prompt. Form <strong>Cancel</strong> discards without asking.</p>
 
         <figure class="visual">
@@ -59,8 +59,8 @@
         <div class="ref-panel">
           <h3>At a glance</h3>
           <ul>
-            <li>Accumulation modes (combine freely): Manual, Twitch Data, Chat Message, Viewer Points.</li>
-            <li>When the limit is hit: Carry Over, Zero Out, or Stop at limit (bar stays full until Reset).</li>
+            <li>Increment modes (combine freely): Manual, Twitch Data, Chat Message, Viewer Points. Or exclusive <strong>Live Totals</strong> (current followers, subscribers, or sub points from Helix).</li>
+            <li>When the limit is hit (increment modes): Carry Over, Zero Out, or Stop at limit (bar stays full until Reset). Live Totals does not use those reset modes.</li>
             <li>Check command example: <code>!bitsgoal</code> replies with <code>{goalProgress}</code> like <code>15/100</code>.</li>
             <li>Viewer Points contribute: viewers spend a bound currency 1:1 into the goal (for example <code>!goal 50</code>). Stop-at-limit goals reject further spend once the bar is full.</li>
             <li>Fire Automations or Custom Alerts on Community Goal Reached.</li>
@@ -71,6 +71,7 @@
 
         <nav class="toc"><strong>On this page</strong><ol>
           <li><a href="#modes">Accumulation modes</a></li>
+          <li><a href="#live-totals">Live Totals</a></li>
           <li><a href="#reset">Reset behavior</a></li>
           <li><a href="#viewer-points">Viewer Points contribute</a></li>
           <li><a href="#check">Check commands</a></li>
@@ -80,14 +81,28 @@
 
         <section class="section" id="modes">
           <h2>Accumulation modes</h2>
-          <p>Set a limit and one or more accumulation modes (checkboxes; combine freely):</p>
+          <p>Set a limit and one or more increment modes (checkboxes; combine freely), or check exclusive <strong>Live Totals</strong>:</p>
           <ul>
-            <li><strong>Twitch Data:</strong> pick one or more EventSub sources from the dropdown (Bits / Cheer, Power-Up, new sub, resub, gifted, follows, raids). New sub matches first-time New Subscription, not a resub. New, resub, follows, and raids always add +1; Bits, Power-Up, and gifted subs use Count method (raw amount or +1 per event).</li>
+            <li><strong>Twitch Data:</strong> pick one or more EventSub sources from the dropdown (Bits / Cheer, Power-Up, new sub, resub, gifted, follows, raids). New sub matches first-time New Subscription, not a resub. New, resub, follows, and raids always add +1; Bits, Power-Up, and gifted subs use Count method (raw amount or +1 per event). This is still this-session event counting - it does not show the channel's current sub or follower total.</li>
             <li><strong>Chat Message:</strong> watch a specific chatter and a pattern with <code>&lt;amount&gt;</code> (useful for extension bits that never fire as Twitch cheers).</li>
             <li><strong>Viewer Points:</strong> viewers spend a bound currency into this goal (1 point = 1 progress).</li>
             <li><strong>Manual:</strong> progress from Push Community Goal actions only.</li>
+            <li><strong>Live Totals:</strong> exclusive. The bar <em>is</em> the current Helix total. See <a href="#live-totals">Live Totals</a>.</li>
           </ul>
           <p>Automations can also use <strong>Chat Message Match</strong> plus <strong>Push Community Goal</strong> with <strong>Use amount from trigger</strong>.</p>
+        </section>
+
+        <section class="section" id="live-totals">
+          <h2>Live Totals</h2>
+          <p>Check <strong>Live Totals</strong> on a goal (it clears the other four modes) and pick one metric:</p>
+          <ul>
+            <li><strong>Followers:</strong> current channel follower count. Works for every channel.</li>
+            <li><strong>Subscribers:</strong> current subscriber count (Affiliate / Partner).</li>
+            <li><strong>Sub Points:</strong> Twitch subscriber points (T1=1, T2=2, T3=6).</li>
+          </ul>
+          <p>ISB Suite seeds the number from Helix when Twitch connects and when you save the goal, then refreshes about every 60 seconds and shortly after follow / sub / gift / sub-end events. A failed Helix call leaves the last value (it does not zero the bar). Unfollows are picked up on the next Helix read - Twitch has no unfollow EventSub.</p>
+          <p><strong>Goal Reached</strong> fires when the live total first <em>crosses</em> the limit after the goal is saved. Enabling a goal that is already over the limit (for example 800 current subs with a 500 limit) does not fire. Later polls at the same value do not re-fire. The bar can show over 100% on the overlay - that is the real total, not a clamp.</p>
+          <p>Carry Over, Zero Out, Stop at limit, and reset-on-stream-start are hidden for Live Totals. Overview <strong>Reset</strong> re-syncs from Twitch instead of zeroing. <strong>Simulate</strong> is disabled. This-session New / Resub / Gifted Sub goals stay on <strong>Twitch Data</strong> - use a second goal if you want both.</p>
         </section>
 
         <section class="section" id="reset">
@@ -98,7 +113,7 @@
             <li><strong>Zero Out:</strong> the bar resets to 0 after each completion. Goal Reached fires, and further progress continues.</li>
             <li><strong>Stop at limit:</strong> the bar stays full. Goal Reached fires once. Twitch, chat, Push, and Viewer Points add nothing more until you Reset (or stream-start reset, if that is on). Decrementing below the limit reopens the bar.</li>
           </ul>
-          <p>Manual Reset zeros the bar and cycle count. If viewers have contributed Viewer Points, the confirm dialog says those points are <strong>not</strong> refunded. Use <strong>Refund VP</strong> to credit them and reset the bar. Reset-when-stream-starts also does not refund (no dialog).</p>
+          <p>Manual Reset zeros the bar and cycle count. If viewers have contributed Viewer Points, the confirm dialog says those points are <strong>not</strong> refunded. Use <strong>Refund VP</strong> to credit them and reset the bar. Reset-when-stream-starts also does not refund (no dialog). Live Totals Reset re-reads Helix instead of zeroing.</p>
         </section>
 
         <section class="section" id="viewer-points">

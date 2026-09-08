@@ -62,6 +62,7 @@
             <li>Supports <a href="/ISBSuiteReleases/docs/reference/message-variables.html">message variables</a> such as <code>{user}</code> and <code>{amount}</code>.</li>
             <li>Optional bot account on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a> sends replies as the bot.</li>
             <li>TTS and Discord can reuse this same template text.</li>
+            <li><code>/shoutout {user}</code> or <code>/so {user}</code> fires Twitch's official shoutout (reconnect Twitch if you connected before this feature).</li>
           </ul>
         </div>
 
@@ -75,7 +76,7 @@
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>When the rule fires, the template is resolved with the current event context and sent to Twitch chat (as the broadcaster account, or as the dedicated bot account if you connected one on Integrations). Rate limits still apply - mod the bot in your channel if you send many replies.</p>
+          <p>When the rule fires, the template is resolved with the current event context and sent to Twitch chat (as the broadcaster account, or as the dedicated bot account if you connected one on Integrations). Rate limits still apply - mod the bot in your channel if you send many replies. A template that starts with <code>/shoutout</code> or <code>/so</code> sends Twitch's official shoutout (Helix) instead of posting that slash command. Viewer text in <code>{input}</code> is posted as chat. <code>/shoutout {user}</code> on a raid uses the raider's user id. You must be live with at least one viewer; one shoutout every 2 minutes, same channel once per hour. Extra text after the name is still sent as chat. Re-authenticate Twitch if you connected before this feature (<code>moderator:manage:shoutouts</code>).</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>
@@ -101,7 +102,7 @@
           <h2>Examples</h2>
           <ul>
             <li>Bits cheer -&gt; <code>Thanks {user} for {amount} bits!</code> plus <a href="/ISBSuiteReleases/docs/features/actions/push-community-goal.html">Push Community Goal</a> with Use amount from trigger.</li>
-            <li>Raid -&gt; longer hype line with <code>{viewers}</code>; keep TTS on a shorter custom line.</li>
+            <li>Raid -&gt; Send Message <code>/shoutout {user}</code> for the official shoutout, or <code>/shoutout {user} Welcome raiders!</code> to shout out and still post a chat line.</li>
           </ul>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>

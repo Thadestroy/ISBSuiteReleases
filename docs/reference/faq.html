@@ -85,8 +85,8 @@
           <h2>Channel points not triggering</h2>
           <ul>
             <li>Confirm EventSub shows connected on Integrations.</li>
-            <li>Reward title in the automation must match the Twitch reward title exactly.</li>
-            <li>Redeem once while connected so the reward ID auto populates.</li>
+            <li>Prefer picking the reward from the catalog so it binds by ID (a Twitch rename still matches).</li>
+            <li>If you typed a title while offline, it must match the Twitch title exactly, or redeem once while connected so the ID auto-populates.</li>
           </ul>
         </section>
 
@@ -98,6 +98,14 @@
             <li>Supported formats: .mp3, .wav, .mp4, .m4a, .wma</li>
             <li>Check the Sound Queue is not paused.</li>
             <li>Confirm the Play Sound / TTS action uses the right bus under <strong>Settings &gt; Audio Output Channels</strong>.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="timed-messages">
+          <h2>Timed messages keep posting in empty chat</h2>
+          <ul>
+            <li>By default, interval posts skip when recent chat is only timed lines. The first timed line of a session still posts.</li>
+            <li>Turn that off, require more chat lines, or allow a cluster of different timers under <strong>Settings &gt; Timed messages</strong>. The same settings cover Chat Bot timers, Automation timers, and Saved List timers.</li>
           </ul>
         </section>
 
@@ -184,6 +192,16 @@
         <section class="section" id="updates">
           <h2>Updates</h2>
           <p>ISB Suite checks for updates on launch and can download and install with a single click when a new version is available.</p>
+        </section>
+
+        <section class="section" id="single-instance">
+          <h2>Launching ISB Suite twice</h2>
+          <p>Only one copy of ISB Suite can run at a time. It shares your AppData folder, Twitch EventSub connection, and global hotkeys - two copies would fight over those.</p>
+          <ul>
+            <li>If you open the app again (shortcut, installer, or a second click), the existing window comes forward instead of starting a new copy.</li>
+            <li>If you cannot see that window, look on other virtual desktops or behind OBS. Close it there before you can start a fresh session.</li>
+            <li>A leftover crash usually releases the lock when the process ends. If a launch still says ISB Suite is already running and you cannot find a window, check Task Manager for <code>ISBSuite.exe</code>.</li>
+          </ul>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>

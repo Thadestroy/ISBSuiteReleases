@@ -103,11 +103,12 @@
             <li>Optional extras for current <strong>Tier 1</strong>, <strong>Tier 2</strong>, and <strong>Tier 3</strong> subscribers live under <strong>Advanced Settings</strong> (added on top of the base amount). Prime counts as Tier 1. Set Points they earn to 0 if only subscribers should get points. Gifted subs count. Leave extras at 0 for everyone to earn the same. The same extras can be set on Subscription and Resubscription event rules.</li>
             <li>Save the currency.</li>
           </ol>
-          <div class="callout"><p><strong>Prerequisite:</strong> enable <strong>Stats - Watch Time</strong> and ensure Twitch is connected with the <code>moderator:read:chatters</code> scope (reconnect on <strong>Integrations</strong> if watch-time accrual is paused). Watching earn rules use the same once-per-minute live poll as watch time. If Watch Time is off, the app prompts you to enable it before saving an enabled Watching rule. Other earn triggers do not need Watch Time.</p></div>
+          <div class="callout"><p><strong>Prerequisite:</strong> enable <strong>Stats - Watch Time</strong> and ensure Twitch is connected with the <code>moderator:read:chatters</code> scope (reconnect on <strong>Integrations</strong> if watch-time accrual is paused). Watching earn rules use the same once-per-minute live poll as watch time. If Watch Time is off, the Watching rule shows an error on the rule itself (you can still save it). Turning Watch Time off later pops a warning if Watching rules already exist. Other earn triggers do not need Watch Time.</p></div>
           <h3>Event triggers</h3>
           <p>Same event family Automations already see, when the event carries a Twitch user id:</p>
           <ul>
             <li><strong>Chat Message</strong> - that viewer earns after sending the number of chat messages you set (for example 10 messages then 5 points). Commands like <code>!points</code> do not count.</li>
+            <li><strong>First-Time Chatter</strong> - that viewer earns once the first time they chat (not each stream). Existing viewers already in your data are not treated as first-time after an update</li>
             <li><strong>Follow</strong></li>
             <li><strong>Subscription</strong> and <strong>Resubscription</strong></li>
             <li><strong>Subscription Gifter</strong> - points go to the gifter, once per gifted sub (a bomb of 5 gifts awards 5 times). Optional gift count with At least or Exactly; leave blank for every gift</li>
@@ -122,10 +123,10 @@
         <section class="section" id="commands">
           <h2>Viewer and admin commands</h2>
           <ul>
-            <li><strong>Balance:</strong> viewers type <code>!points</code> (or your custom command) to check balance.</li>
+            <li><strong>Balance:</strong> viewers type <code>!points</code> (or your custom command) to check their balance, or <code>!points @username</code> for another viewer. Allow checking another viewer is on by default. <code>{user}</code> / <code>{balance}</code> are the subject; <code>{caller}</code> is who typed the command. Unknown login uses the not-found template; a resolved viewer with no wallet is a real <code>0</code>.</li>
             <li><strong>Give:</strong> viewers give their own points to another chatter (for example <code>!givepoints</code>).</li>
-            <li><strong>Gamble:</strong> viewers wager points on a configurable win-chance roll (for example <code>!gamble 50</code>, <code>!gamble 50.2</code>, <code>!gamble 34.7%</code>, or <code>!gamble all</code>). Decimals and percents round to a whole stake before the roll.</li>
-            <li><strong>Admin give:</strong> broadcaster/mods award points from chat (for example <code>!vpgive</code>).</li>
+            <li><strong>Gamble:</strong> viewers wager points on a configurable win-chance roll (for example <code>!gamble 50</code>, <code>!gamble 1k</code>, <code>!gamble 1m</code>, <code>!gamble 50.2</code>, <code>!gamble 34.7%</code>, or <code>!gamble all</code>). <code>k</code> and <code>m</code> suffixes scale by 1,000 and 1,000,000 with no space (<code>1k</code>, not <code>1 k</code>). Decimals and percents round to a whole stake before the roll.</li>
+            <li><strong>Admin give:</strong> broadcaster/mods award points from chat (for example <code>!vpgive @user 100</code>, or <code>!vpgive all 100</code> for everyone currently in chat). <code>all</code> uses the Helix chatters snapshot (same room list as Watch Time), not a live JOIN feed.</li>
             <li>Each command supports aliases and optional Match anywhere in message under Advanced Settings.</li>
             <li>Advanced Settings also cover permission, time cooldown (optional burst), and per-stream limits (same unified editor as other commands).</li>
             <li>Community Goals can bind this currency so viewers spend it into a milestone. See <a href="/ISBSuiteReleases/docs/features/community-goals.html#viewer-points">Community Goals - Viewer Points contribute</a>.</li>

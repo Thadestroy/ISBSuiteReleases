@@ -75,9 +75,10 @@
 
         <section class="section" id="twitch">
           <h2>Twitch alert types</h2>
-          <p>Follow, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver, Bits / Cheer, Power-Up, Raid, Hype Train End, Hype Train Level Up, Goal Achieved, Ad Break, Shoutout Received, Stream Went Live, Channel Point Redemption.</p>
+          <p>Follow, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver, Bits / Cheer, Power-Up, Raid, Hype Train Start, Hype Train End, Hype Train Level Up, Goal Achieved, Ad Break, Shoutout Received, Stream Went Live, Channel Point Redemption.</p>
           <p>New Subscription fires only for a first-time paid sub (chat/Activity Feed notice). Returners and gift recipients do not get a New Subscription alert. Subscription Gifter is gifter-linked (bulk count). Subscription Gift Receiver fires once per recipient with <code>{user}</code> = gifted viewer and <code>{gifter}</code> = gifter (gift bombs = one alert per recipient). Resubscription fires when the viewer shares their resub message in chat. A silent payment or badge change with no chat notice does not fire a New Subscription alert.</p>
           <p>Each type supports custom image or GIF, alert text with variables, display duration, TTS, and minimum thresholds (for example raids with 10+ viewers). Overview rows have an enable/disable light (same as Automations / Chat Bot). Green is on, grey is off; click the light to toggle. A legend at the top of overview lists explains this. Turning a type off and back on restores only the rules that were on before.</p>
+          <p>Bits / Cheer TTS and <code>{message}</code> fold every <code>cheerN</code> token in that one chat line into the event total (<code>{amount}</code>), so stacked cheer emotes are spoken once. Other words in the viewer note stay. Count each / per-N Bits automations are a separate setting and still run from the Twitch bits total.</p>
         </section>
 
         <section class="section" id="appearance">
@@ -103,6 +104,7 @@
               <tr><td>Counter Tier Reached</td><td>Counter crosses into the next configured tier</td></tr>
               <tr><td>Counter Value Changed</td><td>Counter goes up, down, or either way (once per change)</td></tr>
               <tr><td>First Chat Message</td><td>Walk on / catch all on a viewer first message</td></tr>
+              <tr><td>First-Time Chatter</td><td>Once the first time a viewer chats (not each stream). Existing viewers already in your data are not treated as first-time after an update. Optional only when live</td></tr>
               <tr><td>Chat Command</td><td>Your own <code>!command</code> (aliases, Match anywhere, permission, cooldown, limits)</td></tr>
               <tr><td>Timer</td><td>Interval or countdown driven alert</td></tr>
               <tr><td>Action Only (Run Alert)</td><td>No event trigger; only plays when an Actions surface uses Run Alert</td></tr>
