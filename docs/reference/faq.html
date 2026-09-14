@@ -189,6 +189,18 @@
           </ul>
         </section>
 
+        <section class="section" id="obs">
+          <h2>OBS Studio not connecting or not switching scenes</h2>
+          <ul>
+            <li>Use OBS Studio 28 or newer with the built-in WebSocket server (v5). OBS 27 with the old 4.x plugin will not connect.</li>
+            <li>In OBS: <strong>Tools â†’ WebSocket Server Settings</strong>. Enable the server. On Integrations, OBS Studio, open <strong>Set Up OBS</strong> (or <strong>Reconfigure</strong>), paste host, port, and password, then Connect.</li>
+            <li>ISB Suite does not start OBS. Open OBS first. Keep host at <code>127.0.0.1</code> unless OBS is on another machine.</li>
+            <li>Streamlabs Desktop is not obs-websocket and will not connect.</li>
+            <li>Scene and source names are saved as text. A typo or a renamed source in OBS skips that row; the rest of the rule still runs.</li>
+            <li>Setup walkthrough: <a href="/ISBSuiteReleases/docs/features/integrations.html#obs">Integrations - OBS Studio</a>. Action options: <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio action</a>.</li>
+          </ul>
+        </section>
+
         <section class="section" id="updates">
           <h2>Updates</h2>
           <p>ISB Suite checks for updates on launch and can download and install with a single click when a new version is available.</p>

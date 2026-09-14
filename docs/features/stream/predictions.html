@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Predictions | ISB Suite</title>
+  <meta name="description" content="Create and resolve a Twitch Channel Points Prediction from Stream Manager" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Predictions | ISB Suite" />
+  <meta property="og:description" content="Create and resolve a Twitch Channel Points Prediction from Stream Manager" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/stream.html">Stream Manager</a> / Predictions</p>
+        <h1 class="page-title">Predictions</h1>
+        <p class="lede">The Predictions tile creates a Channel Points Prediction from the desk and manages the live one. Create opens a popup for title, 2-10 outcomes, and the window. While a Prediction is ACTIVE or LOCKED, the tile shows the title, time left, and bet counts, with Lock, Cancel, and Pick winner. A Queued count (like the Queues tile) lists drafts that start after the live one ends - click it to review or remove them. There is no queue cap.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/stream-manager-predictions.png" alt="Predictions tile: Create opens a popup. Stand-in screenshot until recapture." />
+          <figcaption>Predictions tile: Create opens a popup. Stand-in screenshot until recapture.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Desk tile, visible by default under Stream info.</li>
+            <li>Title max 45 characters. Outcomes 2-10 (default Yes / No), 25 characters each. Window 30-1800 seconds (default 120).</li>
+            <li>Requires Affiliate or Partner and <code>channel:manage:predictions</code>. Re-authenticate Twitch once if you connected before this feature.</li>
+            <li>Only one Prediction can be ACTIVE or LOCKED. Create is hidden while one is live. Queue next saves drafts on this PC with no cap; the next starts after resolve or cancel, including when that happens on Twitch. Click the Queued count to list and remove them.</li>
+            <li>Manual create, lock, resolve, and cancel record Activity. Automations can also create via the <a href="/ISBSuiteReleases/docs/features/actions/create-prediction.html">Create Prediction</a> action. If a Prediction is already live, that action queues the draft here instead of dropping it.</li>
+            <li>No auto chat announce. Add a Send Message action on a rule if you want to post the title.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#create">Create</a></li>
+          <li><a href="#manage">Manage</a></li>
+          <li><a href="#queue">Queue</a></li>
+          <li><a href="#limits">Limits</a></li>
+        </ol></nav>
+
+        <section class="section" id="create">
+          <h2>Create</h2>
+          <ol class="steps">
+            <li>Connect Twitch on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a>. Grant Predictions management if prompted.</li>
+            <li>Open Stream Manager. Click Create on the Predictions tile.</li>
+            <li>Enter a title, at least two outcomes, and a window. Create sends the Prediction to Twitch.</li>
+          </ol>
+          <p>The tile then shows the live Prediction. Activity shows the created title.</p>
+        </section>
+        <section class="section" id="manage">
+          <h2>Manage</h2>
+          <p>While a Prediction is running, the tile shows the title, remaining time, and how many people picked each outcome (or a count when there are more than three). Lock stops new bets early. Cancel refunds everyone (the tile asks first). Pick winner opens a popup with live totals; choosing an outcome pays those viewers.</p>
+          <p>After the window ends, Twitch locks the Prediction. You still have to pick a winner or cancel before you can create another. The tile also picks up a Prediction started on Twitch or by an automation (within about 15 seconds).</p>
+        </section>
+        <section class="section" id="queue">
+          <h2>Queue</h2>
+          <p>While a Prediction is live, Create stays hidden. Queue next opens the same popup and saves the draft on this PC with no cap. The Create Prediction action also queues here when Twitch already has one ACTIVE. The tile shows a Queued count (and the next title) like the Queues tile; click it for the full list and Remove. When the live one is resolved or canceled - here or on Twitch - ISB Suite starts the next queued Prediction even if Stream Manager is closed.</p>
+        </section>
+        <section class="section" id="limits">
+          <h2>Limits</h2>
+          <ul>
+            <li>Twitch allows one ACTIVE or LOCKED Prediction per channel. You cannot edit the title, outcomes, or window after create.</li>
+            <li>If you do not resolve or cancel within 24 hours, Twitch refunds everyone.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/actions/create-prediction.html">Create Prediction action</a> for rules. <a href="/ISBSuiteReleases/docs/features/activity.html">Activity</a> shows manual create, lock, resolve, and cancel.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

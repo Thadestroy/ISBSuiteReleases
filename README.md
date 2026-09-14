@@ -72,7 +72,7 @@ ISB Suite is built around several major systems that all work together:
 | **Viewer Points** | Custom channel currency with a shop and point drops |
 | **Community Goals** | Stream-wide progress bars fed by Twitch events or chat |
 | **Chat Games** | Mass-entry chat games with stakes, rolls, and configurable outcomes |
-| **Stream Manager** | Live desk: chat, Activity, viewers, stream info, Channel Points, clip, and Quick Actions |
+| **Stream Manager** | Live desk: chat, Activity, viewers, stream info, Predictions, Channel Points, clip, and Quick Actions |
 | **Counters & Stats** | Global and per-viewer counters with tiers and CSV export |
 | **Character Studio** | *(coming soon)* |
 
@@ -85,9 +85,12 @@ Overview list pages (Automations, Alerts, Chat Bot, Chat Games, Community Goals,
 ### Stream Manager
 Live desk on the nav rail. Full guide: [Stream Manager](https://thadestroy.github.io/ISBSuiteReleases/docs/features/stream.html).
 - Customizable columns (drag, hide, resize, Reset) and status cards (live, uptime, CCV, followers, subs, Twitch, Capture, overlay, ads)
-- Chat on the right: send as Streamer or Bot, emotes and GIFs, Bits and Gifted leaderboards, Slow mode, and mod actions. Gifted is who currently gifted a still-active sub (not Twitch's all-time Top Gifters)
+- Chat on the right: send as Streamer or Bot, emotes and GIFs, Bits and Gifted leaderboards (live refresh), Slow mode, and mod actions. Gifted is who currently gifted a still-active sub (not Twitch's all-time Top Gifters)
+- Chat paints Twitch-like event lines (gifts, resubs, raids, watch streaks, announcements). Official `/raid` and `/shoutout` show timed cards. Scroll up for a Latest button. Highlight text to copy
+- Each Chat tile has a Show filter (bots, commands, viewer chat, events). Customize can Add Chat or Add Activity (up to 8 of each) with their own filters. Tiles can Pop out to another window (Dock back)
 - **Viewers** tile lists people currently in chat (Twitch chatters, not CCV), with search. Chat has a Viewers / Chat swap like Twitch
 - **Activity** lists follows, subs, bits, raids, Tiltify, wheels, giveaways, chat games, goals, timers, song requests, Viewer Points commands, and automations that ran without an alert. Filter, search, and Resend a stored alert
+- **Predictions** tile: create, lock, cancel, pick a winner, and queue the next draft (Affiliate or Partner). Create Prediction is also an action on Automations and Chat Bot
 - Stream info Edit (title, category, tags, language, labels) opens a popup. Clip from the desk tile. Optional go-live line with **Send to Twitch chat** (off by default)
 - Channel Points tab: create, edit, and delete rewards ISB created. Dashboard rewards stay read-only; **Migrate to ISB** / **Migrate all** make paused ISB copies
 - Quick Actions: Add Automation, Add Chat Bot, Pause / Resume Automations, plus up to 8 of your own rules
@@ -132,6 +135,7 @@ Each alert type is fully configurable:
 - **Motion:** enter/exit animations (Fade, slides, Scale, Bounce) and text enter (Fade, Slide up, Typewriter)
 - **Preset vs Manual** image/text positioning with offset sliders (% of the Alert Box)
 - Side-by-side Layout | Motion | Preview columns with inline **Test Alert** (motion, sound, and TTS)
+- Main Text and Subtext style editors sit side by side when the alert type supports subtext; they stack if the edit pane is narrow
 - Overflow content **soft-fits** (uniform scale-down) so image and text stay visible; preview matches the live overlay
 - Older alerts without a saved style keep the previous default look
 
@@ -276,6 +280,10 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Enable / Disable | Search Overview items by type or name (Chat Bot, Automations, Alerts, shop, currencies, point drops, Community Goals, Saved Lists) and enable or disable that list immediately |
 | Create Clip | Create a Twitch clip of the current stream (must be live) |
 | Set Title / Category | Change the stream title and/or category. Title fields use the same variables as Send Message |
+| Create Prediction | Start a Twitch Channel Points Prediction (title, 2-10 outcomes, 30-1800s). Queues on Stream Manager if one is already live. Hidden until you grant Predictions |
+| Channel Points | Change cost, pause, or cooldown on ISB-managed rewards. Reset after (default 10 minutes) restores the first snapshot |
+| OBS Studio | Switch scenes, show or hide sources, mute, set volume, start or stop stream or record (OBS 28+ WebSocket). Hidden until you Connect. ISB Suite does not start OBS |
+| Streamlabs Desktop | Same scene / source / mute / stream operations on Streamlabs Remote Control (default port 59650). Volume is 0-100%. Hidden until you Connect. ISB Suite does not start Streamlabs |
 | Spotify | Pause, resume, skip, shuffle, repeat, queue, play now, or Pause Then Resume At End on the connected Spotify app (hidden until you Connect) |
 
 **Cooldown & Limits:** Every automation can combine a time cooldown (None / Global / Per-User) with per-stream limits (max fires globally and/or per user; `0` = unlimited). Optional **burst**: if used N times within a window you set (for example 5 times in 30 seconds), a longer cooldown starts. The normal per-use duration is independent and can be off. Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for “on cooldown” vs “hit limit.” Channel Point redemptions: Twitch still accepts the redeem and charges points. ISB Suite only skips running the automation when blocked (reject/refund is not supported yet).
@@ -284,7 +292,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 
 **Bypass Sound Queue:** play a sound immediately (overlapping) instead of waiting in queue.
 
-**Randomized Action:** Enable on any automation (or shop item / chat game) to define multiple action sets. Each trigger randomly runs one set: uniform random, or **no repeat until all** so every set plays once before any repeats. Useful for varied hype sounds, rotating chat responses, or unpredictable wheel loads from a single command.
+**Randomized Action:** Enable on any automation (or shop item / chat game) to define multiple action sets. Each trigger randomly runs one set: uniform random, or **no repeat until all** so every set plays once before any repeats. Optional **Limit Action Sets by a counter**: matching conditions combine their set numbers, then one set is picked; Otherwise covers misses (including count 0 if you do not cover it). Useful for varied hype sounds, rotating chat responses, unpredictable wheel loads, or a loyalty jackpot from a single command. Full steps: [Randomized Action](https://thadestroy.github.io/ISBSuiteReleases/docs/features/actions/randomized-action.html).
 
 **Import / Edit / Export lines:** On Randomized Action, **Import .txt** opens a file picker, then an **Import lines** dialog so you can still edit the text. Choose Append or Replace. Optional **Copy other actions from the selected set** copies that set's extras (sound, TTS, wheel) onto every imported line, then overwrites Send Message. **Edit lines** is a searchable list of the sets you already have (double-click a line to jump to that set's Actions; **Edit as text** for a plain list). **Export .txt** writes Send Message templates, one per line. The file is copied in; ISB Suite does not watch it on disk. Full steps: [Randomized Action](https://thadestroy.github.io/ISBSuiteReleases/docs/features/actions/randomized-action.html#import).
 
@@ -410,13 +418,25 @@ Each wheel entry can have its own actions when it wins:
 
 ## Integrations
 
-Manage all connections from the **Integrations** page. **Twitch** is the integration most streamers need. Spotify, Tiltify, and Discord are optional.
+Manage all connections from the **Integrations** page. **Twitch** is the integration most streamers need. OBS Studio, Streamlabs Desktop, Spotify, Tiltify, and Discord are optional.
 
 ### Twitch
 - Sign in with your Twitch account using device-code OAuth (no manual token copy-paste)
 - Grants chat read/write and EventSub access
 - **Chat:** reads commands and sends bot messages
 - **EventSub:** receives channel points, follows, subs, raids, bits, Power-Ups, hype train, goals, ad breaks, shoutouts
+
+### OBS Studio *(optional)*
+- OBS 28+ with the built-in WebSocket server (Tools, WebSocket Server Settings)
+- Set host, port, password, and Auto Connect. Reconfigure applies new settings without keeping the old socket
+- After Connect, Automations and Chat Bot get an OBS Studio action. Disconnect stays disconnected on the next launch; the empty action card stays hidden until you Connect again
+- ISB Suite does not start OBS. Full steps: [OBS Studio](https://thadestroy.github.io/ISBSuiteReleases/docs/features/actions/obs.html)
+
+### Streamlabs Desktop *(optional)*
+- Streamlabs Remote Control websocket (default port 59650). On the same PC, host is `127.0.0.1`. Do not paste Streamlabs' IP Addresses list
+- Set host, port, API token, and Auto Connect. This card is separate from OBS Studio
+- After Connect, Automations and Chat Bot get a Streamlabs Desktop action (volume is 0-100%). ISB Suite does not start Streamlabs
+- Full steps: [Streamlabs Desktop](https://thadestroy.github.io/ISBSuiteReleases/docs/features/actions/streamlabs.html)
 
 ### Spotify *(optional)*
 - Guided setup: your own Spotify Developer app and Client ID (no secret), then **Connect with Spotify**. Requires Spotify Premium
@@ -475,6 +495,7 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 | `!resumetimer {name}` | Resume a paused Live Clock |
 | `!addtime {name} {duration}` | Add time to a Live Clock (e.g. `5m`, `30s`, `1h`) |
 | `!removetime {name} {duration}` | Remove time from a Live Clock |
+| `/raid login` | Official Twitch raid from Stream Manager Chat (must be live). Not posted as a chat line |
 | `!so @user` / `!shoutout` | Shout out a channel (Nightbot style). Customize the template in Chat Bot. Built in; does not use a Free chat command slot |
 | `!addcommand {name} {response}` / `!addcom` | Create a simple Chat Bot reply command (default Mods). Fails if the name already exists. Built in; does not use a Free chat command slot |
 | `!editcommand {name} {response}` / `!editcom` | Update the response text of a Chat Bot custom command (default Mods). Cannot change built-ins or Automations |

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OBS Studio | ISB Suite</title>
+  <meta name="description" content="OBS Studio action: switch scenes, show or hide sources, mute, set volume, start or stop stream or record" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="OBS Studio | ISB Suite" />
+  <meta property="og:description" content="OBS Studio action: switch scenes, show or hide sources, mute, set volume, start or stop stream or record" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / OBS Studio</p>
+        <h1 class="page-title">OBS Studio</h1>
+        <p class="lede">Talk to OBS Studio on this PC when the rule fires. After setup under Integrations, the action card stays available even if OBS is closed. Disconnect hides the empty card until you Connect again. Scene and source names are saved as text.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-obs.png" alt="OBS Studio action setup in ISB Suite" />
+          <figcaption>OBS Studio action: enable the card, add one or more operations (set scene, show or hide a source, mute, volume, stream, or record).</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>OBS Studio</strong>.</li>
+            <li>Set up OBS under <a href="/ISBSuiteReleases/docs/features/integrations.html#obs">Integrations</a> and Connect (OBS Studio 28+ with the built-in WebSocket server). After setup, the action card stays available so you can set scene names even if OBS is closed that day. Disconnect on the Integrations card hides the empty action card until you Connect again, including after you close ISB Suite. Rules that already have an OBS action keep the card if you Disconnect or clear the password, with a notice that the action will be skipped. ISB Suite never starts OBS for you.</li>
+            <li>Rules you already saved keep their OBS rows. If OBS is closed when the rule fires, that action is skipped and the rest of the rule still runs.</li>
+            <li>Available on Free and Pro. A failed OBS request is logged and does not stop the rest of the rule.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#commands">Operations</a></li>
+          <li><a href="#pitfalls">Pitfalls</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>When the parent rule fires, ISB Suite sends each enabled operation to the connected OBS WebSocket (switch the program scene, show or hide a source, mute or unmute an input, set volume, start or stop streaming, start or stop recording). You can stack several rows on one rule (for example switch scene and unhide a source).</p>
+          <p>If OBS is closed, not connected, the password is wrong, or a single row fails (missing scene, unknown source), that row is skipped and the rest of the rule still runs (sound, chat, alerts). Existing automations, Chat Bot commands, and other hosts keep the OBS rows you already saved and show that OBS needs to be reconnected. Show / hide looks up the current scene-item id from the scene name plus source name at fire time, so a source you moved between scenes still works if you keep both names correct.</p>
+          <p>With a delay <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> on the same rule, OBS waits until that countdown ends (same timing as Send Message and Spotify).</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>In OBS: <strong>Tools â†’ WebSocket Server Settings</strong>. Enable the server (OBS Studio 28 or newer). Default host <code>127.0.0.1</code>, port <code>4455</code>.</li>
+            <li>On Integrations, <strong>OBS Studio</strong>: <strong>Set Up OBS</strong> opens a window for host, port, password, and Auto Connect. Connect there. Use <strong>Reconfigure</strong> later to change those fields.</li>
+            <li>On the rule, enable <strong>OBS Studio</strong>, pick an operation, and fill scene / source / input names. Combos list live names when connected; you can still type a name OBS does not have open right now.</li>
+          </ol>
+        </section>
+        <section class="section" id="commands">
+          <h2>Operations</h2>
+          <ul>
+            <li><strong>Set program scene</strong>: scene name.</li>
+            <li><strong>Show / hide source</strong>: scene name, source name, and Show or Hide.</li>
+            <li><strong>Mute / unmute input</strong>: input name and Mute or Unmute.</li>
+            <li><strong>Set input volume</strong>: input name and volume in dB.</li>
+            <li><strong>Start stream</strong> / <strong>Stop stream</strong>.</li>
+            <li><strong>Start recording</strong> / <strong>Stop recording</strong>.</li>
+          </ul>
+        </section>
+        <section class="section" id="pitfalls">
+          <h2>Pitfalls</h2>
+          <ul>
+            <li>This is OBS Studio WebSocket v5 only. Streamlabs Desktop uses a different protocol - use the <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> action.</li>
+            <li>OBS 27 with the old 4.x plugin is a setup error. Use OBS Studio 28 or newer.</li>
+            <li><strong>Start stream</strong> will go live if OBS accepts it. The editor warns: use with care.</li>
+            <li>ISB Suite does not launch OBS. Open OBS and enable the WebSocket server first.</li>
+            <li>Keep host at <code>127.0.0.1</code> unless you know you need another machine. Binding OBS to every network interface exposes the socket on your LAN.</li>
+            <li>This action does not replace Window Capture of the ISB Suite overlay. Capture setup stays on <a href="/ISBSuiteReleases/docs/download.html#capture">Download - Capture</a>.</li>
+          </ul>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Raid -&gt; Set program scene to your raid layout, then unhide a &quot;thanks for the raid&quot; source.</li>
+            <li>Channel point redeem -&gt; Show a source on the current scene for a few seconds (pair with a <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> and a second rule or Action Set to hide it again).</li>
+            <li>Mod-only Chat Bot command -&gt; Mute Desktop Audio, or switch to a BRB scene.</li>
+            <li>Stream ending command -&gt; Stop recording (prefer this over Start stream unless you mean to go live).</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

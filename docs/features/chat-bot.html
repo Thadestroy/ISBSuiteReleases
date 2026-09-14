@@ -91,11 +91,11 @@
             <thead><tr><th>Prefer</th><th>When</th></tr></thead>
             <tbody>
               <tr><td>Chat Bot</td><td>Custom <code>!commands</code> and timed or scheduled chat lines are the main job; you want built-ins (join, spin, shoutout, song request, watch time, and similar) in one overview</td></tr>
-              <tr><td>Automations</td><td>Twitch EventSub events (channel points, bits, raids, follows, and so on) drive the rule, or you are building a multi-action stream workflow</td></tr>
+              <tr><td>Automations</td><td>Twitch EventSub events (channel points, bits, raids, follows, and so on) drive the rule, a long action chain, or one rule that should fire from a <code>!command</code> <em>and</em> other triggers. Do not use Automations just to create a simple reply command</td></tr>
               <tr><td>Either</td><td>You need chains - call the other tab with Run Chat Bot or Automation (up to 20 hops; original chatter variables preserved)</td></tr>
             </tbody>
           </table></div>
-          <p>There is no wrong tab for a simple command that also plays a sound. Use Chat Bot if you think of it as a chat command; use Automations if you think of it as an event rule.</p>
+          <p>For a simple command that also plays a sound, stay on Chat Bot. Use Automations when you want that command bundled with other triggers (or a long event workflow) under one cooldown.</p>
         </section>
 
         <section class="section" id="options">
@@ -112,7 +112,7 @@
             <li><strong>Cooldown:</strong> None, Global, or Per User, with optional burst (N uses within a window then a longer cooldown; the normal duration can be off) and optional on-cooldown chat reply.</li>
             <li><strong>Per stream limits:</strong> max fires globally and/or per user (<code>0</code> = unlimited), with optional hit-limit chat reply. Limits reset when a new stream session starts.</li>
           </ul>
-          <p>Community Goal check and contribute commands, Viewer Points commands, Chat Game start/join commands, and Saved Lists also appear on the Chat Bot overview where applicable. Each row has the same enable/disable light as other Chat Bot cards. Edit opens that feature&apos;s settings. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, <code>!endtimer</code>, <code>!addcommand</code>, and <code>!editcommand</code> stay out of the Run Chat Bot or Automation picker. Contribute is not a Run Automation nested target.</p>
+          <p>Community Goal check and contribute commands, Viewer Points commands, Chat Game start/join commands, Saved Lists, and Automation Chat Command triggers also appear on the Chat Bot overview where applicable. Each row has the same enable/disable light as other Chat Bot cards. Edit opens that feature&apos;s settings (Automations for a bundled command). Disabling an Automation reference card turns off the whole automation. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, <code>!endtimer</code>, <code>!addcommand</code>, and <code>!editcommand</code> stay out of the Run Chat Bot or Automation picker. Contribute is not a Run Automation nested target. Built-in <code>!editcommand</code> still cannot change Automations.</p>
           <p>Mods can create or update a basic Chat Bot reply from chat with <code>!addcommand</code> / <code>!editcommand</code> (aliases <code>!addcom</code> / <code>!editcom</code>). Add fails if the name exists; edit updates response text only. Chat confirms with <code>Added {name}: {response}</code> / <code>Updated {name}: {response}</code> (customize in Chat Bot). Example: <code>!addcom !project Today&apos;s project is...</code> â†’ <code>Added !project: Today&apos;s project is...</code> See <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
         </section>
 
@@ -120,7 +120,7 @@
           <h2>Export Commands</h2>
           <p>On Chat Bot Overview, <strong>Export Commands</strong> saves a CSV (<code>bot-commands.csv</code>) of the same commands shown on the page. Columns: Type, Command, Description, Permission, Cooldown, Enabled.</p>
           <ul>
-            <li>Includes Channel Commands, Timed Messages, Built-in Commands, Chat Game join/start, Viewer Points, Community Goal add/remove plus per-goal check/contribute, Saved List Read and Add, and Live Timer Commands.</li>
+            <li>Includes Channel Commands, Timed Messages, Built-in Commands, Chat Game join/start, Automation Chat Commands, Viewer Points, Community Goal add/remove plus per-goal check/contribute, Saved List Read and Add, and Live Timer Commands.</li>
             <li>Aliases are not extra rows (Overview does not show alias cards). They are listed in Description as <code>Aliases: !foo, !bar</code>.</li>
             <li>Timed Messages use Type <code>Timed Message</code> with the interval in Command (for example <code>Every 5m</code>). Saved Lists export both Read and Add so mods have both chat triggers.</li>
             <li>This file is a list for docs or Nightbot-style copies. It is not an import.</li>

@@ -163,6 +163,12 @@
       keywords: "create clip twitch clips:edit duration title {clipUrl} {clipId}",
     },
     {
+      title: "Create Prediction action",
+      url: "/features/actions/create-prediction.html",
+      blurb: "Start a Twitch Prediction; announce with {predictionTitle}",
+      keywords: "create prediction twitch channel:manage:predictions outcomes window {predictionId} {predictionTitle}",
+    },
+    {
       title: "Set Title / Category action",
       url: "/features/actions/set-stream-info.html",
       blurb: "Change stream title and/or category from a rule",
@@ -175,10 +181,16 @@
       keywords: "enable disable overview status light shop chat bot automations",
     },
     {
+      title: "Channel Points action",
+      url: "/features/actions/channel-points.html",
+      blurb: "Discount, pause, or set cooldown on ISB-managed rewards",
+      keywords: "channel points flash sale discount pause cooldown reward helix manage reset after",
+    },
+    {
       title: "Randomized Action",
       url: "/features/actions/randomized-action.html",
-      blurb: "Pick one of several action sets each fire",
-      keywords: "randomized action sets no repeat until all uniform",
+      blurb: "Pick one of several action sets each time, optionally gated by a counter",
+      keywords: "randomized action sets no repeat until all uniform counter ranges if nothing matches jackpot",
     },
     {
       title: "Randomize Image Picker action",
@@ -349,6 +361,12 @@
       keywords: "stream info title category tags clip golive {title} {category} {golive} edit",
     },
     {
+      title: "Predictions",
+      url: "/features/stream/predictions.html",
+      blurb: "Create, resolve, or queue the next Channel Points Prediction from Stream Manager",
+      keywords: "predictions twitch channel:manage:predictions outcomes window create lock cancel resolve winner queue",
+    },
+    {
       title: "Chat",
       url: "/features/stream/chat.html",
       blurb: "Stream Manager chat transcript, viewers, Bits and Gifted",
@@ -429,8 +447,10 @@
             { href: "/features/actions/start-giveaway-session.html", label: "Start Giveaway Session" },
             { href: "/features/actions/run-chat-bot-or-automation.html", label: "Run Chat Bot or Automation" },
             { href: "/features/actions/create-clip.html", label: "Create Clip" },
+            { href: "/features/actions/create-prediction.html", label: "Create Prediction" },
             { href: "/features/actions/set-stream-info.html", label: "Set Title / Category" },
             { href: "/features/actions/enable-disable.html", label: "Enable / Disable" },
+            { href: "/features/actions/channel-points.html", label: "Channel Points" },
             { href: "/features/actions/randomized-action.html", label: "Randomized Action" },
             { href: "/features/actions/randomize-image-picker.html", label: "Randomize Image Picker" },
           ],
@@ -484,6 +504,7 @@
             { href: "/features/stream.html", label: "Overview" },
             { href: "/features/stream/channel-points.html", label: "Channel Points" },
             { href: "/features/stream/stream-info.html", label: "Stream info" },
+            { href: "/features/stream/predictions.html", label: "Predictions" },
             { href: "/features/activity.html", label: "Activity" },
             { href: "/features/stream/chat.html", label: "Chat" },
             { href: "/features/stream/quick-actions.html", label: "Quick Actions" },

@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Randomized Action | ISB Suite</title>
-  <meta name="description" content="Randomized Action: action sets, uniform vs no-repeat, nesting rules" />
+  <meta name="description" content="Randomized Action: action sets, optional counter conditions, uniform vs no-repeat" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
   <meta property="og:title" content="Randomized Action | ISB Suite" />
-  <meta property="og:description" content="Randomized Action: action sets, uniform vs no-repeat, nesting rules" />
+  <meta property="og:description" content="Randomized Action: action sets, optional counter conditions, uniform vs no-repeat" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -48,11 +48,11 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Randomized Action</p>
         <h1 class="page-title">Randomized Action</h1>
-        <p class="lede">Define several Action Sets on one rule. Each fire picks one set - uniform random, or no repeat until every set has played.</p>
+        <p class="lede">Define several Action Sets on one rule. Each time it runs, one set plays - random, or no repeat until every set has played. Optionally pick which sets can play using a counter.</p>
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomized-action.png" alt="Randomized Action action setup in ISB Suite" />
-          <figcaption>Randomized Action with named Action Sets. Import .txt, Edit lines, and Export .txt sit under the Action Set picker. The selected set (Prize Wheel) shows its own nested Actions below.</figcaption>
+          <figcaption>Randomized Action: import or edit Send Message lines, pick and name this Action Set, then edit its Actions below.</figcaption>
         </figure>
 
         <div class="ref-panel">
@@ -60,8 +60,9 @@
           <ul>
             <li>UI label: <strong>Randomized Action</strong> (above the main Actions grid).</li>
             <li>Each set is a full Actions payload (sound, chat, wheel, and so on).</li>
-            <li>Modes: uniform, or Don&apos;t repeat until all Action Sets have played.</li>
-            <li><strong>Import .txt</strong> / <strong>Edit lines</strong> / <strong>Export .txt</strong> turn a list of chat lines into Action Sets. See <a href="#import">Import, edit, and export lines</a> for the file picker and Import lines dialog.</li>
+            <li>Modes: uniform, or Don&apos;t repeat until all Action Sets have played. Don&apos;t repeat hides when counter ranges are on - the eligible list can change each fire.</li>
+            <li>Optional: <strong>Only pick some Action Sets based on a counter</strong> - ranges pick from set numbers, overlap combines then picks one, and If nothing matches covers misses.</li>
+            <li><strong>Import .txt</strong> / <strong>Edit lines</strong> / <strong>Export .txt</strong> sit above the Action Set picker. Add, Remove, Duplicate, and Extract sit on the name row. Move up, Move down, and Move to # sit on the Action Set # row. See <a href="#import">Import, edit, and export lines</a>.</li>
             <li>Nested Randomized Action inside a set is stripped - keep randomness on the parent only.</li>
           </ul>
         </div>
@@ -71,27 +72,29 @@
           <li><a href="#setup">Setup</a></li>
           <li><a href="#import">Import, edit, and export lines</a></li>
           <li><a href="#sets">Action Sets</a></li>
+          <li><a href="#pools">Limit by a counter</a></li>
           <li><a href="#modes">Modes</a></li>
           <li><a href="#usecases">Use cases</a></li>
         </ol></nav>
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>When Randomized Action is enabled, the parent rule no longer runs one flat action list. Instead it picks one named Action Set each fire and runs that set&apos;s Actions. Sets are searchable in the picker. Use this for rotating hype lines, stingers, or mystery wheel loads from a single redeem or command.</p>
+          <p>When Randomized Action is enabled, the parent rule no longer runs one flat action list. Instead it picks one named Action Set each time it runs and plays that set&apos;s Actions. Sets are searchable in the picker. Use this for rotating hype lines, stingers, or mystery wheel loads from a single redeem or command.</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>
           <ol class="steps">
-            <li>Enable <strong>Randomized Action</strong> at the top of Actions.</li>
-            <li>Add Action Sets and name them (Prize Wheel, Hype Pack, Alert Burst), or import a list of chat lines (see <a href="#import">Import, edit, and export lines</a>).</li>
-            <li>Inside each set, enable the Actions for that outcome (Send Message, Play Sound, Start Wheel Session, and so on).</li>
-            <li>Choose uniform vs no-repeat-until-all.</li>
+            <li>Enable <strong>Randomized Action</strong> at the top of Actions. The first-time card is pick this set, name it, and <strong>+ Add</strong> another if you need more.</li>
+            <li>Edit the selected set&apos;s Actions below the card (Send Message, Play Sound, Start Wheel Session, and so on).</li>
+            <li>Optional: check <strong>Don&apos;t repeat until all Action Sets have played</strong> (hidden while counter ranges are on).</li>
+            <li>Use <strong>Import .txt</strong>, <strong>Edit lines</strong>, or <strong>Export .txt</strong> above the picker for a list of chat lines (see <a href="#import">Import, edit, and export lines</a>). Add, Duplicate, and Extract sit on the name row. Move up, Move down, and Move to # sit next to Action Set #.</li>
+            <li>Optional: check <strong>Only pick some Action Sets based on a counter</strong> for a compact ranges card under the tile (see <a href="#pools">Limit by a counter</a>).</li>
           </ol>
-          <p>To reuse an existing setup, use <strong>Import from Automation / Chat Bot</strong> above Randomized Action. A randomized source copies its Action Sets; a flat Chat Bot or Automation becomes one Action Set so Send Message stays on the set (not the Chat Bot parent Response field). Play Sound files are copied onto this rule. <strong>Extract</strong> on a set creates a standalone Automation for reuse and copies that set&apos;s sounds onto the new rule.</p>
+          <p>To reuse an existing setup, use <strong>Import from Automation / Chat Bot</strong> above Randomized Action. A randomized source copies its Action Sets; a flat Chat Bot or Automation becomes one Action Set so Send Message stays on the set (not the Chat Bot parent Response field). Play Sound files are copied onto this rule. <strong>Extract</strong> (on the name row) creates a standalone Automation for reuse and copies that set&apos;s sounds onto the new rule.</p>
         </section>
         <section class="section" id="import">
           <h2>Import, edit, and export lines</h2>
-          <p>The three buttons under the Action Set picker work with <strong>Send Message</strong> only: one non-empty line becomes one Action Set. Import copies the file into the rule. ISB Suite does not keep watching that .txt on disk, so later edits to the file do nothing until you import again. UTF-8. Empty lines are skipped. Commas, variables, and duplicate lines are kept. Hundreds of rotating lines still share the same Twitch chat rate limit.</p>
+          <p>Use <strong>Import .txt</strong>, <strong>Edit lines</strong>, and <strong>Export .txt</strong> above the Action Set picker. They work with <strong>Send Message</strong> only: one non-empty line becomes one Action Set. Import copies the file into the rule. ISB Suite does not keep watching that .txt on disk, so later edits to the file do nothing until you import again. UTF-8. Empty lines are skipped. Commas, variables, and duplicate lines are kept. Hundreds of rotating lines still share the same Twitch chat rate limit.</p>
           <h3>Import .txt</h3>
           <p>Click <strong>Import .txt</strong>, pick a file, then review it in the <strong>Import lines</strong> dialog. You can still edit the text, choose Append or Replace, and optionally copy extras from the Action Set that was selected.</p>
           <figure class="visual">
@@ -118,14 +121,14 @@
             <li>Double-click a line to close the window and jump to that set&apos;s Actions (attach a sound, TTS, or wheel on that set only).</li>
             <li>Ctrl+click and Shift+click select more than one line, then <strong>Delete</strong>.</li>
             <li>The same <strong>Import .txt</strong> / <strong>Export .txt</strong> buttons are in this window.</li>
-            <li><strong>Edit as text</strong> shows every Send Message as a plain list (one line per set). <strong>Apply text</strong> writes that order back; extra lines become new sets. <strong>Show list</strong> returns to the searchable list without applying.</li>
+            <li><strong>Edit as text</strong> shows every Send Message as a plain list (one line per set). <strong>Apply text</strong> writes that order back; extra lines become new sets. <strong>Show list</strong> returns to the searchable list without applying. If counter conditions are on, Apply (and Replace import) asks you to confirm - set numbers in those conditions follow the new order.</li>
           </ul>
           <h3>Export .txt</h3>
           <p><strong>Export .txt</strong> writes Send Message templates for sets where Send Message is on, one per line (file picker titled <strong>Export Action Set lines</strong>, default name <code>action-set-lines.txt</code>). Sets with Send Message off are skipped. If none have a Send Message, export is refused.</p>
         </section>
         <section class="section" id="sets">
           <h2>Action Sets</h2>
-          <p>Each set is a complete Actions editor. Switch sets in the picker to edit that outcome. One redeem can land on a wheel, a sound+TTS pack, or an alert - without duplicate rules.</p>
+          <p>Each set is a complete Actions editor. Switch sets in the picker to edit that outcome. The picker shows a number before the name (<code>7. Prize Wheel</code>) so counter ranges can point at set 7. Use <strong>Move up</strong>, <strong>Move down</strong>, or <strong>Move to #</strong> next to Action Set # to change that order. If ranges are on, moving a set asks you to confirm - those numbers follow the live list. One redeem can land on a wheel, a sound+TTS pack, or an alert - without duplicate rules.</p>
           <figure class="visual">
             <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-randomized-action-hype-pack.png" alt="Hype Pack Action Set with sound, chat, and TTS" />
             <figcaption>Action Set &quot;Hype Pack&quot;: Play Sound, Send Message, and Text-to-Speech in one outcome.</figcaption>
@@ -135,11 +138,25 @@
             <figcaption>Action Set &quot;Alert Burst&quot;: Run Alert plus chat, for a visual celebration outcome.</figcaption>
           </figure>
         </section>
+        <section class="section" id="pools">
+          <h2>Limit by a counter</h2>
+          <p>Optional. Check <strong>Only pick some Action Sets based on a counter</strong> on the Randomized Action card. A compact card opens under the tile. Choose a counter (global or per user). Each range is From / To plus <strong>Pick these Action Sets</strong> (<code>1-20</code>, <code>45</code>, or a mix). Click <strong>Save</strong> to pin that range as a card. Cards sort by count, so <code>1-10</code> sits above <code>1-50</code>. Edit a card to change it. If two ranges both match, those Action Sets are combined, then one is picked. This is not Dice: matching Dice bands all fire; matching ranges do not run two payloads. <strong>If nothing matches</strong> is a separate backup: it is not the same list as the range row. Timing and fallback details sit on the InfoTips.</p>
+          <p>If two ranges cover the same count, those Action Sets are combined, then one is picked. Example: <code>1-50</code> plus <code>1-10</code> plus <code>25-50</code> means count 25 picks from both the 1-50 and 25-50 lists. Cover 0 in a range if you want new / unused counters to stay in a common group. If no range includes 0, count 0 uses If nothing matches.</p>
+          <h3>If nothing matches</h3>
+          <p>Required whenever ranges are on. Used when the counter is not in any range, or a match lists no playable Action Sets (out-of-range numbers, or every listed set is empty). Never falls through to every Action Set just because a match resolved empty.</p>
+          <ul>
+            <li><strong>Play any Action Set</strong> (default) - always plays something. This can include rare prizes.</li>
+            <li><strong>Play only these Action Sets</strong> - safe / consolation lines only.</li>
+            <li><strong>Skip the Action Sets</strong> - skip the random payload. The redeem, cooldown, and chat command still count. Confirm once when you choose this.</li>
+          </ul>
+          <h3>When the count is read</h3>
+          <p>The counter is read when an Action Set is chosen. Counter actions on that set run after, so they do not change this pick. New counters are usually 0. A Timer or system fire with a per-user counter and no viewer uses If nothing matches.</p>
+        </section>
         <section class="section" id="modes">
           <h2>Modes</h2>
           <ul>
-            <li><strong>Uniform</strong> (default): every set has the same chance every fire.</li>
-            <li><strong>Don&apos;t repeat until all Action Sets have played</strong>: shuffle-bag style - every set plays once before any set repeats.</li>
+            <li><strong>Uniform</strong> (default): every set has the same chance every time.</li>
+            <li><strong>Don&apos;t repeat until all Action Sets have played</strong>: shuffle-bag style - every set plays once before any set repeats. This option is hidden when <strong>Only pick some Action Sets based on a counter</strong> is on, because the pick list can change with the count.</li>
           </ul>
         </section>
         <section class="section" id="usecases">
@@ -149,6 +166,7 @@
             <li><strong>Raid variety</strong> - Raid automation -&gt; several Play Sound + Send Message sets so back-to-back raids do not feel identical.</li>
             <li><strong>Rotating chat lines</strong> - Import a .txt of hype lines (file picker, then the Import lines dialog), or open Edit lines from the sets you already have, then search and double-click a line to attach a sound or TTS.</li>
             <li><strong>Shop roulette</strong> - Viewer Points item -&gt; sets that each Start Wheel Session on a different preset plus a unique chat line.</li>
+            <li><strong>Loyalty jackpot</strong> - Link a visit or bits counter. Early counts pick from common sets 1-20; a late range adds a rare set. Overlap combines those lists, then one set plays.</li>
           </ul>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>

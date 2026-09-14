@@ -78,7 +78,7 @@
           <h2>Overview</h2>
           <p>Automations live in the <strong>Automations</strong> tab. Overview pages support instant name search and optional <strong>custom groups</strong> (named groups, chip filters; ungrouped items list first). Each row has a green (enabled) or grey (disabled) light. Click the light to turn the rule on or off; a legend at the top of the list explains this.</p>
           <p>Leaving Add/Edit with unsaved changes (or switching to another automation) shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Opening a form and leaving without edits does not prompt. Form <strong>Cancel</strong> discards without asking.</p>
-          <p><strong>Chat Bot vs Automations:</strong> both tabs share the same trigger and action building blocks. Prefer <strong>Automations</strong> when the rule is driven by Twitch events (channel points, bits, raids, follows, and so on) or needs a long action chain. Prefer <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> when the rule is mainly a custom <code>!command</code> or timed chat message. Either tab can call the other with <strong>Run Chat Bot or Automation</strong>.</p>
+          <p><strong>Chat Bot vs Automations:</strong> both tabs share the same trigger and action building blocks. Prefer <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> for a simple custom <code>!command</code> or timed chat message. Prefer <strong>Automations</strong> for Twitch events (channel points, bits, raids, follows, and so on), long action chains, or an advanced rule that should fire from a command <em>and</em> other triggers together. A Chat Command trigger on an Automation is allowed (including command-only) but is not the usual way to make a reply command. Those commands also appear on Chat Bot Overview as reference cards; Edit opens Automations. Either tab can call the other with <strong>Run Chat Bot or Automation</strong>.</p>
         </section>
 
         <section class="section" id="triggers">
@@ -105,7 +105,7 @@
               <tr><td>Ad Break</td><td>Any duration or specific length; optional chat warnings before the ad; optional welcome-back message when ads end</td></tr>
               <tr><td>Shoutout Received</td><td>Any shoutout from another broadcaster</td></tr>
               <tr><td>Stream Went Live</td><td>Once per broadcast: new stream session, or first hydrate after flag-only live (not on reconnect or mid-stream app restart with the same stream id)</td></tr>
-              <tr><td>Custom Chat Command</td><td>Your <code>!command</code> with permission, cooldown, aliases, Match anywhere</td></tr>
+              <tr><td>Custom Chat Command</td><td>Your <code>!command</code> with permission, aliases, Match anywhere, and Don't trigger from the broadcaster. Cooldown and limits are the automation's (one block for every trigger). Also listed on Chat Bot Overview. Use Chat Bot for a simple reply command</td></tr>
               <tr><td>Counter Tier Reached</td><td>Viewer or channel crosses upward into a configured tier; once per tier gained if several thresholds cross in one increment</td></tr>
               <tr><td>Counter Value Changed</td><td>Once per change; filter increase / decrease / either; optional counter filter</td></tr>
               <tr><td>Community Goal Reached</td><td>Goal hits its limit; optional goal filter</td></tr>
@@ -128,6 +128,8 @@
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/send-message.html">Send Message</a></td><td>Twitch chat with variables</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/discord-webhook.html">Discord Webhook</a></td><td>Post to named webhooks on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a></td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a></td><td>Pause, resume, skip, shuffle, repeat, queue, or play now on the official Spotify app after <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Connect</a></td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a></td><td>Switch scenes, show or hide sources, mute, volume, stream, or record after <a href="/ISBSuiteReleases/docs/features/integrations.html#obs">setup</a></td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a></td><td>Same operations for Streamlabs Desktop after <a href="/ISBSuiteReleases/docs/features/integrations.html#streamlabs">setup</a>; volume is 0-100%</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/counter-action.html">Counter Action</a></td><td>Change by or Set to; number, counter, or range</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/start-giveaway-session.html">Start Giveaway Session</a></td><td>Timed viewer entry giveaway</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert</a></td><td>Play a managed Alerts-page alert</td></tr>
@@ -137,6 +139,7 @@
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html">Randomized Action</a></td><td>Pick one of several action sets</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a></td><td>Chain into another rule; keeps chatter context</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/enable-disable.html">Enable / Disable</a></td><td>Turn Overview items on or off from a rule</td></tr>
+              <tr><td><a href="/ISBSuiteReleases/docs/features/actions/channel-points.html">Channel Points</a></td><td>Discount, pause, or set cooldown on ISB-managed rewards; reset after a timer</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/push-community-goal.html">Push Community Goal</a></td><td>Add progress; optional trigger amount</td></tr>
               <tr><td><a href="/ISBSuiteReleases/docs/features/actions/randomize-image-picker.html">Randomize Image Picker</a></td><td>Reshuffle overlay picker images</td></tr>
             </tbody>
@@ -165,7 +168,7 @@
             <li><strong>Match anywhere in message</strong>: command can appear mid chat (for example <code>/me !discord</code>). Space-boundary rules still apply (<code>!spin</code> will not match inside <code>!spinwheel</code>). Off by default.</li>
             <li><strong>Don't trigger from the broadcaster or linked bot</strong>: this command will not fire from your Twitch account or a linked bot account (prefix or mid-message). Same rule either way you send chat. Off by default.</li>
             <li><strong>Allow checking another viewer</strong>: first leftover word is a viewer (<code>@user</code>). <code>{user}</code> becomes that person; leftover text is <code>{input}</code>. Off by default so <code>!love pizza</code> keeps pizza as <code>{input}</code>. Cooldown and permission still apply to the typer; use <code>{caller}</code> for them.</li>
-            <li><strong>Cooldown and per stream limits</strong>: with optional chat replies.</li>
+            <li><strong>Cooldown and per stream limits</strong>: the automation's rule-level block (one cooldown for every trigger on that rule), with optional chat replies.</li>
           </ul>
           <p>Also see <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
         </section>
@@ -178,6 +181,8 @@
             <li><strong>Stream Deck</strong>: create a broadcaster-only custom command, then send that chat line from a Stream Deck Twitch Chat button.</li>
             <li><strong>Discord</strong>: add named webhooks on Integrations, then use the <a href="/ISBSuiteReleases/docs/features/actions/discord-webhook.html">Discord Webhook</a> action (one rule can post to multiple webhooks).</li>
             <li><strong>Spotify</strong>: Connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Integrations</a>, then enable the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> action (pause, skip, shuffle, repeat, queue, or play now). Viewers can also use built-in <code>!sr</code> and <code>!remove</code>.</li>
+            <li><strong>OBS Studio</strong>: Set up and Connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#obs">Integrations</a>. After setup, the <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> action card stays available even if OBS is closed that day (scene lists may be empty; you can still type names). Disconnect hides the empty card until you Connect again, including after you close ISB Suite. Rules that already have an OBS action keep the card if you Disconnect or clear the password, with a notice that the action will be skipped. OBS 28+ with WebSocket 5; ISB Suite does not start OBS.</li>
+            <li><strong>Streamlabs Desktop</strong>: Set up and Connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#streamlabs">Integrations</a>. After setup, the <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> action card stays available even if Streamlabs is closed that day. Disconnect hides the empty card until you Connect again, including after you close ISB Suite. Rules that already have a Streamlabs action keep the card if you Disconnect, with a notice that the action will be skipped. Volume is 0-100%. ISB Suite does not start Streamlabs.</li>
             <li><strong>Chains</strong>: <a href="/ISBSuiteReleases/docs/features/actions/run-chat-bot-or-automation.html">Run Chat Bot or Automation</a> keeps original chatter context across hops (max 20; loops are blocked). Alerts use <a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert</a>.</li>
             <li><strong>Cascading wheels</strong>: entry action or Run Chat Bot or Automation loads a second wheel. See <a href="/ISBSuiteReleases/docs/features/wheel.html#cascade">Wheel - Cascading</a> and <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</li>
           </ul>

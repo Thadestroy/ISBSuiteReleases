@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Channel Points | ISB Suite</title>
+  <meta name="description" content="Channel Points action: change cost, pause, or cooldown on ISB-managed rewards from a rule" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Channel Points | ISB Suite" />
+  <meta property="og:description" content="Channel Points action: change cost, pause, or cooldown on ISB-managed rewards from a rule" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Channel Points</p>
+        <h1 class="page-title">Channel Points</h1>
+        <p class="lede">Add one or more rewards this app created or migrated, then change cost, availability, and/or cooldown for the whole list. Reset after (on by default) writes the first snapshot back when the timer ends.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-channel-points.png" alt="Channel Points action setup in ISB Suite" />
+          <figcaption>Channel Points: searchable reward chips, Leave as is / set / discount, and an optional Reset after timer.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Channel Points</strong>.</li>
+            <li>Works on rewards ISB created or migrated. Dashboard rewards stay read-only until you migrate them on the <a href="/ISBSuiteReleases/docs/features/stream/channel-points.html">Channel Points tab</a>.</li>
+            <li>Cost: Leave as is, Set to, Increase by, Decrease by, Multiply by, or Discount by (percent).</li>
+            <li>Cooldown &amp; Limits Turn on uses the same redemption cooldown, per-stream, and per-user caps as Stream Manager. Turn the Reset after timer off to keep the change.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#limits">Limits</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>When the rule fires, ISB updates each added reward in order. Failures are skipped so sibling actions still run. If a delay <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> is also on the rule, this waits with Create Clip and Send Message.</p>
+          <p>Fields set to Leave as is are not touched. The first change snapshots the live reward as a baseline and stores it so a crash cannot leave a cheap or paused reward stuck. Later fires on the same reward keep that baseline (half price twice stays half, not a quarter).</p>
+          <p><strong>Reset after</strong> (default 10 minutes) writes the baseline back when the timer ends; the last timer wins. Turn Reset after off to keep the change until you edit the reward or fire another Channel Points action.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Create or migrate the reward on Stream Manager, <a href="/ISBSuiteReleases/docs/features/stream/channel-points.html">Channel Points</a>.</li>
+            <li>Enable <strong>Channel Points</strong> on the Actions card.</li>
+            <li>Search ISB-managed rewards and click <strong>Add</strong> for each one.</li>
+            <li>Set Cost, Availability, and/or Cooldown. Leave as is means do not touch that field.</li>
+            <li>Turn on Cooldown &amp; Limits opens redemption cooldown time plus per-stream and per-user caps (same as Stream Manager). Leave a field blank to keep that cap off. Turn off clears all three.</li>
+            <li>Leave <strong>Reset after</strong> on (or turn it off to keep the change).</li>
+          </ol>
+        </section>
+        <section class="section" id="limits">
+          <h2>Limits</h2>
+          <ul>
+            <li>Cost is rounded half away from zero and clamped to 1-1,000,000. Discount is a percent off (25 = 25% off). Cooldown seconds clamp to 1-604800 when turned on.</li>
+            <li>Pause and Enable are different Twitch fields. Pause hides a still-enabled reward; Disable turns it off.</li>
+            <li>Free tier. No new message variables.</li>
+          </ul>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Going live -&gt; Discount by 50% for 10 minutes.</li>
+            <li>Raid incoming -&gt; pause noisy rewards for 5 minutes.</li>
+            <li>Hype command -&gt; Turn on a 2 minute redemption cooldown and reset after the stream segment.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

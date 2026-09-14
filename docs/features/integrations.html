@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Integrations | ISB Suite</title>
-  <meta name="description" content="Twitch, Discord, Tiltify, Spotify, TTS" />
+  <meta name="description" content="Twitch, Discord, Tiltify, Spotify, OBS Studio, Streamlabs Desktop, TTS" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
   <meta property="og:title" content="Integrations | ISB Suite" />
-  <meta property="og:description" content="Twitch, Discord, Tiltify, Spotify, TTS" />
+  <meta property="og:description" content="Twitch, Discord, Tiltify, Spotify, OBS Studio, Streamlabs Desktop, TTS" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -52,7 +52,7 @@
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/integrations.png" alt="Integrations page in ISB Suite" />
-          <figcaption>Integrations: Twitch, Discord webhooks, optional Tiltify and Spotify, TTS notes.</figcaption>
+          <figcaption>Integrations: Twitch, Discord webhooks, optional Tiltify, Spotify, OBS Studio, Streamlabs Desktop, TTS notes.</figcaption>
         </figure>
 
         <div class="ref-panel">
@@ -62,6 +62,8 @@
             <li>Optional bot account for outbound chat (Free).</li>
             <li>Discord: named webhooks under Integrations, then Discord Webhook action on rules.</li>
             <li>Spotify: guided setup (your own Developer app + Connect). Automations use the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> action; viewers can <code>!sr</code> a song after Connect and <code>!remove</code> their last request.</li>
+            <li>OBS Studio: connect the built-in WebSocket (OBS 28+). Automations use the <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> action to switch scenes, show or hide sources, mute, stream, or record.</li>
+            <li>Streamlabs Desktop: connect third-party Remote Control (port 59650 + API token). Separate from the OBS card. Automations use the <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> action to switch scenes, show or hide sources, mute, set volume (0-100%), stream, or record.</li>
             <li>TTS is built in with no API key.</li>
             <li>Audio output channels (buses for sounds/alerts/TTS) live under <strong>Settings</strong>, not on this page.</li>
             <li>Want another platform? <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Request an integration</a>.</li>
@@ -73,6 +75,8 @@
           <li><a href="#discord">Discord webhooks</a></li>
           <li><a href="#tiltify">Tiltify</a></li>
           <li><a href="#spotify">Spotify</a></li>
+          <li><a href="#obs">OBS Studio</a></li>
+          <li><a href="#streamlabs">Streamlabs Desktop</a></li>
           <li><a href="#tts">Text to Speech</a></li>
           <li><a href="#request">Request an integration</a></li>
         </ol></nav>
@@ -132,6 +136,51 @@
             <li><strong>Allowlist / 403:</strong> under the Developer Dashboard app, User Management, add the same Spotify account you stream with.</li>
             <li>Album and playlist links cannot be queued. Use a track link, a <code>spotify:track:</code> URI, or a song name.</li>
             <li>More troubleshooting: <a href="/ISBSuiteReleases/docs/reference/faq.html#spotify">FAQ - Spotify</a>.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="obs">
+          <h2>OBS Studio (optional)</h2>
+          <p>ISB Suite talks to the OBS Studio WebSocket server on this PC (switch scenes, show or hide sources, mute, volume, start or stop stream or recording). It does not start OBS, and it does not replace Window Capture of the ISB Suite overlay. Available on Free and Pro.</p>
+          <ol class="steps">
+            <li>In OBS Studio 28 or newer: <strong>Tools â†’ WebSocket Server Settings</strong>. Enable the server. Default host <code>127.0.0.1</code>, port <code>4455</code>.</li>
+            <li>On Integrations, <strong>OBS Studio</strong>: click <strong>Set Up OBS</strong>. The setup window holds host, port, the password from OBS, and Auto Connect. Then <strong>Connect</strong>.</li>
+            <li>Optional: check <strong>Connect automatically when ISB Suite starts</strong> in that window. Use <strong>Reconfigure</strong> on the card to change those fields later.</li>
+            <li>After you save a password and Connect, automations and other editors show the <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> action. The card stays available the next day even if OBS is closed. Disconnect hides the empty action card until you Connect again, including after you close ISB Suite. Rules that already have an OBS action keep the card if you Disconnect or clear the password, with a notice that the action will be skipped. Scene and source names are saved as text; if OBS is closed when a rule fires, that action is skipped and the rest of the rule still runs.</li>
+          </ol>
+          <ul>
+            <li>When connected, the card lists live scene and input counts. Host, port, and password stay in Set Up / Reconfigure, not on the card. Combos stay editable so you can type a name that is not in the current catalog.</li>
+            <li>Disconnect from the card stops reconnect, turns off Auto Connect so the next launch stays disconnected, and hides the empty OBS Studio action card until you Connect again. Connect on the card, or check Auto Connect in setup, to reconnect on launch. Connect during Reconnecting tries immediately.</li>
+            <li>A 4.x Hello (OBS 27 / old plugin) is a setup error: OBS Studio 28+ with WebSocket 5 is required.</li>
+            <li>Streamlabs Desktop is a different protocol and will not connect to this card. Use the Streamlabs Desktop card instead.</li>
+          </ul>
+          <h3>If Connect fails</h3>
+          <ul>
+            <li>Confirm OBS is open and the WebSocket server is enabled.</li>
+            <li>Match the password, host, and port from Tools â†’ WebSocket Server Settings.</li>
+            <li>Keep host at <code>127.0.0.1</code> unless OBS is on another machine you trust.</li>
+            <li>More troubleshooting: <a href="/ISBSuiteReleases/docs/reference/faq.html#obs">FAQ - OBS Studio</a>.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="streamlabs">
+          <h2>Streamlabs Desktop (optional)</h2>
+          <p>ISB Suite talks to Streamlabs Desktop on this PC over the third-party WebSocket. Automations use the <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> action to switch scenes, show or hide sources, mute, set volume (0-100%), or start or stop stream or recording. It does not start Streamlabs, and it does not replace Window Capture of the ISB Suite overlay. This is not the OBS Studio WebSocket. Available on Free and Pro.</p>
+          <ol class="steps">
+            <li>In Streamlabs Desktop: <strong>Settings â†’ Remote Control</strong> (some builds: <strong>Mobile â†’ Third Party Connections</strong>). Turn on <strong>Allow third party connections</strong>. Copy the port (default <code>59650</code>) and API token. Do not show the token on stream. Leave Allow Controller app connections off unless you use the phone app.</li>
+            <li>On Integrations, <strong>Streamlabs Desktop</strong>: click <strong>Set Up Streamlabs</strong>. The setup window holds host, port, the API token, and Auto Connect. Then <strong>Connect</strong>.</li>
+            <li>Optional: check <strong>Connect automatically when ISB Suite starts</strong> in that window. Use <strong>Reconfigure</strong> on the card to change those fields later.</li>
+          </ol>
+          <ul>
+            <li>When connected, the card lists live scene counts. Host, port, and token stay in Set Up / Reconfigure, not on the card.</li>
+            <li>Disconnect from the card stops reconnect and turns off Auto Connect so the next launch stays disconnected. Disconnect also hides the empty <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> action card until you Connect again, including after you close ISB Suite. Rules that already have a Streamlabs action keep the card, with a notice that the action will be skipped.</li>
+            <li>The OBS Studio card will not talk to Streamlabs. Use this card.</li>
+          </ul>
+          <h3>If Connect fails</h3>
+          <ul>
+            <li>Confirm Streamlabs Desktop is open and Allow third party connections is on.</li>
+            <li>Match the API token, host, and port from Remote Control.</li>
+            <li>Keep host at <code>127.0.0.1</code> unless Streamlabs is on another machine you trust.</li>
           </ul>
         </section>
 
