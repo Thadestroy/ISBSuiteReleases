@@ -68,11 +68,12 @@ ISB Suite is built around several major systems that all work together:
 | **Automations** | Connect any Twitch event to any action |
 | **Chat Bot** | Automated chat messages triggered by stream events or commands |
 | **Alerts** | On-screen overlays for follows, subs, raids, donations, and more |
-| **Overlay Layout** | Drag-and-drop layout editor for your capture window |
+| **Overlay Layout** | Drag-and-drop layout editor for your capture window, including a Chat Box |
 | **Viewer Points** | Custom channel currency with a shop and point drops |
 | **Community Goals** | Stream-wide progress bars fed by Twitch events or chat |
 | **Chat Games** | Mass-entry chat games with stakes, rolls, and configurable outcomes |
 | **Stream Manager** | Live desk: chat, Activity, viewers, stream info, Predictions, Channel Points, clip, and Quick Actions |
+| **YouTube (Beta)** | Sign in with Google for YouTube chat beside Twitch, Super Chat and membership alerts, and `!link` to join a YouTube handle with a Twitch login |
 | **Counters & Stats** | Global and per-viewer counters with tiers and CSV export |
 | **Character Studio** | *(coming soon)* |
 

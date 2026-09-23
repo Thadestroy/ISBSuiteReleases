@@ -67,6 +67,7 @@
 
         <nav class="toc"><strong>On this page</strong><ol>
           <li><a href="#twitch">Twitch alert types</a></li>
+          <li><a href="#youtube">YouTube alert types</a></li>
           <li><a href="#appearance">Appearance</a></li>
           <li><a href="#custom">Custom Alerts</a></li>
           <li><a href="#run-alert">Run Alert</a></li>
@@ -77,8 +78,13 @@
           <h2>Twitch alert types</h2>
           <p>Follow, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver, Bits / Cheer, Power-Up, Raid, Hype Train Start, Hype Train End, Hype Train Level Up, Goal Achieved, Ad Break, Shoutout Received, Stream Went Live, Channel Point Redemption.</p>
           <p>New Subscription fires only for a first-time paid sub (chat/Activity Feed notice). Returners and gift recipients do not get a New Subscription alert. Subscription Gifter is gifter-linked (bulk count). Subscription Gift Receiver fires once per recipient with <code>{user}</code> = gifted viewer and <code>{gifter}</code> = gifter (gift bombs = one alert per recipient). Resubscription fires when the viewer shares their resub message in chat. A silent payment or badge change with no chat notice does not fire a New Subscription alert.</p>
-          <p>Each type supports custom image or GIF, alert text with variables, display duration, TTS, and minimum thresholds (for example raids with 10+ viewers). Overview rows have an enable/disable light (same as Automations / Chat Bot). Green is on, grey is off; click the light to toggle. A legend at the top of overview lists explains this. Turning a type off and back on restores only the rules that were on before.</p>
+          <p>Each type supports custom image or GIF, alert text with variables, display duration, TTS, and minimum thresholds (for example raids with 10+ viewers). Alert Text may be left blank so the overlay shows no alert-text line. Overview rows have an enable/disable light (same as Automations / Chat Bot). Green is on, grey is off; click the light to toggle. A legend at the top of overview lists explains this. Turning a type off and back on restores only the rules that were on before.</p>
           <p>Bits / Cheer TTS and <code>{message}</code> fold every <code>cheerN</code> token in that one chat line into the event total (<code>{amount}</code>), so stacked cheer emotes are spoken once. Other words in the viewer note stay. Count each / per-N Bits automations are a separate setting and still run from the Twitch bits total.</p>
+        </section>
+
+        <section class="section" id="youtube">
+          <h2>YouTube alert types</h2>
+          <p>Super Chat, Super Sticker, New Member, Member Milestone, Membership Gifter, and Membership Gift Receiver. These are not Bits or Subs. The YouTube section stays hidden until you Sign in with Google. New Member is first-time only. Member Milestone fires when they share it in chat. <code>{amount}</code> is the YouTube display string (for example <code>$5.00</code> or months / gift count), not bits. Free still allows 1 dedicated rule per type. Full rules: <a href="/ISBSuiteReleases/docs/features/youtube.html#events">YouTube</a>.</p>
         </section>
 
         <section class="section" id="appearance">
@@ -117,7 +123,7 @@
         <section class="section" id="run-alert">
           <h2>Run Alert</h2>
           <p>On <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a>, <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a>, Viewer Points shop items, <a href="/ISBSuiteReleases/docs/features/chat-games/index.html">Chat Games</a>, and other Actions surfaces, enable <strong>Run Alert</strong> and pick any Alerts page alert (built-in types, Custom Alerts, or Action Only). When the parent rule fires, that alert plays with the parent event context (<code>{user}</code>, amounts, and so on). The chosen alert must be enabled; its own cooldown and limits still apply. The Run Alert target list uses the same searchable dropdown as Randomized Action sets and Run Chat Bot or Automation.</p>
-          <p>Queued alerts play one at a time in the Home <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Alert Queue</a>.</p>
+          <p>Queued alerts play one at a time in the Stream Manager <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Alert Queue</a>.</p>
         </section>
 
         <section class="section" id="legacy">

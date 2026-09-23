@@ -61,7 +61,7 @@
           <ul>
             <li>Balances live on a per-user counter.</li>
             <li>Watching earn rules need <strong>Stats - Watch Time</strong> and the Twitch chatters scope.</li>
-            <li>Event earn rules (chat, follow, sub, bits, raid, channel points) award when the chatter has a Twitch user id.</li>
+            <li>Event earn rules (chat, follow, sub, bits, raid, channel points, and YouTube Super Chat / members / gifts) award when the chatter has a platform user id.</li>
             <li>Shop items run full Actions (wheel, sound, giveaway, automation, Run Alert, and more).</li>
             <li>Community Goals can spend a bound currency 1:1 into a goal (contribute command on the goal).</li>
             <li>Point Drop needs a Point Drop widget on the active layout.</li>
@@ -103,7 +103,7 @@
             <li>Optional extras for current <strong>Tier 1</strong>, <strong>Tier 2</strong>, and <strong>Tier 3</strong> subscribers live under <strong>Advanced Settings</strong> (added on top of the base amount). Prime counts as Tier 1. Set Points they earn to 0 if only subscribers should get points. Gifted subs count. Leave extras at 0 for everyone to earn the same. The same extras can be set on Subscription and Resubscription event rules.</li>
             <li>Save the currency.</li>
           </ol>
-          <div class="callout"><p><strong>Prerequisite:</strong> enable <strong>Stats - Watch Time</strong> and ensure Twitch is connected with the <code>moderator:read:chatters</code> scope (reconnect on <strong>Integrations</strong> if watch-time accrual is paused). Watching earn rules use the same once-per-minute live poll as watch time. If Watch Time is off, the Watching rule shows an error on the rule itself (you can still save it). Turning Watch Time off later pops a warning if Watching rules already exist. Other earn triggers do not need Watch Time.</p></div>
+          <div class="callout"><p><strong>Prerequisite:</strong> enable <strong>Stats - Watch Time</strong>. Twitch days need the <code>moderator:read:chatters</code> scope (reconnect on <strong>Integrations</strong> if that poll is paused). A YouTube-only day still accrues recently-chatted viewers without Helix. Watching earn rules use the same once-per-minute live poll as watch time. YouTube lurkers never earn; only viewers who recently chatted on YouTube (or who are already in Twitch chat) count. See <a href="/ISBSuiteReleases/docs/features/youtube.html#watch">YouTube</a>. If Watch Time is off, the Watching rule shows an error on the rule itself (you can still save it). Turning Watch Time off later pops a warning if Watching rules already exist. Other earn triggers do not need Watch Time.</p></div>
           <h3>Event triggers</h3>
           <p>Same event family Automations already see, when the event carries a Twitch user id:</p>
           <ul>
@@ -111,11 +111,13 @@
             <li><strong>First-Time Chatter</strong> - that viewer earns once the first time they chat (not each stream). Existing viewers already in your data are not treated as first-time after an update</li>
             <li><strong>Follow</strong></li>
             <li><strong>Subscription</strong> and <strong>Resubscription</strong></li>
-            <li><strong>Subscription Gifter</strong> - points go to the gifter, once per gifted sub (a bomb of 5 gifts awards 5 times). Optional gift count with At least or Exactly; leave blank for every gift</li>
+            <li><strong>Subscription Gifter</strong> - points go to the gifter. <strong>Award per gifted sub</strong> is on by default (a bomb of 5 awards 5 times); turn it off to award once per gift event. Existing gift rules stay per-gift. Optional gift count with At least or Exactly; leave blank for every gift</li>
             <li><strong>Subscription Gift Receiver</strong> - points go to the person who received the gifted sub</li>
-            <li><strong>Raid</strong> - points go to the raider. Optional raider count with At least or Exactly; leave blank for every raid</li>
-            <li><strong>Bits</strong> - points go to the viewer who spent bits (chat cheer or Power-Up). Optional bit amount with At least or Exactly; leave blank for every spend</li>
+            <li><strong>Raid</strong> - points go to the raider. <strong>Award per raider</strong> is on for new rules; turn it off to award once per raid. Existing raid rules stay once per raid. Optional raider count with At least or Exactly; leave blank for every raid</li>
+            <li><strong>Bits</strong> - points go to the viewer who spent bits (chat cheer or Power-Up). <strong>Award per bit</strong> is on for new rules; turn it off to award once per cheer. Existing bits rules stay once per cheer. Optional bit amount with At least or Exactly; leave blank for every spend</li>
             <li><strong>Channel Point Redemption</strong> - points go to the redeemer. Optional reward name; leave blank for every reward</li>
+            <li><strong>Super Chat</strong> and <strong>Super Sticker</strong> - YouTube only. <strong>Award per tier</strong> (1-7, not dollars) is on for new rules; turn it off to award once per Super Chat. Existing Super Chat rules stay once per event. Optional tier with At least or Exactly</li>
+            <li><strong>Membership Gifter</strong> - same per-gift vs once-per-event choice as Subscription Gifter. <strong>New Member</strong>, <strong>Member Milestone</strong>, and <strong>Membership Gift Receiver</strong> award once per event. See <a href="/ISBSuiteReleases/docs/features/youtube.html#events">YouTube</a></li>
           </ul>
           <p>Tiltify donations are not an earn trigger: they do not identify a Twitch viewer, so points cannot attach to a real account.</p>
         </section>
@@ -123,10 +125,10 @@
         <section class="section" id="commands">
           <h2>Viewer and admin commands</h2>
           <ul>
-            <li><strong>Balance:</strong> viewers type <code>!points</code> (or your custom command) to check their balance, or <code>!points @username</code> for another viewer. Allow checking another viewer is on by default. <code>{user}</code> / <code>{balance}</code> are the subject; <code>{caller}</code> is who typed the command. Unknown login uses the not-found template; a resolved viewer with no wallet is a real <code>0</code>.</li>
-            <li><strong>Give:</strong> viewers give their own points to another chatter (for example <code>!givepoints</code>).</li>
+            <li><strong>Balance:</strong> viewers type <code>!points</code> (or your custom command) to check their balance, or <code>!points @username</code> for another viewer (Twitch login or YouTube <code>@handle</code>). Allow checking another viewer is on by default. <code>{user}</code> / <code>{balance}</code> are the subject; <code>{caller}</code> is who typed the command. Unknown login uses the not-found template; a resolved viewer with no wallet is a real <code>0</code>.</li>
+            <li><strong>Give:</strong> viewers give their own points to another chatter (for example <code>!givepoints @handle 100</code>). A YouTube <code>@handle</code> credits that channel; a linked account cannot give to itself.</li>
             <li><strong>Gamble:</strong> viewers wager points on a configurable win-chance roll (for example <code>!gamble 50</code>, <code>!gamble 1k</code>, <code>!gamble 1m</code>, <code>!gamble 50.2</code>, <code>!gamble 34.7%</code>, or <code>!gamble all</code>). <code>k</code> and <code>m</code> suffixes scale by 1,000 and 1,000,000 with no space (<code>1k</code>, not <code>1 k</code>). Decimals and percents round to a whole stake before the roll.</li>
-            <li><strong>Admin give:</strong> broadcaster/mods award points from chat (for example <code>!vpgive @user 100</code>, or <code>!vpgive all 100</code> for everyone currently in chat). <code>all</code> uses the Helix chatters snapshot (same room list as Watch Time), not a live JOIN feed.</li>
+            <li><strong>Admin give:</strong> broadcaster/mods award points from chat (for example <code>!vpgive @user 100</code>, or <code>!vpgive all 100</code> for everyone currently in chat). <code>all</code> is Twitch Helix chatters plus YouTube recently-chatted (same window as Watch Time), de-duped when those identities are linked. Not a live JOIN feed.</li>
             <li>Each command supports aliases and optional Match anywhere in message under Advanced Settings.</li>
             <li>Advanced Settings also cover permission, time cooldown (optional burst), and per-stream limits (same unified editor as other commands).</li>
             <li>Community Goals can bind this currency so viewers spend it into a milestone. See <a href="/ISBSuiteReleases/docs/features/community-goals.html#viewer-points">Community Goals - Viewer Points contribute</a>.</li>

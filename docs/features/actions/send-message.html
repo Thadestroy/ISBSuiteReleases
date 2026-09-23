@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Send Message | ISB Suite</title>
-  <meta name="description" content="Send Message action for Twitch chat with variables" />
+  <meta name="description" content="Send Message action for Twitch and YouTube chat with variables" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
   <meta property="og:title" content="Send Message | ISB Suite" />
-  <meta property="og:description" content="Send Message action for Twitch chat with variables" />
+  <meta property="og:description" content="Send Message action for Twitch and YouTube chat with variables" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -48,7 +48,7 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Send Message</p>
         <h1 class="page-title">Send Message</h1>
-        <p class="lede">Send a Twitch chat line when the rule fires. Templates support message variables from the parent event, with a live preview in the editor.</p>
+        <p class="lede">Send a chat line when the rule fires. Pick Twitch, YouTube, or both. Templates support message variables from the parent event, with a live preview in the editor.</p>
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-send-message.png" alt="Send Message action setup in ISB Suite" />
@@ -60,6 +60,7 @@
           <ul>
             <li>UI label: <strong>Send Message</strong>.</li>
             <li>Supports <a href="/ISBSuiteReleases/docs/reference/message-variables.html">message variables</a> such as <code>{user}</code> and <code>{amount}</code>.</li>
+            <li>Twitch, YouTube, or both. Chat Bot replies still stay on the platform the command was typed.</li>
             <li>Optional bot account on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a> sends replies as the bot.</li>
             <li>TTS and Discord can reuse this same template text.</li>
             <li><code>/shoutout {user}</code> or <code>/so {user}</code> fires Twitch's official shoutout (reconnect Twitch if you connected before this feature).</li>
@@ -76,12 +77,13 @@
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>When the rule fires, the template is resolved with the current event context and sent to Twitch chat (as the broadcaster account, or as the dedicated bot account if you connected one on Integrations). Rate limits still apply - mod the bot in your channel if you send many replies. A template that starts with <code>/shoutout</code> or <code>/so</code> sends Twitch's official shoutout (Helix) instead of posting that slash command. Viewer text in <code>{input}</code> is posted as chat. <code>/shoutout {user}</code> on a raid uses the raider's user id. You must be live with at least one viewer; one shoutout every 2 minutes, same channel once per hour. Extra text after the name is still sent as chat. Re-authenticate Twitch if you connected before this feature (<code>moderator:manage:shoutouts</code>).</p>
+          <p>When the rule fires, the template is resolved with the current event context and sent to the destinations you checked (Twitch, YouTube, or both). Twitch sends as the broadcaster account, or as the dedicated bot account if you connected one on Integrations. YouTube send needs Sign in with Google and a live chat; official send quota applies. Rate limits still apply - mod the Twitch bot in your channel if you send many replies. A template that starts with <code>/shoutout</code> or <code>/so</code> sends Twitch's official shoutout (Helix) instead of posting that slash command. Viewer text in <code>{input}</code> is posted as chat. <code>/shoutout {user}</code> on a raid uses the raider's user id. You must be live with at least one viewer; one shoutout every 2 minutes, same channel once per hour. Extra text after the name is still sent as chat. Re-authenticate Twitch if you connected before this feature (<code>moderator:manage:shoutouts</code>). YouTube connect and quota: <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>
           <ol class="steps">
             <li>Enable <strong>Send Message</strong>.</li>
+            <li>Check Twitch, YouTube, or both.</li>
             <li>Write the <strong>Message Template</strong>. Use the Variables helper to insert tokens.</li>
             <li>Check the green <strong>Preview</strong> line (sample viewer / amounts) before saving.</li>
           </ol>

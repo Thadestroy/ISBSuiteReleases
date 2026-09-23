@@ -55,7 +55,7 @@
             <thead><tr><th>Scenario</th><th>How to</th></tr></thead>
             <tbody>
               <tr><td>Viewer Giveaway</td><td><code>!startwheelspin</code>, viewers <code>!join</code>, then <code>!spinwheel</code></td></tr>
-              <tr><td>Game Selection</td><td>Create a preset with game names, Quick Launch, Spin</td></tr>
+              <tr><td>Game Selection</td><td>Create a preset with game names, add the Stream Manager Wheel card, pick the preset, Spin</td></tr>
               <tr><td>Channel Points Auto Spin</td><td>Automation: reward loads wheel and auto spins</td></tr>
               <tr><td>Walk-on Sounds</td><td>Automation: first message plays a sound (blank username = every chatter once; or a specific viewer)</td></tr>
               <tr><td>Bits Celebration</td><td>Automation: 100+ bits plays a sound and shows an alert</td></tr>
@@ -66,7 +66,7 @@
               <tr><td>Point Drop Event</td><td>Configure a point drop: image on overlay, first chatters to type claim points</td></tr>
               <tr><td>Live Alert on Follow</td><td>Alert rule: Follow shows a fade in GIF and TTS thanking <code>{user}</code></td></tr>
               <tr><td>Heist Chat Game</td><td>Chat Games preset: viewers <code>!heist 50</code> to stake points; resolve doubles winners stakes</td></tr>
-              <tr><td>Duel Chat Game</td><td>Chat Games preset: <code>!duel user amount</code>, opponent <code>!accept</code> / <code>!decline</code>; 50/50 stake transfer</td></tr>
+              <tr><td>Duel Chat Game</td><td>Chat Games preset: <code>!duel user amount</code> (Twitch login or YouTube <code>@handle</code>), opponent <code>!accept</code> / <code>!decline</code>; 50/50 stake transfer. Linked identities cannot duel themselves, and a linked viewer can accept or decline from either platform</td></tr>
               <tr><td>Solo Gamble</td><td>Chat Games preset: per-viewer win/lose roll with separate Win and Lose action phases</td></tr>
               <tr><td>Random Hype Sound</td><td>Automation with Randomized Action and 3 action sets, each playing a different sound</td></tr>
               <tr><td>Rotating chat lines</td><td>Randomized Action: <strong>Import .txt</strong> of hype lines (file picker, then Import lines dialog). <a href="/ISBSuiteReleases/docs/features/actions/randomized-action.html#import">Full import steps</a>. <strong>Edit lines</strong> to attach a sound per line</td></tr>
@@ -77,8 +77,8 @@
               <tr><td>Discord milestone ping</td><td>Automation: Counter Tier Reached, then Discord Webhook posts <code>{user}</code> hit <code>{counterTier}</code></td></tr>
               <tr><td>Song request from chat</td><td>Connect Spotify under Integrations, then leave built-in <code>!sr</code> enabled in Chat Bot (Everyone). Set per-viewer queue caps on the Spotify card (Song Request). Viewers type a song name or paste a track link. They can <code>!remove</code> their last request</td></tr>
               <tr><td>Channel points song queue</td><td>Automation: Channel Points reward, then <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> Queue with <code>{input}</code> as the song field</td></tr>
-              <tr><td>Raid scene switch</td><td>Automation: Incoming Raid, then <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> or <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> Set program scene (and optional Show source)</td></tr>
-              <tr><td>Channel points BRB scene</td><td>Automation: Channel Points reward, then <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> or <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> Set program scene to your BRB layout</td></tr>
+              <tr><td>Raid scene switch</td><td>Automation: Incoming Raid, then <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> or <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> Set program scene, plus <a href="/ISBSuiteReleases/docs/features/actions/overlay-layout.html">Overlay Layout</a> so the ISB overlay changes at the same time</td></tr>
+              <tr><td>Channel points BRB scene</td><td>Automation: Channel Points reward, then <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> or <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> Set program scene and <a href="/ISBSuiteReleases/docs/features/actions/overlay-layout.html">Overlay Layout</a> to your BRB layouts</td></tr>
               <tr><td>Command aliases</td><td>Add <code>!pts</code> as an alias of <code>!points</code>, or <code>!heistgo</code> as an alias of your Heist join command</td></tr>
               <tr><td>Goal progress check</td><td>On a Community Goal, set Check Command to <code>!bitsgoal</code>. Viewers get <code>15/100</code> style progress</td></tr>
               <tr><td>Viewer Points community goal</td><td>Enable Viewer Points on a Community Goal, pick a currency, set Contribute Command to <code>!goal</code>. Viewers type <code>!goal 50</code> to spend 50 points 1:1. Stop-at-limit goals reject further spend once full. Refund from the goal card credits Viewer Points and resets the bar; Goal Reached automations are not undone</td></tr>
@@ -86,6 +86,7 @@
               <tr><td>Extension / Blerp bits live timer</td><td>Chat Message Match (bot login + <code>used &lt;amount&gt; bits</code>) with Count each + <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a> Add (same pattern as Bits). Not the Bits cheer trigger</td></tr>
               <tr><td>Dice / Range Outcomes</td><td>Chat Games Percentile roll: one roll, all matching bands (including overlaps) run full actions; tokens <code>{roll}</code> / <code>{outcome}</code></td></tr>
               <tr><td>Styled alert box</td><td>On any alert, open Appearance: fonts/colors, motion pack, style preset, then Test Alert</td></tr>
+              <tr><td>YouTube simulcast</td><td>Sign in with Google, leave <code>!link</code> on, add Super Chat alerts, and use combined Stream Manager Chat. See <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -151,14 +152,14 @@
 
           <h3>OBS Studio from automations</h3>
           <ol>
-            <li>In OBS: Tools â†’ WebSocket Server Settings. Enable the server (OBS Studio 28+).</li>
+            <li>In OBS: Tools > WebSocket Server Settings. Enable the server (OBS Studio 28+).</li>
             <li>On Integrations, OBS Studio: Set Up OBS, enter host, port, and password in the setup window, then Connect.</li>
             <li>On the rule, enable the <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> action and add scene / source / mute / stream operations.</li>
           </ol>
 
           <h3>Streamlabs Desktop from automations</h3>
           <ol>
-            <li>In Streamlabs Desktop: Settings â†’ Remote Control. Turn on Allow third party connections and copy the API token.</li>
+            <li>In Streamlabs Desktop: Settings > Remote Control. Turn on Allow third party connections and copy the API token.</li>
             <li>On Integrations, Streamlabs Desktop: Set Up Streamlabs, enter host, port, and token, then Connect.</li>
             <li>On the rule, enable the <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> action and add scene / source / mute / stream operations. Volume is 0-100%.</li>
           </ol>

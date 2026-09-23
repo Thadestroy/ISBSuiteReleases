@@ -75,6 +75,7 @@
           <li><a href="#timed">Timed and event messages</a></li>
           <li><a href="#live-timer">Live Timer Commands</a></li>
           <li><a href="#song-request">Song request</a></li>
+          <li><a href="#youtube">YouTube</a></li>
           <li><a href="#actions">Actions from Chat Bot</a></li>
         </ol></nav>
 
@@ -82,7 +83,7 @@
           <h2>Same engine as Automations</h2>
           <p>Chat Bot is not a separate runtime. Rules you create here use the same triggers, actions, cooldowns, aliases, Match anywhere, Randomized Action, Timer, Live Timer, Run Alert, Enable / Disable, and <strong>Run Chat Bot or Automation</strong> chaining as the Automations tab. Overview pages support name search and custom groups like other list pages. Each command card has a green (enabled) or grey (disabled) light. Click the light to turn that command on or off; a legend at the top of the list explains this.</p>
           <p>Leaving Add Bot Message with unsaved changes shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Opening the form and leaving without edits does not prompt. Form <strong>Cancel</strong> discards without asking.</p>
-          <p>Chat Bot response text routes to Twitch. Discord posts use the Discord Webhook action on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a>.</p>
+          <p>Chat Bot replies stay on the platform the command was typed (Twitch or YouTube). Timed messages post to chats that are live in the current ISB session (a YouTube-only day does not post on Twitch). Discord posts use the Discord Webhook action on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a>. YouTube connect, <code>!link</code>, and permissions: <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</p>
         </section>
 
         <section class="section" id="when">
@@ -113,7 +114,7 @@
             <li><strong>Per stream limits:</strong> max fires globally and/or per user (<code>0</code> = unlimited), with optional hit-limit chat reply. Limits reset when a new stream session starts.</li>
           </ul>
           <p>Community Goal check and contribute commands, Viewer Points commands, Chat Game start/join commands, Saved Lists, and Automation Chat Command triggers also appear on the Chat Bot overview where applicable. Each row has the same enable/disable light as other Chat Bot cards. Edit opens that feature&apos;s settings (Automations for a bundled command). Disabling an Automation reference card turns off the whole automation. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, <code>!endtimer</code>, <code>!addcommand</code>, and <code>!editcommand</code> stay out of the Run Chat Bot or Automation picker. Contribute is not a Run Automation nested target. Built-in <code>!editcommand</code> still cannot change Automations.</p>
-          <p>Mods can create or update a basic Chat Bot reply from chat with <code>!addcommand</code> / <code>!editcommand</code> (aliases <code>!addcom</code> / <code>!editcom</code>). Add fails if the name exists; edit updates response text only. Chat confirms with <code>Added {name}: {response}</code> / <code>Updated {name}: {response}</code> (customize in Chat Bot). Example: <code>!addcom !project Today&apos;s project is...</code> â†’ <code>Added !project: Today&apos;s project is...</code> See <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
+          <p>Mods can create or update a basic Chat Bot reply from chat with <code>!addcommand</code> / <code>!editcommand</code> (aliases <code>!addcom</code> / <code>!editcom</code>). Add fails if the name exists; edit updates response text only. Chat confirms with <code>Added {name}: {response}</code> / <code>Updated {name}: {response}</code> (customize in Chat Bot). Example: <code>!addcom !project Today&apos;s project is...</code> > <code>Added !project: Today&apos;s project is...</code> See <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
         </section>
 
         <section class="section" id="export">
@@ -135,10 +136,10 @@
             <li>Optional <strong>Fire on a timer</strong> on Read posts a random entry on an interval (same reply template). Match anywhere and Don't trigger from the broadcaster or linked bot are on Read Advanced Settings and apply to both Read and Add. Each has Advanced Settings (aliases, permission, cooldown). Defaults: Read = Everyone, Add = Moderators. Enable/disable the whole list from the Chat Bot Overview card. Interval posts follow <a href="#timed">Timed messages</a> quiet-chat settings.</li>
             <li>Reply templates are editable (blank = silent). Defaults use <code>{number}</code> and <code>{entry}</code>. Optional capture: local date, Twitch category (<code>{game}</code>), and added-by.</li>
             <li><strong>Entry numbers</strong> stay stable by default (gaps after delete; best for quotes). Turn on <strong>Renumber on delete</strong> in list settings for dense 1...N lists (todos), or use <strong>Renumber</strong> on the Lists tab to compact once.</li>
-            <li>On the <strong>Lists</strong> tab: search, add/bulk-add entries (checkbox in Add entry), export CSV/text, renumber (when not auto-renumbering), and <strong>Pop out</strong> to a separate window for another monitor.</li>
+            <li>On the <strong>Lists</strong> tab: search, add/bulk-add entries (checkbox in Add entry), export CSV/text, renumber (when not auto-renumbering), and <strong>Pop out</strong> to a separate window for another monitor. That window stays open when you minimize the main app.</li>
             <li>Set up and edit list commands on <strong>Add Bot Message</strong> (check <strong>Saved list</strong>). Read/Add each have Advanced Settings (aliases, permission, cooldown). Chat edit/remove of entries is not in v1 (UI only).</li>
           </ul>
-          <p>Create a list from Chat Bot â†’ Lists â†’ <strong>+ Add Chat Bot list</strong>, or check <strong>Saved list</strong> on Add Bot Message.</p>
+          <p>Create a list from Chat Bot > Lists > <strong>+ Add Chat Bot list</strong>, or check <strong>Saved list</strong> on Add Bot Message.</p>
         </section>
 
         <section class="section" id="timed">
@@ -160,6 +161,11 @@
           <h2>Song request</h2>
           <p>Built-in <code>!sr</code> (alias <code>!songrequest</code>) queues a song on the Spotify app after you Connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Integrations</a>. The command cards stay hidden on Chat Bot Overview until that Connect. Default permission is Everyone. Chat Bot holds the command name, aliases, cooldown, and confirm template (<code>{user}</code>, <code>{track}</code>, <code>{artist}</code>). Per-viewer queue caps by permission level (default 5; 0 = none; leave blank for unlimited) are on the Spotify card under Integrations (<strong>Song Request</strong>). Blank <code>!sr</code> posts a usage line. At the cap, chat gets the at-cap reply (<code>{cap}</code>).</p>
           <p>Built-in <code>!remove</code> (alias <code>!removesong</code>) pops that chatter's most recently requested song (a stack: two requests, two removes, last in first out). Only their own songs. Spotify cannot delete a queued song, so the request stays in Next in Queue until it would play; ISB Suite then mutes and skips it. If that track is already playing, it is skipped immediately. See <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a> and the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> action for pause/skip/queue from automations.</p>
+        </section>
+
+        <section class="section" id="youtube">
+          <h2>YouTube</h2>
+          <p>After Sign in with Google, Chat Bot hears YouTube live chat. Replies stay on YouTube. Built-in <code>!link</code> is on <strong>Built-in Commands</strong>. It joins a YouTube <code>@handle</code> and a Twitch login into one ISB account. The card's Response is what bare <code>!link</code> says in chat. Permissions and lurker rules: <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</p>
         </section>
 
         <section class="section" id="actions">

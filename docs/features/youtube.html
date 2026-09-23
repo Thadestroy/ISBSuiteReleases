@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YouTube | ISB Suite</title>
+  <meta name="description" content="YouTube live chat: Sign in with Google, !link, permissions, alerts, watch time, Stream Manager" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="YouTube | ISB Suite" />
+  <meta property="og:description" content="YouTube live chat: Sign in with Google, !link, permissions, alerts, watch time, Stream Manager" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / YouTube</p>
+        <h1 class="page-title">YouTube</h1>
+        <p class="lede">Beta. Request access to the YouTube API on Discord first, then Sign in with Google. YouTube-only editors, Send Message dest, and Stream Manager YouTube filters stay hidden until you connect (same idea as OBS Studio / Streamlabs Desktop). After connect, Chat Bot, alerts, Viewer Points, Community Goals, and Stream Manager Chat work on YouTube live chat the same way they work on Twitch, with a few YouTube-only rules. A rule that already targets YouTube keeps its editor if you Disconnect.</p>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>YouTube is beta. Request API access on <a href="https://discord.gg/w834PyCCgb">Discord</a>, then connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#youtube">Integrations</a>.</li>
+            <li>Read chat and Super Chat / member events from live chat. Send replies with the official YouTube send API.</li>
+            <li>Two-way <code>!link</code> joins a YouTube channel and a Twitch login into one ISB account.</li>
+            <li>YouTube lurkers never earn Watch Time. Only people who recently chatted count.</li>
+            <li>When the daily YouTube send budget is empty, reads and alerts keep working. Only pasting into YouTube chat stops until midnight Pacific.</li>
+            <li>Only-when-live features treat you as live if Twitch or YouTube is live. You go offline only when both are down.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#connect">Connect</a></li>
+          <li><a href="#link">Link Twitch and YouTube</a></li>
+          <li><a href="#permissions">Permissions</a></li>
+          <li><a href="#watch">Watch Time and lurkers</a></li>
+          <li><a href="#events">Alerts, points, and goals</a></li>
+          <li><a href="#desk">Stream Manager</a></li>
+          <li><a href="#quota">Send quota</a></li>
+          <li><a href="#not-youtube">Not on YouTube</a></li>
+        </ol></nav>
+
+        <section class="section" id="connect">
+          <h2>Connect</h2>
+          <ol class="steps">
+            <li>Request access to the YouTube API on <a href="https://discord.gg/w834PyCCgb">Discord</a>.</li>
+            <li>Open <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a>.</li>
+            <li>On the YouTube card, <strong>Sign in with Google</strong> as the channel that owns the live stream.</li>
+          </ol>
+          <p>There is no YouTube bot account. Tokens stay on this PC.</p>
+          <p>Timed messages, walk-ons, Watch Time, and Stream Went Live use a combined live flag. A YouTube-only stream counts as live. A Twitch blip does not end the session while YouTube is still live. After both are offline, the next go-live is a new session so a Twitch-only day and a YouTube-only day do not share walk-on slots.</p>
+        </section>
+
+        <section class="section" id="link">
+          <h2>Link Twitch and YouTube</h2>
+          <p>Linking joins a Twitch login and a YouTube <code>@handle</code> into <strong>one ISB account</strong>. After that, these are shared (one ticket, not two):</p>
+          <ul>
+            <li>Watch time</li>
+            <li>Viewer Points</li>
+            <li>Walk-ons and once-per-stream limits</li>
+            <li>Community goal <code>!contribute</code></li>
+            <li>Saved Lists</li>
+            <li><code>!sr</code> queue caps</li>
+            <li>Giveaway, heist, and wheel joins</li>
+          </ul>
+          <p>A link after both sides already have counters keeps the <strong>larger</strong> value on each counter (not a sum). Stats import can add YouTube <code>@handle</code> / <code>UC...</code> rows onto the same counter as Twitch. Viewers cannot unlink themselves. Unlink is on the Stats viewer row; counters stay on the surviving account.</p>
+          <p><strong>How to link</strong></p>
+          <ol class="steps">
+            <li>On Twitch, type <code>!link @handle</code>. On YouTube, type <code>!link twitchlogin</code>.</li>
+            <li>From the other chat, that person confirms within about 10 minutes with <code>!linkaccept name</code> (or <code>!link name</code>). The name is the Twitch login or YouTube <code>@handle</code> that started it. YouTube uses the <code>@handle</code>, not the display name.</li>
+            <li>A bare <code>!link</code> or <code>!linkaccept</code> explains the command. It does not finish a pending link, so a joke claim cannot be accepted by accident.</li>
+          </ol>
+          <p>An account that is already linked cannot start another pair. A handle already linked to someone else cannot be claimed. The command is on by default under Chat Bot, <strong>Built-in Commands</strong>. Its Response is what bare <code>!link</code> says in chat. Rename, permission, and cooldown are on that card.</p>
+        </section>
+
+        <section class="section" id="permissions">
+          <h2>Permissions</h2>
+          <p>Command replies stay on the platform they were typed. Timed messages, lobby opens, and the go-live line post to chats that are live in the current ISB session (Twitch-only stays off YouTube; YouTube-only stays off Twitch).</p>
+          <ul>
+            <li><strong>Subscribe</strong> on YouTube is the Follow rung (chat does not badge free Subscribe).</li>
+            <li><strong>Member</strong> is the Sub rung.</li>
+            <li>No VIP. <strong>VIP+</strong> is the same as <strong>Mods+</strong>.</li>
+            <li><strong>Follows+</strong> passes for owner, mod, member, or a linked Twitch follower.</li>
+            <li><strong>Subs+</strong> is owner, mod, or YouTube Member only. A linked Twitch sub does not pass.</li>
+            <li><strong>Specific user</strong> lists accept YouTube <code>@handle</code> as well as Twitch login.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="watch">
+          <h2>Watch Time and lurkers</h2>
+          <p>Twitch Get Chatters wins. If a linked account is already in that list, YouTube is not counted again that tick. YouTube viewers who are not on Twitch earn only if they chatted inside the recently-chatted window (Watch Time setting; default 10 minutes). YouTube lurkers never appear. A YouTube-only day still accrues that window without Helix.</p>
+        </section>
+
+        <section class="section" id="events">
+          <h2>Alerts, points, and goals</h2>
+          <p>YouTube Super Chat, Super Sticker, New Member, Member Milestone, Membership Gifter, and Membership Gift Receiver are their own types. They do not reuse Bits or Subs. <code>{amount}</code> is the YouTube display string (for example <code>$5.00</code>), not bits. New Member is first-time only. Member Milestone fires when they share it in chat. The YouTube alert section stays hidden until Sign in with Google. Free still allows 1 dedicated rule per type.</p>
+          <p>The same events can award Viewer Points and add Community Goal progress. Send Message can target YouTube, Twitch, or both. Chat Bot replies still stay on the platform the command was typed. Viewer Points <code>!givepoints @handle</code> and admin give look up a YouTube handle (recent chat, linked account, or official handle lookup) and credit that channel; <code>all</code> includes YouTube recently-chatted viewers and counts a linked account once.</p>
+        </section>
+
+        <section class="section" id="desk">
+          <h2>Stream Manager</h2>
+          <p>One combined Chat tile. Each line has a Twitch or YouTube mark. Show can hide one platform. Chat events include a Super Chat &amp; members chip so those banners stay when the include-set is customized. Activity has a YouTube chip (not Integrations). The status strip shows YouTube connect, send quota, and live chat. Timeout, ban, and deleted-message lines from YouTube paint as mod notices. When send quota is empty, a notice still lands on Activity. The Viewers tile lists Twitch Get Chatters and YouTube recently-chatted in two sections. <code>{randomViewer}</code> picks from that union (linked accounts count once).</p>
+        </section>
+
+        <section class="section" id="quota">
+          <h2>Send quota</h2>
+          <p>Official YouTube send uses a daily unit budget that resets at midnight Pacific Time. When it is empty, ISB Suite stops pasting into YouTube chat only. InnerTube read, alerts, automations, watch time, and all Twitch send keep working. <code>!link</code> still hears both sides; confirm copy also goes to Activity / Stream Manager. The status chip says YouTube send is blocked until the next Pacific midnight.</p>
+        </section>
+
+        <section class="section" id="not-youtube">
+          <h2>Not on YouTube</h2>
+          <p>Follow alerts, raids, Hype Train, Ad Break, Channel Points, Bits, Power-Up, Predictions, clips, and Twitch title/category are Twitch-only. YouTube has no lurker list; the Viewers tile shows recently-chatted names instead of concurrent viewers.</p>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/integrations.html#youtube">Integrations</a>, <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a>, <a href="/ISBSuiteReleases/docs/features/alerts.html">Alerts</a>, <a href="/ISBSuiteReleases/docs/features/stream/chat.html">Stream Manager Chat</a>, <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

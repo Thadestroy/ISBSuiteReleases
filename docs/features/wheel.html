@@ -48,7 +48,7 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Wheel</p>
         <h1 class="page-title">Wheel</h1>
-        <p class="lede">Animated prize wheels with chat join, mod control, Quick Launch presets, custom colors, and per entry win actions.</p>
+        <p class="lede">Animated prize wheels with chat join, mod control, presets, custom colors, and per entry win actions.</p>
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/wheel.png" alt="Wheel Editor in ISB Suite" />
@@ -77,14 +77,14 @@
 
         <section class="section" id="overview">
           <h2>Overview</h2>
-          <p>Create and customize wheels from the <strong>Wheel Editor</strong> tab. Save multiple presets (for example a prize wheel, a game picker, or a category picker) and load them from Quick Launch or from an <a href="/ISBSuiteReleases/docs/features/automations.html">automation</a>.</p>
+          <p>Create and customize wheels from the <strong>Wheel Editor</strong> tab. Save multiple presets (for example a prize wheel, a game picker, or a category picker) and load them from the Stream Manager <strong>Wheel</strong> card or from an <a href="/ISBSuiteReleases/docs/features/automations.html">automation</a>.</p>
           <p>Leaving Wheel Editor with unsaved changes (or switching to another wheel) shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Loading a wheel and leaving without edits does not prompt.</p>
           <ul>
             <li>Smooth spin animations and custom color palettes (per wheel or per entry).</li>
             <li>Viewer Twitch name colors on slices when they <code>!join</code>.</li>
             <li>Configurable winner chat messages with <a href="/ISBSuiteReleases/docs/reference/message-variables.html">message variables</a>.</li>
             <li>Remove on win mode, allow duplicates mode, and optional equal slice sizes that leave weighted chances unchanged.</li>
-            <li>Quick Launch presets: one click loads and optionally auto spins a saved wheel.</li>
+            <li>Stream Manager <strong>Wheel</strong> card: off until you add it from Customize. Picking a preset loads that wheel. Spin and Reset, plus announce winner, remove winners, and allow duplicates, are on the same card.</li>
             <li>Transparent background for window capture in OBS or similar tools. See <a href="/ISBSuiteReleases/docs/download.html#capture">Download - Capture</a>.</li>
           </ul>
         </section>
@@ -92,7 +92,7 @@
         <section class="section" id="editor">
           <h2>Wheel Editor settings</h2>
           <ul>
-            <li><strong>Wheel Name</strong>: shown in Quick Launch and in <code>{wheel}</code> where that variable is available.</li>
+            <li><strong>Wheel Name</strong>: shown on the Stream Manager Wheel card and in <code>{wheel}</code> where that variable is available.</li>
             <li><strong>Allow !join from Chat</strong>: let viewers add themselves during an open session.</li>
             <li><strong>Remove Winners After Spin</strong>: auto-removes the winner slice so it cannot win twice on later manual spins.</li>
             <li><strong>Allow Duplicates</strong>: permit the same name on the wheel more than once.</li>
@@ -146,7 +146,7 @@
             <li>Override the wheel winner announcement for that entry.</li>
             <li>Set a custom color for that entry slice.</li>
           </ul>
-          <p>When a wheel entry win triggers an automation, <code>{winner}</code> resolves to the winning entry name. Pending loads and spins appear on the Home <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Wheel Queue</a>.</p>
+          <p>When a wheel entry win triggers an automation, <code>{winner}</code> resolves to the winning entry name. Pending loads and spins appear on the Stream Manager <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Wheel Queue</a>.</p>
         </section>
 
         <section class="section" id="cascade">

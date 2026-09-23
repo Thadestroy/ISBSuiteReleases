@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat Box | ISB Suite</title>
+  <meta name="description" content="Chat Box overlay widget: live Twitch and YouTube chat with motion, filters, and style" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Chat Box | ISB Suite" />
+  <meta property="og:description" content="Chat Box overlay widget: live Twitch and YouTube chat with motion, filters, and style" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a> / Chat Box</p>
+        <h1 class="page-title">Chat Box</h1>
+        <p class="lede">Place a Chat Box on your overlay to show live Twitch and YouTube chat in capture. Pick how messages enter, then customize typography, panel, badges, extra emotes, and the same filters Stream Manager uses.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-chat-box.png" alt="Chat Box widget in Overlay Layout" />
+          <figcaption>Chat Box: Customize chat opens motion, timing, look, badges, emotes, and filters for that placement.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Widget: <strong>Chat Box</strong> (all license tiers).</li>
+            <li>Live chat from the same transcript as Stream Manager (Twitch and YouTube).</li>
+            <li>Motions: Stack, Horizontal (sideways stack), or Latest message only.</li>
+            <li>Appearance is per placement - two Chat Boxes can look different on the same layout.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#motion">Motion</a></li>
+          <li><a href="#appearance">Appearance</a></li>
+          <li><a href="#filters">Filters</a></li>
+          <li><a href="#usecases">Use cases</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>The Chat Box is a placement on your Overlay Layout. It does not open a second chat connection. Messages come from the same live transcript Stream Manager uses, including YouTube chat when that account is linked. Position, size, visibility, and style live on the widget; the chat feed itself is shared. Switching layouts keeps the messages already on screen - the box fades with the rest of the overlay, the same way a wheel spin does.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>Add a <strong>Chat Box</strong> widget to the active layout and size it where chat should sit on stream.</li>
+            <li>Select the widget and open <strong>Customize chat</strong>.</li>
+            <li>Pick a motion, then set typography, panel fill, badges, extra emotes, and which lines to show.</li>
+            <li>Save the layout and confirm Window Capture includes that region - see <a href="/ISBSuiteReleases/docs/download.html#capture">Download</a>.</li>
+          </ol>
+        </section>
+        <section class="section" id="motion">
+          <h2>Motion</h2>
+          <ul>
+            <li><strong>Stack</strong> - messages pile up. Newest stays at the bottom unless you flip New messages at the top. Hide after removes a line once it has been on screen that long; Always show keeps it until the max-message cap evicts it.</li>
+            <li><strong>Horizontal</strong> - the same stack, sideways. New messages appear on the right and push older ones left. Overflow clips on the left. Always show, hide delay, and max messages work like Stack. Alignment is hidden because the row does not wrap.</li>
+            <li><strong>Latest</strong> - only the newest allowed message stays on screen. Chat delay still holds a newer line until it is due; older held lines are discarded.</li>
+          </ul>
+          <p>Chat delay (0-900 seconds) holds a message from the time it was received until it may appear. Hide after (1-120 seconds) is per message and starts when that line becomes visible. Always show keeps a line until the max-message cap evicts it. New Chat Boxes start with Hide after (Always show off).</p>
+        </section>
+        <section class="section" id="appearance">
+          <h2>Appearance</h2>
+          <ul>
+            <li><strong>Text</strong>: one font, size (default 20), weight, color, left alignment, and optional shadow for the name and the message. Emotes match that text size. Use Twitch name color to keep IRC colors; Readable name colors lift a dark name against the panel fill.</li>
+            <li><strong>YouTube name colors</strong> (when YouTube is connected): YouTube does not send name colors. Default is random colors from the same palette as the wheel, or one color for every YouTube name.</li>
+            <li><strong>Panel</strong>: fill (or Clear) with an opacity slider, optional outline and thickness - same idea as the Goals widget. Outline stays opaque.</li>
+            <li><strong>Show name / timestamps / platform icons</strong>: optional prefixes on each line.</li>
+            <li><strong>Badges</strong>: check-dropdown of Twitch badge sets (broadcaster, moderator, VIP, subscriber, founder, bits, partner, predictions, other). Unchecked sets stay off; an empty list shows none.</li>
+            <li><strong>Emotes</strong>: check-dropdown for Twitch, BetterTTV, 7TV, and FrankerFaceZ from the same catalog Stream Manager uses. Animate emotes is a separate toggle; off keeps a still frame.</li>
+          </ul>
+        </section>
+        <section class="section" id="filters">
+          <h2>Filters</h2>
+          <p>Default is viewer chat plus commands and bots. The Show and Events dropdowns use the same check-list as Community Goals. Turn on Twitch, YouTube, chat messages, mod actions, and event families (subs, bits, raids, hype train, Super Chat, and the rest). Changing a filter drops lines that no longer match; it does not replay history. Two Chat Boxes share one transcript subscription and keep their own rings.</p>
+        </section>
+        <section class="section" id="usecases">
+          <h2>Use cases</h2>
+          <ul>
+            <li><strong>Just Chatting column</strong> - Stack in a side panel with Always show and a dark panel.</li>
+            <li><strong>Ticker</strong> - Horizontal across the lower third; new chat pushes older lines off the left.</li>
+            <li><strong>Spotlight</strong> - Latest only, large type, for a single featured line.</li>
+            <li><strong>Events only</strong> - turn off chat messages and keep subs, raids, or hype train.</li>
+          </ul>
+          <p>Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout overview</a>, <a href="/ISBSuiteReleases/docs/features/stream.html">Stream Manager</a>, <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</p>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

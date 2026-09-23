@@ -60,7 +60,7 @@
           <ul>
             <li>UI label: <strong>Create Prediction</strong>.</li>
             <li>Helix Create Prediction (<code>channel:manage:predictions</code>). Re-authenticate Twitch once if you connected before this feature.</li>
-            <li>Title max 45 characters after variables resolve. 2-10 outcomes (default Yes / No). Window 30-1800 seconds (default 120).</li>
+            <li>Title max 45 characters after variables resolve. 2-10 outcomes (default Yes / No). Window 30 seconds to 30 minutes (default 2 min). Enter sec or min.</li>
             <li>Runs before Send Message / TTS / Discord / alerts so <code>{predictionTitle}</code> / <code>{predictionId}</code> resolve on the same fire.</li>
           </ul>
         </div>
@@ -81,7 +81,7 @@
           <ol class="steps">
             <li>Connect Twitch under Integrations (grant Predictions permission when prompted).</li>
             <li>Enable <strong>Create Prediction</strong> on the Actions card.</li>
-            <li>Set the title, 2-10 outcomes, and the betting window.</li>
+            <li>Set the title, 2-10 outcomes, and the betting window (seconds or minutes).</li>
             <li>Add Send Message (or Discord / TTS) with <code>{predictionTitle}</code> if you want chat to announce the Prediction.</li>
           </ol>
         </section>
@@ -93,7 +93,7 @@
           <h2>Examples</h2>
           <ul>
             <li>Channel points &quot;Call it&quot; -&gt; Create Prediction + Send Message <code>{user} started: {predictionTitle}</code>.</li>
-            <li>Raid -&gt; Create Prediction (Yes / No, 120s) + Discord webhook with the same title.</li>
+            <li>Raid -&gt; Create Prediction (Yes / No, 2 min) + Discord webhook with the same title.</li>
           </ul>
         </section>
         <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>

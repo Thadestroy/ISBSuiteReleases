@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Overlay Layout | ISB Suite</title>
+  <meta name="description" content="Overlay Layout action: switch the live ISB overlay or show / hide widgets when a rule fires" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Overlay Layout | ISB Suite" />
+  <meta property="og:description" content="Overlay Layout action: switch the live ISB overlay or show / hide widgets when a rule fires" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Overlay Layout</p>
+        <h1 class="page-title">Overlay Layout</h1>
+        <p class="lede">Switch the live overlay to another saved layout, or show / hide widgets on a layout, when the rule fires. Pair it with OBS Studio or Streamlabs Desktop on the same rule so the overlay and broadcast scene change together.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-overlay-layout.png" alt="Overlay Layout action setup in ISB Suite" />
+          <figcaption>Overlay Layout action: add Switch layout and Show / hide widget rows the same way you add OBS operations.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Overlay Layout</strong>.</li>
+            <li>Add one or more operations: <strong>Switch layout</strong> or <strong>Show / hide widget</strong>.</li>
+            <li>Picks saved layouts and widgets by name. Stored ids stay stable if you rename a layout.</li>
+            <li>Layout switches use the same collection transition (fade) as hotkeys. Show / hide is instant (no fade).</li>
+            <li>Available on Free and Pro. Free still has 2 layouts; locked layouts cannot be selected or activated.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#pitfalls">Pitfalls</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>When the parent rule fires, ISB Suite runs each Overlay Layout operation in order. A Switch layout starts immediately, before OBS or Streamlabs Desktop scene changes on the same rule finish, so the overlay transition and the broadcast scene change overlap. Show / hide sets the widget on the layout you picked (not a toggle) and saves that visibility.</p>
+          <p>If a layout or widget was deleted or the layout is locked (Free overlay limit), that row is skipped and the rest of the rule still runs. Showing or hiding a widget on a layout that is not live only updates the saved layout; the capture window changes when that layout becomes active.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>On <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a>, create the layouts and place the widgets you want (for example Live, BRB, Raid).</li>
+            <li>On the rule, enable <strong>Overlay Layout</strong>. Add a Switch layout row and/or Show / hide widget rows. Each show / hide row names its layout, the widget, and Show or Hide.</li>
+            <li>Optional: on the same rule, enable <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> or <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> Set program scene or Show / hide source so both change together.</li>
+          </ol>
+        </section>
+        <section class="section" id="pitfalls">
+          <h2>Pitfalls</h2>
+          <ul>
+            <li>This changes ISB Suite overlay layouts and widgets, not OBS or Streamlabs scenes. Use those actions for the broadcast software.</li>
+            <li>Show / Hide is absolute. Firing Hide twice leaves the widget hidden. Widget visibility hotkeys still toggle and are not written to disk until you save the layout.</li>
+            <li>Hiding an Alert Box or Point Drop on the live layout means those alerts or drops will not appear until you show the widget again.</li>
+            <li>Renaming a layout keeps the action working. Deleting a layout or widget does not - pick a new target on the rule.</li>
+            <li>Free: extra layouts past the first two stay locked and cannot become active or have widgets shown or hidden from a rule.</li>
+          </ul>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Raid -&gt; OBS Set program scene to Raid, plus Overlay Layout Switch layout to your raid overlay.</li>
+            <li>Channel points BRB -&gt; Streamlabs Set program scene to BRB, plus Overlay Layout Switch layout to the BRB overlay and Hide the Alert Box on that layout.</li>
+            <li>Mod-only Chat Bot command -&gt; Overlay Layout Switch layout back to Live, then Show the Alert Box.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

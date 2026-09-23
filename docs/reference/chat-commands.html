@@ -56,12 +56,13 @@
             <thead><tr><th>Command</th><th>Description</th></tr></thead>
             <tbody>
               <tr><td><code>!join</code></td><td>Join the current wheel when a session is active</td></tr>
-              <tr><td><code>!points</code> / <code>!points @user</code></td><td>Check viewer points balance (or your custom command name). Optional <code>@username</code> looks up that viewer when Allow checking another viewer is on (default). <code>{user}</code> is the subject; <code>{caller}</code> is who typed the command. Unknown login uses the not-found template; a resolved viewer with no wallet is a real <code>0</code></td></tr>
-              <tr><td><code>!givepoints @user amount</code></td><td>Give your own points to another viewer</td></tr>
+              <tr><td><code>!points</code> / <code>!points @user</code></td><td>Check viewer points balance (or your custom command name). Optional <code>@username</code> looks up that viewer when Allow checking another viewer is on (default), including a YouTube <code>@handle</code>. <code>{user}</code> is the subject; <code>{caller}</code> is who typed the command. Unknown login uses the not-found template; a resolved viewer with no wallet is a real <code>0</code></td></tr>
+              <tr><td><code>!givepoints @user amount</code></td><td>Give your own points to another viewer. <code>@handle</code> resolves a YouTube chatter (recent chat, linked account, or official handle lookup) as well as a Twitch login. Linked identities cannot give to themselves</td></tr>
               <tr><td><code>!gamble amount</code></td><td>Wager points on a configurable win chance roll (decimals and percents ok, e.g. <code>50.2</code> or <code>34.7%</code>; <code>1k</code> = 1,000 and <code>1m</code> = 1,000,000 with no space; rounds to a whole stake)</td></tr>
               <tr><td><code>!giveaway</code></td><td>Enter an active giveaway</td></tr>
               <tr><td><code>!sr</code> / <code>!songrequest</code></td><td>Queue a song on the streamer's Spotify app (song name, optional artist, or a track link). Requires Spotify Connect under Integrations and Spotify Premium. Customize the reply in Chat Bot (<code>{user}</code>, <code>{track}</code>, <code>{artist}</code>). Set per-viewer queue caps on the Spotify Integrations card (default 5; 0 = none; leave blank for unlimited). Built in; default Everyone; does not use a Free chat command slot.</td></tr>
               <tr><td><code>!remove</code> / <code>!removesong</code></td><td>Remove that chatter's most recently requested song (stack: last request first). Spotify cannot delete a queued song, so ISB Suite mutes and skips it when it would play, or immediately if it is already current. Built in; default Everyone; does not use a Free chat command slot.</td></tr>
+              <tr><td><code>!link</code> / <code>!linkaccept</code></td><td>Joins a Twitch login and a YouTube <code>@handle</code> into one ISB account (shared watch time, Viewer Points, walk-ons, once-per-stream limits, <code>!contribute</code>, Saved Lists, <code>!sr</code> caps, and giveaway / heist / wheel joins). Start with <code>!link @handle</code> (Twitch) or <code>!link twitchlogin</code> (YouTube). Confirm from the other chat with <code>!linkaccept name</code> (or <code>!link name</code>). Bare <code>!link</code> explains this and does not finish a pending. Already linked: Unlink on the Stats viewer row. Card: Chat Bot > Built-in Commands. See <a href="/ISBSuiteReleases/docs/features/youtube.html#link">YouTube</a>.</td></tr>
               <tr><td><em>goal contribute</em></td><td>On a Community Goal with Viewer Points mode, viewers type your contribute command plus a whole number (for example <code>!goal 50</code>) to spend 1:1. Same name as Check is ok: bare checks, amount contributes. Stop-at-limit goals reject further spend once the bar is full; a last remainder smaller than the typed amount is clamped. Optional per-stream / per-user-per-stream point caps (Advanced Settings) work the same way</td></tr>
               <tr><td><em>any shop command</em></td><td>Spend points on shop items you configured</td></tr>
             </tbody>
@@ -87,13 +88,13 @@
               <tr><td><code>!watchtime</code></td><td>Tracked watch time for a viewer (optional <code>@user</code>). Customize the template in Chat Bot; requires Stats Watch Time.</td></tr>
               <tr><td><code>!addcommand {name} {response}</code> / <code>!addcom</code></td><td>Create a simple Chat Bot reply command (default Mods). Example: <code>!addcom !project Today&apos;s project is...</code> confirms with <code>Added !project: Today&apos;s project is...</code>. Does not auto-add <code>!</code>. Fails if the name already exists. Built in; does not use a Free chat command slot. Default Response is <code>Added {name}: {response}</code>. Customize in Chat Bot (<code>{command}</code> is this built-in; <code>{name}</code> / <code>{response}</code> are the command they created).</td></tr>
               <tr><td><code>!editcommand {name} {response}</code> / <code>!editcom</code></td><td>Update the response text of a Chat Bot custom command (default Mods). Example: <code>!editcom !project New text</code> confirms with <code>Updated !project: New text</code>. Cannot change built-ins or Automations. Built in; does not use a Free chat command slot. Default Response is <code>Updated {name}: {response}</code>.</td></tr>
-              <tr><td><code>!vpgive @user amount</code></td><td>Admin give points to a viewer</td></tr>
-              <tr><td><code>!vpgive all amount</code></td><td>Admin give the same amount to everyone currently in chat (Helix chatters snapshot)</td></tr>
+              <tr><td><code>!vpgive @user amount</code></td><td>Admin give points to a viewer (Twitch login or YouTube <code>@handle</code>)</td></tr>
+              <tr><td><code>!vpgive all amount</code></td><td>Admin give the same amount to everyone currently in chat (Twitch Helix chatters plus YouTube recently-chatted; a linked account is counted once)</td></tr>
               <tr><td><code>!customcommand</code></td><td>Any custom command from Automations or Chat Bot</td></tr>
               <tr><td><code>!quote add &hellip;</code> / <code>!quoteadd</code></td><td>Example Saved List Add (your base command; default Mods). See <a href="/ISBSuiteReleases/docs/features/chat-bot.html#saved-lists">Saved Lists</a></td></tr>
             </tbody>
           </table></div>
-          <p>Saved List <strong>Read</strong> is usually Everyone: bare base command = random entry; base + number = that entry. Configure under Chat Bot â†’ Add Bot Message (Saved list), or open settings from Overview / Lists.</p>
+          <p>Saved List <strong>Read</strong> is usually Everyone: bare base command = random entry; base + number = that entry. Configure under Chat Bot > Add Bot Message (Saved list), or open settings from Overview / Lists.</p>
         </section>
 
         <section class="section" id="permissions">
@@ -108,7 +109,7 @@
             <li><strong>Broadcaster</strong>: broadcaster only</li>
             <li><strong>Specific User(s)</strong>: only the named viewers (no mod or broadcaster bypass)</li>
           </ul>
-          <p>On Chat Bot custom commands and Chat Games start commands, a role can also include named users who do not meet that role (for example Moderators plus a regular viewer). Specific User(s) stays locked to the list only.</p>
+          <p>On Chat Bot custom commands and Chat Games start commands, a role can also include named users who do not meet that role (for example Moderators plus a regular viewer). Specific User(s) stays locked to the list only. YouTube maps Subscribe to Followers, Member to Subscribers, and VIP+ to Moderators. Specific User lists accept a YouTube <code>@handle</code>. Full ladder: <a href="/ISBSuiteReleases/docs/features/youtube.html#permissions">YouTube</a>.</p>
         </section>
 
         <section class="section" id="aliases">

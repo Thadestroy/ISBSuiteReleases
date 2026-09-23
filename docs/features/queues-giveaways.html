@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Queues and Giveaways | ISB Suite</title>
-  <meta name="description" content="Home queues and timed giveaways" />
+  <meta name="description" content="Stream Manager queues plus timed giveaways" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
   <meta property="og:title" content="Queues and Giveaways | ISB Suite" />
-  <meta property="og:description" content="Home queues and timed giveaways" />
+  <meta property="og:description" content="Stream Manager queues plus timed giveaways" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -48,39 +48,41 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Queues and Giveaways</p>
         <h1 class="page-title">Queues and Giveaways</h1>
-        <p class="lede">Four independent queues on Home keep spins, sounds, giveaways, and alerts organized. Giveaways are timed viewer-entry rounds that auto-spin a wheel.</p>
+        <p class="lede">Alert, Sound, Wheel, Giveaway, and Chat game queues live on the Stream Manager Queues tile. Click a row to inspect the lineup. Giveaways are timed viewer-entry rounds that auto-spin a wheel.</p>
 
         <figure class="visual">
-          <img src="/ISBSuiteReleases/docs/assets/screenshots/home.png" alt="Home page queues in ISB Suite" />
-          <figcaption>Home: Wheel, Sound, Giveaway, and Alert queues with Pause, Skip, Clear.</figcaption>
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/stream-manager.png" alt="Stream Manager Queues tile in ISB Suite" />
+          <figcaption>The Stream Manager Queues tile has Pause, Skip, and Clear. Click a row for the full lineup.</figcaption>
         </figure>
 
         <div class="ref-panel">
           <h3>At a glance</h3>
           <ul>
-            <li>Each queue: Pause, Skip, Clear.</li>
-            <li>Click the active Home giveaway to inspect joiners, remove entries, and watch remaining join time.</li>
+            <li>Stream Manager Queues tile: click Alert, Sound, Wheel, Giveaway, or Chat game to list what is queued.</li>
+            <li>Each queue: Pause, Skip, Clear. Wheel waiting items can be removed from the popup.</li>
+            <li>Click an active giveaway in the popup to inspect joiners, remove entries, and watch remaining join time.</li>
             <li>Next giveaway join phase opens only after winner chat and TTS finish (about 1 second gap), including empty rounds.</li>
             <li>Start Giveaway from Automations or Viewer Points shop items.</li>
-            <li>Related: <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel</a>, <a href="/ISBSuiteReleases/docs/features/viewer-points.html">Viewer Points</a>.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel</a>, <a href="/ISBSuiteReleases/docs/features/viewer-points.html">Viewer Points</a>, <a href="/ISBSuiteReleases/docs/features/stream.html">Stream Manager</a>.</li>
           </ul>
         </div>
 
         <nav class="toc"><strong>On this page</strong><ol>
-          <li><a href="#queues">The four queues</a></li>
+          <li><a href="#queues">The queues</a></li>
           <li><a href="#giveaways">Giveaway system</a></li>
           <li><a href="#countdown">Countdown warnings</a></li>
         </ol></nav>
 
         <section class="section" id="queues">
-          <h2>The four queues</h2>
+          <h2>The queues</h2>
           <ul>
             <li><strong>Wheel Queue:</strong> pending wheel loads and spins from automations, commands, or shop redemptions. Items show the triggering chatter when known (channel-point redeem, chat command, or automation).</li>
-            <li><strong>Sound Queue:</strong> audio waiting to play. Sounds linked to a wheel play at spin time instead of the general queue.</li>
+            <li><strong>Sound Queue:</strong> audio waiting to play. Sounds linked to a wheel play at spin time instead of the general queue. Clear removes waiting clips and does not stop the one already playing.</li>
             <li><strong>Giveaway Queue:</strong> active and pending giveaways. The current giveaway runs at the top. Click it to inspect who has joined, remove people from the pool, and see remaining join time. Close without Save discards staged removals. The next join phase waits for winner chat and TTS (~1 second gap), including when a giveaway expires with no entries.</li>
-            <li><strong>Alert Queue:</strong> on-screen alerts waiting for the Alert Box, played one at a time. Labels show the chatter when known: bits and resub amounts, and gift-sub gifter to recipient on per-recipient gifts (community bombs stay gifter x count).</li>
+            <li><strong>Alert Queue:</strong> on-screen alerts waiting for the Alert Box, played one at a time. Labels show the chatter when known: bits and resub amounts, and gift-sub gifter to recipient on per-recipient gifts (community bombs stay gifter x count). Clear keeps the alert already on screen.</li>
+            <li><strong>Chat game:</strong> on the Stream Manager Queues tile. Pause, skip, and clear are there. The Chat Games page starts games and does not list the queue.</li>
           </ul>
-          <p>Each column has Pause, Skip, and Clear controls. Giveaway Queue Skip discards the active giveaway without spinning or announcing a winner; the next queued giveaway still opens after the usual gap.</p>
+          <p>The Stream Manager tile keeps Pause and Skip on each row. The lineup popup lists everything in that queue. Giveaway Queue Skip discards the active giveaway without spinning or announcing a winner; the next queued giveaway still opens after the usual gap.</p>
         </section>
 
         <section class="section" id="giveaways">
@@ -88,7 +90,7 @@
           <p>Run timed viewer-entry giveaways from automations or viewer point shop items:</p>
           <ul>
             <li>Chatters enter via a configurable command (default <code>!giveaway</code>).</li>
-            <li>Click the active Home queue row to review joiners and remaining time. Save commits removals; removed chatters can re-join.</li>
+            <li>Click the active giveaway in the Stream Manager lineup popup to review joiners and remaining time. Save commits removals; removed chatters can re-join.</li>
             <li>Auto-spins the wheel after a configurable duration (seconds, minutes, or hours).</li>
             <li>Configurable open / already-joined / winner chat announcements.</li>
             <li>Duplicate-entry protection with per-user cooldown on the already-joined reply.</li>

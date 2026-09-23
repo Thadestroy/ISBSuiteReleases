@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Integrations | ISB Suite</title>
-  <meta name="description" content="Twitch, Discord, Tiltify, Spotify, OBS Studio, Streamlabs Desktop, TTS" />
+  <meta name="description" content="Twitch, YouTube, Discord, Tiltify, Spotify, OBS Studio, Streamlabs Desktop, TTS" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
   <meta property="og:title" content="Integrations | ISB Suite" />
-  <meta property="og:description" content="Twitch, Discord, Tiltify, Spotify, OBS Studio, Streamlabs Desktop, TTS" />
+  <meta property="og:description" content="Twitch, YouTube, Discord, Tiltify, Spotify, OBS Studio, Streamlabs Desktop, TTS" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -48,17 +48,18 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Integrations</p>
         <h1 class="page-title">Integrations</h1>
-        <p class="lede">Manage connections from the Integrations page. Twitch is the only integration most streamers need. Everything else is optional.</p>
+        <p class="lede">Manage connections from the Integrations page. Twitch is the only integration most streamers need. YouTube is a beta simulcast (request API access on Discord first). Everything else is optional.</p>
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/integrations.png" alt="Integrations page in ISB Suite" />
-          <figcaption>Integrations: Twitch, Discord webhooks, optional Tiltify, Spotify, OBS Studio, Streamlabs Desktop, TTS notes.</figcaption>
+          <figcaption>Integrations: Twitch, YouTube, Discord webhooks, optional Tiltify, Spotify, OBS Studio, Streamlabs Desktop, TTS notes.</figcaption>
         </figure>
 
         <div class="ref-panel">
           <h3>At a glance</h3>
           <ul>
             <li>Twitch: device-code OAuth for chat and EventSub.</li>
+            <li>YouTube (beta): request API access on Discord, then Sign in with Google. Full guide: <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</li>
             <li>Optional bot account for outbound chat (Free).</li>
             <li>Discord: named webhooks under Integrations, then Discord Webhook action on rules.</li>
             <li>Spotify: guided setup (your own Developer app + Connect). Automations use the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> action; viewers can <code>!sr</code> a song after Connect and <code>!remove</code> their last request.</li>
@@ -72,6 +73,7 @@
 
         <nav class="toc"><strong>On this page</strong><ol>
           <li><a href="#twitch">Twitch</a></li>
+          <li><a href="#youtube">YouTube</a></li>
           <li><a href="#discord">Discord webhooks</a></li>
           <li><a href="#tiltify">Tiltify</a></li>
           <li><a href="#spotify">Spotify</a></li>
@@ -89,6 +91,11 @@
             <li>EventSub: channel points, follows, subs, raids, bits, hype train, goals, ad breaks, shoutouts.</li>
             <li>Optional dedicated bot account: link a second Twitch account so replies send as the bot while the broadcaster account stays for triggers. Available on Free. Mod the bot for higher rate limits. When you click Connect bot, the browser must be signed into the <em>bot</em> - log out of your streamer account first if you just connected Twitch.</li>
           </ul>
+        </section>
+
+        <section class="section" id="youtube">
+          <h2>YouTube (beta)</h2>
+          <p>YouTube is a beta feature. Request access to the YouTube API on <a href="https://discord.gg/w834PyCCgb">Discord</a>, then Sign in with Google on Integrations. After connect, Chat Bot, alerts, Viewer Points, Community Goals, and Stream Manager Chat can use YouTube live chat. Full setup, <code>!link</code>, permissions, lurkers, and send quota: <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</p>
         </section>
 
         <section class="section" id="discord">
@@ -143,7 +150,7 @@
           <h2>OBS Studio (optional)</h2>
           <p>ISB Suite talks to the OBS Studio WebSocket server on this PC (switch scenes, show or hide sources, mute, volume, start or stop stream or recording). It does not start OBS, and it does not replace Window Capture of the ISB Suite overlay. Available on Free and Pro.</p>
           <ol class="steps">
-            <li>In OBS Studio 28 or newer: <strong>Tools â†’ WebSocket Server Settings</strong>. Enable the server. Default host <code>127.0.0.1</code>, port <code>4455</code>.</li>
+            <li>In OBS Studio 28 or newer: <strong>Tools > WebSocket Server Settings</strong>. Enable the server. Default host <code>127.0.0.1</code>, port <code>4455</code>.</li>
             <li>On Integrations, <strong>OBS Studio</strong>: click <strong>Set Up OBS</strong>. The setup window holds host, port, the password from OBS, and Auto Connect. Then <strong>Connect</strong>.</li>
             <li>Optional: check <strong>Connect automatically when ISB Suite starts</strong> in that window. Use <strong>Reconfigure</strong> on the card to change those fields later.</li>
             <li>After you save a password and Connect, automations and other editors show the <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> action. The card stays available the next day even if OBS is closed. Disconnect hides the empty action card until you Connect again, including after you close ISB Suite. Rules that already have an OBS action keep the card if you Disconnect or clear the password, with a notice that the action will be skipped. Scene and source names are saved as text; if OBS is closed when a rule fires, that action is skipped and the rest of the rule still runs.</li>
@@ -157,7 +164,7 @@
           <h3>If Connect fails</h3>
           <ul>
             <li>Confirm OBS is open and the WebSocket server is enabled.</li>
-            <li>Match the password, host, and port from Tools â†’ WebSocket Server Settings.</li>
+            <li>Match the password, host, and port from Tools > WebSocket Server Settings.</li>
             <li>Keep host at <code>127.0.0.1</code> unless OBS is on another machine you trust.</li>
             <li>More troubleshooting: <a href="/ISBSuiteReleases/docs/reference/faq.html#obs">FAQ - OBS Studio</a>.</li>
           </ul>
@@ -167,7 +174,7 @@
           <h2>Streamlabs Desktop (optional)</h2>
           <p>ISB Suite talks to Streamlabs Desktop on this PC over the third-party WebSocket. Automations use the <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> action to switch scenes, show or hide sources, mute, set volume (0-100%), or start or stop stream or recording. It does not start Streamlabs, and it does not replace Window Capture of the ISB Suite overlay. This is not the OBS Studio WebSocket. Available on Free and Pro.</p>
           <ol class="steps">
-            <li>In Streamlabs Desktop: <strong>Settings â†’ Remote Control</strong> (some builds: <strong>Mobile â†’ Third Party Connections</strong>). Turn on <strong>Allow third party connections</strong>. Copy the port (default <code>59650</code>) and API token. Do not show the token on stream. Leave Allow Controller app connections off unless you use the phone app.</li>
+            <li>In Streamlabs Desktop: <strong>Settings > Remote Control</strong> (some builds: <strong>Mobile > Third Party Connections</strong>). Turn on <strong>Allow third party connections</strong>. Copy the port (default <code>59650</code>) and API token. Do not show the token on stream. Leave Allow Controller app connections off unless you use the phone app.</li>
             <li>On Integrations, <strong>Streamlabs Desktop</strong>: click <strong>Set Up Streamlabs</strong>. The setup window holds host, port, the API token, and Auto Connect. Then <strong>Connect</strong>.</li>
             <li>Optional: check <strong>Connect automatically when ISB Suite starts</strong> in that window. Use <strong>Reconfigure</strong> on the card to change those fields later.</li>
           </ol>

@@ -60,7 +60,7 @@
           <ul>
             <li>Preset: <strong>Heist</strong>.</li>
             <li>Timed join window; variable stake; independent win rolls per entrant.</li>
-            <li>Typical demo defaults: 50% win chance, 2x payout multiplier, each-entrant resolution.</li>
+            <li>Typical demo defaults: 50% win chance, 2x payout multiplier, each-entrant resolution. Optional leftover share is off.</li>
             <li>Phases: Open, Join, Win, Lose, No Winners, When Session Ends, If No One Joins.</li>
             <li>Variables: <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">Chat Games tokens</a>.</li>
           </ul>
@@ -77,7 +77,7 @@
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>A start trigger opens the heist. Viewers join with the join command and stake an amount from the configured counter (variable stake). When the timer ends, each entrant is rolled independently against <strong>Win chance</strong>. Winners receive a payout from <strong>Payout multiplier</strong> (often 2x stake); losers forfeit. If people joined but nobody won, the <strong>No Winners</strong> phase can fire in addition to the end-of-session summary path.</p>
+          <p>A start trigger opens the heist. Viewers join with the join command and stake an amount from the configured counter (variable stake). When the timer ends, each entrant is rolled independently against <strong>Win chance</strong>. Winners receive a payout from <strong>Payout multiplier</strong> (often 2x stake); losers forfeit. Optional <strong>Share lost stakes equally among winners</strong> keeps that multiplier and splits leftover loser stakes evenly among the people who came back (off by default). If people joined but nobody won, the leftover stays lost and the <strong>No Winners</strong> phase can fire in addition to the end-of-session summary path.</p>
           <p>Heist is the default &quot;everyone rolls&quot; timed game. Prefer <a href="/ISBSuiteReleases/docs/features/chat-games/lottery.html">Lottery</a> when you want one shared pool winner instead.</p>
         </section>
         <section class="section" id="setup">
@@ -98,6 +98,7 @@
             <li><strong>Stake mode</strong>: Variable - viewers pass an amount after the join command.</li>
             <li><strong>Win chance %</strong>: independent roll chance per entrant when the session resolves.</li>
             <li><strong>Payout multiplier</strong>: winner payout relative to their stake (for example 2.0 = double).</li>
+            <li><strong>Share lost stakes equally among winners</strong>: optional. Winners still get bet x multiplier; leftover from people who did not come back is split equally (remainder +1 in join order). Off keeps the forfeit. When leftover is fully shared, <code>{totalLost}</code> is 0; when nobody wins it still reports the burned pool.</li>
             <li><strong>Resolution scope</strong>: Each entrant (Heist-style) so every joiner is rolled.</li>
             <li><strong>Payout mode</strong>: Multiplier on stake for classic heist math.</li>
             <li><strong>Duration</strong>: join window length; Countdown Warnings use remaining-time offsets against this.</li>

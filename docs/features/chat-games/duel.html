@@ -77,9 +77,9 @@
         <section class="section" id="how">
           <h2>How it works</h2>
           <ol class="steps">
-            <li>A viewer challenges with <code>!duel @OtherUser 100</code> (command names are editable).</li>
+            <li>A viewer challenges with <code>!duel @OtherUser 100</code> (Twitch login or YouTube <code>@handle</code>; command names are editable). After <code>!link</code>, they cannot challenge their other identity.</li>
             <li>ISB Suite checks that both the challenger and the opponent have at least that amount on the chosen per-user counter. If either is short, chat gets a not-enough style error and no challenge is opened.</li>
-            <li>The opponent types <code>!accept</code> or <code>!decline</code> before the timeout. Decline and timeout move no points.</li>
+            <li>The opponent types <code>!accept</code> or <code>!decline</code> before the timeout. A linked viewer can do that from either platform. Decline and timeout move no points.</li>
             <li>On accept, balances are checked again. A fair 50/50 pick chooses the winner; the loser transfers <strong>x</strong> to the winner.</li>
           </ol>
           <p>For a solo house bet with Win/Lose action phases, use <strong>Solo Gamble</strong> instead of Duel.</p>

@@ -79,13 +79,13 @@
 
         <section class="section" id="core">
           <h2>Core</h2>
-          <p>User, wheel, and Twitch event tokens. Chat/TTS and alert overlays share one <code>{amount}</code> cascade (counter precedence, then bits / viewers / resub months / gift count / hype / ad seconds). Prefer <code>{bits}</code> or <code>{subs}</code> when those apply. There is no separate <code>{months}</code> or <code>{viewers}</code> token.</p>
+          <p>User, wheel, and Twitch event tokens. Chat/TTS and alert overlays share one <code>{amount}</code> cascade (counter precedence, then bits / viewers / resub months / gift count / hype / ad seconds). Prefer <code>{bits}</code> or <code>{subs}</code> when those apply. There is no separate <code>{months}</code> or <code>{viewers}</code> token. On YouTube Super Chat / Super Sticker, <code>{amount}</code> is the display string (for example <code>$5.00</code>); use <code>{amountnumber}</code> and <code>{currency}</code> for the parsed value. See <a href="/ISBSuiteReleases/docs/features/youtube.html#events">YouTube</a>.</p>
           <div class="table-wrap"><table>
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td><code>{user}</code></td><td>Viewer&apos;s display name (requires a Twitch trigger). On lookup-style commands this is the looked-up subject when an <code>@user</code> arg is present</td></tr>
               <tr><td><code>{caller}</code> / <code>{callerDisplayName}</code></td><td>Display name of the viewer who typed the command when <code>{user}</code> is a looked-up subject (Viewer Points balance, Follow Age, Watch Time, and Chat Command / Chat Bot when Allow checking another viewer is on). Equals <code>{user}</code> when there is no subject</td></tr>
-              <tr><td><code>{randomViewer}</code></td><td>Random current chatter&apos;s display name (anyone in chat now, including the linked bot). Same name for every use in one message, and for chat, TTS, Discord, and alerts on the same fire. Fills from the Helix chatters list while Twitch is connected (live or offline). Empty chat substitutes nothing.</td></tr>
+              <tr><td><code>{randomViewer}</code></td><td>Random current chatter&apos;s display name (anyone in Twitch Helix chat or YouTube recently-chatted, including the linked bot). Same name for every use in one message, and for chat, TTS, Discord, and alerts on the same fire. A YouTube-only day is not empty. After <code>!link</code>, Twitch + YouTube is one ticket. Empty chat substitutes nothing.</td></tr>
               <tr><td><code>{displayName}</code></td><td>Alias for <code>{user}</code> (Follow Age / Watch Time)</td></tr>
               <tr><td><code>{winner}</code></td><td>Winning wheel entry text (also when an automation runs from a wheel entry win)</td></tr>
               <tr><td><code>{wheel}</code></td><td>Wheel / preset name</td></tr>
@@ -207,7 +207,7 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
-              <tr><td><code>{golive}</code></td><td>Go live chat message from Stream Manager (stored even when Send to Twitch chat is off). Tokens inside that line (for example <code>{category}</code>) fill in when this token is used</td></tr>
+              <tr><td><code>{golive}</code></td><td>Go live chat message from Stream Manager (stored even when Send to live chat is off). Tokens inside that line (for example <code>{category}</code>) fill in when this token is used</td></tr>
               <tr><td><code>{category}</code></td><td>This stream&apos;s current Twitch category</td></tr>
               <tr><td><code>{title}</code></td><td>This stream&apos;s current Twitch title</td></tr>
             </tbody>

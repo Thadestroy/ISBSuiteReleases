@@ -48,7 +48,7 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / Automations</p>
         <h1 class="page-title">Automations</h1>
-        <p class="lede">Connect Twitch events and custom commands to actions: wheels, sounds, chat, Discord, counters, giveaways, alerts, TTS, timers, randomized sets, and chains into Chat Bot or other automations.</p>
+        <p class="lede">Connect Twitch and YouTube events and custom commands to actions: wheels, sounds, chat, Discord, counters, giveaways, alerts, TTS, timers, randomized sets, and chains into Chat Bot or other automations.</p>
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/automations.png" alt="Automations page in ISB Suite" />
@@ -78,7 +78,7 @@
           <h2>Overview</h2>
           <p>Automations live in the <strong>Automations</strong> tab. Overview pages support instant name search and optional <strong>custom groups</strong> (named groups, chip filters; ungrouped items list first). Each row has a green (enabled) or grey (disabled) light. Click the light to turn the rule on or off; a legend at the top of the list explains this.</p>
           <p>Leaving Add/Edit with unsaved changes (or switching to another automation) shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Opening a form and leaving without edits does not prompt. Form <strong>Cancel</strong> discards without asking.</p>
-          <p><strong>Chat Bot vs Automations:</strong> both tabs share the same trigger and action building blocks. Prefer <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> for a simple custom <code>!command</code> or timed chat message. Prefer <strong>Automations</strong> for Twitch events (channel points, bits, raids, follows, and so on), long action chains, or an advanced rule that should fire from a command <em>and</em> other triggers together. A Chat Command trigger on an Automation is allowed (including command-only) but is not the usual way to make a reply command. Those commands also appear on Chat Bot Overview as reference cards; Edit opens Automations. Either tab can call the other with <strong>Run Chat Bot or Automation</strong>.</p>
+          <p><strong>Chat Bot vs Automations:</strong> both tabs share the same trigger and action building blocks. Prefer <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> for a simple custom <code>!command</code> or timed chat message. Prefer <strong>Automations</strong> for Twitch or YouTube events (channel points, bits, Super Chat, raids, follows, and so on), long action chains, or an advanced rule that should fire from a command <em>and</em> other triggers together. A Chat Command trigger on an Automation is allowed (including command-only) but is not the usual way to make a reply command. Those commands also appear on Chat Bot Overview as reference cards; Edit opens Automations. Either tab can call the other with <strong>Run Chat Bot or Automation</strong>.</p>
         </section>
 
         <section class="section" id="triggers">
@@ -92,6 +92,7 @@
               <tr><td>First-Time Chatter</td><td>Once the first time a viewer chats (not each stream). Existing viewers already in your data are not treated as first-time after an update. Optional only when live. For starting currency, add a Viewer Points earn rule of the same type</td></tr>
               <tr><td>Bits / Cheer</td><td>At least or exact amount (chat cheers only)</td></tr>
               <tr><td>Power-Up</td><td>Bits spent on Gigantify, Celebration, Message Effect, or custom Power-Ups; at least or exact amount. Viewer-points Bits earn still counts those bits. Community goals count them when Power-Up is among the selected Twitch Data sources</td></tr>
+              <tr><td>Super Chat / Super Sticker / New Member / Member Milestone / Membership gifts</td><td>YouTube only; not Bits or Subs. Hidden until Sign in with Google. See <a href="/ISBSuiteReleases/docs/features/youtube.html#events">YouTube</a></td></tr>
               <tr><td>Subscription Gifter</td><td>At least or exact gift count (gifter is <code>{user}</code>)</td></tr>
               <tr><td>Subscription Gift Receiver</td><td>Once per recipient from chat gift notice; recipient is <code>{user}</code>, gifter is <code>{gifter}</code></td></tr>
               <tr><td>New Subscription</td><td>Any tier or Tier 1/2/3</td></tr>

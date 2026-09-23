@@ -70,6 +70,16 @@
           </ol>
         </section>
 
+        <section class="section" id="youtube">
+          <h2>YouTube send blocked or chat not appearing</h2>
+          <ul>
+            <li>Sign in with Google on <a href="/ISBSuiteReleases/docs/features/integrations.html#youtube">Integrations</a>. You do not create a Cloud project.</li>
+            <li>YouTube must be live with a live chat id. The Stream Manager YouTube card says live when chat is attached.</li>
+            <li>If the card says blocked, official YouTube send is out of daily units until midnight Pacific. Reads, alerts, and Twitch send keep working. See <a href="/ISBSuiteReleases/docs/features/youtube.html#quota">YouTube</a>.</li>
+            <li>YouTube lurkers do not earn Watch Time. They must chat first.</li>
+          </ul>
+        </section>
+
         <section class="section" id="commands">
           <h2>Chat commands not working</h2>
           <ul>
@@ -193,7 +203,7 @@
           <h2>OBS Studio not connecting or not switching scenes</h2>
           <ul>
             <li>Use OBS Studio 28 or newer with the built-in WebSocket server (v5). OBS 27 with the old 4.x plugin will not connect.</li>
-            <li>In OBS: <strong>Tools â†’ WebSocket Server Settings</strong>. Enable the server. On Integrations, OBS Studio, open <strong>Set Up OBS</strong> (or <strong>Reconfigure</strong>), paste host, port, and password, then Connect.</li>
+            <li>In OBS: <strong>Tools > WebSocket Server Settings</strong>. Enable the server. On Integrations, OBS Studio, open <strong>Set Up OBS</strong> (or <strong>Reconfigure</strong>), paste host, port, and password, then Connect.</li>
             <li>ISB Suite does not start OBS. Open OBS first. Keep host at <code>127.0.0.1</code> unless OBS is on another machine.</li>
             <li>Streamlabs Desktop is not obs-websocket and will not connect.</li>
             <li>Scene and source names are saved as text. A typo or a renamed source in OBS skips that row; the rest of the rule still runs.</li>

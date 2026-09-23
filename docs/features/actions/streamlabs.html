@@ -59,7 +59,7 @@
           <h3>At a glance</h3>
           <ul>
             <li>UI label: <strong>Streamlabs Desktop</strong>.</li>
-            <li>Set up Streamlabs under <a href="/ISBSuiteReleases/docs/features/integrations.html#streamlabs">Integrations</a> and Connect (Settings â†’ Remote Control, Allow third party connections). After setup, the action card stays available so you can set scene names even if Streamlabs is closed that day. Disconnect on the Integrations card hides the empty action card until you Connect again, including after you close ISB Suite. Rules that already have a Streamlabs action keep the card if you Disconnect, with a notice that the action will be skipped. ISB Suite never starts Streamlabs for you.</li>
+            <li>Set up Streamlabs under <a href="/ISBSuiteReleases/docs/features/integrations.html#streamlabs">Integrations</a> and Connect (Settings > Remote Control, Allow third party connections). After setup, the action card stays available so you can set scene names even if Streamlabs is closed that day. Disconnect on the Integrations card hides the empty action card until you Connect again, including after you close ISB Suite. Rules that already have a Streamlabs action keep the card if you Disconnect, with a notice that the action will be skipped. ISB Suite never starts Streamlabs for you.</li>
             <li>Rules you already saved keep their Streamlabs rows. If Streamlabs is closed when the rule fires, that action is skipped and the rest of the rule still runs.</li>
             <li>Available on Free and Pro. A failed Streamlabs request is logged and does not stop the rest of the rule.</li>
           </ul>
@@ -76,14 +76,14 @@
         <section class="section" id="how">
           <h2>How it works</h2>
           <p>When the parent rule fires, ISB Suite sends each enabled operation to connected Streamlabs Desktop (switch the program scene, show or hide a source, mute or unmute an input, set volume, start or stop streaming, start or stop recording). You can stack several rows on one rule (for example switch scene and unhide a source).</p>
-          <p>If Streamlabs is closed, not connected, the token is wrong, or a single row fails (missing scene, unknown source), that row is skipped and the rest of the rule still runs (sound, chat, alerts). Show / hide looks up the current scene item from the scene name plus source name at fire time.</p>
+          <p>If Streamlabs is closed, not connected, the token is wrong, or a single row fails (missing scene, unknown source), that row is skipped and the rest of the rule still runs (sound, chat, alerts). Show / hide looks up the current scene item from the scene name plus source name at fire time. A source inside a folder is listed as <code>Folder / Source</code> and is shown or hidden on its own. Rules you already saved that name a source on the scene keep using that scene-level item.</p>
           <p>Start / Stop stream and record check whether Streamlabs is already live or recording, then toggle only if needed. Starting a stream that is already live will not stop it.</p>
           <p>With a delay <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> on the same rule, Streamlabs waits until that countdown ends (same timing as Send Message and OBS).</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>
           <ol class="steps">
-            <li>In Streamlabs Desktop: <strong>Settings â†’ Remote Control</strong> (some builds: <strong>Mobile â†’ Third Party Connections</strong>). Turn on <strong>Allow third party connections</strong>. Copy the port (default <code>59650</code>) and API token. Do not show the token on stream.</li>
+            <li>In Streamlabs Desktop: <strong>Settings > Remote Control</strong> (some builds: <strong>Mobile > Third Party Connections</strong>). Turn on <strong>Allow third party connections</strong>. Copy the port (default <code>59650</code>) and API token. Do not show the token on stream.</li>
             <li>On Integrations, <strong>Streamlabs Desktop</strong>: <strong>Set Up Streamlabs</strong> opens a window for host, port, API token, and Auto Connect. Connect there. Use <strong>Reconfigure</strong> later to change those fields.</li>
             <li>On the rule, enable <strong>Streamlabs Desktop</strong>, pick an operation, and fill scene / source / input names. Combos list live names when connected; you can still type a name Streamlabs does not have open right now.</li>
           </ol>
@@ -92,7 +92,7 @@
           <h2>Operations</h2>
           <ul>
             <li><strong>Set program scene</strong>: scene name.</li>
-            <li><strong>Show / hide source</strong>: scene name, source name, and Show or Hide.</li>
+            <li><strong>Show / hide source</strong>: scene name, source name, and Show or Hide. A source inside a folder is listed as <code>Folder / Source</code>. The folder itself stays in the list, so you can still show or hide the whole folder.</li>
             <li><strong>Mute / unmute input</strong>: input name and Mute or Unmute.</li>
             <li><strong>Set input volume</strong>: input name and volume as 0-100% (not OBS dB).</li>
             <li><strong>Start stream</strong> / <strong>Stop stream</strong>.</li>
@@ -106,6 +106,7 @@
             <li><strong>Start stream</strong> will go live if Streamlabs accepts it. The editor warns: use with care.</li>
             <li>ISB Suite does not launch Streamlabs. Open Streamlabs and turn on Allow third party connections first.</li>
             <li>Keep host at <code>127.0.0.1</code> unless you know you need another machine.</li>
+            <li>Hiding a folder hides every source inside it. Hiding one source inside the folder leaves the rest of the folder visible.</li>
             <li>This action does not replace Window Capture of the ISB Suite overlay. Capture setup stays on <a href="/ISBSuiteReleases/docs/download.html#capture">Download - Capture</a>.</li>
           </ul>
         </section>
@@ -113,7 +114,7 @@
           <h2>Examples</h2>
           <ul>
             <li>Raid -&gt; Set program scene to your raid layout, then unhide a &quot;thanks for the raid&quot; source.</li>
-            <li>Channel point redeem -&gt; Show a source on the current scene for a few seconds (pair with a <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> and a second rule or Action Set to hide it again).</li>
+            <li>Channel point redeem -&gt; Show <code>Folder / Alert</code> so only that source inside the folder appears.</li>
             <li>Mod-only Chat Bot command -&gt; Mute Desktop Audio, or switch to a BRB scene.</li>
             <li>Stream ending command -&gt; Stop recording (prefer this over Start stream unless you mean to go live).</li>
           </ul>

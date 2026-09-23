@@ -261,8 +261,8 @@
     {
       title: "Overlay Layout",
       url: "/features/overlay-layout/index.html",
-      blurb: "Layouts, widgets, hotkeys, Timer Widget, Goals",
-      keywords: "overlay layout widget alert box point drop browser source timer !endtimer hotkey transition",
+      blurb: "Layouts, widgets, hotkeys, Timer Widget, Goals, Chat Box",
+      keywords: "overlay layout widget alert box point drop browser source timer chat box !endtimer hotkey transition",
     },
     {
       title: "Wheel overlay widget",
@@ -313,6 +313,12 @@
       keywords: "overlay goals widget community goal progress bar standard condensed appearance",
     },
     {
+      title: "Chat Box overlay widget",
+      url: "/features/overlay-layout/chat-box.html",
+      blurb: "Live Twitch and YouTube chat on the capture stage",
+      keywords: "overlay chat box widget stack horizontal latest badges emotes twitch youtube filters",
+    },
+    {
       title: "Viewer Points",
       url: "/features/viewer-points.html",
       blurb: "Currency, earn rules, shop, point drops",
@@ -331,10 +337,16 @@
       keywords: "counter stats tier leaderboard csv {top5Counter} {counterTier} {count} watch time",
     },
     {
+      title: "YouTube",
+      url: "/features/youtube.html",
+      blurb: "Sign in with Google, !link, Super Chat alerts, combined chat",
+      keywords: "youtube google live chat super chat member !link handle quota lurkers stream manager",
+    },
+    {
       title: "Integrations",
       url: "/features/integrations.html",
-      blurb: "Twitch, bot account, Discord webhooks, Tiltify, Spotify, TTS",
-      keywords: "integrations twitch discord tiltify spotify bot account eventsub oauth webhook migration pkce",
+      blurb: "Twitch, YouTube, bot account, Discord webhooks, Tiltify, Spotify, TTS",
+      keywords: "integrations twitch youtube discord tiltify spotify bot account eventsub oauth webhook migration pkce",
     },
     {
       title: "Queues and Giveaways",
@@ -425,7 +437,24 @@
       heading: "Features",
       links: [
         { href: "/features/index.html", label: "Overview" },
-        { href: "/features/wheel.html", label: "Wheel" },
+        {
+          id: "stream-manager",
+          href: "/features/stream.html",
+          label: "Stream Manager",
+          matchPrefix: "/features/stream",
+          alsoMatch: ["/features/activity.html", "/features/queues-giveaways.html"],
+          children: [
+            { href: "/features/stream.html", label: "Overview" },
+            { href: "/features/stream/chat.html", label: "Chat" },
+            { href: "/features/activity.html", label: "Activity" },
+            { href: "/features/queues-giveaways.html", label: "Queues and Giveaways" },
+            { href: "/features/stream/channel-points.html", label: "Channel Points" },
+            { href: "/features/stream/predictions.html", label: "Predictions" },
+            { href: "/features/stream/stream-info.html", label: "Stream info" },
+            { href: "/features/stream/quick-actions.html", label: "Quick Actions" },
+          ],
+        },
+        { href: "/features/automations.html", label: "Automations" },
         {
           id: "actions",
           href: "/features/actions/index.html",
@@ -439,6 +468,9 @@
             { href: "/features/actions/text-to-speech.html", label: "Text-to-Speech" },
             { href: "/features/actions/discord-webhook.html", label: "Discord Webhook" },
             { href: "/features/actions/spotify.html", label: "Spotify" },
+            { href: "/features/actions/obs.html", label: "OBS Studio" },
+            { href: "/features/actions/streamlabs.html", label: "Streamlabs Desktop" },
+            { href: "/features/actions/overlay-layout.html", label: "Overlay Layout" },
             { href: "/features/actions/counter-action.html", label: "Counter Action" },
             { href: "/features/actions/push-community-goal.html", label: "Push Community Goal" },
             { href: "/features/actions/run-alert.html", label: "Run Alert" },
@@ -455,9 +487,7 @@
             { href: "/features/actions/randomize-image-picker.html", label: "Randomize Image Picker" },
           ],
         },
-        { href: "/features/automations.html", label: "Automations" },
         { href: "/features/alerts.html", label: "Alerts" },
-        { href: "/features/activity.html", label: "Activity" },
         { href: "/features/chat-bot.html", label: "Chat Bot" },
         {
           id: "chat-games",
@@ -469,11 +499,13 @@
             { href: "/features/chat-games/heist.html", label: "Heist" },
             { href: "/features/chat-games/lottery.html", label: "Lottery" },
             { href: "/features/chat-games/duel.html", label: "Duel" },
+            { href: "/features/chat-games/solo-gamble.html", label: "Solo Gamble" },
             { href: "/features/chat-games/percentile-roll.html", label: "Percentile roll" },
             { href: "/features/chat-games/blank-sandbox.html", label: "Blank sandbox" },
             { href: "/features/chat-games/instant-action.html", label: "Instant action" },
           ],
         },
+        { href: "/features/wheel.html", label: "Wheel Editor" },
         {
           id: "overlay-layout",
           href: "/features/overlay-layout/index.html",
@@ -489,28 +521,14 @@
             { href: "/features/overlay-layout/random-image-picker.html", label: "Random Image Picker" },
             { href: "/features/overlay-layout/timer.html", label: "Timer Widget" },
             { href: "/features/overlay-layout/goals.html", label: "Goals" },
+            { href: "/features/overlay-layout/chat-box.html", label: "Chat Box" },
           ],
         },
         { href: "/features/viewer-points.html", label: "Viewer Points" },
         { href: "/features/community-goals.html", label: "Community Goals" },
-        { href: "/features/counters-stats.html", label: "Counters and Stats" },
+        { href: "/features/counters-stats.html", label: "Stats" },
         { href: "/features/integrations.html", label: "Integrations" },
-        {
-          id: "stream-manager",
-          href: "/features/stream.html",
-          label: "Stream Manager",
-          matchPrefix: "/features/stream",
-          children: [
-            { href: "/features/stream.html", label: "Overview" },
-            { href: "/features/stream/channel-points.html", label: "Channel Points" },
-            { href: "/features/stream/stream-info.html", label: "Stream info" },
-            { href: "/features/stream/predictions.html", label: "Predictions" },
-            { href: "/features/activity.html", label: "Activity" },
-            { href: "/features/stream/chat.html", label: "Chat" },
-            { href: "/features/stream/quick-actions.html", label: "Quick Actions" },
-          ],
-        },
-        { href: "/features/queues-giveaways.html", label: "Queues and Giveaways" },
+        { href: "/features/youtube.html", label: "YouTube" },
       ],
     },
     {
@@ -541,6 +559,10 @@
   }
 
   function pathMatchesBranch(path, link) {
+    const extras = Array.isArray(link.alsoMatch) ? link.alsoMatch : [];
+    for (const extra of extras) {
+      if (path === normalizePath(extra)) return true;
+    }
     const prefix = link.matchPrefix;
     if (!prefix) {
       const base = normalizePath((link.href || "").split("#")[0]);

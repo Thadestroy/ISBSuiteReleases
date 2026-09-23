@@ -76,13 +76,13 @@
         <section class="section" id="how">
           <h2>How it works</h2>
           <p>When the parent rule fires, ISB Suite sends each enabled operation to the connected OBS WebSocket (switch the program scene, show or hide a source, mute or unmute an input, set volume, start or stop streaming, start or stop recording). You can stack several rows on one rule (for example switch scene and unhide a source).</p>
-          <p>If OBS is closed, not connected, the password is wrong, or a single row fails (missing scene, unknown source), that row is skipped and the rest of the rule still runs (sound, chat, alerts). Existing automations, Chat Bot commands, and other hosts keep the OBS rows you already saved and show that OBS needs to be reconnected. Show / hide looks up the current scene-item id from the scene name plus source name at fire time, so a source you moved between scenes still works if you keep both names correct.</p>
+          <p>If OBS is closed, not connected, the password is wrong, or a single row fails (missing scene, unknown source), that row is skipped and the rest of the rule still runs (sound, chat, alerts). Existing automations, Chat Bot commands, and other hosts keep the OBS rows you already saved and show that OBS needs to be reconnected. Show / hide looks up the current scene-item id from the scene name plus source name at fire time, so a source you moved between scenes still works if you keep both names correct. A source inside a group is listed as <code>Group / Source</code> and is shown or hidden on its own. Rules you already saved that name a source on the scene keep using that scene-level item.</p>
           <p>With a delay <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> on the same rule, OBS waits until that countdown ends (same timing as Send Message and Spotify).</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>
           <ol class="steps">
-            <li>In OBS: <strong>Tools â†’ WebSocket Server Settings</strong>. Enable the server (OBS Studio 28 or newer). Default host <code>127.0.0.1</code>, port <code>4455</code>.</li>
+            <li>In OBS: <strong>Tools > WebSocket Server Settings</strong>. Enable the server (OBS Studio 28 or newer). Default host <code>127.0.0.1</code>, port <code>4455</code>.</li>
             <li>On Integrations, <strong>OBS Studio</strong>: <strong>Set Up OBS</strong> opens a window for host, port, password, and Auto Connect. Connect there. Use <strong>Reconfigure</strong> later to change those fields.</li>
             <li>On the rule, enable <strong>OBS Studio</strong>, pick an operation, and fill scene / source / input names. Combos list live names when connected; you can still type a name OBS does not have open right now.</li>
           </ol>
@@ -91,7 +91,7 @@
           <h2>Operations</h2>
           <ul>
             <li><strong>Set program scene</strong>: scene name.</li>
-            <li><strong>Show / hide source</strong>: scene name, source name, and Show or Hide.</li>
+            <li><strong>Show / hide source</strong>: scene name, source name, and Show or Hide. A source inside a group is listed as <code>Group / Source</code>. The group itself stays in the list, so you can still show or hide the whole group.</li>
             <li><strong>Mute / unmute input</strong>: input name and Mute or Unmute.</li>
             <li><strong>Set input volume</strong>: input name and volume in dB.</li>
             <li><strong>Start stream</strong> / <strong>Stop stream</strong>.</li>
@@ -106,6 +106,7 @@
             <li><strong>Start stream</strong> will go live if OBS accepts it. The editor warns: use with care.</li>
             <li>ISB Suite does not launch OBS. Open OBS and enable the WebSocket server first.</li>
             <li>Keep host at <code>127.0.0.1</code> unless you know you need another machine. Binding OBS to every network interface exposes the socket on your LAN.</li>
+            <li>Hiding a group hides every source inside it. Hiding one source inside the group leaves the rest of the group visible.</li>
             <li>This action does not replace Window Capture of the ISB Suite overlay. Capture setup stays on <a href="/ISBSuiteReleases/docs/download.html#capture">Download - Capture</a>.</li>
           </ul>
         </section>
@@ -113,7 +114,7 @@
           <h2>Examples</h2>
           <ul>
             <li>Raid -&gt; Set program scene to your raid layout, then unhide a &quot;thanks for the raid&quot; source.</li>
-            <li>Channel point redeem -&gt; Show a source on the current scene for a few seconds (pair with a <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> and a second rule or Action Set to hide it again).</li>
+            <li>Channel point redeem -&gt; Show <code>Group / Alert</code> so only that source inside the group appears.</li>
             <li>Mod-only Chat Bot command -&gt; Mute Desktop Audio, or switch to a BRB scene.</li>
             <li>Stream ending command -&gt; Stop recording (prefer this over Start stream unless you mean to go live).</li>
           </ul>
