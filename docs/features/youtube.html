@@ -96,7 +96,7 @@
             <li><code>!sr</code> queue caps</li>
             <li>Giveaway, heist, and wheel joins</li>
           </ul>
-          <p>A link after both sides already have counters keeps the <strong>larger</strong> value on each counter (not a sum). Stats import can add YouTube <code>@handle</code> / <code>UC...</code> rows onto the same counter as Twitch. Viewers cannot unlink themselves. Unlink is on the Stats viewer row; counters stay on the surviving account.</p>
+          <p>A link after both sides already have counters keeps the <strong>larger</strong> value on each counter by default. Settings, Linking accounts, can add the two amounts together instead. Changing that setting does not redo a link that already finished. Stats import can add YouTube <code>@handle</code> / <code>UC...</code> rows onto the same counter as Twitch. Viewers cannot unlink themselves. Unlink is on the Stats viewer row; counters stay on the surviving account.</p>
           <p><strong>How to link</strong></p>
           <ol class="steps">
             <li>On Twitch, type <code>!link @handle</code>. On YouTube, type <code>!link twitchlogin</code>.</li>
@@ -109,6 +109,8 @@
         <section class="section" id="permissions">
           <h2>Permissions</h2>
           <p>Command replies stay on the platform they were typed. Timed messages, lobby opens, and the go-live line post to chats that are live in the current ISB session (Twitch-only stays off YouTube; YouTube-only stays off Twitch).</p>
+          <p>When Twitch and YouTube are both connected, Chat Bot, Automations, Chat Games, and the First Chat, First-Time Chatter, and custom chat-command alerts show <strong>Run on</strong> with a Twitch checkbox and a YouTube checkbox. Both start checked, including rules saved before this, unless Settings, Starting platforms, says otherwise. That card chooses Twitch, YouTube, or both for a new Automation, First Chat, First-Time Chatter, or chat-command alert, Chat Bot command, Chat Game, or Viewer Points currency. Wheel Editor Send to both starts off, including wheels saved before this, so the winner message and entry chat follow the chat that started the run until you turn that checkbox on. The rows follow the nav. The card shows only when both platforms are connected. Uncheck one platform to skip it. Uncheck both to turn that rule off everywhere. The row stays hidden when only one platform is connected, unless the save is already not both-on. Disconnecting YouTube hides a both-on row and keeps a one-platform save, with the same reconnect notice as a saved YouTube destination. Waiting for a live stream still shows the row. Overview lists say Twitch only, YouTube only, or Off when it is not both. <code>!link</code> stays on every connected chat and has no checkboxes.</p>
+          <p>When both Run on boxes are checked, Send Message can post in both Twitch and YouTube chats. Off posts where the run started. Timers and other triggers with no chat stay on Twitch unless that box is on. One checked box sends only to that chat. Built-in alerts have no checkbox. A Bits alert posts on Twitch. A Super Chat alert posts on YouTube.</p>
           <ul>
             <li><strong>Subscribe</strong> on YouTube is the Follow rung (chat does not badge free Subscribe).</li>
             <li><strong>Member</strong> is the Sub rung.</li>
@@ -127,7 +129,7 @@
         <section class="section" id="events">
           <h2>Alerts, points, and goals</h2>
           <p>YouTube Super Chat, Super Sticker, New Member, Member Milestone, Membership Gifter, and Membership Gift Receiver are their own types. They do not reuse Bits or Subs. <code>{amount}</code> is the YouTube display string (for example <code>$5.00</code>), not bits. New Member is first-time only. Member Milestone fires when they share it in chat. The YouTube alert section stays hidden until Sign in with Google. Free still allows 1 dedicated rule per type.</p>
-          <p>The same events can award Viewer Points and add Community Goal progress. Send Message can target YouTube, Twitch, or both. Chat Bot replies still stay on the platform the command was typed. Viewer Points <code>!givepoints @handle</code> and admin give look up a YouTube handle (recent chat, linked account, or official handle lookup) and credit that channel; <code>all</code> includes YouTube recently-chatted viewers and counts a linked account once.</p>
+          <p>The same events can award Viewer Points and add Community Goal progress. Send Message stays in the chat that started the run unless <strong>Send to both Twitch &amp; YouTube chats</strong> is on. Viewer Points <code>!givepoints @handle</code> and admin give look up a YouTube handle (recent chat, linked account, or official handle lookup) and credit that channel; <code>all</code> includes YouTube recently-chatted viewers and counts a linked account once.</p>
         </section>
 
         <section class="section" id="desk">

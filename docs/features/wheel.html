@@ -97,7 +97,7 @@
             <li><strong>Remove Winners After Spin</strong>: auto-removes the winner slice so it cannot win twice on later manual spins.</li>
             <li><strong>Allow Duplicates</strong>: permit the same name on the wheel more than once.</li>
             <li><strong>Equal slice sizes (visual only)</strong>: draw every slice the same size on the wheel and overlay. Entry chances in the % column stay as set. This does not change who wins.</li>
-            <li><strong>Announce Winner in Chat</strong>: send the winner message to Twitch chat automatically.</li>
+            <li><strong>Announce Winner in Chat</strong>: send the winner message automatically. It posts in the chat that started the run (a YouTube command stays on YouTube, a timer or a manual spin stays on Twitch) unless <strong>Send to both Twitch &amp; YouTube chats</strong> is on. That checkbox starts off, including wheels saved before it, and is separate from the entry chat response.</li>
             <li><strong>Custom Winner Message</strong>: override the default <code>The winner is: {winner}!</code> template. Supports variables such as <code>{winner}</code>, <code>{user}</code>, and counter tokens.</li>
           </ul>
         </section>
@@ -140,7 +140,7 @@
           <p>Each wheel entry can run its own actions when it wins:</p>
           <ul>
             <li>Play a sound file with volume control.</li>
-            <li>Send a custom chat message (supports <a href="/ISBSuiteReleases/docs/reference/message-variables.html">variables</a>).</li>
+            <li>Send a custom chat message (supports <a href="/ISBSuiteReleases/docs/reference/message-variables.html">variables</a>). It follows the chat that started the run unless that entry's <strong>Send to both Twitch &amp; YouTube chats</strong> is on, separate from the wheel winner message.</li>
             <li>Run a <strong>Counter Action</strong> (Change by or Set to; number, plus or minus another counter, or a random range). See <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a>.</li>
             <li>Trigger another automation (including cascading into a second wheel).</li>
             <li>Override the wheel winner announcement for that entry.</li>

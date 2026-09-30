@@ -111,13 +111,14 @@
               <tr><td>Counter Tier Reached</td><td>Counter crosses into the next configured tier</td></tr>
               <tr><td>Counter Value Changed</td><td>Counter goes up, down, or either way (once per change)</td></tr>
               <tr><td>First Chat Message</td><td>Walk on / catch all on a viewer first message</td></tr>
-              <tr><td>First-Time Chatter</td><td>Once the first time a viewer chats (not each stream). Existing viewers already in your data are not treated as first-time after an update. Optional only when live</td></tr>
+              <tr><td>First-Time Chatter</td><td>Once the first time a viewer chats (not each stream). After they have sent a message, they are not first-time again. Twitch and YouTube are saved separately. Existing viewers already in your data stay off the list after an update. Optional only when live</td></tr>
               <tr><td>Chat Command</td><td>Your own <code>!command</code> (aliases, Match anywhere, permission, cooldown, limits)</td></tr>
               <tr><td>Timer</td><td>Interval or countdown driven alert</td></tr>
               <tr><td>Action Only (Run Alert)</td><td>No event trigger; only plays when an Actions surface uses Run Alert</td></tr>
             </tbody>
           </table></div>
           <p>Custom alerts support the same overlay options as built in alerts (image/GIF, sound, alert text, TTS, and chat response).</p>
+          <p>First Chat, First-Time Chatter, and Chat Command alerts can use <strong>Run on</strong> when Twitch and YouTube are both connected. When both are checked, their chat response can post in both chats. Off posts where that alert run started. Other custom alerts, including Action Only, do not. Built-in alerts send that chat line to the platform that triggered them. See <a href="/ISBSuiteReleases/docs/features/youtube.html#permissions">YouTube</a>.</p>
         </section>
 
         <section class="section" id="run-alert">

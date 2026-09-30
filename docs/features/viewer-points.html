@@ -88,6 +88,7 @@
           </ol>
           <ul>
             <li>Also customize the not-enough-points message and redemption confirmation message.</li>
+            <li><strong>Run on</strong> Twitch and YouTube sits on the currency, next to Enabled. Shop items, point drops, earn rules, balance, give, gamble, and goal contributions follow that choice. Both stay on until you uncheck one. One side off skips that chat. Both off runs nowhere. Existing currencies stay on both.</li>
           </ul>
         </section>
 
@@ -108,7 +109,7 @@
           <p>Same event family Automations already see, when the event carries a Twitch user id:</p>
           <ul>
             <li><strong>Chat Message</strong> - that viewer earns after sending the number of chat messages you set (for example 10 messages then 5 points). Commands like <code>!points</code> do not count.</li>
-            <li><strong>First-Time Chatter</strong> - that viewer earns once the first time they chat (not each stream). Existing viewers already in your data are not treated as first-time after an update</li>
+            <li><strong>First-Time Chatter</strong> - that viewer earns once the first time they chat (not each stream). After they have sent a message, they are not first-time again. Twitch and YouTube are saved separately. Existing viewers already in your data stay off the list after an update</li>
             <li><strong>Follow</strong></li>
             <li><strong>Subscription</strong> and <strong>Resubscription</strong></li>
             <li><strong>Subscription Gifter</strong> - points go to the gifter. <strong>Award per gifted sub</strong> is on by default (a bomb of 5 awards 5 times); turn it off to award once per gift event. Existing gift rules stay per-gift. Optional gift count with At least or Exactly; leave blank for every gift</li>
@@ -126,9 +127,9 @@
           <h2>Viewer and admin commands</h2>
           <ul>
             <li><strong>Balance:</strong> viewers type <code>!points</code> (or your custom command) to check their balance, or <code>!points @username</code> for another viewer (Twitch login or YouTube <code>@handle</code>). Allow checking another viewer is on by default. <code>{user}</code> / <code>{balance}</code> are the subject; <code>{caller}</code> is who typed the command. Unknown login uses the not-found template; a resolved viewer with no wallet is a real <code>0</code>.</li>
-            <li><strong>Give:</strong> viewers give their own points to another chatter (for example <code>!givepoints @handle 100</code>). A YouTube <code>@handle</code> credits that channel; a linked account cannot give to itself.</li>
+            <li><strong>Give:</strong> viewers give their own points to another chatter (for example <code>!givepoints @handle 100</code>, <code>!givepoints @handle 1k</code>, <code>!givepoints @handle 50%</code>, or <code>!givepoints @handle all</code>). <code>k</code> and <code>m</code> match gamble (<code>1k</code> = 1,000, <code>1m</code> = 1,000,000, no space). Percent and <code>all</code> use the points you can spend above the counter minimum. A YouTube <code>@handle</code> credits that channel; a linked account cannot give to itself. A name of <code>all</code> is that viewer, not a broadcast.</li>
             <li><strong>Gamble:</strong> viewers wager points on a configurable win-chance roll (for example <code>!gamble 50</code>, <code>!gamble 1k</code>, <code>!gamble 1m</code>, <code>!gamble 50.2</code>, <code>!gamble 34.7%</code>, or <code>!gamble all</code>). <code>k</code> and <code>m</code> suffixes scale by 1,000 and 1,000,000 with no space (<code>1k</code>, not <code>1 k</code>). Decimals and percents round to a whole stake before the roll.</li>
-            <li><strong>Admin give:</strong> broadcaster/mods award points from chat (for example <code>!vpgive @user 100</code>, or <code>!vpgive all 100</code> for everyone currently in chat). <code>all</code> is Twitch Helix chatters plus YouTube recently-chatted (same window as Watch Time), de-duped when those identities are linked. Not a live JOIN feed.</li>
+            <li><strong>Admin give:</strong> broadcaster/mods award points from chat (for example <code>!vpgive @user 100</code>, <code>!vpgive @user 1k</code>, or <code>!vpgive all 1k</code> for everyone currently in chat). The amount is a flat number or <code>k</code> / <code>m</code> suffix. <code>all</code> is the broadcast target (Twitch Helix chatters plus YouTube recently-chatted, same window as Watch Time, de-duped when those identities are linked), not an amount. Not a live JOIN feed.</li>
             <li>Each command supports aliases and optional Match anywhere in message under Advanced Settings.</li>
             <li>Advanced Settings also cover permission, time cooldown (optional burst), and per-stream limits (same unified editor as other commands).</li>
             <li>Community Goals can bind this currency so viewers spend it into a milestone. See <a href="/ISBSuiteReleases/docs/features/community-goals.html#viewer-points">Community Goals - Viewer Points contribute</a>.</li>

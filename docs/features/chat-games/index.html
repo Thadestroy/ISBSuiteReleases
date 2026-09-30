@@ -62,6 +62,7 @@
             <li>Free: no separate Chat Games cap (stake counters and other features still follow their Free limits). Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
             <li>Presets: Heist, Lottery, Duel, Solo Gamble, Percentile roll, Blank sandbox, Instant action.</li>
             <li>Join and start commands support aliases and Match anywhere. Phases use the same <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> editor as Automations.</li>
+            <li>With Twitch and YouTube both connected, <strong>Run on</strong> checkboxes limit that game to one chat. When both are checked, phase Send Message can post in both chats. Off posts where the run started. See <a href="/ISBSuiteReleases/docs/features/youtube.html#permissions">YouTube</a>.</li>
             <li>Variables: <a href="/ISBSuiteReleases/docs/reference/message-variables.html#games">Message variables - Chat Games</a>.</li>
           </ul>
         </div>
@@ -118,7 +119,7 @@
           <h2>Stakes and payout</h2>
           <p>When a preset uses stakes, pick a <strong>stake counter</strong> (often your Viewer Points currency counter). Common modes:</p>
           <ul>
-            <li><strong>Variable stake</strong>: viewer supplies an amount (for example <code>!heist 50</code>).</li>
+            <li><strong>Variable stake</strong>: viewer supplies an amount (for example <code>!heist 50</code>, <code>!heist 1k</code>, <code>!heist 1m</code>, <code>!heist 50%</code>, or <code>!heist all</code>). <code>1k</code> is 1,000 and <code>1m</code> is 1,000,000 with no space. <code>all</code> bets the balance, clamped to max stake when a max is set. A percent must sit inside min and max (it does not clamp). Turn off Allow all to reject the word <code>all</code>; <code>50%</code> still works.</li>
             <li><strong>Fixed stake</strong>: every entrant pays the same fee into the pool.</li>
             <li><strong>Win chance</strong> and <strong>payout multiplier</strong>: used when each entrant rolls independently (Heist / Solo Gamble).</li>
             <li><strong>Resolution scope</strong>: each entrant vs a single winner drawn from the pool (Lottery).</li>

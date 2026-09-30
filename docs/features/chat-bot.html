@@ -52,7 +52,7 @@
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/chat-bot.png" alt="Chat Bot page in ISB Suite" />
-          <figcaption>Chat Bot overview: commands, built ins, search, and groups.</figcaption>
+          <figcaption>Chat Bot overview: commands, built ins, alias lines, search, and groups.</figcaption>
         </figure>
 
         <div class="ref-panel">
@@ -81,7 +81,7 @@
 
         <section class="section" id="engine">
           <h2>Same engine as Automations</h2>
-          <p>Chat Bot is not a separate runtime. Rules you create here use the same triggers, actions, cooldowns, aliases, Match anywhere, Randomized Action, Timer, Live Timer, Run Alert, Enable / Disable, and <strong>Run Chat Bot or Automation</strong> chaining as the Automations tab. Overview pages support name search and custom groups like other list pages. Each command card has a green (enabled) or grey (disabled) light. Click the light to turn that command on or off; a legend at the top of the list explains this.</p>
+          <p>Chat Bot is not a separate runtime. Rules you create here use the same triggers, actions, cooldowns, aliases, Match anywhere, Randomized Action, Timer, Live Timer, Run Alert, Enable / Disable, and <strong>Run Chat Bot or Automation</strong> chaining as the Automations tab. Chat Bot Overview search matches a command name or any of its aliases, and a command with aliases shows a short alias line on its card. Custom groups work like other list pages. Each command card has a green (enabled) or grey (disabled) light. Click the light to turn that command on or off; a legend at the top of the list explains this.</p>
           <p>Leaving Add Bot Message with unsaved changes shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Opening the form and leaving without edits does not prompt. Form <strong>Cancel</strong> discards without asking.</p>
           <p>Chat Bot replies stay on the platform the command was typed (Twitch or YouTube). Timed messages post to chats that are live in the current ISB session (a YouTube-only day does not post on Twitch). Discord posts use the Discord Webhook action on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a>. YouTube connect, <code>!link</code>, and permissions: <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</p>
         </section>
@@ -113,7 +113,7 @@
             <li><strong>Cooldown:</strong> None, Global, or Per User, with optional burst (N uses within a window then a longer cooldown; the normal duration can be off) and optional on-cooldown chat reply.</li>
             <li><strong>Per stream limits:</strong> max fires globally and/or per user (<code>0</code> = unlimited), with optional hit-limit chat reply. Limits reset when a new stream session starts.</li>
           </ul>
-          <p>Community Goal check and contribute commands, Viewer Points commands, Chat Game start/join commands, Saved Lists, and Automation Chat Command triggers also appear on the Chat Bot overview where applicable. Each row has the same enable/disable light as other Chat Bot cards. Edit opens that feature&apos;s settings (Automations for a bundled command). Disabling an Automation reference card turns off the whole automation. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, <code>!endtimer</code>, <code>!addcommand</code>, and <code>!editcommand</code> stay out of the Run Chat Bot or Automation picker. Contribute is not a Run Automation nested target. Built-in <code>!editcommand</code> still cannot change Automations.</p>
+          <p>Community Goal check and contribute commands, Viewer Points commands, Chat Game start/join commands, Saved Lists, and Automation Chat Command triggers also appear on the Chat Bot overview where applicable. Those cards show the same short alias line, and Overview search finds them from an alias. Each row has the same enable/disable light as other Chat Bot cards. Edit opens that feature&apos;s settings (Automations for a bundled command). Disabling an Automation reference card turns off the whole automation. Arg-only built-ins such as <code>!addgoal</code>, <code>!removegoal</code>, <code>!endtimer</code>, <code>!addcommand</code>, and <code>!editcommand</code> stay out of the Run Chat Bot or Automation picker. Contribute is not a Run Automation nested target. Built-in <code>!editcommand</code> still cannot change Automations.</p>
           <p>Mods can create or update a basic Chat Bot reply from chat with <code>!addcommand</code> / <code>!editcommand</code> (aliases <code>!addcom</code> / <code>!editcom</code>). Add fails if the name exists; edit updates response text only. Chat confirms with <code>Added {name}: {response}</code> / <code>Updated {name}: {response}</code> (customize in Chat Bot). Example: <code>!addcom !project Today&apos;s project is...</code> > <code>Added !project: Today&apos;s project is...</code> See <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
         </section>
 
@@ -122,7 +122,7 @@
           <p>On Chat Bot Overview, <strong>Export Commands</strong> saves a CSV (<code>bot-commands.csv</code>) of the same commands shown on the page. Columns: Type, Command, Description, Permission, Cooldown, Enabled.</p>
           <ul>
             <li>Includes Channel Commands, Timed Messages, Built-in Commands, Chat Game join/start, Automation Chat Commands, Viewer Points, Community Goal add/remove plus per-goal check/contribute, Saved List Read and Add, and Live Timer Commands.</li>
-            <li>Aliases are not extra rows (Overview does not show alias cards). They are listed in Description as <code>Aliases: !foo, !bar</code>.</li>
+            <li>Aliases are not extra rows. The overview card shows a short Aliases line, and search finds that card from an alias. The CSV lists them in Description as <code>Aliases: !foo, !bar</code>.</li>
             <li>Timed Messages use Type <code>Timed Message</code> with the interval in Command (for example <code>Every 5m</code>). Saved Lists export both Read and Add so mods have both chat triggers.</li>
             <li>This file is a list for docs or Nightbot-style copies. It is not an import.</li>
           </ul>
@@ -165,7 +165,7 @@
 
         <section class="section" id="youtube">
           <h2>YouTube</h2>
-          <p>After Sign in with Google, Chat Bot hears YouTube live chat. Replies stay on YouTube. Built-in <code>!link</code> is on <strong>Built-in Commands</strong>. It joins a YouTube <code>@handle</code> and a Twitch login into one ISB account. The card's Response is what bare <code>!link</code> says in chat. Permissions and lurker rules: <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</p>
+          <p>After Sign in with Google, Chat Bot hears YouTube live chat. Replies stay on YouTube until you choose otherwise. With both Twitch and YouTube connected, the command card has <strong>Run on</strong> checkboxes so a command can skip one chat. When both are checked, Response has <strong>Send to both Twitch &amp; YouTube chats</strong>. Off posts where the command was used. On posts in both. One checked box sends only to that chat. Built-in <code>!link</code> is on <strong>Built-in Commands</strong> and stays on every connected chat. It joins a YouTube <code>@handle</code> and a Twitch login into one ISB account. The card's Response is what bare <code>!link</code> says in chat. Permissions and lurker rules: <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</p>
         </section>
 
         <section class="section" id="actions">

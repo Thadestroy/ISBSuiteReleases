@@ -60,6 +60,7 @@
           <ul>
             <li>Free: 15 automations. Full table on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
             <li>One automation can have multiple triggers. Same rule engine as <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a> - use Automations for EventSub and multi-action rules.</li>
+            <li>With Twitch and YouTube both connected, <strong>Run on</strong> checkboxes limit that automation to one chat. When both are checked, Send Message can post in both chats. Off posts where the run started. See <a href="/ISBSuiteReleases/docs/features/youtube.html#permissions">YouTube</a>.</li>
             <li>Cooldown: None, Global, or Per User, plus optional burst (N uses within a window then a longer cooldown; the normal duration can be off) and per stream limits.</li>
             <li>Related: <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a>, <a href="/ISBSuiteReleases/docs/features/alerts.html">Alerts</a>, <a href="/ISBSuiteReleases/docs/features/wheel.html">Wheel</a>, <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>, <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</li>
           </ul>
@@ -89,7 +90,7 @@
             <tbody>
               <tr><td>Channel Point Redemption</td><td>Pick from your live Twitch catalog (binds reward ID) or Any redemption. Type the exact title if Twitch is disconnected; ID still auto-binds after the first matching redeem</td></tr>
               <tr><td>Walk-on Sound</td><td>First chat message per stream; blank username = everyone; named = specific viewer; both can fire; optional only when live</td></tr>
-              <tr><td>First-Time Chatter</td><td>Once the first time a viewer chats (not each stream). Existing viewers already in your data are not treated as first-time after an update. Optional only when live. For starting currency, add a Viewer Points earn rule of the same type</td></tr>
+              <tr><td>First-Time Chatter</td><td>Once the first time a viewer chats (not each stream). After they have sent a message, they are not first-time again. Twitch and YouTube are saved separately. Existing viewers already in your data stay off the list after an update. Optional only when live. For starting currency, add a Viewer Points earn rule of the same type</td></tr>
               <tr><td>Bits / Cheer</td><td>At least or exact amount (chat cheers only)</td></tr>
               <tr><td>Power-Up</td><td>Bits spent on Gigantify, Celebration, Message Effect, or custom Power-Ups; at least or exact amount. Viewer-points Bits earn still counts those bits. Community goals count them when Power-Up is among the selected Twitch Data sources</td></tr>
               <tr><td>Super Chat / Super Sticker / New Member / Member Milestone / Membership gifts</td><td>YouTube only; not Bits or Subs. Hidden until Sign in with Google. See <a href="/ISBSuiteReleases/docs/features/youtube.html#events">YouTube</a></td></tr>

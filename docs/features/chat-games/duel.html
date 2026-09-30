@@ -59,7 +59,7 @@
           <h3>At a glance</h3>
           <ul>
             <li>Preset: <strong>Duel</strong>.</li>
-            <li>Commands: <code>!duel &lt;user&gt; &lt;amount&gt;</code>, <code>!accept</code>, <code>!decline</code> (configurable).</li>
+            <li>Commands: <code>!duel &lt;user&gt; &lt;amount&gt;</code> (<code>50</code>, <code>1k</code>, <code>1m</code>, <code>50%</code>, or <code>all</code>), <code>!accept</code>, <code>!decline</code> (configurable). <code>all</code> is the smaller spendable balance above the counter minimum, clamped to max stake. A percent is of the challenger's spendable balance; the opponent must be able to spend that much too.</li>
             <li>Both viewers must afford the stake at challenge time and again on accept.</li>
             <li>Payout is a transfer of <strong>x</strong> (not a 2x pot).</li>
             <li>Accept timeout is adjustable (default 60 seconds).</li>
@@ -77,7 +77,7 @@
         <section class="section" id="how">
           <h2>How it works</h2>
           <ol class="steps">
-            <li>A viewer challenges with <code>!duel @OtherUser 100</code> (Twitch login or YouTube <code>@handle</code>; command names are editable). After <code>!link</code>, they cannot challenge their other identity.</li>
+            <li>A viewer challenges with <code>!duel @OtherUser 100</code>, <code>1k</code>, <code>50%</code>, or <code>all</code> (Twitch login or YouTube <code>@handle</code>; command names are editable). After <code>!link</code>, they cannot challenge their other identity. <code>all</code> stakes the smaller spendable balance above the counter minimum (clamped to max). A percent is of the challenger's spendable balance.</li>
             <li>ISB Suite checks that both the challenger and the opponent have at least that amount on the chosen per-user counter. If either is short, chat gets a not-enough style error and no challenge is opened.</li>
             <li>The opponent types <code>!accept</code> or <code>!decline</code> before the timeout. A linked viewer can do that from either platform. Decline and timeout move no points.</li>
             <li>On accept, balances are checked again. A fair 50/50 pick chooses the winner; the loser transfers <strong>x</strong> to the winner.</li>
