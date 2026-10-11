@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <item>
-    <version>2.2.1</version>
-    <url>https://github.com/Thadestroy/ISBSuiteReleases/releases/download/v2.2.1/ISBSuiteSetup_2.2.1.exe</url>
-    <changelog>https://github.com/Thadestroy/ISBSuiteReleases/releases/tag/v2.2.1</changelog>
+    <version>2.2.2</version>
+    <url>https://github.com/Thadestroy/ISBSuiteReleases/releases/download/v2.2.2/ISBSuiteSetup_2.2.2.exe</url>
+    <changelog>https://github.com/Thadestroy/ISBSuiteReleases/releases/tag/v2.2.2</changelog>
     <mandatory>true</mandatory>
-    <checksum algorithm="SHA256">baeb60c1c99d0f3632bbc652c66609bcd4379856b95a1bccf2e8f932b1006030</checksum>
+    <checksum algorithm="SHA256">5efa82c7b60620854d6bd42de4e04f1a97df968a379122b8bc6fad6259928a44</checksum>
 </item>
