@@ -157,6 +157,11 @@
           <p>The Chat Bot overview has a <strong>Live Timer Commands</strong> section for <code>!pausetimer</code>, <code>!resumetimer</code>, <code>!addtime</code>, and <code>!removetime</code>. <code>!endtimer</code> stays under Built-in Commands (ends a Live Clock or skips a delay Timer). See <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a> and <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
         </section>
 
+        <section class="section" id="isb">
+          <h2>ISB Suite command</h2>
+          <p>Built-in <code>!ISB</code> (aliases <code>!software</code>, <code>!chatbot</code>, and <code>!ISBSuite</code>) is off until you turn it on under Chat Bot &gt; Built-in Commands. When someone uses it, chat gets a short line and a link to this site. The same card also posts that line every 30 minutes while you are live, in both Twitch and YouTube chats. Default: <code>This Channel uses ISB Suite for chat bot commands, games, viewer points, and more! https://thadestroy.github.io/ISBSuiteReleases/docs/</code>. Edit the response, name, and aliases on that card. Permission defaults to Everyone. It does not use a Free chat command slot. See <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
+        </section>
+
         <section class="section" id="song-request">
           <h2>Song request</h2>
           <p>Built-in <code>!sr</code> (alias <code>!songrequest</code>) queues a song on the Spotify app after you Connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Integrations</a>. The command cards stay hidden on Chat Bot Overview until that Connect. Default permission is Everyone. Chat Bot holds the command name, aliases, cooldown, and confirm template (<code>{user}</code>, <code>{track}</code>, <code>{artist}</code>). Per-viewer queue caps by permission level (default 5; 0 = none; leave blank for unlimited) are on the Spotify card under Integrations (<strong>Song Request</strong>). Blank <code>!sr</code> posts a usage line. At the cap, chat gets the at-cap reply (<code>{cap}</code>).</p>

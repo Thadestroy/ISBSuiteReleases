@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Play Clip | ISB Suite</title>
+  <meta name="description" content="Play Clip action: show a Twitch clip in an overlay widget, or stop the one playing" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Play Clip | ISB Suite" />
+  <meta property="og:description" content="Play Clip action: show a Twitch clip in an overlay widget, or stop the one playing" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Play Clip</p>
+        <h1 class="page-title">Play Clip</h1>
+        <p class="lede">Play a public Twitch clip in a Twitch Clip widget. Paste one link to replay it, or use a variable so chat, automations, and chat games can each supply a different clip. A second play replaces the one on screen. Stop clears it.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-create-clip.png" alt="Play Clip action setup in ISB Suite" />
+          <figcaption>Play Clip lives on the shared Actions card, next to Create Clip.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>UI label: <strong>Play Clip</strong>.</li>
+            <li>Needs a <a href="/ISBSuiteReleases/docs/features/overlay-layout/twitch-clip.html">Twitch Clip</a> widget on the active layout. All license tiers. Layout count is still Free = 2.</li>
+            <li>Source is one link or a variable: <code>{input}</code>, <code>{clipUrl}</code>, or <code>{clipId}</code>. Leave Allow checking another viewer off so a clip link stays in <code>{input}</code>.</li>
+            <li>Last play wins. There is no queue. Stop the playing clip with an empty widget clears every clip that is showing.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#overlap">Back to back</a></li>
+          <li><a href="#example">Examples</a></li>
+        </ol></nav>
+
+        <section class="section" id="how">
+          <h2>How it works</h2>
+          <p>The widget is only the screen region. This action decides what plays. A pasted URL always replays that clip. <code>{input}</code> plays the chat text from a command. <code>{clipUrl}</code> or <code>{clipId}</code> plays the clip Create Clip just made on the same fire. Play runs after Create Clip so those tokens are filled.</p>
+          <p>A bad link, a leftover variable, or a non-Twitch address is logged and the widget stays hidden. It does not replace a clip that is already showing. A deleted or embed-blocked clip fails the same way. The channel does not need to be live.</p>
+        </section>
+        <section class="section" id="setup">
+          <h2>Setup</h2>
+          <ol class="steps">
+            <li>On Overlay Layout, add a <strong>Twitch Clip</strong> widget and save. Use Test Play there with a link if you want to check the box.</li>
+            <li>Enable <strong>Play Clip</strong> on the Actions card. Choose Play a clip, and enter a link or a variable.</li>
+            <li>Which widget stays on (First on the active layout) unless you pick a named widget. Stop the playing clip uses the same choice. Empty means every playing clip.</li>
+            <li>Volume and output channel live on the widget, same as Browser Source.</li>
+          </ol>
+        </section>
+        <section class="section" id="overlap">
+          <h2>Back to back</h2>
+          <p>A new Play replaces the clip in that widget, even if the previous one has not finished. The same link starts over. Stop hides it. Command cooldown and permission are what limit spam. There is no queue and no separate skip hotkey.</p>
+        </section>
+        <section class="section" id="example">
+          <h2>Examples</h2>
+          <ul>
+            <li>Chat command <code>!clip</code> with source <code>{input}</code> plays the link the viewer typed.</li>
+            <li>One automation with a fixed clip URL replays that clip every time it fires.</li>
+            <li>Create Clip plus Play Clip source <code>{clipUrl}</code> shows the clip you just made.</li>
+            <li>A second Play Clip set to Stop the playing clip clears the widget.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

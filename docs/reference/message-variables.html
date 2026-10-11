@@ -59,6 +59,7 @@
           <li><a href="#saved-lists">Saved Lists</a></li>
           <li><a href="#add-edit-command">Add / Edit Command</a></li>
           <li><a href="#stream">Stream</a></li>
+          <li><a href="#spotify">Spotify</a></li>
           <li><a href="#timers">Timers and commands</a></li>
           <li><a href="#games">Chat Games</a></li>
           <li><a href="#tiltify">Tiltify</a></li>
@@ -97,8 +98,8 @@
               <tr><td><code>{subs}</code></td><td>Sub or gift count (Sub / Resub / Gift Sub)</td></tr>
               <tr><td><code>{tier}</code></td><td>Sub tier: 1, 2, or 3</td></tr>
               <tr><td><code>{gifter}</code></td><td>Gifter display name (Subscription Gift Receiver; <code>{user}</code> is the recipient)</td></tr>
-              <tr><td><code>{clipUrl}</code></td><td>Public clip URL after a successful Create Clip action on this fire. Unset (literal token) if clip failed or the channel was offline.</td></tr>
-              <tr><td><code>{clipId}</code></td><td>Clip id after a successful Create Clip action on this fire.</td></tr>
+              <tr><td><code>{clipUrl}</code></td><td>Public clip URL after a successful Create Clip action on this fire. Play Clip can use this token as its source. Unset (literal token) if clip failed or the channel was offline.</td></tr>
+              <tr><td><code>{clipId}</code></td><td>Clip id after a successful Create Clip action on this fire. Play Clip can use this token as its source.</td></tr>
               <tr><td><code>{predictionId}</code></td><td>Prediction id after a successful Create Prediction action on this fire. Unset if create failed.</td></tr>
               <tr><td><code>{predictionTitle}</code></td><td>Prediction title after a successful Create Prediction action on this fire. Unset if create failed.</td></tr>
             </tbody>
@@ -210,6 +211,21 @@
               <tr><td><code>{golive}</code></td><td>Go live chat message from Stream Manager (stored even when Send to live chat is off). Tokens inside that line (for example <code>{category}</code>) fill in when this token is used</td></tr>
               <tr><td><code>{category}</code></td><td>This stream&apos;s current Twitch category</td></tr>
               <tr><td><code>{title}</code></td><td>This stream&apos;s current Twitch title</td></tr>
+            </tbody>
+          </table></div>
+        </section>
+
+        <section class="section" id="spotify">
+          <h2>Spotify</h2>
+          <p>These tokens read the song on the connected Spotify player, including while it is paused. Use them in automations, alerts, chat, and TTS. Not connected, nothing playing, or no fetch yet leaves the literal token. <code>{track}</code> and <code>{artist}</code> are the song-request row only (see Timers and commands). Progress and duration are <code>m:ss</code>, or <code>h:mm:ss</code> at an hour or more.</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>{spotifyTrack}</code></td><td>Track title currently on the Spotify player</td></tr>
+              <tr><td><code>{spotifyArtist}</code></td><td>Artist or artists, comma-separated</td></tr>
+              <tr><td><code>{spotifyAlbum}</code></td><td>Album name</td></tr>
+              <tr><td><code>{spotifyProgress}</code></td><td>Playback position (<code>m:ss</code>)</td></tr>
+              <tr><td><code>{spotifyDuration}</code></td><td>Track length (<code>m:ss</code>)</td></tr>
             </tbody>
           </table></div>
         </section>

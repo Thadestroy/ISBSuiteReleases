@@ -68,7 +68,7 @@ ISB Suite is built around several major systems that all work together:
 | **Automations** | Connect any Twitch event to any action |
 | **Chat Bot** | Automated chat messages triggered by stream events or commands |
 | **Alerts** | On-screen overlays for follows, subs, raids, donations, and more |
-| **Overlay Layout** | Drag-and-drop layout editor for your capture window, including a Chat Box |
+| **Overlay Layout** | Drag-and-drop layout editor for your capture window, including a Chat Box and a Twitch Clip region |
 | **Viewer Points** | Custom channel currency with a shop and point drops |
 | **Community Goals** | Stream-wide progress bars fed by Twitch events or chat |
 | **Chat Games** | Mass-entry chat games with stakes, rolls, and configurable outcomes |
@@ -181,6 +181,7 @@ Design exactly what gets captured by your streaming software using the built-in 
 | **Random Image Picker** | Displays one randomly chosen image from a Random Image Picker; re-rolled by the "Randomize Image Picker" automation action |
 | **Timer Widget** | Delay-queue countdown or Live Clock (Subathon); see [Timer Widget](#timer-widget) |
 | **Goals** | Live Community Goal progress bar; bind any goal and style the bar per placement |
+| **Twitch Clip** | Region where a Play Clip action shows a public Twitch clip. Blank until something plays |
 | **Character Playfield** | *(coming soon)* |
 
 ### Character Studio
@@ -280,6 +281,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Push Community Goal | Add progress to one or more goals; optional **Use amount from trigger** (Bits cheer, Power-Up bits, or Chat Message Match `<amount>`) |
 | Enable / Disable | Search Overview items by type or name (Chat Bot, Automations, Alerts, shop, currencies, point drops, Community Goals, Saved Lists) and enable or disable that list immediately |
 | Create Clip | Create a Twitch clip of the current stream (must be live) |
+| Play Clip | Play a public Twitch clip in a Twitch Clip overlay widget, or stop the one showing. A link replays that clip; `{input}` or `{clipUrl}` fills in at fire time |
 | Set Title / Category | Change the stream title and/or category. Title fields use the same variables as Send Message |
 | Create Prediction | Start a Twitch Channel Points Prediction (title, 2-10 outcomes, 30-1800s). Queues on Stream Manager if one is already live. Hidden until you grant Predictions |
 | Channel Points | Change cost, pause, or cooldown on ISB-managed rewards. Reset after (default 10 minutes) restores the first snapshot |

@@ -137,24 +137,23 @@
 
         <section class="section" id="actions">
           <h2>Per entry actions</h2>
-          <p>Each wheel entry can run its own actions when it wins:</p>
+          <p>Each wheel slice uses the same Actions list as Automations. Existing slices keep the actions they already had. Slice color stays on the slice, above that list. <strong>Disable wheel's default winner message</strong> sits on Send Message and only applies while that message is on.</p>
           <ul>
-            <li>Play a sound file with volume control.</li>
-            <li>Send a custom chat message (supports <a href="/ISBSuiteReleases/docs/reference/message-variables.html">variables</a>). It follows the chat that started the run unless that entry's <strong>Send to both Twitch &amp; YouTube chats</strong> is on, separate from the wheel winner message.</li>
-            <li>Run a <strong>Counter Action</strong> (Change by or Set to; number, plus or minus another counter, or a random range). See <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a>.</li>
-            <li>Trigger another automation (including cascading into a second wheel).</li>
-            <li>Override the wheel winner announcement for that entry.</li>
-            <li>Set a custom color for that entry slice.</li>
+            <li>Play a sound, send a chat message, change counters, run an automation or alert, start a wheel or giveaway, and the rest of the <a href="/ISBSuiteReleases/docs/features/actions/index.html">action catalog</a>.</li>
+            <li>Send Message follows the chat that started the run unless <strong>Send to both Twitch &amp; YouTube chats</strong> is on. That is separate from the wheel's own winner message. <code>{winner}</code> is the slice text and <code>{wheel}</code> is the preset name.</li>
+            <li>A slice whose only old action was Trigger Automation keeps a 3 second Timer delay before Run Automation. A slice that also played a sound, sent a message, or changed a counter runs Run Automation with those actions.</li>
+            <li>Start Wheel Session on the slice is the direct way to cascade into another wheel.</li>
+            <li>Set a custom color for that slice only.</li>
           </ul>
-          <p>When a wheel entry win triggers an automation, <code>{winner}</code> resolves to the winning entry name. Pending loads and spins appear on the Stream Manager <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Wheel Queue</a>.</p>
+          <p>The wheel's own winner announcement is unchanged. Pending loads and spins appear on the Stream Manager <a href="/ISBSuiteReleases/docs/features/queues-giveaways.html">Wheel Queue</a>.</p>
         </section>
 
         <section class="section" id="cascade">
           <h2>Cascading wheels</h2>
           <ol class="steps">
             <li>Create multiple wheel presets (for example Category Picker and Game Picker).</li>
-            <li>On an entry in Category Picker, add a trigger automation action.</li>
-            <li>That automation uses Load and Spin Wheel to load the Game Picker (optionally auto spin).</li>
+            <li>On a slice in Category Picker, turn on Start Wheel Session and pick Game Picker, or Run Automation that does the same.</li>
+            <li>Optionally turn on Automatically spin. A slice that only used to trigger an automation still waits 3 seconds first.</li>
           </ol>
           <p>More setups: <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
         </section>
