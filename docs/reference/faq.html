@@ -103,7 +103,7 @@
         <section class="section" id="audio">
           <h2>Audio not playing</h2>
           <ul>
-            <li>Sounds are copied into app data when you save. If an older setup points at a missing file, re pick the sound once.</li>
+            <li>Sounds are copied into app data when you save. If an older setup points at a missing file, pick it again with <strong>Browse</strong> or <a href="#media-library">Library</a>.</li>
             <li>Check volume is not 0.</li>
             <li>Supported formats: .mp3, .wav, .mp4, .m4a, .wma</li>
             <li>Check the Sound Queue is not paused.</li>
@@ -119,6 +119,20 @@
           </ul>
         </section>
 
+        <section class="section" id="media-library">
+          <h2>Media library</h2>
+          <p>Images, GIFs, and sounds you save in ISB Suite stay in a library so you can use them again. There is no Media Library page in the sidebar. Open it from a <strong>Library</strong> button on the slot you are editing. <strong>Browse</strong> still picks a new file from your PC.</p>
+          <ul>
+            <li><strong>Where:</strong> Play Sound, giveaway winner sound, alert image and sound, point-drop image and sound, overlay static image (<strong>+ Image from Library</strong>), random image picker (<strong>From Library</strong>), and character studio (GIF, PNG, sprite sheet, and accessory).</li>
+            <li><strong>What you see:</strong> an image or GIF slot shows Images and GIFs, with a preview on each card. A sound slot shows Sounds, and <strong>Play</strong> previews a card before you choose it. Sprite sheets and accessories stay PNG only. Search filters the list.</li>
+            <li><strong>Use</strong> puts that file on the slot. Play and Delete do not.</li>
+            <li>Drag the title bar to move the window. Resize from the edges. The square button maximizes, and clicking it again restores. Escape, Cancel, or the X closes it.</li>
+            <li><strong>Delete</strong> removes one library item when nothing in ISB Suite still uses it. <strong>Remove unused</strong> clears every library item nothing uses. Deleting an alert, sound, or overlay does not remove that file from the library.</li>
+            <li>Saving the same slot again with the same file does not create a second <code>name_2</code> copy. Each alert or sound still keeps its own working copy. The library shows one card when the files are identical.</li>
+            <li>A library file that is no longer on disk is not offered.</li>
+          </ul>
+        </section>
+
         <section class="section" id="backups">
           <h2>Backups and restore</h2>
           <ul>
@@ -126,7 +140,7 @@
             <li>A backup is a standard <code>.zip</code> of your recoverable data (config, state, database, media). Create and export write that same pack; restore and import apply it (full replace + app restart).</li>
             <li>Choose how often to create backups and how many to keep. Secrets (tokens, keys, license) are included by default - turn that off before sharing a file.</li>
             <li>After importing on a new PC, re-check <strong>Settings &gt; Audio Output Channels</strong> - device IDs may not match.</li>
-            <li>Export copies media already stored in AppData. If a command still pointed at a file on the old PC (Downloads, Desktop, a local HTML page), that file is not in the zip. After import, ISB Suite lists those leftovers so you can re-browse them. You can save that full list to a text file from the dialog.</li>
+            <li>Export copies media already stored in AppData, including the <a href="#media-library">media library</a>. If a command still pointed at a file on the old PC (Downloads, Desktop, a local HTML page), that file is not in the zip. After import, ISB Suite lists those leftovers so you can re-browse them. You can save that full list to a text file from the dialog.</li>
             <li>ISB Suite also keeps lightweight safety copies whenever you save so a single corrupt file can recover without a full restore. You do not manage those separately.</li>
           </ul>
         </section>

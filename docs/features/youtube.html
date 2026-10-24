@@ -134,12 +134,12 @@
 
         <section class="section" id="desk">
           <h2>Stream Manager</h2>
-          <p>One combined Chat tile. Each line has a Twitch or YouTube mark. Show can hide one platform. Chat events include a Super Chat &amp; members chip so those banners stay when the include-set is customized. Activity has a YouTube chip (not Integrations). The status strip shows YouTube connect, send quota, and live chat. Timeout, ban, and deleted-message lines from YouTube paint as mod notices. When send quota is empty, a notice still lands on Activity. The Viewers tile lists Twitch Get Chatters and YouTube recently-chatted in two sections. <code>{randomViewer}</code> picks from that union (linked accounts count once).</p>
+          <p>One combined Chat tile. Each line has a Twitch or YouTube mark. Show can hide one platform. Chat events include a Super Chat &amp; members chip so those banners stay when the include-set is customized. Activity has a YouTube chip (not Integrations). The status strip shows YouTube connect, send quota, and live chat. Timeout, ban, and deleted-message lines from YouTube paint as mod notices. When send quota is empty, a notice still lands on Activity. The Viewers tile gives Twitch Get Chatters about 60% of the list and YouTube recently-chatted the rest. Each platform groups the broadcaster, mods, and on Twitch VIPs, then viewers. Twitch section headers use that channel's broadcaster, mod, and VIP badges. Twitch mods and VIPs are grouped even when they have not typed. If that Twitch login cannot read the mod and VIP lists, the Twitch setup window opens so you can sign in again. Skip for now leaves the login in place and does not ask again. <code>{randomViewer}</code> picks from that union (linked accounts count once).</p>
         </section>
 
         <section class="section" id="quota">
           <h2>Send quota</h2>
-          <p>Official YouTube send uses a daily unit budget that resets at midnight Pacific Time. When it is empty, ISB Suite stops pasting into YouTube chat only. InnerTube read, alerts, automations, watch time, and all Twitch send keep working. <code>!link</code> still hears both sides; confirm copy also goes to Activity / Stream Manager. The status chip says YouTube send is blocked until the next Pacific midnight.</p>
+          <p>Official YouTube send uses a daily unit budget that resets at midnight Pacific Time. Replies that become ready together post one at a time, about a second apart, so two viewers who use a command in the same second each get a reply. When it is empty, ISB Suite stops pasting into YouTube chat only. InnerTube read, alerts, automations, watch time, and all Twitch send keep working. <code>!link</code> still hears both sides; confirm copy also goes to Activity / Stream Manager. The status chip says YouTube send is blocked until the next Pacific midnight.</p>
         </section>
 
         <section class="section" id="not-youtube">

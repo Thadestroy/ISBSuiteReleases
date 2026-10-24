@@ -88,7 +88,7 @@
       title: "Play Sound action",
       url: "/features/actions/play-sound.html",
       blurb: "Queue audio, volume, bypass sound queue",
-      keywords: "play sound bypass queue volume stinger walk-on",
+      keywords: "play sound bypass queue volume stinger walk-on library media",
     },
     {
       title: "Send Message action",
@@ -113,6 +113,24 @@
       url: "/features/actions/spotify.html",
       blurb: "Pause, skip, queue, or play now on the official Spotify app",
       keywords: "spotify pause skip shuffle repeat queue play now song request !sr !remove !removesong premium connect",
+    },
+    {
+      title: "OBS Studio action",
+      url: "/features/actions/obs.html",
+      blurb: "Switch scenes, show or hide sources, mute, set volume, start or stop stream or record",
+      keywords: "obs studio websocket scene source mute volume stream record",
+    },
+    {
+      title: "Streamlabs Desktop action",
+      url: "/features/actions/streamlabs.html",
+      blurb: "Switch scenes, show or hide sources, mute, set volume, start or stop stream or record",
+      keywords: "streamlabs desktop remote control scene source mute volume stream record",
+    },
+    {
+      title: "Overlay Layout action",
+      url: "/features/actions/overlay-layout.html",
+      blurb: "Switch layouts or show / hide widgets on a saved overlay",
+      keywords: "overlay layout action switch layout show hide widget fade hotkey",
     },
     {
       title: "Counter Action",
@@ -163,6 +181,12 @@
       keywords: "create clip twitch clips:edit duration title {clipUrl} {clipId}",
     },
     {
+      title: "Play Clip action",
+      url: "/features/actions/play-clip.html",
+      blurb: "Play a Twitch clip in an overlay widget, or stop the one showing",
+      keywords: "play clip twitch clip widget {clipUrl} {clipId} {input} stop overlay",
+    },
+    {
       title: "Create Prediction action",
       url: "/features/actions/create-prediction.html",
       blurb: "Start a Twitch Prediction; announce with {predictionTitle}",
@@ -190,7 +214,7 @@
       title: "Randomized Action",
       url: "/features/actions/randomized-action.html",
       blurb: "Pick one of several action sets each time, optionally gated by a counter",
-      keywords: "randomized action sets no repeat until all uniform counter ranges if nothing matches jackpot",
+      keywords: "randomized action sets no repeat until all uniform counter ranges if nothing matches jackpot {actionSet}",
     },
     {
       title: "Randomize Image Picker action",
@@ -239,6 +263,12 @@
       url: "/features/chat-games/duel.html",
       blurb: "Instant per-user gamble with Win and Lose phases",
       keywords: "duel chat game instant stake win lose",
+    },
+    {
+      title: "Solo Gamble chat game",
+      url: "/features/chat-games/solo-gamble.html",
+      blurb: "Instant per-user gamble with win and lose phases",
+      keywords: "solo gamble chat game win chance payout multiplier win lose",
     },
     {
       title: "Percentile roll chat game",
@@ -319,6 +349,12 @@
       keywords: "overlay chat box widget stack horizontal latest badges emotes twitch youtube filters",
     },
     {
+      title: "Twitch Clip overlay widget",
+      url: "/features/overlay-layout/twitch-clip.html",
+      blurb: "Region where a Play Clip action shows a Twitch clip",
+      keywords: "overlay twitch clip widget play clip 16:9 volume capture",
+    },
+    {
       title: "Viewer Points",
       url: "/features/viewer-points.html",
       blurb: "Currency, earn rules, shop, point drops",
@@ -367,6 +403,12 @@
       keywords: "channel points rewards migrate isb dashboard pause enable cooldown",
     },
     {
+      title: "AutoMod",
+      url: "/features/stream/automod.html",
+      blurb: "Delete Twitch chat keywords and links that are not allowed",
+      keywords: "automod keyword link allow list delete chat moderator twitch",
+    },
+    {
       title: "Stream info",
       url: "/features/stream/stream-info.html",
       blurb: "Title, category, tags, go-live line, and Create Clip",
@@ -412,13 +454,19 @@
       title: "Message variables",
       url: "/reference/message-variables.html",
       blurb: "Tokens for chat, alerts, TTS, leaderboards",
-      keywords: "variables tokens {user} {winner} {amount} {counter} {balance} {goalProgress} {top5Counter} {counterTier} {input} {track} {artist}",
+      keywords: "variables tokens {user} {winner} {amount} {actionSet} {counter} {balance} {goalProgress} {top5Counter} {counterTier} {input} {track} {artist}",
+    },
+    {
+      title: "Media library",
+      url: "/reference/faq.html#media-library",
+      blurb: "Reuse an image, GIF, or sound from Library",
+      keywords: "media library images gifs sounds preview play use delete remove unused browse popup character sprite",
     },
     {
       title: "FAQ and troubleshooting",
       url: "/reference/faq.html",
-      blurb: "Twitch, audio, overlay, alerts, cursor, Tiltify, Spotify",
-      keywords: "faq troubleshooting connected audio overlay cursor minecraft wgc fullscreen tiltify spotify premium device",
+      blurb: "Twitch, audio, overlay, alerts, cursor, Tiltify, Spotify, media library",
+      keywords: "faq troubleshooting connected audio overlay cursor minecraft wgc fullscreen tiltify spotify premium device media library",
     },
   ];
 
@@ -449,6 +497,7 @@
             { href: "/features/activity.html", label: "Activity" },
             { href: "/features/queues-giveaways.html", label: "Queues and Giveaways" },
             { href: "/features/stream/channel-points.html", label: "Channel Points" },
+            { href: "/features/stream/automod.html", label: "AutoMod" },
             { href: "/features/stream/predictions.html", label: "Predictions" },
             { href: "/features/stream/stream-info.html", label: "Stream info" },
             { href: "/features/stream/quick-actions.html", label: "Quick Actions" },
@@ -479,6 +528,7 @@
             { href: "/features/actions/start-giveaway-session.html", label: "Start Giveaway Session" },
             { href: "/features/actions/run-chat-bot-or-automation.html", label: "Run Chat Bot or Automation" },
             { href: "/features/actions/create-clip.html", label: "Create Clip" },
+            { href: "/features/actions/play-clip.html", label: "Play Clip" },
             { href: "/features/actions/create-prediction.html", label: "Create Prediction" },
             { href: "/features/actions/set-stream-info.html", label: "Set Title / Category" },
             { href: "/features/actions/enable-disable.html", label: "Enable / Disable" },
@@ -522,6 +572,7 @@
             { href: "/features/overlay-layout/timer.html", label: "Timer Widget" },
             { href: "/features/overlay-layout/goals.html", label: "Goals" },
             { href: "/features/overlay-layout/chat-box.html", label: "Chat Box" },
+            { href: "/features/overlay-layout/twitch-clip.html", label: "Twitch Clip" },
           ],
         },
         { href: "/features/viewer-points.html", label: "Viewer Points" },

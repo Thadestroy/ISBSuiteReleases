@@ -90,6 +90,7 @@
               <tr><td><code>{displayName}</code></td><td>Alias for <code>{user}</code> (Follow Age / Watch Time)</td></tr>
               <tr><td><code>{winner}</code></td><td>Winning wheel entry text (also when an automation runs from a wheel entry win)</td></tr>
               <tr><td><code>{wheel}</code></td><td>Wheel / preset name</td></tr>
+              <tr><td><code>{actionSet}</code></td><td>Name of the Action Set picked for this fire (uniform, no-repeat, or a counter pool). Chat, TTS, Discord, and the alert on that set share it, including after a countdown. A blank name substitutes nothing. The literal token stays when this fire did not pick a set, including cooldown replies and a nested Run Automation.</td></tr>
               <tr><td><code>{amount}</code></td><td>Shared numeric event value: Counter Value Changed abs-delta, wired Counter Action amount, community-goal delta, bits, raid/shoutout viewers, resub months, gift count, hype level, ad seconds, points given/wagered, point-drop claim amount, or chat game stake</td></tr>
               <tr><td><code>{message}</code></td><td>Alert overlay text typed by the viewer (same source as <code>{input}</code>). On Bits / Cheer, <code>cheerN</code> tokens are stripped so TTS does not repeat each emote</td></tr>
               <tr><td><code>{reward}</code></td><td>Channel point reward title</td></tr>
@@ -204,20 +205,21 @@
 
         <section class="section" id="stream">
           <h2>Stream</h2>
-          <p>These tokens read the Stream Manager go-live line and the last title/category ISB loaded from Twitch (Stream Manager, go-live send, or Set Title/Category). Use them in automations, alerts, Viewer Points, and other templates. Related: <a href="/ISBSuiteReleases/docs/features/stream.html">Stream Manager</a>.</p>
+          <p>These tokens read the Stream Manager go-live line, how long the current broadcast has been live, and the last title/category ISB loaded from Twitch (Stream Manager, go-live send, or Set Title/Category). Use them in automations, alerts, Viewer Points, and other templates. Related: <a href="/ISBSuiteReleases/docs/features/stream.html">Stream Manager</a>.</p>
           <div class="table-wrap"><table>
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td><code>{golive}</code></td><td>Go live chat message from Stream Manager (stored even when Send to live chat is off). Tokens inside that line (for example <code>{category}</code>) fill in when this token is used</td></tr>
               <tr><td><code>{category}</code></td><td>This stream&apos;s current Twitch category</td></tr>
               <tr><td><code>{title}</code></td><td>This stream&apos;s current Twitch title</td></tr>
+              <tr><td><code>{uptime}</code></td><td>How long this broadcast has been live, in words (for example <code>1 hour 25 minutes</code>). Under an hour, leftover seconds stay (<code>25 minutes 9 seconds</code>). Offline is <code>0 seconds</code>. Not watch time or cooldown time</td></tr>
             </tbody>
           </table></div>
         </section>
 
         <section class="section" id="spotify">
           <h2>Spotify</h2>
-          <p>These tokens read the song on the connected Spotify player, including while it is paused. Use them in automations, alerts, chat, and TTS. Not connected, nothing playing, or no fetch yet leaves the literal token. <code>{track}</code> and <code>{artist}</code> are the song-request row only (see Timers and commands). Progress and duration are <code>m:ss</code>, or <code>h:mm:ss</code> at an hour or more.</p>
+          <p>These tokens read the song on the connected Spotify player, including while it is paused. Use them in automations, alerts, chat, and TTS. Not connected, nothing playing, or no fetch yet leaves the literal token. A Spotify Song Changed automation keeps the song that started, even if another song is playing by the time the message sends. <code>{track}</code> and <code>{artist}</code> are the song-request row only (see Timers and commands). Progress and duration are <code>m:ss</code>, or <code>h:mm:ss</code> at an hour or more.</p>
           <div class="table-wrap"><table>
             <thead><tr><th>Variable</th><th>Value</th></tr></thead>
             <tbody>

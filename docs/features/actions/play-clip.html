@@ -51,7 +51,7 @@
         <p class="lede">Play a public Twitch clip in a Twitch Clip widget. Paste one link to replay it, or use a variable so chat, automations, and chat games can each supply a different clip. A second play replaces the one on screen. Stop clears it.</p>
 
         <figure class="visual">
-          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-create-clip.png" alt="Play Clip action setup in ISB Suite" />
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-play-clip.png" alt="Play Clip action setup in ISB Suite" />
           <figcaption>Play Clip lives on the shared Actions card, next to Create Clip.</figcaption>
         </figure>
 
@@ -75,7 +75,7 @@
         <section class="section" id="how">
           <h2>How it works</h2>
           <p>The widget is only the screen region. This action decides what plays. A pasted URL always replays that clip. <code>{input}</code> plays the chat text from a command. <code>{clipUrl}</code> or <code>{clipId}</code> plays the clip Create Clip just made on the same fire. Play runs after Create Clip so those tokens are filled.</p>
-          <p>A bad link, a leftover variable, or a non-Twitch address is logged and the widget stays hidden. It does not replace a clip that is already showing. A deleted or embed-blocked clip fails the same way. The channel does not need to be live.</p>
+          <p>A bad link, a leftover variable, or a non-Twitch address is logged and the widget stays hidden. It does not replace a clip that is already showing. A deleted or embed-blocked clip fails the same way. A file past the size limit is logged with its size and skipped the same way. The channel does not need to be live.</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>

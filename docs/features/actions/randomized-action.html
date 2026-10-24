@@ -64,6 +64,7 @@
             <li>Optional: <strong>Only pick some Action Sets based on a counter</strong> - ranges pick from set numbers, overlap combines then picks one, and If nothing matches covers misses.</li>
             <li><strong>Import .txt</strong> / <strong>Edit lines</strong> / <strong>Export .txt</strong> sit above the Action Set picker. Add, Remove, Duplicate, and Extract sit on the name row. Move up, Move down, and Move to # sit on the Action Set # row. See <a href="#import">Import, edit, and export lines</a>.</li>
             <li>Nested Randomized Action inside a set is stripped - keep randomness on the parent only.</li>
+            <li>Chat, TTS, Discord, and alerts on the picked set can print its name with <code>{actionSet}</code>.</li>
           </ul>
         </div>
 
@@ -79,7 +80,7 @@
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>When Randomized Action is enabled, the parent rule no longer runs one flat action list. Instead it picks one named Action Set each time it runs and plays that set&apos;s Actions. Sets are searchable in the picker. Use this for rotating hype lines, stingers, or mystery wheel loads from a single redeem or command.</p>
+          <p>When Randomized Action is enabled, the parent rule no longer runs one flat action list. Instead it picks one named Action Set each time it runs and plays that set&apos;s Actions. Sets are searchable in the picker. Use this for rotating hype lines, stingers, or mystery wheel loads from a single redeem or command. <code>{actionSet}</code> in that set&apos;s chat, TTS, Discord, or alert text is the name picked for this run. A blank name leaves the spot empty.</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>

@@ -99,6 +99,7 @@
               <tr><td>New Subscription</td><td>Any tier or Tier 1/2/3</td></tr>
               <tr><td>Resubscription</td><td>Any, or tier and/or minimum months</td></tr>
               <tr><td>Follow</td><td>Any new follow</td></tr>
+              <tr><td>Watch Streak</td><td>Every Twitch watch-streak chat banner. Leave the length blank for every streak, or set At least / Exactly. <code>{amount}</code> is the streak length when Twitch sends one. <code>{input}</code> is the viewer's attached chat text, not the banner sentence. Hiding the chat banner does not stop the trigger</td></tr>
               <tr><td>Raid</td><td>At least or exact viewer count (blank / Any for every raid). Send Message <code>/shoutout {user}</code> fires Twitch's official shoutout</td></tr>
               <tr><td>Hype Train Start</td><td>Once when the train begins. Level Up does not fire on start</td></tr>
               <tr><td>Hype Train End</td><td>At least or exact level (blank / Any Level for every end); levels can go well past 5 (emote unlocks continue at 10 / 25 / 50 / 100+)</td></tr>
@@ -107,6 +108,7 @@
               <tr><td>Ad Break</td><td>Any duration or specific length; optional chat warnings before the ad; optional welcome-back message when ads end</td></tr>
               <tr><td>Shoutout Received</td><td>Any shoutout from another broadcaster</td></tr>
               <tr><td>Stream Went Live</td><td>Once per broadcast: new stream session, or first hydrate after flag-only live (not on reconnect or mid-stream app restart with the same stream id)</td></tr>
+              <tr><td>Spotify Song Changed</td><td>The connected Spotify account starts playing a different song. Use Send Chat Message <code>Now playing: {spotifyTrack} by {spotifyArtist}</code>. The line keeps that song even if the next one starts before chat sends. The song already playing when you open ISB Suite or connect Spotify is not announced. Pause, resume, and the same song again are quiet. Podcasts and local files are not included</td></tr>
               <tr><td>Custom Chat Command</td><td>Your <code>!command</code> with permission, aliases, Match anywhere, and Don't trigger from the broadcaster. Cooldown and limits are the automation's (one block for every trigger). Also listed on Chat Bot Overview. Use Chat Bot for a simple reply command</td></tr>
               <tr><td>Counter Tier Reached</td><td>Viewer or channel crosses upward into a configured tier; once per tier gained if several thresholds cross in one increment</td></tr>
               <tr><td>Counter Value Changed</td><td>Once per change; filter increase / decrease / either; optional counter filter</td></tr>
@@ -117,7 +119,6 @@
             </tbody>
           </table></div>
           <p><strong>Count each unit:</strong> Bits, Power-Up, Subscription Gifter, Raid, Hype Train, Tiltify, and Chat Message Match can expand one event into multiple runs (off by default; live preview in the editor). Count-each runs share one cooldown and per-stream limit slot for that source event.</p>
-          <p><strong>Per-stream limits:</strong> leave Max fires blank for no cap. <code>0</code> means it does not fire. <code>1</code> means once this stream. The per-user box works the same way for each viewer, and is skipped when the trigger has no viewer. Counters reset when a new stream session starts.</p>
         </section>
 
         <section class="section" id="actions">
