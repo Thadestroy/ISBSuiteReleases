@@ -72,7 +72,7 @@ ISB Suite is built around several major systems that all work together:
 | **Viewer Points** | Custom channel currency with a shop and point drops |
 | **Community Goals** | Stream-wide progress bars fed by Twitch events or chat |
 | **Chat Games** | Mass-entry chat games with stakes, rolls, and configurable outcomes |
-| **Stream Manager** | Live desk: chat, Activity, viewers, stream info, Predictions, Channel Points, clip, and Quick Actions |
+| **Stream Manager** | Live desk: chat, Activity, viewers, stream info, Predictions, Polls, Channel Points, clip, and Quick Actions |
 | **YouTube (Beta)** | Sign in with Google for YouTube chat beside Twitch, Super Chat and membership alerts, and `!link` to join a YouTube handle with a Twitch login |
 | **Counters & Stats** | Global and per-viewer counters with tiers and CSV export |
 | **Character Studio** | *(coming soon)* |
@@ -92,6 +92,7 @@ Live desk on the nav rail. Full guide: [Stream Manager](https://thadestroy.githu
 - **Viewers** tile lists people currently in chat (Twitch chatters, not CCV), with search. Chat has a Viewers / Chat swap like Twitch
 - **Activity** lists follows, subs, bits, raids, Tiltify, wheels, giveaways, chat games, goals, timers, song requests, Viewer Points commands, and automations that ran without an alert. Filter, search, and Resend a stored alert
 - **Predictions** tile: create, lock, cancel, pick a winner, and queue the next draft (Affiliate or Partner). Create Prediction is also an action on Automations and Chat Bot
+- **Polls** tile: create a Twitch poll, then End (results stay) or Cancel (Twitch removes it). Channel Points extra votes stay off unless you turn them on. There is no poll queue yet. Create Poll is also an action; if a poll is already live, that fire skips it
 - Stream info Edit (title, category, tags, language, labels) opens a popup. Clip from the desk tile. Optional go-live line with **Send to Twitch chat** (off by default)
 - Channel Points tab: create, edit, and delete rewards ISB created. Dashboard rewards stay read-only; **Migrate to ISB** / **Migrate all** make paused ISB copies
 - Quick Actions: Add Automation, Add Chat Bot, Pause / Resume Automations, plus up to 8 of your own rules
@@ -116,7 +117,7 @@ Live desk on the nav rail. Full guide: [Stream Manager](https://thadestroy.githu
 Animated on-screen alerts for stream events, displayed in the Alert Box widget on your overlay:
 
 **Twitch Alerts**
-- Follow, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver
+- Follow, Watch Streak, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver
 - Bits / Cheer, Power-Up, Raid, Hype Train Start, Hype Train End, Hype Train Level Up, Goal Achieved
 - Ad Break (optional pre-warnings and welcome-back), Shoutout Received, Stream Went Live, Channel Point Redemption
 - New Subscription and Resubscription follow Twitch chat announcements (a silent payment / badge change with no chat notice does not fire a New Subscription alert)
@@ -228,6 +229,8 @@ Create a custom channel currency with a redeemable shop and point drops:
 ### Powerful Automation System
 Connect any stream event to any action. Automations live in the **Automations** tab.
 
+**Share a setup.** Export on an automation, Chat Bot command, Chat Game, custom alert, or shop item lists the setups and media before you save the file. Import Package on any of those pages can update the copy this PC added from that same file, or add another copy. Balances, goal progress, queues, viewer lists, and Discord webhook URLs stay on this PC. A package that was edited after export is refused. Free packages stop at 2 GB and Pro at 25 GB.
+
 **Trigger Types**
 
 | Trigger | Details |
@@ -284,6 +287,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Play Clip | Play a public Twitch clip in a Twitch Clip overlay widget, or stop the one showing. A link replays that clip; `{input}` or `{clipUrl}` fills in at fire time |
 | Set Title / Category | Change the stream title and/or category. Title fields use the same variables as Send Message |
 | Create Prediction | Start a Twitch Channel Points Prediction (title, 2-10 outcomes, 30-1800s). Queues on Stream Manager if one is already live. Hidden until you grant Predictions |
+| Create Poll | Start a Twitch poll (title, 2-5 choices, 15-1800s). Channel Points extra votes stay off unless you turn them on. If a poll is already live, that fire skips it. Hidden until you grant Polls |
 | Channel Points | Change cost, pause, or cooldown on ISB-managed rewards. Reset after (default 10 minutes) restores the first snapshot |
 | OBS Studio | Switch scenes, show or hide sources, mute, set volume, start or stop stream or record (OBS 28+ WebSocket). Hidden until you Connect. ISB Suite does not start OBS |
 | Streamlabs Desktop | Same scene / source / mute / stream operations on Streamlabs Remote Control (default port 59650). Volume is 0-100%. Hidden until you Connect. ISB Suite does not start Streamlabs |
@@ -407,6 +411,7 @@ Speak winner announcements and alert callouts aloud, no account or API key requi
 - Works out of the box with no setup
 - Choose from a range of voices (e.g. Brian, Amy, Matthew)
 - Configure voice and volume per automation, alert, or giveaway winner
+- Spoken text may contain `&`, `<`, and `>`
 
 ### Per-Entry Actions
 Each wheel entry can have its own actions when it wins:
@@ -478,6 +483,7 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 |---------|-------------|
 | `!join` | Join the current wheel (when a session is active) |
 | `!points` | Check your viewer points balance (or your custom command name) |
+| `!shop` / `!shop 2` | List shop buy commands and prices. `!shop 2` turns the page. The line does not name the currency. Twitch and YouTube pages differ |
 | `!givepoints @user amount` | Give your own points to another viewer |
 | `!gamble amount` | Wager points on a configurable win-chance roll (`amount`, `amount%`, or `all`; decimals allowed and round to a whole stake) |
 | `!giveaway` | Enter an active giveaway |

@@ -65,6 +65,7 @@
             <li>Leaderboard token: <code>{top5Counter:CounterName}</code> (per-user only).</li>
             <li>Per-user <code>{counter:CounterName}</code> on a timer (no viewer) shows the Stats Total.</li>
             <li>CSV import accepts comma or semicolon (auto-detected).</li>
+            <li><strong>Add viewer</strong> on Stats sets one viewer's value without a CSV. Same lookup rules as import. Global totals stay on the pencil.</li>
             <li>Free: 5 counters. Built-in system counters and counters referenced by other features are exempt. Full limits on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
           </ul>
         </div>
@@ -130,6 +131,7 @@
             <li>The downloadable template stays comma-separated. YouTube mode uses <code>@handle</code> examples.</li>
             <li>Step 1 picks <strong>Twitch usernames</strong> or <strong>YouTube handles</strong> (<code>@handle</code> or a <code>UC...</code> channel id). Display names cannot be resolved. YouTube-only streamers can import without Twitch.</li>
             <li>YouTube rows become their own ISB account. After <code>!link</code>, each counter follows Settings, Linking accounts: keep the larger value (the default) or add the two amounts together. To add YouTube history onto an already-linked row without another link, import with Add. See <a href="/ISBSuiteReleases/docs/features/youtube.html#link">YouTube</a>.</li>
+            <li><strong>Add viewer</strong> on Counter Stats does the same lookup for one person: Twitch login, or a YouTube <code>@handle</code> or <code>UC...</code> channel id. Set replaces their value. Add (when they already have one) increases it. The account is created only when you set the value. The pencil still edits a global total or a viewer already on the board.</li>
           </ul>
         </section>
 

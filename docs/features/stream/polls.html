@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Polls | ISB Suite</title>
+  <meta name="description" content="Create, end, or cancel a Twitch poll from Stream Manager" />
+  <meta name="site-base" content="/ISBSuiteReleases/docs" />
+  <meta property="og:title" content="Polls | ISB Suite" />
+  <meta property="og:description" content="Create, end, or cancel a Twitch poll from Stream Manager" />
+  <meta property="og:image" content="/assets/screenshots/home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ISBSuiteReleases/docs/assets/css/site.css" />
+</head>
+<body>
+  <div class="wiki">
+    <header class="wiki-top">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="brand" href="/ISBSuiteReleases/docs/index.html">
+        <img src="/ISBSuiteReleases/docs/assets/app-icon.png" alt="" width="32" height="32" />
+        <span class="brand-text">
+          <strong>ISB Suite</strong>
+          <span>Integrated Stream Broadcast Suite</span>
+        </span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <label class="sr-only" for="wiki-search">Search docs</label>
+        <input id="wiki-search" type="search" placeholder="Search features, commands, setups..." autocomplete="off" />
+        <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a>
+        <a class="btn btn-primary" href="/ISBSuiteReleases/docs/download.html">Download</a>
+      </div>
+    </header>
+    <aside class="wiki-side" id="wiki-side"></aside>
+    <main class="wiki-main">
+      <article class="page wide">
+        <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/stream.html">Stream Manager</a> / Polls</p>
+        <h1 class="page-title">Polls</h1>
+        <p class="lede">The Polls tile creates a Twitch poll from the desk and manages the live one. Create opens a popup for the title, 2-5 choices, and the duration. Channel Points extra votes stay off unless you turn them on. While a poll is ACTIVE, the tile shows the title, time left, and vote counts, with End and Cancel. End keeps the results on Twitch. Cancel removes the poll. A finished poll stays on the tile for 15 seconds, and a new poll replaces it immediately. Queue next holds drafts that start after the live poll ends. There is no queue cap.</p>
+
+        <figure class="visual">
+          <img src="/ISBSuiteReleases/docs/assets/screenshots/stream-manager-polls.png" alt="Create Poll: title, choices, duration, and optional Channel Points votes." />
+          <figcaption>Create Poll: title, choices, duration, and optional Channel Points votes.</figcaption>
+        </figure>
+
+        <div class="ref-panel">
+          <h3>At a glance</h3>
+          <ul>
+            <li>Desk tile, visible by default under Predictions.</li>
+            <li>Title max 60 characters. Choices 2-5 (default Yes / No), 25 characters each. Duration 15 seconds to 30 minutes (default 1 min). Enter sec or min.</li>
+            <li>Channel Points extra votes are off unless you check them. Cost is 1 to 1,000,000 points per extra vote.</li>
+            <li>Requires Affiliate or Partner and <code>channel:manage:polls</code>. Re-authenticate Twitch once if you connected before this feature.</li>
+            <li>Only one poll can be live. Create is hidden while one is live. Queue next, and the <a href="/ISBSuiteReleases/docs/features/actions/create-poll.html">Create Poll</a> action when a poll is already live, save the draft here. There is no queue cap.</li>
+            <li>A successful create from the tile or from an automation records Activity. Stream Manager Chat shows the same poll above the transcript, including one started on Twitch.</li>
+          </ul>
+        </div>
+
+        <nav class="toc"><strong>On this page</strong><ol>
+          <li><a href="#create">Create</a></li>
+          <li><a href="#manage">Manage</a></li>
+          <li><a href="#queue">Queue</a></li>
+          <li><a href="#limits">Limits</a></li>
+        </ol></nav>
+
+        <section class="section" id="create">
+          <h2>Create</h2>
+          <ol class="steps">
+            <li>Connect Twitch on <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a>. Grant poll management if prompted.</li>
+            <li>Open Stream Manager. Click Create on the Polls tile.</li>
+            <li>Enter a title, at least two choices, and a duration (seconds or minutes). Leave Channel Points extra votes off unless you want them. Create sends the poll to Twitch.</li>
+          </ol>
+          <p>The tile then shows the live poll. Activity shows the created title.</p>
+        </section>
+        <section class="section" id="manage">
+          <h2>Manage</h2>
+          <p>While a poll is running, the tile shows the title, remaining time, and a bar for each choice. End stops it early and leaves the results on Twitch. Cancel asks first, then tells Twitch to remove the poll. Stream Manager Chat shows the same poll above the messages and keeps the result up for 30 seconds. Close it sooner with the X, including when nobody voted. That also clears this tile. End and Cancel stay on this tile.</p>
+          <p>After the duration, the result stays on the tile for 15 seconds. A clear winner stays bright and the other choices fade. A tie stays even, and a poll with no votes stays even. A new poll replaces the result immediately. The tile also picks up a poll started on Twitch or by an automation.</p>
+        </section>
+        <section class="section" id="queue">
+          <h2>Queue</h2>
+          <p>While a poll is live, Create stays hidden. Queue next opens the waiting list, shows how many are waiting, and saves the draft on this PC with no cap. Queue next inside that list adds another. Remove a row from the list. The Create Poll action also queues here when Twitch already has one ACTIVE. When the live poll ends, is ended, or is canceled - here or on Twitch - ISB Suite starts the next queued poll even if Stream Manager is closed. A title Twitch rejects stays queued so it does not retry on its own. Reconnect Twitch if the queue says it is paused.</p>
+        </section>
+        <section class="section" id="limits">
+          <h2>Limits</h2>
+          <ul>
+            <li>Twitch allows one live poll per channel. You cannot edit the title, choices, or duration after create.</li>
+            <li>Bits voting is not offered here.</li>
+            <li>Related: <a href="/ISBSuiteReleases/docs/features/actions/create-poll.html">Create Poll action</a> for rules. <a href="/ISBSuiteReleases/docs/features/activity.html">Activity</a> shows the created title. <a href="/ISBSuiteReleases/docs/features/stream/chat.html">Chat</a> shows the live card.</li>
+          </ul>
+        </section>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+      </article>
+    </main>
+  </div>
+  <script src="/ISBSuiteReleases/docs/assets/js/site.js"></script>
+</body>
+</html>

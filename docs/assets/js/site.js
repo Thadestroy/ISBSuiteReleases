@@ -193,6 +193,12 @@
       keywords: "create prediction twitch channel:manage:predictions outcomes window {predictionId} {predictionTitle}",
     },
     {
+      title: "Create Poll action",
+      url: "/features/actions/create-poll.html",
+      blurb: "Start a Twitch poll; announce with {pollTitle}",
+      keywords: "create poll twitch channel:manage:polls choices duration {pollId} {pollTitle} channel points",
+    },
+    {
       title: "Set Title / Category action",
       url: "/features/actions/set-stream-info.html",
       blurb: "Change stream title and/or category from a rule",
@@ -232,7 +238,7 @@
       title: "Alerts",
       url: "/features/alerts.html",
       blurb: "Built-in and custom alerts, appearance, Run Alert",
-      keywords: "alert follow sub bits raid tts gif appearance custom run alert motion style preset",
+      keywords: "alert follow watch streak sub bits raid tts gif appearance custom run alert motion style preset",
     },
     {
       title: "Chat Bot",
@@ -358,7 +364,7 @@
       title: "Viewer Points",
       url: "/features/viewer-points.html",
       blurb: "Currency, earn rules, shop, point drops",
-      keywords: "viewer points shop drop earn watching watch time follow bits raid sub chat message channel points balance !points !points @user {caller} !givepoints !gamble !vpgive !vpgive all !claim community goal contribute",
+      keywords: "viewer points shop drop earn watching watch time follow bits raid sub chat message channel points balance !points !points @user {caller} !shop !shop 2 !givepoints !gamble !vpgive !vpgive all !claim community goal contribute",
     },
     {
       title: "Community Goals",
@@ -419,6 +425,12 @@
       url: "/features/stream/predictions.html",
       blurb: "Create, resolve, or queue the next Channel Points Prediction from Stream Manager",
       keywords: "predictions twitch channel:manage:predictions outcomes window create lock cancel resolve winner queue",
+    },
+    {
+      title: "Polls",
+      url: "/features/stream/polls.html",
+      blurb: "Create, queue, end, or cancel a Twitch poll from Stream Manager",
+      keywords: "polls twitch channel:manage:polls choices duration end cancel queue channel points votes",
     },
     {
       title: "Chat",
@@ -499,6 +511,7 @@
             { href: "/features/stream/channel-points.html", label: "Channel Points" },
             { href: "/features/stream/automod.html", label: "AutoMod" },
             { href: "/features/stream/predictions.html", label: "Predictions" },
+            { href: "/features/stream/polls.html", label: "Polls" },
             { href: "/features/stream/stream-info.html", label: "Stream info" },
             { href: "/features/stream/quick-actions.html", label: "Quick Actions" },
           ],
@@ -530,6 +543,7 @@
             { href: "/features/actions/create-clip.html", label: "Create Clip" },
             { href: "/features/actions/play-clip.html", label: "Play Clip" },
             { href: "/features/actions/create-prediction.html", label: "Create Prediction" },
+            { href: "/features/actions/create-poll.html", label: "Create Poll" },
             { href: "/features/actions/set-stream-info.html", label: "Set Title / Category" },
             { href: "/features/actions/enable-disable.html", label: "Enable / Disable" },
             { href: "/features/actions/channel-points.html", label: "Channel Points" },

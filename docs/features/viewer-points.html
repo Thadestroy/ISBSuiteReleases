@@ -63,6 +63,7 @@
             <li>Watching earn rules need <strong>Stats - Watch Time</strong> and the Twitch chatters scope.</li>
             <li>Event earn rules (chat, follow, sub, bits, raid, channel points, and YouTube Super Chat / members / gifts) award when the chatter has a platform user id.</li>
             <li>Shop items run full Actions (wheel, sound, giveaway, automation, Run Alert, and more).</li>
+            <li><code>!shop</code> lists each item's buy command and price. <code>!shop 2</code> turns the page.</li>
             <li>Community Goals can spend a bound currency 1:1 into a goal (contribute command on the goal).</li>
             <li>Point Drop needs a Point Drop widget on the active layout.</li>
             <li>Free: 1 currency, 5 shop items per currency, 1 point drop per currency. Full limits on <a href="/ISBSuiteReleases/docs/pricing.html">Free and Pro</a>.</li>
@@ -127,6 +128,7 @@
           <h2>Viewer and admin commands</h2>
           <ul>
             <li><strong>Balance:</strong> viewers type <code>!points</code> (or your custom command) to check their balance, or <code>!points @username</code> for another viewer (Twitch login or YouTube <code>@handle</code>). Allow checking another viewer is on by default. <code>{user}</code> / <code>{balance}</code> are the subject; <code>{caller}</code> is who typed the command. Unknown login uses the not-found template; a resolved viewer with no wallet is a real <code>0</code>.</li>
+            <li><strong>Shop list:</strong> viewers type <code>!shop</code> (or your custom command) to see each item's buy command and price, for example <code>!spin 100</code>. <code>!shop 2</code> turns the page. The list does not name the currency. Twitch and YouTube pages are different lengths, so page 2 is not the same items on both. Items that are off, locked, or on a currency that does not run in that chat are left out. It is a built-in command, edited from the Shop page the same way as <code>!addgoal</code>.</li>
             <li><strong>Give:</strong> viewers give their own points to another chatter (for example <code>!givepoints @handle 100</code>, <code>!givepoints @handle 1k</code>, <code>!givepoints @handle 50%</code>, or <code>!givepoints @handle all</code>). <code>k</code> and <code>m</code> match gamble (<code>1k</code> = 1,000, <code>1m</code> = 1,000,000, no space). Percent and <code>all</code> use the points you can spend above the counter minimum. A YouTube <code>@handle</code> credits that channel; a linked account cannot give to itself. A name of <code>all</code> is that viewer, not a broadcast.</li>
             <li><strong>Gamble:</strong> viewers wager points on a configurable win-chance roll (for example <code>!gamble 50</code>, <code>!gamble 1k</code>, <code>!gamble 1m</code>, <code>!gamble 50.2</code>, <code>!gamble 34.7%</code>, or <code>!gamble all</code>). <code>k</code> and <code>m</code> suffixes scale by 1,000 and 1,000,000 with no space (<code>1k</code>, not <code>1 k</code>). Decimals and percents round to a whole stake before the roll. Win chance and jackpot chance can use hundredths, such as 50.55. Optional jackpot under Advanced Settings (off by default): a chance on that same roll pays a payout multiple (default 1% and 5x). A 5x hit on a 50 wager credits 200. <code>{amount}</code> stays the wager, and the jackpot chat line is editable.</li>
             <li><strong>Admin give:</strong> broadcaster/mods award points from chat (for example <code>!vpgive @user 100</code>, <code>!vpgive @user 1k</code>, or <code>!vpgive all 1k</code> for everyone currently in chat). The amount is a flat number or <code>k</code> / <code>m</code> suffix. <code>all</code> is the broadcast target (Twitch Helix chatters plus YouTube recently-chatted, same window as Watch Time, de-duped when those identities are linked), not an amount. Not a live JOIN feed.</li>
@@ -139,7 +141,9 @@
         <section class="section" id="shop">
           <h2>Shop items</h2>
           <ul>
+            <li><strong>Shop list command</strong> is a built-in command on the Shop page, edited the same way as Community Goals <code>!addgoal</code>. Default <code>!shop</code>, Everyone, on. Change the name, aliases, Match anywhere, permission, and cooldown from that card.</li>
             <li>Viewers spend points to trigger actions: load a wheel, play a sound, start a giveaway, send chat, increment a counter, run an automation, Run Alert, and more.</li>
+            <li><strong>Export</strong> on a shop item exports that item. <strong>Export</strong> on the currency exports the whole Viewer Points setup, including earn rules, commands, point drops, and every shop item. <strong>Import Package</strong> opens any package. See <a href="/ISBSuiteReleases/docs/features/automations.html#setup-package">Share a setup</a>.</li>
             <li>Per-item price and purchase confirmation message.</li>
             <li>Advanced Settings: permission, cooldown (optional burst), per-stream limits, command aliases, and Match anywhere. Longer aliases pass the remainder as <code>{input}</code>.</li>
           </ul>
@@ -154,6 +158,7 @@
             <li><strong>Spawn chance:</strong> percentage probability at each interval check.</li>
             <li><strong>Display duration:</strong> how long the drop image stays visible.</li>
             <li><strong>Claim command:</strong> chat command viewers type to claim (aliases and Match anywhere supported).</li>
+            <li><strong>Export</strong> on a point drop shares that drop and the currency it belongs to. See <a href="/ISBSuiteReleases/docs/features/automations.html#setup-package">Share a setup</a>.</li>
             <li><strong>Claim slots:</strong> randomized range (min/max) for how many successful claims can happen before the drop ends.</li>
             <li><strong>Points per claim:</strong> how many viewer points each successful claim awards (default 1).</li>
             <li><strong>Drop image/GIF:</strong> shown in the Point Drop widget on your overlay. Browse a new file, or <strong>Library</strong> to reuse one. See <a href="/ISBSuiteReleases/docs/reference/faq.html#media-library">Media library</a>.</li>

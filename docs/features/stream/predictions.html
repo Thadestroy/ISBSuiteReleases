@@ -48,7 +48,7 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/stream.html">Stream Manager</a> / Predictions</p>
         <h1 class="page-title">Predictions</h1>
-        <p class="lede">The Predictions tile creates a Channel Points Prediction from the desk and manages the live one. Create opens a popup for title, 2-10 outcomes, and the window. While a Prediction is ACTIVE or LOCKED, the tile shows the title, time left, and bet counts, with Lock, Cancel, and Pick winner. A Queued count (like the Queues tile) lists drafts that start after the live one ends - click it to review or remove them. There is no queue cap.</p>
+        <p class="lede">The Predictions tile creates a Channel Points Prediction from the desk and manages the live one. Create opens a popup for title, 2-10 outcomes, and the window. While a Prediction is ACTIVE or LOCKED, the tile shows the title, time left, and bet counts, with Lock, Cancel, and Pick winner. Queue next opens the waiting list and shows how many drafts are waiting. Queue next inside that list adds another. Click a row to remove it. There is no queue cap.</p>
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/stream-manager-predictions.png" alt="Create Prediction: title, outcomes, and the window." />
@@ -61,9 +61,9 @@
             <li>Desk tile, visible by default under Stream info.</li>
             <li>Title max 45 characters. Outcomes 2-10 (default Yes / No), 25 characters each. Window 30 seconds to 30 minutes (default 2 min). Enter sec or min.</li>
             <li>Requires Affiliate or Partner and <code>channel:manage:predictions</code>. Re-authenticate Twitch once if you connected before this feature.</li>
-            <li>Only one Prediction can be ACTIVE or LOCKED. Create is hidden while one is live. Queue next saves drafts on this PC with no cap; the next starts after resolve or cancel, including when that happens on Twitch. Click the Queued count to list and remove them.</li>
+            <li>Only one Prediction can be ACTIVE or LOCKED. Create is hidden while one is live. Queue next opens the waiting list, shows how many are waiting, and saves drafts on this PC with no cap. Queue next inside that list adds another. Remove a row from the list. The next starts after resolve or cancel, including when that happens on Twitch.</li>
             <li>Manual create, lock, resolve, and cancel record Activity. Automations can also create via the <a href="/ISBSuiteReleases/docs/features/actions/create-prediction.html">Create Prediction</a> action. If a Prediction is already live, that action queues the draft here instead of dropping it.</li>
-            <li>No auto chat announce. Add a Send Message action on a rule if you want to post the title.</li>
+            <li>No auto chat announce. Add a Send Message action on a rule if you want to post the title. Stream Manager Chat shows the live Prediction above the transcript, including one started on Twitch, and keeps the result up for 30 seconds. Close it sooner with the X once a winner, a refund, or a poll with no votes is showing. That also clears the matching desk tile. A Twitch Poll uses the same kind of card.</li>
           </ul>
         </div>
 
@@ -85,12 +85,12 @@
         </section>
         <section class="section" id="manage">
           <h2>Manage</h2>
-          <p>While a Prediction is running, the tile shows the title, remaining time, and how many people picked each outcome (or a count when there are more than three). Lock stops new bets early. Cancel refunds everyone (the tile asks first). Pick winner opens a popup with live totals; choosing an outcome pays those viewers.</p>
-          <p>After the window ends, Twitch locks the Prediction. You still have to pick a winner or cancel before you can create another. The tile also picks up a Prediction started on Twitch or by an automation (within about 15 seconds).</p>
+          <p>While a Prediction is running, the tile shows the title, remaining time, and a bar for each outcome. Viewers opens the top 10 names Twitch sent for each side. After a winner, that list shows points won and points lost. Lock stops new bets early. Cancel refunds everyone (the tile asks first). Pick winner opens a popup with live totals; choosing an outcome pays those viewers. Stream Manager Chat shows the same Prediction above the messages. End, cancel, and pick winner stay on this tile.</p>
+          <p>After the window ends, Twitch locks the Prediction. You still have to pick a winner or cancel before you can create another. A winner or a refund stays on the tile for 15 seconds. A clear winner stays bright and the other outcomes fade. A new Prediction replaces the result immediately. The tile also picks up a Prediction started on Twitch or by an automation (within about 15 seconds).</p>
         </section>
         <section class="section" id="queue">
           <h2>Queue</h2>
-          <p>While a Prediction is live, Create stays hidden. Queue next opens the same popup and saves the draft on this PC with no cap. The Create Prediction action also queues here when Twitch already has one ACTIVE. The tile shows a Queued count (and the next title) like the Queues tile; click it for the full list and Remove. When the live one is resolved or canceled - here or on Twitch - ISB Suite starts the next queued Prediction even if Stream Manager is closed.</p>
+          <p>While a Prediction is live, Create stays hidden. Queue next opens the waiting list, shows how many are waiting, and saves the draft on this PC with no cap. Queue next inside that list adds another. Remove a row from the list. The Create Prediction action also queues here when Twitch already has one ACTIVE. When the live one is resolved or canceled - here or on Twitch - ISB Suite starts the next queued Prediction even if Stream Manager is closed.</p>
         </section>
         <section class="section" id="limits">
           <h2>Limits</h2>

@@ -62,6 +62,7 @@
             <li>Same trigger and action building blocks as <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a> - pick the tab that matches how you think about the rule.</li>
             <li>Custom <code>!commands</code> with permission, aliases, Match anywhere, Don't trigger from the broadcaster or linked bot, and Allow checking another viewer on the card; cooldown and per stream limits under Show Advanced.</li>
             <li>Overview <strong>Export Commands</strong> writes a CSV of every command card on this page (channel commands, timed messages, built-ins, Chat Games, Viewer Points, Community Goals, Saved Lists, Live Timer), including aliases in the Description column.</li>
+            <li><strong>Export</strong> on a command card and <strong>Import Package</strong> share a setup. See <a href="/ISBSuiteReleases/docs/features/automations.html#setup-package">Share a setup</a>.</li>
             <li>Built in commands appear here for editing where applicable. Full list: <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>. Variables: <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</li>
           </ul>
         </div>
@@ -102,7 +103,7 @@
         <section class="section" id="options">
           <h2>Command options</h2>
           <p>Type the command the way viewers will send it in chat, including a leading <code>!</code> (for example <code>!spin</code>). Empty command-name and alias fields show a muted <code>!command</code> / <code>!alias</code> hint. Other prefixes such as <code>?help</code> still work. The app does not auto-add <code>!</code>.</p>
-          <p>Custom commands keep permission, aliases, Match anywhere, Don't trigger from the broadcaster or linked bot, and Allow checking another viewer on the main card (with info tips). Cooldown and per-stream limits stay under Show Advanced with the other actions.</p>
+          <p>Custom commands keep permission, aliases, Match anywhere, Don't trigger from the broadcaster or linked bot, and Allow checking another viewer on the main card (with info tips). Cooldown and per-stream limits stay under Show Advanced with the other actions. <strong>Send as</strong> sits under Run on. It appears only when a bot is linked, and only on a custom reply (not a randomized reply, and not Follow Age, Watch Time, Shoutout, or Song Request). Bot is the default. <code>!editcommand</code> keeps the choice; <code>!addcommand</code> stays Bot.</p>
           <p>Custom commands support:</p>
           <ul>
             <li><strong>Permission levels:</strong> Everyone; Followers (followers, subs, VIPs, mods, broadcaster); Subscribers (subs, VIPs, mods, broadcaster); VIPs (VIPs, mods, broadcaster); Moderators (mods and broadcaster); Broadcaster only; Specific User(s). A role can also include named users who do not meet that role (for example Moderators plus a regular viewer).</li>

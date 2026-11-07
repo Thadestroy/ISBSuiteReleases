@@ -62,6 +62,7 @@
             <li>Needs an <strong>Alert Box</strong> widget on the active <a href="/ISBSuiteReleases/docs/features/overlay-layout/index.html">Overlay Layout</a>.</li>
             <li>When several rules match, the most specific alert fires (exact amount and dedicated rules beat catch-alls).</li>
             <li><strong>Run Alert</strong> from Automations, Chat Bot, shop, and games reuses a designed alert. Related: <a href="/ISBSuiteReleases/docs/features/actions/run-alert.html">Run Alert action</a>, <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a>, <a href="/ISBSuiteReleases/docs/reference/message-variables.html">Message variables</a>.</li>
+            <li><strong>Export</strong> on a built-in alert or a custom alert, and <strong>Import Package</strong>, share a setup. See <a href="/ISBSuiteReleases/docs/features/automations.html#setup-package">Share a setup</a>.</li>
           </ul>
         </div>
 
@@ -76,7 +77,8 @@
 
         <section class="section" id="twitch">
           <h2>Twitch alert types</h2>
-          <p>Follow, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver, Bits / Cheer, Power-Up, Raid, Hype Train Start, Hype Train End, Hype Train Level Up, Goal Achieved, Ad Break, Shoutout Received, Stream Went Live, Channel Point Redemption.</p>
+          <p>Follow, Watch Streak, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver, Bits / Cheer, Power-Up, Raid, Hype Train Start, Hype Train End, Hype Train Level Up, Goal Achieved, Ad Break, Shoutout Received, Stream Went Live, Channel Point Redemption.</p>
+          <p><strong>Watch Streak</strong> uses <code>{user} is on a {amount}-day watch streak!</code>. Leave the length blank for every streak, or set At least / Exactly.</p>
           <p><strong>Spotify Song Changed</strong> is on this page too. It fires when a different song starts on the connected Spotify account. The default text is <code>Now playing: {spotifyTrack} by {spotifyArtist}</code>.</p>
           <p>New Subscription fires only for a first-time paid sub (chat/Activity Feed notice). Returners and gift recipients do not get a New Subscription alert. Subscription Gifter is gifter-linked (bulk count). Subscription Gift Receiver fires once per recipient with <code>{user}</code> = gifted viewer and <code>{gifter}</code> = gifter (gift bombs = one alert per recipient). Resubscription fires when the viewer shares their resub message in chat. A silent payment or badge change with no chat notice does not fire a New Subscription alert.</p>
           <p>Image and sound each have <strong>Library</strong> to reuse a file already saved in ISB Suite. See <a href="/ISBSuiteReleases/docs/reference/faq.html#media-library">Media library</a>.</p>
@@ -112,7 +114,7 @@
             <tbody>
               <tr><td>Community Goal Reached</td><td>When a community goal hits its limit</td></tr>
               <tr><td>Counter Tier Reached</td><td>Counter crosses into the next configured tier</td></tr>
-              <tr><td>Counter Value Changed</td><td>Counter goes up, down, or either way (once per change)</td></tr>
+              <tr><td>Counter Value Changed</td><td>Counter goes up, down, or either way (once per change). Watch-time updates do not run this trigger</td></tr>
               <tr><td>First Chat Message</td><td>Walk on / catch all on a viewer first message</td></tr>
               <tr><td>First-Time Chatter</td><td>Once the first time a viewer chats (not each stream). After they have sent a message, they are not first-time again. Twitch and YouTube are saved separately. Existing viewers already in your data stay off the list after an update. Optional only when live</td></tr>
               <tr><td>Chat Command</td><td>Your own <code>!command</code> (aliases, Match anywhere, permission, cooldown, limits)</td></tr>
