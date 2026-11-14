@@ -65,7 +65,7 @@
             <li>Spotify: guided setup (your own Developer app + Connect). Automations use the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify</a> action; viewers can <code>!sr</code> a song after Connect and <code>!remove</code> their last request.</li>
             <li>OBS Studio: connect the built-in WebSocket (OBS 28+). Automations use the <a href="/ISBSuiteReleases/docs/features/actions/obs.html">OBS Studio</a> action to switch scenes, show or hide sources, mute, stream, or record.</li>
             <li>Streamlabs Desktop: connect third-party Remote Control (port 59650 + API token). Separate from the OBS card. Automations use the <a href="/ISBSuiteReleases/docs/features/actions/streamlabs.html">Streamlabs Desktop</a> action to switch scenes, show or hide sources, mute, set volume (0-100%), stream, or record.</li>
-            <li>TTS is built in with no API key.</li>
+            <li>TTS uses your Amazon Polly account (Integrations). Standard voices such as Brian, Amy, and Matthew. Amazon bills that account.</li>
             <li>Audio output channels (buses for sounds/alerts/TTS) live under <strong>Settings</strong>, not on this page.</li>
             <li>Skip the alert, sound, wheel, giveaway, chat game, or TTS that is playing from a global hotkey under <strong>Settings - Hotkeys</strong>, even when ISB Suite is not focused. Skipping an alert also stops that alert's TTS. Skip TTS stops whatever is speaking.</li>
             <li>Want another platform? <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Request an integration</a>.</li>
@@ -96,7 +96,7 @@
 
         <section class="section" id="youtube">
           <h2>YouTube (beta)</h2>
-          <p>YouTube is a beta feature. Request access to the YouTube API on <a href="https://discord.gg/w834PyCCgb">Discord</a>, then Sign in with Google on Integrations. After connect, Chat Bot, alerts, Viewer Points, Community Goals, and Stream Manager Chat can use YouTube live chat. Full setup, <code>!link</code>, permissions, lurkers, and send quota: <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</p>
+          <p>YouTube is a beta feature. Request access to the YouTube API on <a href="https://discord.gg/w834PyCCgb">Discord</a>, then agree to the privacy policy and terms and Sign in with Google on Integrations. After connect, Chat Bot, alerts, Viewer Points, Community Goals, and Stream Manager Chat can use YouTube live chat. Full setup, <code>!link</code>, permissions, lurkers, and send quota: <a href="/ISBSuiteReleases/docs/features/youtube.html">YouTube</a>.</p>
         </section>
 
         <section class="section" id="discord">
@@ -121,7 +121,7 @@
 
         <section class="section" id="spotify">
           <h2>Spotify (optional)</h2>
-          <p>ISB Suite sends commands to the official Spotify app on your PC (pause, skip, shuffle, queue). It never plays Spotify audio itself. Available on Free and Pro. Playback requires a <strong>Spotify Premium</strong> account.</p>
+          <p>ISB Suite sends commands to the official Spotify app on your PC (pause, skip, shuffle, queue, play a playlist). It never plays Spotify audio itself. Available on Free and Pro. Playback requires a <strong>Spotify Premium</strong> account.</p>
           <p>Spotify does not allow ISB Suite to ship one shared app for every customer. You create a free app on the Spotify Developer Dashboard; ISB Suite walks you through it (same style as Amazon Polly setup):</p>
           <ol class="steps">
             <li>On Integrations, Spotify: <strong>Set Up Spotify</strong>.</li>
@@ -133,7 +133,7 @@
           <ul>
             <li>Keep the Spotify desktop or mobile app open and play something once so a device is active.</li>
             <li>After the Client ID is saved, reconnect is one <strong>Connect with Spotify</strong> click. Disconnect clears tokens but keeps the Client ID.</li>
-            <li>On an automation, enable the <strong>Spotify</strong> action: pause, resume, skip, shuffle, repeat, queue a track, play now, or Pause Then Resume At End. See the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify action</a> page. Queue / Play now accept a song name, an open.spotify.com/track link, or a <code>spotify:track:</code> URI (message variables like <code>{input}</code> work).</li>
+            <li>On an automation, enable the <strong>Spotify</strong> action: pause, resume, skip, shuffle, repeat, queue a track, play now, play a playlist, or Pause Then Resume At End. See the <a href="/ISBSuiteReleases/docs/features/actions/spotify.html">Spotify action</a> page. Queue / Play now accept a song name, an open.spotify.com/track link, or a <code>spotify:track:</code> URI. Play playlist accepts one playlist link. Message variables like <code>{input}</code> work.</li>
             <li>Trigger <strong>Spotify Song Changed</strong> runs when a different song starts playing. A Send Chat Message such as <code>Now playing: {spotifyTrack} by {spotifyArtist}</code> names that song. Connecting Spotify, or opening the app while a song is already playing, does not send the line. See <a href="/ISBSuiteReleases/docs/features/automations.html">Automations</a>.</li>
             <li>Viewers can request songs with built-in <code>!sr</code> (alias <code>!songrequest</code>): a song name, optional artist, or a track link. They can <code>!remove</code> (alias <code>!removesong</code>) their last request. Chat Bot holds the command name, permission, cooldown, and confirm template. Per-viewer queue caps (default 5; 0 = none; leave blank for unlimited) are on the Spotify card under Integrations. Spotify cannot delete a queued song, so <code>!remove</code> skips that request when it comes up. A skip you make in the Spotify app shows on the Stream Manager song card and in <code>{spotifyTrack}</code> within about 10 seconds while that card is open or a request is still queued. Jumping to a removed request yourself can let it play for about 10 seconds before ISB skips it.</li>
             <li>Development Mode apps can only be used by accounts you add under User Management (a small allowlist).</li>
@@ -143,7 +143,7 @@
             <li><strong>Premium required:</strong> the Spotify account you Connect must be Premium. Free accounts cannot be controlled.</li>
             <li><strong>No active device:</strong> open the Spotify app and play something once, then try again.</li>
             <li><strong>Allowlist / 403:</strong> under the Developer Dashboard app, User Management, add the same Spotify account you stream with.</li>
-            <li>Album and playlist links cannot be queued. Use a track link, a <code>spotify:track:</code> URI, or a song name.</li>
+            <li>Album links cannot be queued or played. Playlist links belong on Play playlist, not Queue or Play now. <code>!sr</code> stays a song name or track link.</li>
             <li>More troubleshooting: <a href="/ISBSuiteReleases/docs/reference/faq.html#spotify">FAQ - Spotify</a>.</li>
           </ul>
         </section>
@@ -195,14 +195,14 @@
 
         <section class="section" id="tts">
           <h2>Text to Speech</h2>
-          <p>Built-in voices (for example Brian, Amy, Matthew). Configure voice and volume per automation, alert, or giveaway winner. No account or API key required.</p>
+          <p>Speech uses your Amazon Polly account. Under Integrations, open Amazon Polly and follow the setup window to create an access key. Standard voices include Brian, Amy, and Matthew. A setup you already saved stays and asks you to connect; speech is skipped until then. Amazon bills the characters you speak.</p>
         </section>
 
         <section class="section" id="request">
           <h2>Want another integration?</h2>
           <p>ISB Suite is an ongoing project. If there is a platform or service you would like integrated, <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">request it by opening an issue</a>. Feedback and ideas help shape what gets added next.</p>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/terms.html">Terms</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

@@ -78,17 +78,17 @@
         <section class="section" id="twitch">
           <h2>Twitch alert types</h2>
           <p>Follow, Watch Streak, New Subscription, Resubscription, Subscription Gifter, Subscription Gift Receiver, Bits / Cheer, Power-Up, Raid, Hype Train Start, Hype Train End, Hype Train Level Up, Goal Achieved, Ad Break, Shoutout Received, Stream Went Live, Channel Point Redemption.</p>
-          <p><strong>Watch Streak</strong> uses <code>{user} is on a {amount}-day watch streak!</code>. Leave the length blank for every streak, or set At least / Exactly.</p>
+          <p><strong>Watch Streak</strong> uses <code>{user} is on a {amount}-day watch streak!</code>. Leave the length blank for every streak, or set At least, Exactly, or Every X (109 waits until 110 for every 10). <code>{amount}</code> stays the streak length.</p>
           <p><strong>Spotify Song Changed</strong> is on this page too. It fires when a different song starts on the connected Spotify account. The default text is <code>Now playing: {spotifyTrack} by {spotifyArtist}</code>.</p>
           <p>New Subscription fires only for a first-time paid sub (chat/Activity Feed notice). Returners and gift recipients do not get a New Subscription alert. Subscription Gifter is gifter-linked (bulk count). Subscription Gift Receiver fires once per recipient with <code>{user}</code> = gifted viewer and <code>{gifter}</code> = gifter (gift bombs = one alert per recipient). Resubscription fires when the viewer shares their resub message in chat. A silent payment or badge change with no chat notice does not fire a New Subscription alert.</p>
-          <p>Image and sound each have <strong>Library</strong> to reuse a file already saved in ISB Suite. See <a href="/ISBSuiteReleases/docs/reference/faq.html#media-library">Media library</a>.</p>
+          <p>Image and sound each have <strong>Library</strong> to reuse a file already saved in ISB Suite, and <strong>Clear</strong> to detach that file from this alert. The Media Library copy stays. Clearing the sound turns sound off for the next alert. Volume and channel stay. See <a href="/ISBSuiteReleases/docs/reference/faq.html#media-library">Media library</a>.</p>
           <p>Each type supports custom image or GIF, alert text with variables, display duration, TTS, and minimum thresholds (for example raids with 10+ viewers). Alert Text may be left blank so the overlay shows no alert-text line. Overview rows have an enable/disable light (same as Automations / Chat Bot). Green is on, grey is off; click the light to toggle. A legend at the top of overview lists explains this. Turning a type off and back on restores only the rules that were on before.</p>
           <p>Bits / Cheer TTS and <code>{message}</code> fold every <code>cheerN</code> token in that one chat line into the event total (<code>{amount}</code>), so stacked cheer emotes are spoken once. Other words in the viewer note stay. Count each / per-N Bits automations are a separate setting and still run from the Twitch bits total.</p>
         </section>
 
         <section class="section" id="youtube">
           <h2>YouTube alert types</h2>
-          <p>Super Chat, Super Sticker, New Member, Member Milestone, Membership Gifter, and Membership Gift Receiver. These are not Bits or Subs. The YouTube section stays hidden until you Sign in with Google. New Member is first-time only. Member Milestone fires when they share it in chat. <code>{amount}</code> is the YouTube display string (for example <code>$5.00</code> or months / gift count), not bits. Free still allows 1 dedicated rule per type. Full rules: <a href="/ISBSuiteReleases/docs/features/youtube.html#events">YouTube</a>.</p>
+          <p>Super Chat, Super Sticker, New Member, Member Milestone, Membership Gifter, and Membership Gift Receiver. These are not Bits or Subs. The YouTube section stays hidden until you Sign in with Google. New Member is first-time only. Member Milestone fires when they share it in chat. Months can be At least, Exactly, or Every X (67 waits until 70 for every 10); blank matches any milestone. <code>{amount}</code> is the YouTube display string (for example <code>$5.00</code> or months / gift count), not bits. Free still allows 1 dedicated rule per type. Full rules: <a href="/ISBSuiteReleases/docs/features/youtube.html#events">YouTube</a>.</p>
         </section>
 
         <section class="section" id="appearance">
@@ -97,9 +97,9 @@
           <ul>
             <li>Layout, fonts (live preview), colors, highlight, drop shadow, text delay, and fade timings.</li>
             <li>Save and load reusable <strong>style presets</strong> (copy on apply).</li>
-            <li><strong>Motion:</strong> enter/exit animations (Fade, slides, Scale, Bounce) and text enter (Fade, Slide up, Typewriter).</li>
+            <li><strong>Motion:</strong> enter/exit animations (Fade, slides, Scale, Bounce, and from a screen edge) and text enter (Fade, Slide up, Typewriter). Screen-edge options travel between that edge and the alert box. Enter (ms) and Exit (ms) are the travel time.</li>
             <li><strong>Preset vs Manual</strong> image/text positioning with offset sliders (percent of the Alert Box).</li>
-            <li>Side by side Layout | Motion | Preview columns with inline <strong>Test Alert</strong> (motion, sound, and TTS).</li>
+            <li>Side by side Layout | Motion | Preview columns with inline <strong>Test Alert</strong> (motion, sound, and TTS). <strong>Mute sound</strong> on that preview skips the alert sound file; animation and TTS still play. Live alerts stay the same.</li>
             <li>Main Text and Subtext style editors sit side by side when the alert type supports subtext; they stack if the edit pane is narrow.</li>
             <li>Overflow content <strong>soft fits</strong> (uniform scale down) so image and text stay visible; preview matches the live overlay.</li>
           </ul>
@@ -136,7 +136,7 @@
           <h2>Legacy style note</h2>
           <p>Older alerts without a saved style keep the previous default look. Opening Appearance and saving (or applying a style preset) stores the new layout, motion, and typography for that alert going forward.</p>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/terms.html">Terms</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

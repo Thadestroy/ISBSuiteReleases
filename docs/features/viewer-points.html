@@ -112,14 +112,14 @@
             <li><strong>Chat Message</strong> - that viewer earns after sending the number of chat messages you set (for example 10 messages then 5 points). Commands like <code>!points</code> do not count.</li>
             <li><strong>First-Time Chatter</strong> - that viewer earns once the first time they chat (not each stream). After they have sent a message, they are not first-time again. Twitch and YouTube are saved separately. Existing viewers already in your data stay off the list after an update</li>
             <li><strong>Follow</strong></li>
-            <li><strong>Subscription</strong> and <strong>Resubscription</strong></li>
+            <li><strong>Subscription</strong>. <strong>Resubscription</strong> months can be At least, Exactly, or Every X (67 waits until 70 for every 10). Blank months pays every resub. Points are awarded once, not per month. Tier extras pay only when the months match</li>
             <li><strong>Subscription Gifter</strong> - points go to the gifter. <strong>Award per gifted sub</strong> is on by default (a bomb of 5 awards 5 times); turn it off to award once per gift event. Existing gift rules stay per-gift. Optional gift count with At least or Exactly; leave blank for every gift</li>
             <li><strong>Subscription Gift Receiver</strong> - points go to the person who received the gifted sub</li>
             <li><strong>Raid</strong> - points go to the raider. <strong>Award per raider</strong> is on for new rules; turn it off to award once per raid. Existing raid rules stay once per raid. Optional raider count with At least or Exactly; leave blank for every raid</li>
             <li><strong>Bits</strong> - points go to the viewer who spent bits (chat cheer or Power-Up). <strong>Award per bit</strong> is on for new rules; turn it off to award once per cheer. Existing bits rules stay once per cheer. Optional bit amount with At least or Exactly; leave blank for every spend</li>
             <li><strong>Channel Point Redemption</strong> - points go to the redeemer. Optional reward name; leave blank for every reward</li>
             <li><strong>Super Chat</strong> and <strong>Super Sticker</strong> - YouTube only. <strong>Award per tier</strong> (1-7, not dollars) is on for new rules; turn it off to award once per Super Chat. Existing Super Chat rules stay once per event. Optional tier with At least or Exactly</li>
-            <li><strong>Membership Gifter</strong> - same per-gift vs once-per-event choice as Subscription Gifter. <strong>New Member</strong>, <strong>Member Milestone</strong>, and <strong>Membership Gift Receiver</strong> award once per event. See <a href="/ISBSuiteReleases/docs/features/youtube.html#events">YouTube</a></li>
+            <li><strong>Membership Gifter</strong> - same per-gift vs once-per-event choice as Subscription Gifter. <strong>New Member</strong> and <strong>Membership Gift Receiver</strong> award once per event. <strong>Member Milestone</strong> months can be At least, Exactly, or Every X (67 waits until 70 for every 10). Blank months pays every milestone, and points are awarded once, not per month. Bits, Super Chat, and Super Sticker stay At least or Exactly. See <a href="/ISBSuiteReleases/docs/features/youtube.html#events">YouTube</a></li>
           </ul>
           <p>Tiltify donations are not an earn trigger: they do not identify a Twitch viewer, so points cannot attach to a real account.</p>
         </section>
@@ -161,14 +161,14 @@
             <li><strong>Export</strong> on a point drop shares that drop and the currency it belongs to. See <a href="/ISBSuiteReleases/docs/features/automations.html#setup-package">Share a setup</a>.</li>
             <li><strong>Claim slots:</strong> randomized range (min/max) for how many successful claims can happen before the drop ends.</li>
             <li><strong>Points per claim:</strong> how many viewer points each successful claim awards (default 1).</li>
-            <li><strong>Drop image/GIF:</strong> shown in the Point Drop widget on your overlay. Browse a new file, or <strong>Library</strong> to reuse one. See <a href="/ISBSuiteReleases/docs/reference/faq.html#media-library">Media library</a>.</li>
-            <li>Optional claim sound with volume control. <strong>Library</strong> reuses a sound the same way.</li>
+            <li><strong>Drop image/GIF:</strong> shown in the Point Drop widget on your overlay. Browse a new file, or <strong>Library</strong> to reuse one. <strong>Clear</strong> detaches it from this drop. The Media Library copy stays. See <a href="/ISBSuiteReleases/docs/reference/faq.html#media-library">Media library</a>.</li>
+            <li>Optional spawn sound with volume control. <strong>Library</strong> reuses a sound the same way. <strong>Clear</strong> detaches it. A drop with no image can still be saved.</li>
             <li>Optional already-claimed chat message when a viewer tries to claim again on the same drop (one claim per viewer). Leave the field empty to stay silent.</li>
             <li>Supports only-when-live mode to skip starting-soon screens.</li>
           </ul>
           <p>Spawn, claim, already-claimed, and expiry messages can use <code>{amount}</code> for points per claim, <code>{pool}</code> / <code>{claimsLeft}</code> for claim slots, and <code>{pointsPool}</code> / <code>{pointsLeft}</code> for total/remaining points (slots x amount). Prefer <code>{pointsLeft}</code> when Points per claim is greater than 1 so chat does not look like a slot count. An <strong>active</strong> drop is frozen at spawn: claim amount, claim slots, claim command, and chat templates stay as they were when that drop appeared. Saving the Point Drop editor updates the stored config for the <strong>next</strong> spawn only. Related: <a href="/ISBSuiteReleases/docs/features/overlay-layout/point-drop.html">Overlay Layout - Point Drop</a>, <a href="/ISBSuiteReleases/docs/features/counters-stats.html">Counters and Stats</a> (Watch Time), <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a>.</p>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/terms.html">Terms</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

@@ -80,7 +80,7 @@
           <p>A Timer Widget shows the active countdown for a named preset on your capture stage. The same widget type covers two jobs:</p>
           <ul>
             <li><strong>Delay Timer</strong> - a rule&apos;s <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer</a> action waits, then runs deferred actions. The widget shows that wait.</li>
-            <li><strong>Live Clock</strong> - a subathon-style clock driven by <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a>. Overlay Layout can Start / Pause / Resume / End; mods use chat commands to adjust time.</li>
+            <li><strong>Live Clock</strong> - a clock driven by <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a>. Countdown or count up. Overlay Layout can Start / Set / Pause / Resume / End; mods use chat commands to adjust time.</li>
           </ul>
         </section>
         <section class="section" id="setup">
@@ -97,18 +97,19 @@
           <ul>
             <li><strong>Preset / Name</strong>: display name used with chat commands (<code>!endtimer</code>, <code>!addtime</code>, and so on).</li>
             <li><strong>Text style</strong>: font, weight, alignment, color, optional text shadow.</li>
-            <li><strong>Live Clock</strong>: optional max remaining; accept adds while paused (see below).</li>
+            <li><strong>Live Clock</strong>: direction (countdown or count up), optional max, accept adds while paused (see below).</li>
             <li><strong>Transform / crop / visibility / hotkey</strong>: shared stage controls.</li>
             <li>On the delay Timer <em>action</em>, choose <strong>None (background only)</strong> for a wait with no overlay digits.</li>
           </ul>
         </section>
         <section class="section" id="live-clock">
           <h2>Live Clock</h2>
-          <p>Live Clock is the extendable countdown for subathons. Automations add or start time via Live Timer; you can also control the clock from Overlay Layout (Start / Pause / Resume / End).</p>
+          <p>Live Clock counts down or counts up on this preset. Automations add or start time via Live Timer. Overlay Layout can Start, Set, Pause, Resume, and End. Set uses the duration box and only changes a clock that is already running or paused.</p>
           <ul>
-            <li><strong>Accept adds while paused</strong>: when on (default), <code>!addtime</code> / RemoveTime still apply while paused.</li>
-            <li><strong>Max remaining</strong>: optional cap so the clock cannot grow past a limit.</li>
-            <li><strong>Live Timer Ended</strong>: automations can fire when the clock hits natural zero. Manual <code>!endtimer</code> abort does not fire that trigger.</li>
+            <li><strong>Direction</strong>: Countdown or Count up for the next Start. A running clock keeps its direction until End.</li>
+            <li><strong>Accept adds while paused</strong>: when on (default), add, remove, and set still apply while paused.</li>
+            <li><strong>Max</strong>: optional cap. Countdown cannot grow past it. Count up ends, and can fire Live Timer Ended, when elapsed reaches it. Leave it blank and a count-up clock runs until End.</li>
+            <li><strong>Live Timer Ended</strong>: countdown hits zero, or count up reaches Max. Manual End and <code>!endtimer</code> do not fire that trigger. Remove on a count-up clock floors at 0:00 and keeps running.</li>
           </ul>
         </section>
         <section class="section" id="delay">
@@ -124,20 +125,21 @@
           <h2>Chat commands</h2>
           <ul>
             <li>Delay or Live Clock: <code>!endtimer {name}</code> (Built-in Commands; Live Clock abort does not fire Live Timer Ended).</li>
-            <li>Live Clock: <code>!pausetimer</code>, <code>!resumetimer</code>, <code>!addtime</code>, <code>!removetime</code> under Chat Bot - Live Timer Commands.</li>
+            <li>Live Clock: <code>!pausetimer</code>, <code>!resumetimer</code>, <code>!addtime</code>, <code>!removetime</code>, <code>!settime</code> under Chat Bot - Live Timer Commands.</li>
           </ul>
           <p>Full list: <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
         </section>
         <section class="section" id="usecases">
           <h2>Use cases</h2>
           <ul>
-            <li><strong>Subathon</strong> - Live Clock + Live Timer. Mods extend with !addtime.</li>
+            <li><strong>Subathon</strong> - Live Clock countdown + Live Timer. Mods extend with !addtime.</li>
+            <li><strong>Count up</strong> - same Live Clock set to Count up. Pause, add, and <code>!settime</code> move the elapsed time. Set Max when that clock should finish.</li>
             <li><strong>Heist window mirror</strong> - Chat Games Open phase starts a delay Timer so overlay shows time left alongside Countdown Warnings in chat.</li>
             <li><strong>Background delay</strong> - Timer action with None (background only) when you need pacing without on-screen digits.</li>
           </ul>
           <p>Related: <a href="/ISBSuiteReleases/docs/features/actions/live-timer.html">Live Timer</a>, <a href="/ISBSuiteReleases/docs/features/actions/timer.html">Timer action</a>, <a href="/ISBSuiteReleases/docs/reference/use-cases.html">Use cases</a> (Subathon Countdown).</p>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/terms.html">Terms</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

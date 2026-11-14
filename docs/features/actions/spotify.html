@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Spotify | ISB Suite</title>
-  <meta name="description" content="Spotify action: pause, skip, shuffle, queue, play now, or Pause Then Resume At End" />
+  <meta name="description" content="Spotify action: pause, skip, shuffle, queue, play now, play a playlist, or Pause Then Resume At End" />
   <meta name="site-base" content="/ISBSuiteReleases/docs" />
   <meta property="og:title" content="Spotify | ISB Suite" />
-  <meta property="og:description" content="Spotify action: pause, skip, shuffle, queue, play now, or Pause Then Resume At End" />
+  <meta property="og:description" content="Spotify action: pause, skip, shuffle, queue, play now, play a playlist, or Pause Then Resume At End" />
   <meta property="og:image" content="/assets/screenshots/home.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/ISBSuiteReleases/docs/assets/app-icon.png" />
@@ -52,7 +52,7 @@
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-spotify.png" alt="Spotify action setup in ISB Suite" />
-          <figcaption>Spotify action: pick a command. Queue / Play now take a song name or Spotify link (variables allowed).</figcaption>
+          <figcaption>Spotify action: Play playlist takes one playlist link and starts it on the active device.</figcaption>
         </figure>
 
         <div class="ref-panel">
@@ -61,6 +61,7 @@
             <li>UI label: <strong>Spotify</strong>.</li>
             <li>Connect under <a href="/ISBSuiteReleases/docs/features/integrations.html#spotify">Integrations</a> (your own Developer app + Client ID, no secret). The Spotify action and Chat Bot <code>!sr</code> / <code>!remove</code> stay hidden until you Connect.</li>
             <li>Keep the Spotify desktop or mobile app open and play something once so a device is active.</li>
+            <li><strong>Play playlist</strong> starts that playlist on the active device. Paste one playlist link. It does not search by name.</li>
             <li>Viewers can also queue with built-in <code>!sr</code> and undo with <code>!remove</code> (see <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>).</li>
           </ul>
         </div>
@@ -75,8 +76,9 @@
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>When the parent rule fires, ISB Suite sends a Player command to the official Spotify app (pause, resume, skip, shuffle, repeat, queue, play now, or Pause Then Resume At End). A Spotify error (not connected, Free account, no active device) is logged and does not stop the rest of the rule (sound, chat, alerts still run).</p>
+          <p>When the parent rule fires, ISB Suite sends a Player command to the official Spotify app (pause, resume, skip, shuffle, repeat, queue, play now, play a playlist, or Pause Then Resume At End). A Spotify error (not connected, Free account, no active device, or a playlist the account cannot open) is logged and does not stop the rest of the rule (sound, chat, alerts still run).</p>
           <p>Queue adds a track behind what is playing. Play now starts that track immediately. Both accept a song name, an open.spotify.com/track link, or a <code>spotify:track:</code> URI. Message variables such as <code>{input}</code> resolve the same way other action fields do.</p>
+          <p><strong>Play playlist</strong> starts a playlist link on the active device, from the first item, and replaces what is playing. Shuffle, repeat, and volume stay as they are. Paste one link (<code>open.spotify.com/playlist</code> or <code>spotify:playlist:</code>). A playlist name is not searched. <code>{input}</code> works the same way as other action fields.</p>
           <p><strong>Pause Then Resume At End</strong> pauses as soon as this rule starts (before Play Sound), then resumes when this rule&apos;s sound, TTS, alert overlay, and auto-spin wheel have finished. It does not wait for a Timer (the Timer delays the whole payload), a giveaway until a winner, or a chat game. Two overlapping rules keep Spotify paused until both have finished.</p>
         </section>
         <section class="section" id="setup">
@@ -84,7 +86,7 @@
           <ol class="steps">
             <li>On Integrations, finish <strong>Set Up Spotify</strong> and <strong>Connect with Spotify</strong>. Playback needs a Spotify Premium account.</li>
             <li>Open the Spotify app and play something once so a device is active.</li>
-            <li>On the rule, enable <strong>Spotify</strong>, pick a command, and for Queue / Play now fill <strong>Song or Spotify link</strong>.</li>
+            <li>On the rule, enable <strong>Spotify</strong>, pick a command, and for Queue / Play now fill <strong>Song or Spotify link</strong>. For Play playlist paste <strong>Playlist link</strong>.</li>
           </ol>
         </section>
         <section class="section" id="commands">
@@ -94,7 +96,8 @@
             <li><strong>Shuffle</strong>: check Shuffle on, or leave it off to disable shuffle.</li>
             <li><strong>Repeat</strong>: Off, Track, or Context.</li>
             <li><strong>Queue</strong> / <strong>Play now</strong>: song search or a track link. Album and playlist links are not supported. Blank song field cannot save.</li>
-            <li><strong>Pause Then Resume At End</strong>: pause immediately, resume when this rule&apos;s clip, TTS, alert, or auto-spin is done. Walk-on setup: First Message + Play Sound (bypass queue) + this command.</li>
+            <li><strong>Play playlist</strong>: one playlist link. Starts at the first item and replaces what is playing. Shuffle, repeat, and volume stay as they are. A name is not searched. Blank link cannot save.</li>
+            <li><strong>Pause Then Resume At End</strong>: pause immediately, resume when this rule&apos;s clip, TTS, alert, or auto-spin is done. Walk-on setup: First Message + Play Sound (bypass queue) + this command. Play playlist is a separate rule if a clip and a playlist both need to run.</li>
           </ul>
         </section>
         <section class="section" id="pitfalls">
@@ -104,6 +107,9 @@
             <li>If Spotify is closed or idle, commands fail with a no-active-device message until you play something once.</li>
             <li>Spotify Free accounts cannot be controlled (Premium required).</li>
             <li>For viewer requests, prefer built-in <code>!sr</code> / <code>!remove</code> instead of a custom Chat Command that only runs this action (Chat Bot already has permission, cooldown, and a confirm template).</li>
+            <li>Play playlist does not clear song requests. Outstanding <code>!sr</code> rows stay until that track is observed playing, the 6-hour age-out, or the next time you open ISB Suite. A playlist track that matches a live request counts as that request. A removed request is still skipped. Other rows keep their cap slots.</li>
+            <li>When <strong>Playlist link</strong> is <code>{input}</code>, set that trigger to Moderator or Broadcaster. Anyone allowed to fire the rule can start any playlist the connected account can open.</li>
+            <li>Shuffle already on can start the playlist somewhere other than the first item. Repeat Track loops the first item.</li>
             <li>This command is not a general &quot;run anything at the start / end of an automation&quot; slot. It only waits for sound, TTS, alert, and auto-spin on this rule.</li>
           </ul>
         </section>
@@ -113,10 +119,11 @@
             <li>Channel point redeem -&gt; Queue <code>{input}</code> so the redeem text is the song name.</li>
             <li>Mod-only Chat Bot command -&gt; Skip next when chat is tired of a song.</li>
             <li>Raid hype -&gt; Play now a known track URI.</li>
+            <li>Mod chat command <code>!playlist</code> with <code>{input}</code> -&gt; Play playlist, permission Moderator.</li>
             <li>Walk-on clip -&gt; Pause Then Resume At End + Play Sound (bypass queue) so Spotify does not clash with the clip.</li>
           </ul>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/terms.html">Terms</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

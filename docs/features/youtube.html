@@ -78,9 +78,9 @@
           <ol class="steps">
             <li>Request access to the YouTube API on <a href="https://discord.gg/w834PyCCgb">Discord</a>.</li>
             <li>Open <a href="/ISBSuiteReleases/docs/features/integrations.html">Integrations</a>.</li>
-            <li>On the YouTube card, <strong>Sign in with Google</strong> as the channel that owns the live stream.</li>
+            <li>On the YouTube card, agree to the <a href="/ISBSuiteReleases/docs/privacy.html">privacy policy</a> and <a href="/ISBSuiteReleases/docs/terms.html">terms</a>, then <strong>Sign in with Google</strong> as the channel that owns the live stream.</li>
           </ol>
-          <p>There is no YouTube bot account. Tokens stay on this PC.</p>
+          <p>There is no YouTube bot account. Tokens stay on this PC. Disconnect removes the YouTube connection at Google and deletes that grant on this PC. Viewer points, watch time, and saved rules stay.</p>
           <p>Timed messages, walk-ons, Watch Time, and Stream Went Live use a combined live flag. A YouTube-only stream counts as live. A Twitch blip does not end the session while YouTube is still live. After both are offline, the next go-live is a new session so a Twitch-only day and a YouTube-only day do not share walk-on slots.</p>
         </section>
 
@@ -128,13 +128,13 @@
 
         <section class="section" id="events">
           <h2>Alerts, points, and goals</h2>
-          <p>YouTube Super Chat, Super Sticker, New Member, Member Milestone, Membership Gifter, and Membership Gift Receiver are their own types. They do not reuse Bits or Subs. <code>{amount}</code> is the YouTube display string (for example <code>$5.00</code>), not bits. New Member is first-time only. Member Milestone fires when they share it in chat. The YouTube alert section stays hidden until Sign in with Google. Free still allows 1 dedicated rule per type.</p>
+          <p>YouTube Super Chat, Super Sticker, New Member, Member Milestone, Membership Gifter, and Membership Gift Receiver are their own types. They do not reuse Bits or Subs. <code>{amount}</code> is the YouTube display string (for example <code>$5.00</code>), not bits. New Member is first-time only. Member Milestone fires when they share it in chat. Months can be At least, Exactly, or Every X (67 waits until 70 for every 10); blank matches any milestone. The YouTube alert section stays hidden until Sign in with Google. Free still allows 1 dedicated rule per type.</p>
           <p>The same events can award Viewer Points and add Community Goal progress. Send Message stays in the chat that started the run unless <strong>Send to both Twitch &amp; YouTube chats</strong> is on. Viewer Points <code>!givepoints @handle</code> and admin give look up a YouTube handle (recent chat, linked account, or official handle lookup) and credit that channel; <code>all</code> includes YouTube recently-chatted viewers and counts a linked account once.</p>
         </section>
 
         <section class="section" id="desk">
           <h2>Stream Manager</h2>
-          <p>One combined Chat tile. Each line has a Twitch or YouTube mark. Show can hide one platform. Chat events include a Super Chat &amp; members chip so those banners stay when the include-set is customized. Activity has a YouTube chip (not Integrations). The status strip shows YouTube connect, send quota, and live chat. Timeout, ban, and deleted-message lines from YouTube paint as mod notices. When send quota is empty, a notice still lands on Activity. The Viewers tile gives Twitch Get Chatters about 60% of the list and YouTube recently-chatted the rest. Each platform groups the broadcaster, mods, and on Twitch VIPs, then viewers. Twitch section headers use that channel's broadcaster, mod, and VIP badges. Twitch mods and VIPs are grouped even when they have not typed. If that Twitch login cannot read the mod and VIP lists, the Twitch setup window opens so you can sign in again. Skip for now leaves the login in place and does not ask again. <code>{randomViewer}</code> picks from that union (linked accounts count once).</p>
+          <p>One combined Chat tile. Each line has a Twitch or YouTube mark. Show can hide one platform. Chat events include a Super Chat &amp; members chip so those banners stay when the include-set is customized. Activity has a YouTube chip (not Integrations). The status strip shows YouTube connect, send quota, and live chat. Timeout, ban, and deleted-message lines from YouTube paint as mod notices. When send quota is empty, a notice still lands on Activity. The Viewers tile lists Twitch Get Chatters and YouTube recently-chatted in two sections. <code>{randomViewer}</code> picks from that union (linked accounts count once).</p>
         </section>
 
         <section class="section" id="quota">
@@ -147,7 +147,7 @@
           <p>Follow alerts, raids, Hype Train, Ad Break, Channel Points, Bits, Power-Up, Predictions, clips, and Twitch title/category are Twitch-only. YouTube has no lurker list; the Viewers tile shows recently-chatted names instead of concurrent viewers.</p>
           <p>Related: <a href="/ISBSuiteReleases/docs/features/integrations.html#youtube">Integrations</a>, <a href="/ISBSuiteReleases/docs/features/chat-bot.html">Chat Bot</a>, <a href="/ISBSuiteReleases/docs/features/alerts.html">Alerts</a>, <a href="/ISBSuiteReleases/docs/features/stream/chat.html">Stream Manager Chat</a>, <a href="/ISBSuiteReleases/docs/reference/chat-commands.html">Chat commands</a>.</p>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/terms.html">Terms</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

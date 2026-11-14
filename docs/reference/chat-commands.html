@@ -83,8 +83,9 @@
               <tr><td><code>!endtimer {name}</code></td><td>End a Live Clock (abort; does not fire Live Timer Ended) or skip a delay-queue Timer countdown without running deferred actions</td></tr>
               <tr><td><code>!pausetimer {name}</code></td><td>Pause a Live Clock on a named Timer Widget preset</td></tr>
               <tr><td><code>!resumetimer {name}</code></td><td>Resume a paused Live Clock</td></tr>
-              <tr><td><code>!addtime {name} {duration}</code></td><td>Add time to a Live Clock (e.g. <code>5m</code>, <code>30s</code>, <code>1h</code>)</td></tr>
-              <tr><td><code>!removetime {name} {duration}</code></td><td>Remove time from a Live Clock</td></tr>
+              <tr><td><code>!addtime {name} {duration}</code></td><td>Add time to a Live Clock. One amount (<code>5m</code>, <code>30s</code>, <code>1h</code>) or pieces that add (<code>3m 12s</code>, <code>1h 3m 12s</code>)</td></tr>
+              <tr><td><code>!removetime {name} {duration}</code></td><td>Remove time from a Live Clock. Same duration as <code>!addtime</code>, including <code>3m 12s</code>. Count up stops at 0:00 and keeps running</td></tr>
+              <tr><td><code>!settime {name} {duration}</code></td><td>Set a running or paused Live Clock to a time (<code>5m</code>, <code>3m 12s</code>, <code>0</code>). Pieces add together. Does not start an idle clock. 0 ends a countdown and leaves a count-up clock at 0:00</td></tr>
               <tr><td><code>!so @user</code> / <code>!shoutout</code></td><td>Shout out a channel (Nightbot style). Resolves the target, looks up their last Twitch category, and posts a templated chat line (default Mods). Customize the template in Chat Bot (<code>{user}</code>, <code>{login}</code>, <code>{game}</code>). Built in; does not use a Free chat command slot. For Twitch's official shoutout, use Send Message <code>/shoutout {user}</code> on an automation (see <a href="/ISBSuiteReleases/docs/features/actions/send-message.html">Send Message</a>).</td></tr>
               <tr><td><code>!followage</code></td><td>How long a viewer has been following (optional <code>@user</code>). Customize the template in Chat Bot.</td></tr>
               <tr><td><code>!watchtime</code></td><td>Tracked watch time for a viewer (optional <code>@user</code>). Customize the template in Chat Bot; requires Stats Watch Time.</td></tr>
@@ -136,7 +137,7 @@
           <p>New limit fields default to unlimited; existing cooldowns keep working. Channel Point redemptions are different: Twitch still accepts the redeem and charges points; ISB Suite only skips running the automation when blocked (reject / refund is not supported yet).</p>
           <p>Community Goal <strong>contribute</strong> Advanced Settings also has optional <strong>point-amount</strong> caps (max points per stream, and max per user per stream). Those are separate from max fires. <code>0</code> = unlimited. They reset on a new stream and when you Refund VP.</p>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/terms.html">Terms</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

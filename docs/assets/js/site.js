@@ -34,7 +34,13 @@
       title: "Privacy",
       url: "/privacy.html",
       blurb: "What the app stores locally and what leaves your PC",
-      keywords: "privacy data local appdata tokens",
+      keywords: "privacy data local appdata tokens youtube",
+    },
+    {
+      title: "Terms",
+      url: "/terms.html",
+      blurb: "Terms for the ISB Suite app, this site, and YouTube",
+      keywords: "terms license pro youtube tos privacy",
     },
     {
       title: "Community Discord",
@@ -111,8 +117,8 @@
     {
       title: "Spotify action",
       url: "/features/actions/spotify.html",
-      blurb: "Pause, skip, queue, or play now on the official Spotify app",
-      keywords: "spotify pause skip shuffle repeat queue play now song request !sr !remove !removesong premium connect",
+      blurb: "Pause, skip, queue, play now, or play a playlist on the official Spotify app",
+      keywords: "spotify pause skip shuffle repeat queue play now play playlist playlist link song request !sr !remove !removesong premium connect",
     },
     {
       title: "OBS Studio action",
@@ -160,7 +166,7 @@
       title: "Live Timer action",
       url: "/features/actions/live-timer.html",
       blurb: "Drive a Live Clock (Subathon) on a Timer Widget",
-      keywords: "live timer live clock subathon add subathon !pausetimer !addtime !endtimer starts at",
+      keywords: "live timer live clock subathon countdown count up !pausetimer !addtime !settime !endtimer starts at direction",
     },
     {
       title: "Start Giveaway Session action",
@@ -244,7 +250,7 @@
       title: "Chat Bot",
       url: "/features/chat-bot.html",
       blurb: "Commands, timed messages, same engine as Automations",
-      keywords: "chat bot command alias cooldown match anywhere timed scheduled built in groups !sr !remove song request",
+      keywords: "chat bot command alias cooldown match anywhere timed scheduled built in groups !sr !remove song request !settime live timer",
     },
     {
       title: "Chat Games",
@@ -339,8 +345,8 @@
     {
       title: "Timer Widget",
       url: "/features/overlay-layout/timer.html",
-      blurb: "Delay Timer or Live Clock (Subathon) countdown",
-      keywords: "overlay timer widget countdown live clock subathon !endtimer !pausetimer !addtime preset",
+      blurb: "Delay Timer or Live Clock countdown and count up",
+      keywords: "overlay timer widget countdown count up live clock subathon !endtimer !pausetimer !addtime !settime preset",
     },
     {
       title: "Goals overlay widget",
@@ -460,7 +466,7 @@
       title: "Chat commands",
       url: "/reference/chat-commands.html",
       blurb: "Viewer and mod commands, Advanced Settings",
-      keywords: "commands !join !spinwheel !points !points @user {caller} !giveaway !sr !songrequest !remove !removesong !vpgive !vpgive all permission alias match anywhere allow checking another viewer cooldown limits",
+      keywords: "commands !join !spinwheel !points !points @user {caller} !giveaway !sr !songrequest !remove !removesong !settime !addtime !vpgive !vpgive all permission alias match anywhere allow checking another viewer cooldown limits",
     },
     {
       title: "Message variables",
@@ -490,6 +496,7 @@
         { href: "/wiki.html", label: "Docs" },
         { href: "/download.html", label: "Download" },
         { href: "/pricing.html", label: "Free and Pro" },
+        { href: "/terms.html", label: "Terms" },
         { href: "/privacy.html", label: "Privacy" },
       ],
     },

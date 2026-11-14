@@ -79,7 +79,7 @@
             <li>Create multiple named layouts (for example Main Scene, Wheel Scene, Just Chatting).</li>
             <li>Switch from the list, assign a global hotkey per layout, or use the <a href="/ISBSuiteReleases/docs/features/actions/overlay-layout.html">Overlay Layout</a> action on an automation to switch layouts or show / hide widgets (pair with OBS / Streamlabs Set program scene).</li>
             <li>All widgets in the active layout render on the capture stage.</li>
-            <li>Duplicate a layout when you want the same widgets with different sizes or visibility for another scene.</li>
+            <li><strong>Duplicate</strong> (beside Add) copies the selected layout and its widgets into a new one named “Name copy”, then “Name copy 2”. The copy has its own ids, a blank layout hotkey, and its own image files. Widget show/hide hotkeys stay. The same Free layout cap as Add applies; at the cap, nothing is created.</li>
             <li><strong>Export</strong> shares the selected layout. A picker, timer, or goal placed on it comes along. See <a href="/ISBSuiteReleases/docs/features/automations.html#setup-package">Share a setup</a>.</li>
             <li>Leaving Overlay Layout with unsaved edits (or switching layouts) shows <strong>Save</strong>, <strong>Don't Save</strong>, or <strong>Cancel</strong>. Opening a layout and leaving without edits does not prompt.</li>
           </ul>
@@ -95,7 +95,7 @@
             <a class="feature-card" href="/ISBSuiteReleases/docs/features/overlay-layout/static-image.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-static-image.png" alt="" /><div class="body"><h3>Static Image</h3><p>Logos and fixed art on the stage.</p></div></a>
             <a class="feature-card" href="/ISBSuiteReleases/docs/features/overlay-layout/browser-source.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-browser-source.png" alt="" /><div class="body"><h3>Browser Source</h3><p>Live web page URL in the capture.</p></div></a>
             <a class="feature-card" href="/ISBSuiteReleases/docs/features/overlay-layout/random-image-picker.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-random-image-picker.png" alt="" /><div class="body"><h3>Random Image Picker</h3><p>Bound picker images; re-roll via Actions.</p></div></a>
-            <a class="feature-card" href="/ISBSuiteReleases/docs/features/overlay-layout/timer.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-timer.png" alt="" /><div class="body"><h3>Timer Widget</h3><p>Delay Timer or Live Clock (Subathon) countdown.</p></div></a>
+            <a class="feature-card" href="/ISBSuiteReleases/docs/features/overlay-layout/timer.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-timer.png" alt="" /><div class="body"><h3>Timer Widget</h3><p>Delay Timer, or a Live Clock that counts down or up.</p></div></a>
             <a class="feature-card" href="/ISBSuiteReleases/docs/features/overlay-layout/goals.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-goals.png" alt="" /><div class="body"><h3>Goals</h3><p>Live Community Goal progress bar on the stage.</p></div></a>
             <a class="feature-card" href="/ISBSuiteReleases/docs/features/overlay-layout/chat-box.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-chat-box.png" alt="" /><div class="body"><h3>Chat Box</h3><p>Live Twitch and YouTube chat on the capture stage.</p></div></a>
             <a class="feature-card" href="/ISBSuiteReleases/docs/features/overlay-layout/twitch-clip.html"><img src="/ISBSuiteReleases/docs/assets/screenshots/overlay-twitch-clip.png" alt="" /><div class="body"><h3>Twitch Clip</h3><p>Region where a Play Clip action shows a Twitch clip.</p></div></a>
@@ -109,6 +109,7 @@
             <li>Set visibility per widget, or assign a hotkey to toggle during stream.</li>
             <li>Preview Widgets / In Capture Window shows live renders.</li>
             <li>Alt+drag to crop. Arrows nudge (Shift = 10px). Del removes. Esc deselects. Ctrl+Z/Y undo/redo.</li>
+            <li><strong>Copy</strong> and <strong>Paste</strong> (or Ctrl+C / Ctrl+V) place a copy of the selected widget on the layout that is open, including a different overlay. Pasting onto the same layout nudges it and clears its show/hide hotkey. Alert Box and Point Drop stay one per layout.</li>
             <li>Edges snap to the border - hold Shift to disable snap while dragging.</li>
           </ul>
         </section>
@@ -131,7 +132,7 @@
           <h2>Layout transitions</h2>
           <p>Configure animated transition effects when switching between layouts so scene changes feel intentional on the capture stage. Keep heavy Browser Source widgets off layouts you flip often if CPU is tight.</p>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/terms.html">Terms</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

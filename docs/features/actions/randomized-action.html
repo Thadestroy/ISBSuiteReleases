@@ -87,7 +87,7 @@
         <section class="section" id="setup">
           <h2>Setup</h2>
           <ol class="steps">
-            <li>Enable <strong>Randomized Action</strong> at the top of Actions. The first-time card is pick this set, name it, and <strong>+ Add</strong> another if you need more.</li>
+            <li>Enable <strong>Randomized Action</strong> at the top of Actions. The first-time card is pick this set, name it, and <strong>+ Add</strong> another if you need more. <strong>+ Add</strong> starts that new set with Send Message off and an empty message until you turn Send Message on or type a line. Turning Randomized Action on keeps the Send Message already on the flat editor.</li>
             <li>Edit the selected set&apos;s Actions below the card (Send Message, Play Sound, Start Wheel Session, and so on).</li>
             <li>Optional: check <strong>Don&apos;t repeat until all Action Sets have played</strong> (hidden while counter ranges are on).</li>
             <li>Use <strong>Import .txt</strong>, <strong>Edit lines</strong>, or <strong>Export .txt</strong> above the picker for a list of chat lines (see <a href="#import">Import, edit, and export lines</a>). Add, Duplicate, and Extract sit on the name row. Move up, Move down, and Move to # sit next to Action Set #.</li>
@@ -97,7 +97,7 @@
         </section>
         <section class="section" id="import">
           <h2>Import, edit, and export lines</h2>
-          <p>Use <strong>Import .txt</strong>, <strong>Edit lines</strong>, and <strong>Export .txt</strong> above the Action Set picker. They work with <strong>Send Message</strong> only: one non-empty line becomes one Action Set. Import copies the file into the rule. ISB Suite does not keep watching that .txt on disk, so later edits to the file do nothing until you import again. UTF-8. Empty lines are skipped. Commas, variables, and duplicate lines are kept. Hundreds of rotating lines still share the same Twitch chat rate limit.</p>
+          <p>Use <strong>Import .txt</strong>, <strong>Edit lines</strong>, and <strong>Export .txt</strong> above the Action Set picker. They work with <strong>Send Message</strong> only: one non-empty line becomes one Action Set. A line that is exactly <code>[Send Message Disabled]</code> adds a set with Send Message off. Import copies the file into the rule. ISB Suite does not keep watching that .txt on disk, so later edits to the file do nothing until you import again. UTF-8. Empty lines are skipped. Commas, variables, and duplicate lines are kept. Hundreds of rotating lines still share the same Twitch chat rate limit.</p>
           <h3>Import .txt</h3>
           <p>Click <strong>Import .txt</strong>, pick a file, then review it in the <strong>Import lines</strong> dialog. You can still edit the text, choose Append or Replace, and optionally copy extras from the Action Set that was selected.</p>
           <figure class="visual">
@@ -109,7 +109,7 @@
             <li>Click <strong>Import .txt</strong>. A file picker titled <strong>Import Action Set lines</strong> opens (*.txt, or any file).</li>
             <li>After you pick a file, an <strong>Import lines</strong> dialog shows the file text so you can still edit it. The line count at the bottom is how many Action Sets will be created.</li>
             <li>Choose <strong>Append to current Action Sets</strong> (keep what you have) or <strong>Replace current Action Sets</strong> (wipe them first).</li>
-            <li>Optional: check <strong>Copy other actions from the selected set</strong>. Each imported line gets that set&apos;s extras, then Send Message is overwritten with that line.</li>
+            <li>Optional: check <strong>Copy other actions from the selected set</strong>. Each imported line gets that set&apos;s extras, then Send Message is overwritten with that line. A line that is exactly <code>[Send Message Disabled]</code> keeps those extras, turns Send Message off, and leaves the stored message in place.</li>
             <li>Click <strong>Import</strong>. Importing 50 or more lines asks for a second confirm. Replace also warns if any current set has actions besides Send Message (those extras would be dropped).</li>
           </ol>
           <p>An empty file (or only blank lines) shows <strong>No lines to import</strong> and never opens the dialog.</p>
@@ -124,10 +124,10 @@
             <li>Double-click a line to close the window and jump to that set&apos;s Actions (attach a sound, TTS, or wheel on that set only).</li>
             <li>Ctrl+click and Shift+click select more than one line, then <strong>Delete</strong>.</li>
             <li>The same <strong>Import .txt</strong> / <strong>Export .txt</strong> buttons are in this window.</li>
-            <li><strong>Edit as text</strong> shows every Send Message as a plain list (one line per set). <strong>Apply text</strong> writes that order back; extra lines become new sets. <strong>Show list</strong> returns to the searchable list without applying. If counter conditions are on, Apply (and Replace import) asks you to confirm - set numbers in those conditions follow the new order.</li>
+            <li><strong>Edit as text</strong> shows one line per set. A set with Send Message off is <code>[Send Message Disabled]</code>, even when a draft is still stored. <strong>Apply text</strong> writes that order back and leaves that set off. A real line enables Send Message and stores that line. Extra lines become new sets. <strong>Show list</strong> returns to the searchable list without applying. To send the words <code>[Send Message Disabled]</code>, write <code>\[Send Message Disabled]</code>. If counter conditions are on, Apply (and Replace import) asks you to confirm - set numbers in those conditions follow the new order.</li>
           </ul>
           <h3>Export .txt</h3>
-          <p><strong>Export .txt</strong> writes Send Message templates for sets where Send Message is on, one per line (file picker titled <strong>Export Action Set lines</strong>, default name <code>action-set-lines.txt</code>). Sets with Send Message off are skipped. If none have a Send Message, export is refused.</p>
+          <p><strong>Export .txt</strong> writes Send Message templates for sets where Send Message is on, one per line (file picker titled <strong>Export Action Set lines</strong>, default name <code>action-set-lines.txt</code>). Sets with Send Message off are skipped, and the file does not use <code>[Send Message Disabled]</code> as a placeholder. A set that is sending those words is written as <code>\[Send Message Disabled]</code> so importing the file keeps Send Message on. If none have a Send Message, export is refused.</p>
         </section>
         <section class="section" id="sets">
           <h2>Action Sets</h2>
@@ -172,7 +172,7 @@
             <li><strong>Loyalty jackpot</strong> - Link a visit or bits counter. Early counts pick from common sets 1-20; a late range adds a rare set. Overlap combines those lists, then one set plays.</li>
           </ul>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/terms.html">Terms</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

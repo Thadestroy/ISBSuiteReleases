@@ -48,7 +48,7 @@
       <article class="page wide">
         <p class="crumb"><a href="/ISBSuiteReleases/docs/index.html">Home</a> / <a href="/ISBSuiteReleases/docs/features/index.html">Features</a> / <a href="/ISBSuiteReleases/docs/features/actions/index.html">Actions</a> / Text-to-Speech</p>
         <h1 class="page-title">Text-to-Speech</h1>
-        <p class="lede">Speak an announcement when the rule fires. Read the Send Message text, a custom TTS template, or both. Built-in voices need no cloud API key.</p>
+        <p class="lede">Speak an announcement when the rule fires. Read the Send Message text, a custom TTS template, or both. Voices come from your Amazon Polly account.</p>
 
         <figure class="visual">
           <img src="/ISBSuiteReleases/docs/assets/screenshots/actions-text-to-speech.png" alt="Text-to-Speech action setup in ISB Suite" />
@@ -59,6 +59,7 @@
           <h3>At a glance</h3>
           <ul>
             <li>UI label: <strong>Text-to-Speech</strong>.</li>
+            <li>Connect your Amazon Polly account under Integrations. Standard voices such as Brian, Amy, and Matthew.</li>
             <li>You must enable at least one read option or nothing is spoken.</li>
             <li>Custom TTS text supports variables; spoken after Send Message text when both are on.</li>
             <li>Use <strong>Test TTS</strong> before going live.</li>
@@ -74,11 +75,12 @@
 
         <section class="section" id="how">
           <h2>How it works</h2>
-          <p>On fire, TTS speaks the selected sources through the chosen voice, volume, and audio channel. If both Send Message and custom TTS text are enabled, Send Message is spoken first, then the custom TTS line. The editor warns if TTS is on but neither read option is checked. Spoken text may contain <code>&amp;</code>, <code>&lt;</code>, and <code>&gt;</code>.</p>
+          <p>On fire, TTS speaks the selected sources through the chosen voice, volume, and audio channel. If both Send Message and custom TTS text are enabled, Send Message is spoken first, then the custom TTS line. The editor warns if TTS is on but neither read option is checked. Spoken text may contain <code>&amp;</code>, <code>&lt;</code>, and <code>&gt;</code>. Connect Amazon Polly under Integrations before adding this action. A rule that already speaks keeps the card and shows a setup error; that line is skipped until the keys are saved. Amazon bills the characters spoken on that account.</p>
         </section>
         <section class="section" id="setup">
           <h2>Setup</h2>
           <ol class="steps">
+            <li>Under Integrations, set up <strong>Amazon Polly</strong> with your own access key.</li>
             <li>Enable <strong>Text-to-Speech</strong>.</li>
             <li>Check <strong>Read Send Message Response via TTS</strong> and/or <strong>Read TTS Text via TTS</strong>.</li>
             <li>If using custom text, fill <strong>TTS Text</strong> (supports <code>{input}</code> and other variables).</li>
@@ -101,7 +103,7 @@
             <li>Shop redeem -&gt; TTS only (no chat) for a private-feeling on-stream callout.</li>
           </ul>
         </section>
-        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
+        <p class="page-footer">ISB Suite | <a href="https://github.com/Thadestroy/ISBSuiteReleases/issues">Support</a> | <a href="https://discord.gg/w834PyCCgb">Discord</a> | <a href="/ISBSuiteReleases/docs/terms.html">Terms</a> | <a href="/ISBSuiteReleases/docs/privacy.html">Privacy</a></p>
       </article>
     </main>
   </div>

@@ -122,6 +122,7 @@ Animated on-screen alerts for stream events, displayed in the Alert Box widget o
 - Ad Break (optional pre-warnings and welcome-back), Shoutout Received, Stream Went Live, Channel Point Redemption
 - New Subscription and Resubscription follow Twitch chat announcements (a silent payment / badge change with no chat notice does not fire a New Subscription alert)
 - Subscription Gifter is gifter-linked (bulk count). Subscription Gift Receiver fires once per recipient (`{user}` = gifted viewer, `{gifter}` = gifter)
+- Watch streak length, resub months, YouTube member months, and Hype Train Level Up can be At least, Exactly, or Every X. Every 10 fires at 10, 20, 30, and so on. A streak of 109 waits until 110. A blank number still matches every event. Hype Train Start and End stay At least or Exactly
 
 Each alert type is fully configurable:
 - Custom alert image or GIF
@@ -134,9 +135,9 @@ Each alert type is fully configurable:
 **Appearance** (per alert)
 - Layout, fonts (live preview), colors, highlight, drop shadow, text delay, and fade timings
 - Save and load reusable **style presets** (copy-on-apply)
-- **Motion:** enter/exit animations (Fade, slides, Scale, Bounce) and text enter (Fade, Slide up, Typewriter)
+- **Motion:** enter/exit animations (Fade, slides, Scale, Bounce, and from a screen edge) and text enter (Fade, Slide up, Typewriter). Screen-edge options travel between that edge and the alert box. Enter (ms) and Exit (ms) are the travel time.
 - **Preset vs Manual** image/text positioning with offset sliders (% of the Alert Box)
-- Side-by-side Layout | Motion | Preview columns with inline **Test Alert** (motion, sound, and TTS)
+- Side-by-side Layout | Motion | Preview columns with inline **Test Alert** (motion, sound, and TTS). **Mute sound** on that preview skips the alert sound file; animation and TTS still play. Live alerts stay the same.
 - Main Text and Subtext style editors sit side by side when the alert type supports subtext; they stack if the edit pane is narrow
 - Overflow content **soft-fits** (uniform scale-down) so image and text stay visible; preview matches the live overlay
 - Older alerts without a saved style keep the previous default look
@@ -163,6 +164,7 @@ On Automations, Chat Bot, Viewer Points shop items, Chat Games, and other places
 Design exactly what gets captured by your streaming software using the built-in layout editor:
 
 - Multiple named layouts (switch between them live or with hotkeys)
+- Duplicate a layout, widgets included, when you want the same setup under a new name
 - Drag-and-drop widgets onto a 1920?1080 (or custom) stage canvas
 - Resize widgets with handles, set precise positions
 - Global hotkeys to switch layouts or toggle individual widget visibility
@@ -197,7 +199,7 @@ Create a custom channel currency with a redeemable shop and point drops:
 
 **Earn Rules**
 - **Watching (live presence):** award on a schedule while viewers are in chat during a live stream. Requires **Stats > Watch Time** (same live chat presence poll)
-- **Event rules:** chat, follow, sub, resub, gift (gifter and receiver), raid, bits (cheers and Power-Ups), and channel-point redemption. Gift bombs pay the gifter once per gifted sub. Bits, raid, and gift count support At least / Exactly (leave blank for every event). Tiltify donations are not an earn trigger
+- **Event rules:** chat, follow, sub, resub, gift (gifter and receiver), raid, bits (cheers and Power-Ups), and channel-point redemption. Gift bombs pay the gifter once per gifted sub. Bits, raid, and gift count support At least / Exactly (leave blank for every event). Resub months and YouTube member months can also be Every X: every 10 pays at 70 when they are at 67 months, once per event, not per month. A blank number still pays every event. Bits, Super Chat, and Super Sticker stay At least or Exactly. Tiltify donations are not an earn trigger
 - **Watching**, **Subscription**, and **Resubscription** can add extra points for current T1 / T2 / T3 subscribers (Prime counts as T1). Set the base to 0 if only subscribers should earn
 
 **Viewer Commands**
@@ -243,12 +245,12 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Subscription Gifter | At-least or exact gift count (gifter is `{user}`) |
 | Subscription Gift Receiver | Once per recipient; recipient is `{user}`, gifter is `{gifter}` |
 | New Subscription | Any tier, or filtered by Tier 1/2/3 |
-| Resubscription | Any, or filtered by tier and/or minimum months |
+| Resubscription | Any, or a tier and/or months. Months can be At least, Exactly, or Every X (67 waits until 70 for every 10). Blank months matches any resub |
 | Follow | Any new follow |
 | Raid | Any raid, or with minimum viewer count |
 | Hype Train Start | Once when the train begins. Level Up does not fire on start |
 | Hype Train End | Any level, or minimum level |
-| Hype Train Level Up | Once per level increase; any level, or at least / exact |
+| Hype Train Level Up | Once per level increase, including levels Twitch skipped. At least, Exactly, or Every X (every 2 fires at 2, 4, 6, and later even levels). Blank matches any level-up. Hype Train End stays At least or Exactly |
 | Goal Achieved | Any goal type, or filtered by type string |
 | Ad Break | Any duration, or a specific ad length; optional chat warnings before the ad; optional welcome-back when ads end |
 | Shoutout Received | Any shoutout from another broadcaster |
@@ -257,7 +259,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Counter Tier Reached | When a viewer (per-user counter) or the channel (global counter) crosses upward into the next configured tier on a selected counter; fires once per tier gained if several thresholds are crossed in one increment |
 | Counter Value Changed | When a counter's value actually changes (once per change, not per unit); filter by increases / decreases / either way, and optionally by counter |
 | Community Goal Reached | When a community goal hits its limit (optional filter by goal) |
-| Live Timer Ended | When a Live Clock on a Timer Widget hits natural zero (optional preset filter). Manual `!endtimer` abort does not fire this |
+| Live Timer Ended | When a countdown Live Clock hits zero, or a count-up Live Clock reaches its max (optional preset filter). Manual `!endtimer` abort does not fire this |
 | Chat Message Match | Specific chatter (e.g. a bits-sound bot) whose message matches a pattern with `<amount>` (e.g. `used <amount> bits`); that number becomes `{amount}` |
 | Timer / Interval | Repeating interval (Automations tab) |
 
@@ -278,7 +280,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Show Alert | Display an on-screen alert box event |
 | Text-to-Speech | Speak an announcement (no credentials needed) |
 | Timer | Countdown before actions fire; optionally show the countdown on a [Timer Widget](#timer-widget) (delay queue — not Subathon) |
-| Live Timer | Drive a Live Clock on a Timer Widget (Starts at + per-trigger Add / Start / Ignore table). Applies immediately, even alongside a delay Timer |
+| Live Timer | Drive a Live Clock on a Timer Widget. Countdown or count up. Starts at plus a per-trigger Add / Start / Ignore table. Applies immediately, even alongside a delay Timer |
 | Randomized Action | Pick one of several action sets at random (different sounds, messages, wheels, etc.) |
 | Run Chat Bot or Automation | Trigger another Automations rule or Chat Bot overview item (searchable; chains keep the original chatter's variables) |
 | Push Community Goal | Add progress to one or more goals; optional **Use amount from trigger** (Bits cheer, Power-Up bits, or Chat Message Match `<amount>`) |
@@ -291,7 +293,7 @@ Connect any stream event to any action. Automations live in the **Automations** 
 | Channel Points | Change cost, pause, or cooldown on ISB-managed rewards. Reset after (default 10 minutes) restores the first snapshot |
 | OBS Studio | Switch scenes, show or hide sources, mute, set volume, start or stop stream or record (OBS 28+ WebSocket). Hidden until you Connect. ISB Suite does not start OBS |
 | Streamlabs Desktop | Same scene / source / mute / stream operations on Streamlabs Remote Control (default port 59650). Volume is 0-100%. Hidden until you Connect. ISB Suite does not start Streamlabs |
-| Spotify | Pause, resume, skip, shuffle, repeat, queue, play now, or Pause Then Resume At End on the connected Spotify app (hidden until you Connect) |
+| Spotify | Pause, resume, skip, shuffle, repeat, queue, play now, play a playlist, or Pause Then Resume At End on the connected Spotify app (hidden until you Connect) |
 
 **Cooldown & Limits:** Every automation can combine a time cooldown (None / Global / Per-User) with per-stream limits (max fires globally and/or per user; `0` = unlimited). Optional **burst**: if used N times within a window you set (for example 5 times in 30 seconds), a longer cooldown starts. The normal per-use duration is independent and can be off. Limits reset when a new stream session starts (same boundary as walk-ons). Separate optional chat replies for “on cooldown” vs “hit limit.” Channel Point redemptions: Twitch still accepts the redeem and charges points. ISB Suite only skips running the automation when blocked (reject/refund is not supported yet).
 
@@ -449,8 +451,8 @@ Manage all connections from the **Integrations** page. **Twitch** is the integra
 ### Spotify *(optional)*
 - Guided setup: your own Spotify Developer app and Client ID (no secret), then **Connect with Spotify**. Requires Spotify Premium
 - ISB Suite commands the Spotify app on your PC. It never plays Spotify audio itself
-- Automations can pause, resume, skip, shuffle, repeat, queue a track, play now, or **Pause Then Resume At End** (pauses before Play Sound, then resumes when that rule's sound, TTS, alert overlay, or auto-spin wheel finishes)
-- Queue / Play now accept a song name, an open.spotify.com/track link, or a `spotify:track:` URI. Album and playlist links are not supported
+- Automations can pause, resume, skip, shuffle, repeat, queue a track, play now, play a playlist, or **Pause Then Resume At End** (pauses before Play Sound, then resumes when that rule's sound, TTS, alert overlay, or auto-spin wheel finishes)
+- Queue / Play now accept a song name, an open.spotify.com/track link, or a `spotify:track:` URI. Play playlist accepts one playlist link and starts it from the first item. Album links, and playlist links on Queue or Play now, are not supported
 - Built-in `!sr` / `!songrequest` and `!remove` / `!removesong` stay hidden until you Connect. Set command, permission, cooldown, confirm reply, and per-viewer queue caps (default 5) from Integrations, Spotify, Song Request
 - Full steps: [Spotify](https://thadestroy.github.io/ISBSuiteReleases/docs/features/integrations.html)
 
@@ -502,8 +504,9 @@ ISB Suite is an ongoing project. If there's a platform or service you'd like int
 | `!endtimer {name}` | End an active Live Clock (abort to Idle; does not fire Live Timer Ended) or skip a delay-queue Timer countdown without running deferred actions |
 | `!pausetimer {name}` | Pause a Live Clock on a named Timer Widget preset |
 | `!resumetimer {name}` | Resume a paused Live Clock |
-| `!addtime {name} {duration}` | Add time to a Live Clock (e.g. `5m`, `30s`, `1h`) |
-| `!removetime {name} {duration}` | Remove time from a Live Clock |
+| `!addtime {name} {duration}` | Add time to a Live Clock. One amount (`5m`, `30s`, `1h`) or pieces that add (`3m 12s`, `1h 3m 12s`) |
+| `!removetime {name} {duration}` | Remove time from a Live Clock. Same duration as `!addtime`, including `3m 12s`. Count up stops at 0:00 and keeps running |
+| `!settime {name} {duration}` | Set a running or paused Live Clock (`5m`, `3m 12s`, `0`). Pieces add together. Does not start an idle clock. 0 ends a countdown and leaves a count-up clock at 0:00 |
 | `/raid login` | Official Twitch raid from Stream Manager Chat (must be live). Not posted as a chat line |
 | `!so @user` / `!shoutout` | Shout out a channel (Nightbot style). Customize the template in Chat Bot. Built in; does not use a Free chat command slot |
 | `!addcommand {name} {response}` / `!addcom` | Create a simple Chat Bot reply command (default Mods). Fails if the name already exists. Built in; does not use a Free chat command slot |
@@ -670,11 +673,13 @@ Access via the **Overlay Layout** tab in the main navigation.
 
 ### Layout Management
 - Create multiple named layouts (e.g. "Main Scene", "Wheel Scene", "Just Chatting")
+- Duplicate copies the selected layout and its widgets into a new layout named "Name copy" (its own ids, no layout hotkey, its own image files). Free still caps how many layouts you can add.
 - Switch active layout from the list, or assign a global hotkey to each layout
 - All widgets in the active layout are rendered on the capture stage
 
 ### Widget Controls
 - Click to select a widget; resize handles appear on all 8 sides
+- Copy and Paste (Ctrl+C / Ctrl+V) place a copy of the selected widget on the layout that is open, including a different overlay
 - Drag to reposition
 - Set visibility per widget, or assign a hotkey to toggle it on/off during stream
 - Preview All mode shows live renders of all widgets simultaneously
@@ -686,15 +691,15 @@ Access via the **Overlay Layout** tab in the main navigation.
 A Timer Widget preset can show either:
 
 - **Delay Timer** — linked from the **Timer** action: countdown while deferred actions wait; multiple rules sharing a preset queue so only one delay runs at a time. Use **None (background only)** for a delay with no on-screen widget.
-- **Live Clock (Subathon)** — driven by the **Live Timer** action: extendable countdown with Overlay Layout Start / Pause / Resume / End, optional max remaining, and “accept adds while paused.” Natural zero can fire **Live Timer Ended** automations; manual End / `!endtimer` abort does not.
+- **Live Clock (Subathon)** — driven by the **Live Timer** action: countdown or count up, with Overlay Layout Start / Set / Pause / Resume / End, optional max, and “accept adds while paused.” A countdown fires **Live Timer Ended** at zero. A count-up clock fires it when elapsed reaches Max, and otherwise runs until End. Manual End / `!endtimer` abort does not.
 
 **Setup (delay):** Overlay Layout → add Timer Widget / preset → enable **Timer** on a rule and **Link Rule…** (or pick the preset on the Timer action).
 
-**Setup (Subathon):** Enable **Live Timer** on an automation and pick the Timer Widget preset (on the rule or via Overlay Layout **Link Rule…**). Place that Timer Widget on a layout — the countdown shows while the Live Clock is Running/Paused.
+**Setup (Subathon):** Enable **Live Timer** on an automation and pick the Timer Widget preset (on the rule or via Overlay Layout **Link Rule…**). Choose Countdown or Count up on that preset. Place that Timer Widget on a layout — the clock shows while it is Running or Paused. A running clock keeps its direction until End.
 
 **Text styling:** with a Timer widget selected in Overlay Layout, edit font, weight, color, alignment, and drop shadow (same text style controls as Alerts). Text size still scales with the widget box height.
 
-**Chat (mods):** `!endtimer`, `!pausetimer`, `!resumetimer`, `!addtime`, and `!removetime` take the Timer Widget name (Live Clock commands also take a duration where noted). Customize names/permission/Response under Chat Bot → Built-in Commands. For delay Timers, `!endtimer` skips deferred actions (does not run them early); queued delay items for that preset stay queued.
+**Chat (mods):** `!endtimer`, `!pausetimer`, `!resumetimer`, `!addtime`, `!removetime`, and `!settime` take the Timer Widget name (Live Clock commands also take a duration where noted, one amount or pieces that add, such as `3m 12s`). Customize names/permission/Response under Chat Bot → Live Timer Commands (`!endtimer` stays under Built-in Commands). For delay Timers, `!endtimer` skips deferred actions (does not run them early); queued delay items for that preset stay queued.
 
 ---
 
@@ -729,11 +734,13 @@ On each currency's editor, open **Earn Rules** and click **+ Add Earn Rule**. Po
 
 **Event triggers** (same family Automations already see, when the event carries a Twitch user id):
 - **Chat Message** - after N chat messages (commands like `!points` do not count)
-- **Follow**, **Subscription**, **Resubscription**
+- **Follow**, **Subscription**
+- **Resubscription** - optional cumulative months with At least, Exactly, or Every X (67 waits until 70 for every 10). Blank pays every resub. Awarded once per resub, not per month. Tier extras pay only when the months match
 - **Subscription Gifter** - once per gifted sub (a bomb of 5 awards 5 times). Optional gift count with At least or Exactly
 - **Subscription Gift Receiver**
 - **Raid** / **Bits** - optional count or amount with At least or Exactly. Bits earn includes Power-Up spends
 - **Channel Point Redemption** - optional reward name; leave blank for every reward
+- **Member Milestone** - optional months with At least, Exactly, or Every X (67 waits until 70 for every 10). Blank pays every milestone. Awarded once, not per month. Bits, Super Chat, and Super Sticker stay At least or Exactly
 
 Tiltify donations are not an earn trigger: they do not identify a Twitch viewer.
 

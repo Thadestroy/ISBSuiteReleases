@@ -1142,6 +1142,16 @@ body.landing {
   margin-left: 1rem;
 }
 
+.landing-foot .yt-brand {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.landing-foot .yt-brand svg {
+  display: block;
+}
+
 @media (max-width: 900px) {
   .landing-hero {
     min-height: min(64vh, 34rem);
